@@ -1,5 +1,8 @@
-﻿@model Daisy.Client.Web.Models.PhotoViewModel
+﻿@model Daisy.Client.Web.Models.PhotosViewModel
 
 <div>
-    
+    @foreach (var photo in Model.Photos)        
+    {
+        <img class="photo-grid-resize" src="@photo.Url" />
+    }
 </div>

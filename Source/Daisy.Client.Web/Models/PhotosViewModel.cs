@@ -5,8 +5,8 @@ using System.Web;
 
 namespace Daisy.Client.Web.Models
 {
-    public class PhotoViewModel
+    public class PhotosViewModel
     {
-        public string Url { get; set; }
+        public List<Photo> Photos { get; set; }
     }
 }

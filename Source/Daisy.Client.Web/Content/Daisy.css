@@ -3,5 +3,7 @@
     width: 100%;
 }
 
-img.resize-grid {
+img.photo-grid-resize {
+    width: 600px;
+    height: 300px;
 }
