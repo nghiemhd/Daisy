@@ -3,6 +3,8 @@
 <div>
     @foreach (var photo in Model.Photos)        
     {
-        <img class="photo-grid-resize" src="@photo.Url" />
+        <div class="col-md-6">
+            <img class="photo-grid-resize" src="@photo.Url" />
+        </div>        
     }
 </div>

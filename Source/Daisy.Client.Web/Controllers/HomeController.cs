@@ -16,6 +16,12 @@ namespace Daisy.Client.Web.Controllers
                 Photos = new List<Photo> { 
                     new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },   
                     new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },
+                    new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },   
+                    new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },
+                    new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },   
+                    new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },
+                    new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },   
+                    new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },
                 }
             };
             return View(model);
