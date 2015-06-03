@@ -13,7 +13,7 @@ namespace Daisy.Core.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 100),
-                        IsDisplayed = c.Boolean(nullable: false),
+                        IsDisplayed = c.Boolean(nullable: false, defaultValue: true),
                         IsDeleted = c.Boolean(nullable: false, defaultValue: false),
                         UpdatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
                         UpdatedBy = c.String(nullable: false, maxLength: 50, unicode: false, defaultValueSql: "suser_name()"),
