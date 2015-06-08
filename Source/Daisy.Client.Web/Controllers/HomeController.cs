@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
-using Daisy.Client.Web.Models;
+using Models = Daisy.Web.Models;
 using Daisy.Service.ServiceContracts;
+using FlickrNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Daisy.Client.Web.Controllers
+namespace Daisy.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -34,9 +35,19 @@ namespace Daisy.Client.Web.Controllers
             //    }
             //};
 
+            var options = new PhotoSearchOptions();
+            options.PerPage = 10;
+            options.Page = 1;
+            options.MediaType = MediaType.Photos;
+            options.Extras = PhotoSearchExtras.All;
+            options.UserId = "96231191@N07";
+
+            Flickr flickr = new Flickr("95b00fe5ec213d2e9dc52ebf72cea4e0", "a9f96d07c3481f94");
+            var test = flickr.PhotosSearch(options);
+
             var photos = photoService.GetDisplayedPhotos();
-            var model = new PhotosViewModel();
-            model.Photos = Mapper.Map<List<Photo>>(photos);
+            var model = new Models.PhotosViewModel();
+            model.Photos = Mapper.Map<List<Models.Photo>>(photos);
 
             return View(model);
         }

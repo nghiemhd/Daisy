@@ -50,8 +50,21 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="MockObjects\MockDataContext.cs" />
+    <Compile Include="MockObjects\MockRepository.cs" />
+    <Compile Include="MockObjects\MockUnitOfWork.cs" />
+    <Compile Include="PhotoServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Daisy.Core\Daisy.Core.csproj">
+      <Project>{b45bf591-6471-45fe-acb4-c697b9a0979f}</Project>
+      <Name>Daisy.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Daisy.Service\Daisy.Service.csproj">
+      <Project>{61db9c60-07ab-4fda-bf6a-385113c8975b}</Project>
+      <Name>Daisy.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

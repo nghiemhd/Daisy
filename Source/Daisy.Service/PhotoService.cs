@@ -22,12 +22,12 @@ namespace Daisy.Service
 
         public IEnumerable<Photo> GetAllPhotos()
         {
-            return photoRepository.GetAll();
+            return photoRepository.GetAll().ToList();
         }
 
         public IEnumerable<Photo> GetDisplayedPhotos()
         {
-            return photoRepository.GetAll().Where(x => x.IsDisplayed == true);
+            return photoRepository.GetAll().Where(x => x.IsDisplayed == true).ToList();
         }
 
         public Photo GetPhotoById(int id)

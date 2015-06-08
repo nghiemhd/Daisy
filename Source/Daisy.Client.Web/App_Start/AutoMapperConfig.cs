@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Daisy.Client.Web.Models;
+using Daisy.Web.Models;
 using Entities = Daisy.Core.Entities;
 using System;
 using System.Collections.Generic;

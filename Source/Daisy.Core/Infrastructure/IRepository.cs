@@ -9,7 +9,7 @@ namespace Daisy.Core.Infrastructure
     public interface IRepository<T> where T : class
     {
         IQueryable<T> GetAll();
-        T Add(T entity);
+        T Insert(T entity);
         void MarkAsDeleted(T entity);
         void Delete(T entity);
         void Update(T entity);

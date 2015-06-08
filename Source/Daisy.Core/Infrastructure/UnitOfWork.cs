@@ -50,6 +50,7 @@ namespace Daisy.Core.Infrastructure
             catch(Exception ex)
             {
                 Errors = GetExceptionErrors(ex);
+                throw ex;
             }
         }
 

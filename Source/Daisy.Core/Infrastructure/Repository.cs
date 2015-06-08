@@ -24,7 +24,7 @@ namespace Daisy.Core.Infrastructure
             return dbSet;
         }
 
-        public virtual T Add(T entity)
+        public virtual T Insert(T entity)
         {
             if (entity == null)
             {
