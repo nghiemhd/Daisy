@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Daisy.Client.Web
+namespace Daisy.Web
 {
     public class RouteConfig
     {

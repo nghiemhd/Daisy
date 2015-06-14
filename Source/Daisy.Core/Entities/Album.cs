@@ -21,6 +21,9 @@ namespace Daisy.Core.Entities
 
         public bool IsDisplayed { get; set; }
 
+        [MaxLength(100)]
+        public string FlickrAlbumId { get; set; }
+
         public virtual ICollection<Photo> Photos { get; set; }
     }
 }

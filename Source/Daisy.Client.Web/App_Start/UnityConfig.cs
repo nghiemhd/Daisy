@@ -5,7 +5,7 @@ using Daisy.Service.ServiceContracts;
 using Daisy.Service;
 using Daisy.Core.Infrastructure;
 
-namespace Daisy.Client.Web.App_Start
+namespace Daisy.Web.App_Start
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.

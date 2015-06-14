@@ -45,6 +45,7 @@ namespace Daisy.Web.Controllers
             Flickr flickr = new Flickr("95b00fe5ec213d2e9dc52ebf72cea4e0", "a9f96d07c3481f94");
             var test = flickr.PhotosSearch(options);
 
+            var albums = flickr.PhotosetsGetList(options.UserId);
             var photos = photoService.GetDisplayedPhotos();
             var model = new Models.PhotosViewModel();
             model.Photos = Mapper.Map<List<Models.Photo>>(photos);

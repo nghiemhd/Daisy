@@ -42,10 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticationService.cs" />
+    <Compile Include="ServiceContracts\IFlickrService.cs" />
+    <Compile Include="Services\AlbumService.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Common\ResponseStatusEnum.cs" />
     <Compile Include="DataContracts\DataResponse.cs" />
-    <Compile Include="PhotoService.cs" />
+    <Compile Include="Services\FlickrService.cs" />
+    <Compile Include="Services\PhotoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceContracts\IAlbumService.cs" />
     <Compile Include="ServiceContracts\IAuthenticationService.cs" />
@@ -70,6 +73,7 @@
     <None Include="FlickrNet.chm" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

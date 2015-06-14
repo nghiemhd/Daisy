@@ -1,0 +1,19 @@
+﻿@model Daisy.Admin.Models.AlbumListViewModel
+@{
+    ViewBag.Title = "Album Management";
+}
+
+<h2>Album Management</h2>
+
+<div>
+    @foreach (var album in Model.Albums)
+    {
+        <div class="col-md-3">
+            <img class="photo-grid-resize" src="@album.AlbumThumbnailUrl" alt="@album.Name" />
+            <div>@Html.ActionLink(@album.Name, "Detail", "Album", new { id = @album.FlickrAlbumId }, null)</div>
+        </div>
+    }
+</div>
+
+
+

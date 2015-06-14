@@ -1,0 +1,18 @@
+﻿@model Daisy.Admin.Models.AlbumViewModel
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Detail</h2>
+
+<div>
+    @foreach (var photo in Model.Photos)
+    {
+        <div class="col-md-6">
+            <img class="photo-grid-resize" src="@photo.PhotoUrl" />
+        </div>
+    }
+</div>
+
+
+
