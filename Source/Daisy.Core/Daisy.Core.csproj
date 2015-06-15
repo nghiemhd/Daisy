@@ -56,29 +56,21 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\Repository.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201505260659495_InitDatabase.cs" />
-    <Compile Include="Migrations\201505260659495_InitDatabase.Designer.cs">
-      <DependentUpon>201505260659495_InitDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506080510349_UserTable.cs" />
-    <Compile Include="Migrations\201506080510349_UserTable.Designer.cs">
-      <DependentUpon>201506080510349_UserTable.cs</DependentUpon>
+    <Compile Include="Migrations\201506150712448_Init.cs" />
+    <Compile Include="Migrations\201506150712448_Init.Designer.cs">
+      <DependentUpon>201506150712448_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506150712448_Init.resx">
+      <DependentUpon>201506150712448_Init.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505260659495_InitDatabase.resx">
-      <DependentUpon>201505260659495_InitDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506080510349_UserTable.resx">
-      <DependentUpon>201506080510349_UserTable.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

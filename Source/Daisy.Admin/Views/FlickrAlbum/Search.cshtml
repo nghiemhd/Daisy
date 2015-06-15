@@ -1,0 +1,41 @@
+﻿@model Daisy.Admin.Models.PagedListAlbumViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<div>@Html.LabelFor(m => m.SearchOptions.AlbumName)</div>
+<div>@Html.TextBoxFor(m => m.SearchOptions.AlbumName, new { id = "txtAlbumName" })</div>
+<div>
+    <button id="btnSearch">Search</button>
+</div>
+
+@section scripts
+{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnSearch').click(function () {
+            debugger
+            var albumName = $('#txtAlbumName').val();
+            var data = {
+                AlbumName: albumName
+            };
+
+            $.ajax({
+                url: '@Url.Content("~/FlickrAlbum/Search")',
+                type: 'POST',
+                content: "application/json; charset=utf-8",
+                dataType: "json",
+                data: data,                
+                success: function (data) {
+                    debugger
+                    alert('aaa');
+                },
+                error: function (xhr, desc, err) {
+                    console.log(xhr);
+                    console.log("Desc: " + desc + "\nErr:" + err);
+                }
+            });
+        });
+    });
+</script>
+}

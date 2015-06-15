@@ -1,5 +1,7 @@
-﻿using Daisy.Core.Entities;
+﻿using Daisy.Common;
+using Daisy.Core.Entities;
 using Daisy.Core.Infrastructure;
+using Daisy.Service.DataContracts;
 using Daisy.Service.ServiceContracts;
 using FlickrNet;
 using System;
@@ -28,9 +30,14 @@ namespace Daisy.Service
             return flickrService.GetAllAlbums(userId);
         }
 
+        public PagedList<Photoset> GetAlbumsFromFlickr(SearchAlbumOptions options)
+        {
+            return flickrService.GetAlbums(options);
+        }
+
         public PhotosetPhotoCollection GetPhotosByAlbumFromFlickr(string albumId)
         {
             return flickrService.GetPhotosByAlbum(albumId);            
-        }
+        }        
     }
 }

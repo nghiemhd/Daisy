@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using Daisy.Common;
+using DaisyEntities = Daisy.Core.Entities;
 using DaisyModels = Daisy.Admin.Models;
+using Daisy.Service.DataContracts;
 using FlickrNet;
 using System;
 using System.Collections.Generic;
@@ -21,6 +24,10 @@ namespace Daisy.Admin
                 .ForMember(dest => dest.FlickrPhotoId, opt => opt.MapFrom(src => src.PhotoId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title))
                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.LargeUrl));
+
+            Mapper.CreateMap<DaisyModels.SearchAlbumModel, SearchAlbumOptions>();
+
+            Mapper.CreateMap<PagedList<DaisyEntities.Album>, PagedList<DaisyModels.Album>>();
         }
     }
 }

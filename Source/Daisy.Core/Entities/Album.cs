@@ -19,6 +19,8 @@ namespace Daisy.Core.Entities
         [MaxLength(100)]
         public string Name { get; set; }
 
+        public string ThumbnailUrl { get; set; }
+
         public bool IsDisplayed { get; set; }
 
         [MaxLength(100)]

@@ -11,5 +11,8 @@ namespace Daisy.Common
         public static readonly string FlickrApiKey = "apiKey";
         public static readonly string FlickrSharedSecret = "sharedSecret";
         public static readonly string FlickrUserId = "userId";
+
+        public static readonly int DefaultPageSize = 50;
+        public static readonly int MaxPageSize = 500;
     }
 }
