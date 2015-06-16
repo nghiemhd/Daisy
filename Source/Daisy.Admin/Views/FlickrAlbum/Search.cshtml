@@ -9,6 +9,9 @@
     <button id="btnSearch">Search</button>
 </div>
 
+<div id="gridAlbums"></div>
+
+
 @section scripts
 {
 <script type="text/javascript">
@@ -26,10 +29,7 @@
                 content: "application/json; charset=utf-8",
                 dataType: "json",
                 data: data,                
-                success: function (data) {
-                    debugger
-                    alert('aaa');
-                },
+                success: LoadAlbums(response),
                 error: function (xhr, desc, err) {
                     console.log(xhr);
                     console.log("Desc: " + desc + "\nErr:" + err);
@@ -37,5 +37,13 @@
             });
         });
     });
+
+    function LoadAlbums(data)
+    {
+        debugger
+        data.Albums.each(function () {
+            
+        });
+    }
 </script>
 }
