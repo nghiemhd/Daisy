@@ -29,7 +29,7 @@
                 content: "application/json; charset=utf-8",
                 dataType: "json",
                 data: data,                
-                success: LoadAlbums(response),
+                success: LoadAlbums,
                 error: function (xhr, desc, err) {
                     console.log(xhr);
                     console.log("Desc: " + desc + "\nErr:" + err);
@@ -41,8 +41,13 @@
     function LoadAlbums(data)
     {
         debugger
-        data.Albums.each(function () {
-            
+        $('#gridAlbums').empty();
+        $.each(data.Albums, function (index, album) {
+            debugger
+            $('#gridAlbums').append('<div class="col-md-3">' +
+                '<img class="photo-grid-resize" src="' + album.AlbumThumbnailUrl + '" />' +
+                '<div>' + album.Name + '</div>' +
+                '</div>');
         });
     }
 </script>

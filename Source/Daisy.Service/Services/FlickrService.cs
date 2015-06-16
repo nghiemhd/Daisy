@@ -54,11 +54,11 @@ namespace Daisy.Service
                 if (!options.AlbumName.IsNullOrEmpty())
                 {
                     albums = albums
-                        .Where(x => x.Title == options.AlbumName);                        
+                        .Where(x => x.Title.IndexOf(options.AlbumName, StringComparison.OrdinalIgnoreCase) >= 0);                        
                 }
 
                 albums = albums
-                        .Skip(options.PageSize * (options.PageIndex + 1))
+                        .Skip(options.PageSize * options.PageIndex)
                         .Take(options.PageSize);
 
                 PagedList<Photoset> result = new PagedList<Photoset>(
