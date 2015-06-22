@@ -1,16 +1,16 @@
-﻿using AutoMapper;
-using DaisyModels = Daisy.Admin.Models;
-using Daisy.Common;
-using Daisy.Common.Extensions;
-using Daisy.Service.ServiceContracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
+using AutoMapper;
 using Daisy.Admin.Models;
+using Daisy.Common;
+using Daisy.Common.Extensions;
 using Daisy.Service.DataContracts;
+using Daisy.Service.ServiceContracts;
 
 namespace Daisy.Admin.Controllers
 {
@@ -30,8 +30,8 @@ namespace Daisy.Admin.Controllers
             return View();
         }
 
-        [HttpPost]
-        public JsonResult Search(SearchAlbumModel options)
+        [HttpGet]
+        public ActionResult Search(SearchAlbumModel options)
         {
             try
             {
@@ -41,10 +41,38 @@ namespace Daisy.Admin.Controllers
                 }
                 var searchOptions = Mapper.Map<SearchAlbumOptions>(options);
                 var albums = albumService.GetAlbumsFromFlickr(searchOptions);
-                var mappingAlbums = Mapper.Map<PagedList<DaisyModels.Album>>(albums);
+                var mappingAlbums = Mapper.Map<List<Album>>(albums.Items);
+                var pagedListAlbums = new PagedList<Album>(mappingAlbums, albums.PageIndex, albums.PageSize, albums.TotalCount);
+                var model = new PagedListAlbumViewModel
+                {
+                    Albums = pagedListAlbums,
+                    SearchOptions = options
+                };
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public JsonResult AjaxSearch(SearchAlbumModel options)
+        {
+            try
+            {
+                if (options.UserId.IsNullOrEmpty())
+                {
+                    options.UserId = flickrUserId;                    
+                }
+                var searchOptions = Mapper.Map<SearchAlbumOptions>(options);
+                var albums = albumService.GetAlbumsFromFlickr(searchOptions);
+                var mappingAlbums = Mapper.Map<List<Album>>(albums.Items);
+                var pagedListAlbums = new PagedList<Album>(mappingAlbums, albums.PageIndex, albums.PageSize, albums.TotalCount);
                 var result = new PagedListAlbumViewModel
                 {
-                    Albums = mappingAlbums,
+                    Albums = pagedListAlbums,
                     SearchOptions = options
                 };
 
@@ -60,8 +88,8 @@ namespace Daisy.Admin.Controllers
         {
             var photos = albumService.GetPhotosByAlbumFromFlickr(id);
 
-            var mappingPhotos = Mapper.Map<List<DaisyModels.Photo>>(photos);
-            var model = new DaisyModels.AlbumViewModel
+            var mappingPhotos = Mapper.Map<List<Photo>>(photos);
+            var model = new AlbumViewModel
             {
                 Photos = mappingPhotos
             };

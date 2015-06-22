@@ -26,6 +26,9 @@ namespace Daisy.Admin
                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.LargeUrl));
 
             Mapper.CreateMap<DaisyModels.SearchAlbumModel, SearchAlbumOptions>();
+
+            //Mapper.CreateMap<PagedList<FlickrNet.Photoset>, PagedList<DaisyModels.Album>>()
+            //    .ConstructUsing(x => new PagedList<DaisyModels.Album>(x.))
         }
     }
 }

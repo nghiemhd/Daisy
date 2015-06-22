@@ -1,0 +1,19 @@
+﻿@model Daisy.Admin.Models.PagedListAlbumViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<div>@Html.LabelFor(m => m.SearchOptions.AlbumName)</div>
+<div>@Html.TextBoxFor(m => m.SearchOptions.AlbumName, new { id = "txtAlbumName" })</div>
+<div>
+    <button id="btnSearch">Search</button>
+</div>
+
+<div id="albumPagination"></div>
+<div id="gridAlbums"></div>
+@Html.Hidden("FlickrAlbumSearchUrl", Url.Action("Search","FlickrAlbum"))
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/System/FlickrAlbum.js"></script>
+}

@@ -3,52 +3,12 @@
     ViewBag.Title = "Search";
 }
 
-<div>@Html.LabelFor(m => m.SearchOptions.AlbumName)</div>
-<div>@Html.TextBoxFor(m => m.SearchOptions.AlbumName, new { id = "txtAlbumName" })</div>
-<div>
-    <button id="btnSearch">Search</button>
-</div>
-
-<div id="gridAlbums"></div>
-
-
-@section scripts
+@using (Html.BeginForm("Search", "FlickrAlbum", FormMethod.Get, new { @class = "form-inline" }))
 {
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#btnSearch').click(function () {
-            debugger
-            var albumName = $('#txtAlbumName').val();
-            var data = {
-                AlbumName: albumName
-            };
-
-            $.ajax({
-                url: '@Url.Content("~/FlickrAlbum/Search")',
-                type: 'POST',
-                content: "application/json; charset=utf-8",
-                dataType: "json",
-                data: data,                
-                success: LoadAlbums,
-                error: function (xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Desc: " + desc + "\nErr:" + err);
-                }
-            });
-        });
-    });
-
-    function LoadAlbums(data)
-    {
-        debugger
-        $('#gridAlbums').empty();
-        $.each(data.Albums, function (index, album) {
-            debugger
-            $('#gridAlbums').append('<div class="col-md-3">' +
-                '<img class="photo-grid-resize" src="' + album.AlbumThumbnailUrl + '" />' +
-                '<div>' + album.Name + '</div>' +
-                '</div>');
-        });
-    }
-</script>
+    <fieldset class="form-group">
+        @Html.LabelFor(x => x.SearchOptions.AlbumName)
+        @Html.TextBoxFor(x => x.SearchOptions.AlbumName)
+        <button type="submit" class="btn btn-default">Search</button>
+    </fieldset>
 }
+

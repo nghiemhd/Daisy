@@ -7,17 +7,14 @@ using System.Threading.Tasks;
 
 namespace Daisy.Common
 {
-    public interface IPagedList : IEnumerable
+    public interface IPagedList<T>
     {
+        IEnumerable<T> Items { get; }
         int PageIndex { get; }
         int PageSize { get; }
         int TotalCount { get; }
         int TotalPages { get; }
         bool HasPreviousPage { get; }
         bool HasNextPage { get; }
-    }
-
-    public interface IPagedList<T> : IPagedList, IList<T>
-    {
     }
 }
