@@ -28,6 +28,11 @@ namespace Daisy.Admin.Controllers
             return View();
         }
 
+        public ActionResult AjaxSearch()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Search(PagedListAlbumViewModel model)
         {
@@ -57,6 +62,10 @@ namespace Daisy.Admin.Controllers
         {
             try
             {
+                if (options == null)
+                {
+                    throw new ArgumentNullException("options");
+                }
                 var searchOptions = Mapper.Map<SearchAlbumOptions>(options);
                 var albums = albumService.GetAlbumsFromFlickr(searchOptions);
                 var mappingAlbums = Mapper.Map<List<Album>>(albums.Items);
