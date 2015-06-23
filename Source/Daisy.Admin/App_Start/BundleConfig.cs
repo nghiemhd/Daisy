@@ -25,6 +25,7 @@ namespace Daisy.Admin
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/daisy.admin.css",
                       "~/Content/site.css"));
         }
     }

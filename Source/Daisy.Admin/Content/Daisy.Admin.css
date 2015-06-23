@@ -1,3 +1,16 @@
-﻿img.photo-grid-resize {
-    width: 100%;
+﻿.album-thumbnail {
+    height: 250px;
+    margin: 10px 10px 10px 10px;
+}
+.album-thumbnail-border {
+    width:290px;
+    height: 290px;
+    background-color:#101010;
+}
+.photo-list-album-view {
+  background-size: cover;
+}
+.center {
+    margin: 0 auto;
+    float:none;
 }

@@ -18,17 +18,38 @@
                 console.log("Desc: " + desc + "\nErr:" + err);
             }
         });
-    });
+    });    
 });
+
+function SearchAlbums(pageIndex) {
+    var url = $('#FlickrAlbumSearchUrl').val();
+    var albumName = $('#txtAlbumName').val();
+    var data = {
+        AlbumName: albumName,
+        PageIndex: pageIndex
+    };
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        content: "application/json; charset=utf-8",
+        dataType: "json",
+        data: data,
+        success: LoadAlbums,
+        error: function (xhr, desc, err) {
+            console.log(xhr);
+            console.log("Desc: " + desc + "\nErr:" + err);
+        }
+    });
+}
 
 function LoadAlbums(data) {
     $('#gridAlbums').empty();
     var metadata = data.Albums;
     LoadPagination(metadata.PageIndex, metadata.TotalPages, metadata.HasPreviousPage, metadata.HasNextPage);
     $.each(data.Albums.Items, function (index, item) {
-        $('#gridAlbums').append('<div class="col-md-3">' +
-            '<img class="photo-grid-resize" src="' + item.AlbumThumbnailUrl + '" />' +
-            '<div>' + item.Name + '</div>' +
+        $('#gridAlbums').append('<div class="col-sm-3 col-md-2 col-lg-2" style="background-color:#101010;">' +
+            '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')"></div>' +
             '</div>');
     });
 }

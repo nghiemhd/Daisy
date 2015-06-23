@@ -17,37 +17,32 @@ namespace Daisy.Admin.Controllers
     public class FlickrAlbumController : Controller
     {
         private readonly IAlbumService albumService;
-        private readonly string flickrUserId;
 
         public FlickrAlbumController(IAlbumService albumService)
         {
             this.albumService = albumService;
-            this.flickrUserId = ConfigurationManager.AppSettings[Constants.FlickrUserId];
         }
         
-        public ActionResult Search()
+        public ActionResult Search()                
         {
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Search(SearchAlbumModel options)
+        [HttpPost]
+        public ActionResult Search(PagedListAlbumViewModel model)
         {
             try
             {
-                if (options.UserId.IsNullOrEmpty())
+                if (model == null)
                 {
-                    options.UserId = flickrUserId;
+                    throw new ArgumentNullException("model");
                 }
-                var searchOptions = Mapper.Map<SearchAlbumOptions>(options);
+
+                var searchOptions = Mapper.Map<SearchAlbumOptions>(model.SearchOptions);
                 var albums = albumService.GetAlbumsFromFlickr(searchOptions);
                 var mappingAlbums = Mapper.Map<List<Album>>(albums.Items);
                 var pagedListAlbums = new PagedList<Album>(mappingAlbums, albums.PageIndex, albums.PageSize, albums.TotalCount);
-                var model = new PagedListAlbumViewModel
-                {
-                    Albums = pagedListAlbums,
-                    SearchOptions = options
-                };
+                model.Albums = pagedListAlbums;
 
                 return View(model);
             }
@@ -62,10 +57,6 @@ namespace Daisy.Admin.Controllers
         {
             try
             {
-                if (options.UserId.IsNullOrEmpty())
-                {
-                    options.UserId = flickrUserId;                    
-                }
                 var searchOptions = Mapper.Map<SearchAlbumOptions>(options);
                 var albums = albumService.GetAlbumsFromFlickr(searchOptions);
                 var mappingAlbums = Mapper.Map<List<Album>>(albums.Items);

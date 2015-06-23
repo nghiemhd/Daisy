@@ -39,13 +39,14 @@ namespace Daisy.Admin.App_Start
         {
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
-            var apiKey = ConfigurationManager.AppSettings[Constants.FlickrApiKey];
-            var sharedSecret = ConfigurationManager.AppSettings[Constants.FlickrSharedSecret];
+            //var apiKey = ConfigurationManager.AppSettings[Constants.FlickrApiKey];
+            //var sharedSecret = ConfigurationManager.AppSettings[Constants.FlickrSharedSecret];
 
             // TODO: Register your types here
             container.RegisterType<IDbContext, DataContext>();
             container.RegisterType<IUnitOfWork, UnitOfWork<DataContext>>();
-            container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor(apiKey, sharedSecret));
+            container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor());
+            //container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor(apiKey, sharedSecret));
             container.RegisterType<IAlbumService, AlbumService>();
         }
     }

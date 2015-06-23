@@ -5,6 +5,7 @@ using Daisy.Service.ServiceContracts;
 using FlickrNet;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +16,16 @@ namespace Daisy.Service
     {
         private readonly Flickr flickr;
 
-        public FlickrService(string apiKey, string sharedSecret)
+        public FlickrService()
         {
+            var apiKey = ConfigurationManager.AppSettings[Constants.FlickrApiKey];
+            var sharedSecret = ConfigurationManager.AppSettings[Constants.FlickrSharedSecret];
             flickr = new Flickr(apiKey, sharedSecret);
         }
 
-        public FlickrService(string apiKey, string sharedSecret, string token)
+        public FlickrService(string apiKey, string sharedSecret)
         {
-            flickr = new Flickr(apiKey, sharedSecret, token);
+            flickr = new Flickr(apiKey, sharedSecret);
         }
 
         public PhotosetCollection GetAllAlbums(string userId)
@@ -39,6 +42,16 @@ namespace Daisy.Service
         {
             try
             {
+                if (options == null)
+                {
+                    throw new ArgumentNullException("options");
+                }
+
+                if (options.UserId.IsNullOrEmpty())
+                {
+                    options.UserId = ConfigurationManager.AppSettings[Constants.FlickrUserId];
+                }
+
                 IEnumerable<Photoset> albums = flickr.PhotosetsGetList(options.UserId);
                 int totalCount = albums.Count();
 
