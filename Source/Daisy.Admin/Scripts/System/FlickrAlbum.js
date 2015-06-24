@@ -1,15 +1,21 @@
 ﻿$(document).ready(function () {
     $('#btnSearch').click(function () {
         SearchAlbums(0);
-    });    
+    });
+
+    $('#cboPageSize').change(function () {
+        SearchAlbums(0);
+    });
 });
 
 function SearchAlbums(pageIndex) {
     var url = $('#FlickrAlbumSearchUrl').val();
     var albumName = $('#txtAlbumName').val();
+    var pageSize = $('#cboPageSize').val();
     var data = {
         AlbumName: albumName,
-        PageIndex: pageIndex
+        PageIndex: pageIndex,
+        PageSize: pageSize
     };
 
     $.ajax({
@@ -22,16 +28,24 @@ function SearchAlbums(pageIndex) {
         error: function (xhr, desc, err) {
             console.log(xhr);
             console.log("Desc: " + desc + "\nErr:" + err);
-        }
+        },
+        beforeSend: function () {
+            $('#loader').show();
+        },
+        complete: function () {
+            $('#loader').hide();            
+        },
     });
 }
 
 function LoadAlbums(response) {
     $('#gridAlbums').empty();
+    $('#paging').empty();
+    $('#searchResultInfo').hide();
     var data = response.Albums;
-    if (data.TotalPages > 1) {
-        $('#paging').empty();
+    if (data.TotalPages >= 1) {        
         LoadPaging(data.PageIndex, data.TotalPages, data.HasPreviousPage, data.HasNextPage);
+        LoadPageSizeList(data.PageSize, data.TotalCount);
     }
     $.each(data.Items, function (index, item) {
         $('#gridAlbums').append('<div class="col-sm-3 col-md-2 col-lg-2" style="background-color:#101010;">' +
@@ -71,5 +85,12 @@ function LoadPaging(pageIndex, totalPages, hasPreviousPage, hasNextPage)
     }
     html += '</li>';
     html += '</ul>';
-    $('#paging').append(html);
+    $('#paging').append(html);    
+}
+
+function LoadPageSizeList(selectedPageSize, totalCount)
+{
+    $('#totalCount').text(totalCount);
+    $('#cboPageSize').val(selectedPageSize);
+    $('#searchResultInfo').show();
 }

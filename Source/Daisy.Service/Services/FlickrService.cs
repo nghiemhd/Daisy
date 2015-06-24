@@ -53,12 +53,12 @@ namespace Daisy.Service
                 }
 
                 IEnumerable<Photoset> albums = flickr.PhotosetsGetList(options.UserId);
-                int totalCount = albums.Count();
-
+                
                 if (options.PageSize <= 0 || options.PageSize > Constants.MaxPageSize)
                 {
                     options.PageSize = Constants.DefaultPageSize;
                 }
+
                 if (options.PageIndex < 0)
                 {
                     options.PageIndex = 0;
@@ -70,6 +70,7 @@ namespace Daisy.Service
                         .Where(x => x.Title.IndexOf(options.AlbumName, StringComparison.OrdinalIgnoreCase) >= 0);                        
                 }
 
+                int totalCount = albums.Count();
                 albums = albums
                         .Skip(options.PageSize * options.PageIndex)
                         .Take(options.PageSize);

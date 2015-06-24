@@ -19,8 +19,24 @@
     </div>
 </div>
 
-<div id="paging" class="container-fluid spacer"></div>
+<div class="container-fluid spacer">
+    <div class="form-inline">
+        <div id="paging" class="form-group"></div>
+        <div id="searchResultInfo" class="form-group" style="float:right;margin-top:20px;display:none">
+            Total <span id="totalCount"></span> albums. Display
+            <select id="cboPageSize" class="form-control dropdown">
+                <option>10</option>
+                <option selected="selected">50</option>
+                <option>100</option>
+            </select>
+            per page            
+        </div>
+    </div>
+</div>
 <div id="gridAlbums" class="container-fluid"></div>
+<div id="loader" class="overlay" style="display:none">
+    <img class="loader" src="~/Images/loading.gif" />
+</div>
 @Html.Hidden("FlickrAlbumSearchUrl", Url.Action("AjaxSearch","FlickrAlbum"))
 
 @section scripts
