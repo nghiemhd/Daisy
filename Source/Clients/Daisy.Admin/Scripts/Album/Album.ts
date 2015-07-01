@@ -108,12 +108,12 @@
                         li.className = 'active';
                     }
                     else {
-                        a.onclick = (function (id:number) {
-                            var album = new FlickrAlbum();
-                            options.PageIndex = +a.innerHTML - 1;
-                            album.search(<IAlbumSearchOptions>options);
-                            return false;
-                        })(i);
+                        //a.onclick = (function (id:number) {
+                        //    var album = new FlickrAlbum();
+                        //    options.PageIndex = +a.innerHTML - 1;
+                        //    album.search(<IAlbumSearchOptions>options);
+                        //    return false;
+                        //})(i);
                     }
                     
                     li.appendChild(a);    
