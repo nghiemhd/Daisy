@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Web", "Daisy.Client.Web\Daisy.Web.csproj", "{430BF6C1-9940-4312-849A-B34A3A1D8F38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Web", "Clients\Daisy.Web\Daisy.Web.csproj", "{430BF6C1-9940-4312-849A-B34A3A1D8F38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Service", "Daisy.Service\Daisy.Service.csproj", "{61DB9C60-07AB-4FDA-BF6A-385113C8975B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Service", "Services\Daisy.Service\Daisy.Service.csproj", "{61DB9C60-07AB-4FDA-BF6A-385113C8975B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{A139063C-D574-450D-A204-2FAFE7089C3C}"
 EndProject
@@ -13,21 +13,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{99FD763D-B54A-4D7B-9B81-76E3C5E724A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Core", "Daisy.Core\Daisy.Core.csproj", "{B45BF591-6471-45FE-ACB4-C697B9A0979F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Core", "Libraries\Daisy.Core\Daisy.Core.csproj", "{B45BF591-6471-45FE-ACB4-C697B9A0979F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3810E6B4-E3BD-4C17-8D80-1B271BB42A2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.UnitTest", "Daisy.UnitTest\Daisy.UnitTest.csproj", "{FC595477-B4FF-4963-AEEB-622D53215DEE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.UnitTest", "Tests\Daisy.UnitTest\Daisy.UnitTest.csproj", "{FC595477-B4FF-4963-AEEB-622D53215DEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.IntegrationTest", "Daisy.IntegrationTest\Daisy.IntegrationTest.csproj", "{4E145089-C9B3-4DB4-AED2-FF691EC1CB5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.IntegrationTest", "Tests\Daisy.IntegrationTest\Daisy.IntegrationTest.csproj", "{4E145089-C9B3-4DB4-AED2-FF691EC1CB5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Admin", "Daisy.Admin\Daisy.Admin.csproj", "{5635E13E-2CFF-4691-BF54-2485A2455383}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Admin", "Clients\Daisy.Admin\Daisy.Admin.csproj", "{5635E13E-2CFF-4691-BF54-2485A2455383}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Security", "Daisy.Security\Daisy.Security.csproj", "{5641B173-43CF-4FCD-B6DD-B60A0E8DF19C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Security", "Libraries\Daisy.Security\Daisy.Security.csproj", "{5641B173-43CF-4FCD-B6DD-B60A0E8DF19C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Logging", "Daisy.Logging\Daisy.Logging.csproj", "{BC355E9B-D6C7-411B-A72E-25AB14144FAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Logging", "Libraries\Daisy.Logging\Daisy.Logging.csproj", "{BC355E9B-D6C7-411B-A72E-25AB14144FAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Common", "Daisy.Common\Daisy.Common.csproj", "{05856D7E-0CFF-42F2-9DA0-3B447253D90E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Common", "Libraries\Daisy.Common\Daisy.Common.csproj", "{05856D7E-0CFF-42F2-9DA0-3B447253D90E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
