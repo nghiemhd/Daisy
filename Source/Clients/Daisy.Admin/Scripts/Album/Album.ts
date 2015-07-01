@@ -107,13 +107,14 @@
                     if (i == pagingInfo.PageIndex) {
                         li.className = 'active';
                     }
-                    else {
-                        //a.onclick = (function (id:number) {
-                        //    var album = new FlickrAlbum();
-                        //    options.PageIndex = +a.innerHTML - 1;
-                        //    album.search(<IAlbumSearchOptions>options);
-                        //    return false;
-                        //})(i);
+                    else {                       
+                        a.onclick = (function (pageIndex: number): any {
+                            return function () {
+                                var album = new FlickrAlbum();
+                                options.PageIndex = pageIndex;
+                                album.search(<IAlbumSearchOptions>options);                                
+                            }  
+                        })(i);;
                     }
                     
                     li.appendChild(a);    
