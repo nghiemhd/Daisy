@@ -7,7 +7,7 @@
             PageSize: $('#cboPageSize').val()
         }; 
         var album = new Album.FlickrAlbum();
-        album.search(options);
+        album.search(options);        
     });
 
     $('#cboPageSize').change(function () {
@@ -19,5 +19,5 @@
         }; 
         var album = new Album.FlickrAlbum();
         album.search(options);
-    });
+    });    
 }); 

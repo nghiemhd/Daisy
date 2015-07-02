@@ -34,3 +34,7 @@
     top: 50%;
     position:absolute;
 }
+
+.pagination > li > a:hover {
+    cursor: pointer;
+}
