@@ -27,8 +27,8 @@ namespace Daisy.IntegrationTest
         {
             var user = new User 
             { 
-                Username = "nghiemhd2",
-                Password = "123"
+                Username = "daisyadmin",
+                Password = "daisy@123"
             };
 
             var authenticationService = container.Resolve<IAuthenticationService>();
@@ -43,7 +43,7 @@ namespace Daisy.IntegrationTest
         public void TestValidateUser()
         { 
             var authenticationService = container.Resolve<IAuthenticationService>();
-            var isValid = authenticationService.ValidateUser("nghiemhd", "123");
+            var isValid = authenticationService.ValidateUser("daisyadmin", "daisy@123");
 
             Assert.IsTrue(isValid);
         }

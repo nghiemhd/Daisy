@@ -14,6 +14,7 @@ using Daisy.Service.ServiceContracts;
 
 namespace Daisy.Admin.Controllers
 {
+    [Authorize]
     public class FlickrAlbumController : Controller
     {
         private readonly IAlbumService albumService;

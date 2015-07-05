@@ -45,6 +45,7 @@ namespace Daisy.Admin.App_Start
             // TODO: Register your types here
             container.RegisterType<IDbContext, DataContext>();
             container.RegisterType<IUnitOfWork, UnitOfWork<DataContext>>();
+            container.RegisterType<IAuthenticationService, AuthenticationService>();
             container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor());
             //container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor(apiKey, sharedSecret));
             container.RegisterType<IAlbumService, AlbumService>();
