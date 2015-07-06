@@ -2,3 +2,9 @@ obj
 bin
 EntityFramework.6.1.3
 /Source/*.suo
+/Source/Clients/Daisy.Admin/Scripts/Album/Main.js
+/Source/Clients/Daisy.Admin/Scripts/Album/Main.js.map
+/Source/Clients/Daisy.Admin/Scripts/Common/common.js
+/Source/Clients/Daisy.Admin/Scripts/Common/common.js.map
+/Source/Clients/Daisy.Admin/Scripts/Album/Album.js
+/Source/Clients/Daisy.Admin/Scripts/Album/Album.js.map

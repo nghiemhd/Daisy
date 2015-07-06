@@ -29,12 +29,54 @@
         FunctionArguments: ISearchOptions;
     }
 
+    export interface ILoadPageSizesArguments {
+        Container: HTMLElement;
+        DisplayedTotalString: string;
+        PageSizeOptions: number[];
+        SelectedPageSize: number;
+        ClassName: string;
+        FunctionToExecute: string;
+        FunctionArguments: ISearchOptions;
+    }
+
     export class Helper {
         static displayPageSizeList(selectedPageSize: number, totalCount: number) {
             $('#totalCount').text(totalCount);
             $('#cboPageSize').val(selectedPageSize.toString());
             $('#searchResultInfo').show();
         } 
+
+        static loadPageSizes(arg: ILoadPageSizesArguments) {
+            if (arg.PageSizeOptions.indexOf(arg.SelectedPageSize) != -1) {
+                var span = document.createElement('span');
+                span.innerHTML = arg.DisplayedTotalString + ' Display ';
+                arg.Container.appendChild(span);
+                var select = document.createElement('select');
+                select.classList.add('form-control', 'dropdown');
+
+                for (var i = 0; i < arg.PageSizeOptions.length; i++) {
+                    var option = document.createElement('option');
+                    option.innerHTML = arg.PageSizeOptions[i].toString();
+                    if (arg.PageSizeOptions[i] == arg.SelectedPageSize)
+                    {
+                        option.setAttribute("selected", "selected");
+                    }
+                    select.appendChild(option);
+                }
+
+                select.onchange = function () {
+                    arg.FunctionArguments.PageIndex = 0;
+                    arg.FunctionArguments.PageSize = this.value;
+                    var cls = new (<any>Common.Helper.getClassFromString(arg.ClassName));
+                    cls[arg.FunctionToExecute](arg.FunctionArguments);
+                }
+
+                arg.Container.appendChild(select);
+                var endSpan = document.createElement('span');
+                endSpan.innerHTML = ' per page';
+                arg.Container.appendChild(endSpan);
+            }
+        }
 
         static loadPagination(arg: ILoadPaginationArguments) {
             if (arg.PagingInfo.TotalPages > 0) {

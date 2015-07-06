@@ -63,16 +63,25 @@
                 FunctionToExecute: "search",
                 FunctionArguments: searchOptions
             };
-
             Common.Helper.loadPagination(loadPaginationArg);
-            Common.Helper.displayPageSizeList(response.Albums.PageSize, response.Albums.TotalCount);
+
+            var loadPageSizesArg: Common.ILoadPageSizesArguments = {
+                Container: $('#searchResultInfo')[0],
+                DisplayedTotalString: "Total " + response.Albums.TotalCount + " albums.",
+                PageSizeOptions: [10, 50, 100, 150],
+                SelectedPageSize: response.Albums.PageSize,
+                ClassName: "Album.FlickrAlbum",
+                FunctionToExecute: "search",
+                FunctionArguments: searchOptions
+            };
+            Common.Helper.loadPageSizes(loadPageSizesArg);
         }
 
         private cleanUI()
         {
             $('#gridAlbums').empty();
             $('#paging').empty();
-            $('#searchResultInfo').hide();
+            $('#searchResultInfo').empty();
         }
         
         private loadAlbums(data: Common.IPagedList<IAlbum>) {

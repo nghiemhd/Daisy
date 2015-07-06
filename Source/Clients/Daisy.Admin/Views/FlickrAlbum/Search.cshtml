@@ -2,10 +2,9 @@
 @{
     ViewBag.Title = "Search";
 }
-@Html.Hidden("FlickrAlbumSearchUrl", Url.Action("AjaxSearch", "FlickrAlbum"))
+
 <div class="spacer">
-    @using (Html.BeginForm("Search", "FlickrAlbum", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
+    <div class="form-horizontal">
         <div class="form-group">
             @Html.LabelFor(x => x.SearchOptions.AlbumName, new { @class = "control-label col-sm-1" })
             <div class="col-sm-3">
@@ -14,49 +13,35 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-3">
-                <button type="submit" class="btn btn-default">Search</button>
+                <button id="btnSearch" class="btn btn-default">Search</button>
             </div>
         </div>
-    }
+    </div>
 </div>
 
 <div class="container-fluid spacer">
-    @if (@Model != null && @Model.SearchOptions != null && @Model.Albums != null)
-    {
-        if (@Model.Albums.TotalPages > 1)
-        {
-            <ul class="pagination">
-                <li @Helper.If(!@Model.Albums.HasPreviousPage, then: "class=disabled")>
-                    <a href="#">&laquo;</a>
-                </li>
-                @for (int i = 1; i < @Model.Albums.TotalPages + 1; i++)
-                {
-                    <li @Helper.If(i == @Model.Albums.PageIndex + 1, then: "class=active")>
-                        <a href="#" onclick="SearchAlbums(@i-1);">@i</a>
-                    </li>
-                }
-                <li @Helper.If(!@Model.Albums.HasNextPage, then: "class=disabled")>
-                    <a href="#">&raquo;</a>
-                </li>
-            </ul>
-        }
-    }
+    <div class="form-inline">
+        <div id="paging" class="form-group"></div>
+        <div id="searchResultInfo" class="form-group" style="float:right;margin-top:20px;">
+            @*Total <span id="totalCount"></span> albums. Display
+            <select id="cboPageSize" class="form-control dropdown">
+                <option>10</option>
+                <option selected="selected">50</option>
+                <option>100</option>
+            </select>
+            per page*@            
+        </div>
+    </div>
 </div>
-
-<div id="gridAlbums" class="container-fluid">
-    @if (@Model != null)
-    {
-        foreach (var item in @Model.Albums.Items)
-        {
-            <div class="col-sm-3 col-md-2 col-lg-2" style="background-color:#101010;">
-                <div class="album-thumbnail photo-list-album-view" style="background-image:url(@item.AlbumThumbnailUrl)">
-                </div>
-            </div>
-        }
-    }
+<div id="gridAlbums" class="container-fluid"></div>
+<div id="loader" class="overlay" style="display:none">
+    <img class="loader" src="~/Images/loading.gif" />
 </div>
+@Html.Hidden("FlickrAlbumSearchUrl", Url.Action("Search","FlickrAlbum"))
 
 @section scripts
 {
-    <script type="text/javascript" src="~/Scripts/System/FlickrAlbum.js"></script>
+    <script src="~/Scripts/Common/common.js"></script>
+    <script src="~/Scripts/Album/Album.js"></script>
+    <script src="~/Scripts/Album/Main.js"></script>
 }

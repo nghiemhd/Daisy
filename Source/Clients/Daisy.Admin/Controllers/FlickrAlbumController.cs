@@ -35,31 +35,7 @@ namespace Daisy.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Search(PagedListAlbumViewModel model)
-        {
-            try
-            {
-                if (model == null)
-                {
-                    throw new ArgumentNullException("model");
-                }
-
-                var searchOptions = Mapper.Map<SearchAlbumOptions>(model.SearchOptions);
-                var albums = albumService.GetAlbumsFromFlickr(searchOptions);
-                var mappingAlbums = Mapper.Map<List<Album>>(albums.Items);
-                var pagedListAlbums = new PagedList<Album>(mappingAlbums, albums.PageIndex, albums.PageSize, albums.TotalCount);
-                model.Albums = pagedListAlbums;
-
-                return View(model);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        [HttpPost]
-        public JsonResult AjaxSearch(SearchAlbumModel options)
+        public JsonResult Search(SearchAlbumModel options)
         {
             try
             {
