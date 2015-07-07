@@ -25,17 +25,17 @@ namespace Daisy.Service
             this.flickrService = flickrService;
         }
 
-        public PhotosetCollection GetAllAlbumsFromFlickr(string userId)
+        public PhotosetCollection GetAllFlickrAlbums(string userId)
         {
             return flickrService.GetAllAlbums(userId);
         }
 
-        public PagedList<Photoset> GetAlbumsFromFlickr(SearchAlbumOptions options)
+        public PagedList<Photoset> GetFlickrAlbums(SearchAlbumOptions options)
         {
             return flickrService.GetAlbums(options);
         }
 
-        public PhotosetPhotoCollection GetPhotosByAlbumFromFlickr(string albumId)
+        public PhotosetPhotoCollection GetPhotosByFlickrAlbum(string albumId)
         {
             return flickrService.GetPhotosByAlbum(albumId);            
         }        

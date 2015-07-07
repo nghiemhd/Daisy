@@ -29,11 +29,6 @@ namespace Daisy.Admin.Controllers
             return View();
         }
 
-        public ActionResult AjaxSearch()
-        {
-            return View();
-        }
-
         [HttpPost]
         public JsonResult Search(SearchAlbumModel options)
         {
@@ -44,7 +39,7 @@ namespace Daisy.Admin.Controllers
                     throw new ArgumentNullException("options");
                 }
                 var searchOptions = Mapper.Map<SearchAlbumOptions>(options);
-                var albums = albumService.GetAlbumsFromFlickr(searchOptions);
+                var albums = albumService.GetFlickrAlbums(searchOptions);
                 var mappingAlbums = Mapper.Map<List<Album>>(albums.Items);
                 var pagedListAlbums = new PagedList<Album>(mappingAlbums, albums.PageIndex, albums.PageSize, albums.TotalCount);
                 var result = new PagedListAlbumViewModel
@@ -61,12 +56,12 @@ namespace Daisy.Admin.Controllers
             }
         }
 
-        public ActionResult Detail(string id)
+        public ActionResult Edit(string id)
         {
-            var photos = albumService.GetPhotosByAlbumFromFlickr(id);
+            var photos = albumService.GetPhotosByFlickrAlbum(id);
 
             var mappingPhotos = Mapper.Map<List<Photo>>(photos);
-            var model = new AlbumViewModel
+            var model = new AlbumDetailViewModel
             {
                 Photos = mappingPhotos
             };

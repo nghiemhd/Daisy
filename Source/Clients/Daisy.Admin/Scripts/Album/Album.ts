@@ -55,9 +55,8 @@
                 TotalPages: response.Albums.TotalPages
             };
             var searchOptions = <IAlbumSearchOptions>response.SearchOptions;
-            var divPaging = $('#paging')[0];
             var loadPaginationArg: Common.ILoadPaginationArguments = {
-                Container: divPaging,
+                Container: $('#paging')[0],
                 PagingInfo: pagingInfo,
                 ClassName: "Album.FlickrAlbum",
                 FunctionToExecute: "search",
@@ -88,6 +87,9 @@
             $.each(data.Items, function (index, item) {
                 $('#gridAlbums').append('<div class="col-sm-3 col-md-2 col-lg-2" style="background-color:#101010;">' +
                     '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')"></div>' +
+                    '<div class="album-title">' +
+                    '<input type="checkbox">&nbsp;<a href="/Admin/FlickrAlbum/Edit/' + item.FlickrAlbumId + '">' + item.Name + '</a>' +
+                    '</div>' +
                     '</div>');
             });
         }                

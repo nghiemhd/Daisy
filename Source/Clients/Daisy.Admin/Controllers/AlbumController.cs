@@ -25,7 +25,7 @@ namespace Daisy.Admin.Controllers
         
         public ActionResult Index()
         {
-            var albums = albumService.GetAllAlbumsFromFlickr(flickrUserId);
+            var albums = albumService.GetAllFlickrAlbums(flickrUserId);
 
             var mappingAlbums = Mapper.Map<List<DaisyModels.Album>>(albums);
             var model = new DaisyModels.AlbumListViewModel 
@@ -37,10 +37,10 @@ namespace Daisy.Admin.Controllers
 
         public ActionResult Detail(string id)
         {
-            var photos = albumService.GetPhotosByAlbumFromFlickr(id);
+            var photos = albumService.GetPhotosByFlickrAlbum(id);
 
             var mappingPhotos = Mapper.Map<List<DaisyModels.Photo>>(photos);
-            var model = new DaisyModels.AlbumViewModel
+            var model = new DaisyModels.AlbumDetailViewModel
             {
                 Photos = mappingPhotos
             };

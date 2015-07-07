@@ -167,7 +167,7 @@
     <Compile Include="Models\Account\LogOnModel.cs" />
     <Compile Include="Models\Album\Album.cs" />
     <Compile Include="Models\Album\AlbumListViewModel.cs" />
-    <Compile Include="Models\Album\AlbumViewModel.cs" />
+    <Compile Include="Models\Album\AlbumDetailViewModel.cs" />
     <Compile Include="Models\Album\PagedListAlbumViewModel.cs" />
     <Compile Include="Models\Album\Photo.cs" />
     <Compile Include="Models\Album\SearchAlbumModel.cs" />
@@ -229,6 +229,7 @@
     <Content Include="Views\FlickrAlbum\Search.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\FlickrAlbum\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

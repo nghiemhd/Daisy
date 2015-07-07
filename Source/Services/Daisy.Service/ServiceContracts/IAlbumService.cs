@@ -11,10 +11,10 @@ namespace Daisy.Service.ServiceContracts
 {
     public interface IAlbumService
     {
-        PhotosetCollection GetAllAlbumsFromFlickr(string userId);
+        PhotosetCollection GetAllFlickrAlbums(string userId);
 
-        PagedList<Photoset> GetAlbumsFromFlickr(SearchAlbumOptions options);
+        PagedList<Photoset> GetFlickrAlbums(SearchAlbumOptions options);
 
-        PhotosetPhotoCollection GetPhotosByAlbumFromFlickr(string albumId);
+        PhotosetPhotoCollection GetPhotosByFlickrAlbum(string albumId);
     }
 }
