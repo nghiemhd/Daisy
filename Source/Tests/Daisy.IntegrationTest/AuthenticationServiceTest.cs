@@ -16,10 +16,11 @@ namespace Daisy.IntegrationTest
         [TestInitialize]
         public void Setup()
         {
-            container = new UnityContainer();
-            container.RegisterType<IDbContext, DataContext>();
-            container.RegisterType<IUnitOfWork, UnitOfWork<DataContext>>();
-            container.RegisterType<IAuthenticationService, AuthenticationService>();
+            //container = new UnityContainer();
+            //container.RegisterType<IDbContext, DataContext>();
+            //container.RegisterType<IUnitOfWork, UnitOfWork<DataContext>>();
+            //container.RegisterType<IAuthenticationService, AuthenticationService>();
+            container = Bootstrapper.GetConfiguredContainer();
         }
 
         [TestMethod]
