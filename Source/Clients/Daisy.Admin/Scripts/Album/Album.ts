@@ -1,5 +1,5 @@
 ﻿module Album {
-    "use strict";
+    'use strict';
 
     export interface IAlbumSearchOptions extends Common.ISearchOptions {
         RequestUrl: string;
@@ -27,15 +27,43 @@
             $.ajax({
                 url: options.RequestUrl,
                 type: 'POST',
-                content: "application/json; charset=utf-8",
-                dataType: "json",
+                content: 'application/json; charset=utf-8',
+                dataType: 'json',
                 data: data,
                 success: (response) => {
                     this.searchCallback(response);
                 },
                 error: function (xhr, desc, err) {
                     console.log(xhr);
-                    console.log("Desc: " + desc + "\nErr:" + err);
+                    console.log('Desc: ' + desc + '\nErr:' + err);
+                },
+                beforeSend: function () {
+                    $('#loader').show();
+                },
+                complete: function () {
+                    $('#loader').hide();
+                }
+            });
+        }
+
+        importAlbums(albums: IAlbum[]) {
+            $.ajax({
+                url: '/Admin/FlickrAlbum/Import',
+                type: 'POST',
+                content: 'application/json; charset=utf-8',
+                dataType: 'json',
+                data: { albums: albums },
+                success: (response) => {
+                    if (response == "Success") {
+                        toastr.success('import successfully');
+                    }
+                    else {
+                        toastr.error(response);
+                    }                    
+                },
+                error: function (xhr, desc, err) {
+                    console.log(xhr);
+                    console.log('Desc: ' + desc + '\nErr:' + err);
                 },
                 beforeSend: function () {
                     $('#loader').show();
@@ -61,19 +89,19 @@
             var loadPaginationArg: Common.ILoadPaginationArguments = {
                 Container: $('#paging')[0],
                 PagingInfo: pagingInfo,
-                ClassName: "Album.FlickrAlbum",
-                FunctionToExecute: "search",
+                ClassName: 'Album.FlickrAlbum',
+                FunctionToExecute: 'search',
                 FunctionArguments: searchOptions
             };
             Common.Helper.loadPagination(loadPaginationArg);
 
             var loadPageSizesArg: Common.ILoadPageSizesArguments = {
                 Container: $('#searchResultInfo')[0],
-                DisplayedTotalString: "Total " + response.Albums.TotalCount + " albums.",
+                DisplayedTotalString: 'Total ' + response.Albums.TotalCount + ' albums.',
                 PageSizeOptions: [10, 50, 100, 150],
                 SelectedPageSize: response.Albums.PageSize,
-                ClassName: "Album.FlickrAlbum",
-                FunctionToExecute: "search",
+                ClassName: 'Album.FlickrAlbum',
+                FunctionToExecute: 'search',
                 FunctionArguments: searchOptions
             };
             Common.Helper.loadPageSizes(loadPageSizesArg);

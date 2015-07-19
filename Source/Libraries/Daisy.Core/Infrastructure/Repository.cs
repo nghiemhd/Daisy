@@ -19,6 +19,14 @@ namespace Daisy.Core.Infrastructure
             dbSet = context.Set<T>();
         }
 
+        public DbContext EFContext 
+        {
+            get
+            {
+                return this.context as DbContext;
+            }
+        }
+
         public virtual IQueryable<T> GetAll()
         {
             return dbSet;

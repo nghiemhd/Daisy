@@ -9,6 +9,7 @@ namespace Daisy.Service.Common
     public enum ResponseStatus
     {
         Success = 1,
-        Failure = 2
+        Failure = 2,
+        OutOfRange = 3
     }
 }

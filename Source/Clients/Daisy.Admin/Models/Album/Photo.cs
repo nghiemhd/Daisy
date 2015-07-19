@@ -11,6 +11,10 @@ namespace Daisy.Admin.Models
 
         public string Name { get; set; }
 
-        public string PhotoUrl { get; set; }
+        public string SmallUrl { get; set; }
+
+        public string MediumUrl { get; set; }
+
+        public string LargeUrl { get; set; }
     }
 }

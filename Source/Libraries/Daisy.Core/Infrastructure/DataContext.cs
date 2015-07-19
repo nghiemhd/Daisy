@@ -24,6 +24,15 @@ namespace Daisy.Core.Infrastructure
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<Album>()
+                .HasMany<Photo>(a => a.Photos)
+                .WithMany(p => p.Albums)
+                .Map(ap => {
+                    ap.MapLeftKey("AlbumId");
+                    ap.MapRightKey("PhotoId");
+                    ap.ToTable("AlbumPhoto");
+                });
         }
 
         #region DbSet

@@ -39,6 +39,16 @@
         FunctionArguments: ISearchOptions;
     }
 
+    export enum ResponseStatus {
+        Success,
+        Failure,
+        OutOfRange
+    }
+
+    export class Constant {
+        static get MAX_ALBUM_IMPORT(): number { return 30; }
+    }
+
     export class Helper {
         static displayPageSizeList(selectedPageSize: number, totalCount: number) {
             $('#totalCount').text(totalCount);
@@ -59,7 +69,7 @@
                     option.innerHTML = arg.PageSizeOptions[i].toString();
                     if (arg.PageSizeOptions[i] == arg.SelectedPageSize)
                     {
-                        option.setAttribute("selected", "selected");
+                        option.setAttribute('selected', 'selected');
                     }
                     select.appendChild(option);
                 }

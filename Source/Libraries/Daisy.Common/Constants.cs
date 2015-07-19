@@ -14,5 +14,6 @@ namespace Daisy.Common
 
         public static readonly int DefaultPageSize = 50;
         public static readonly int MaxPageSize = 500;
+        public static readonly int MaxAlbumImport = 30;
     }
 }
