@@ -14,5 +14,7 @@ namespace Daisy.Service.ServiceContracts
         PhotosetCollection GetAllAlbums(string userId);
         PagedList<Photoset> GetAlbums(SearchAlbumOptions options);
         PhotosetPhotoCollection GetPhotosByAlbum(string photosetId);
+        Photoset GetAlbumById(string id);
+        PhotoInfo GetPhotoInfo(string id);
     }
 }

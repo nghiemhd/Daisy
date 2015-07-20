@@ -270,6 +270,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\AlbumDetail\AlbumDetail.ts" />
     <TypeScriptCompile Include="Scripts\Album\Album.ts" />
     <TypeScriptCompile Include="Scripts\Album\Main.ts" />
     <TypeScriptCompile Include="Scripts\Common\common.ts" />

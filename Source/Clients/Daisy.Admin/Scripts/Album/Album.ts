@@ -119,7 +119,8 @@
                 $('#gridAlbums').append('<div class="col-sm-3 col-md-2 col-lg-2" style="background-color:#101010;">' +
                     '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')"></div>' +
                     '<div class="album-title">' +
-                    '<input type="checkbox" value="'+ item.FlickrAlbumId +'">&nbsp;<a href="/Admin/FlickrAlbum/Edit/' + item.FlickrAlbumId + '">' + item.Name + '</a>' +
+                    '<input type="checkbox" value="' + item.FlickrAlbumId + '">&nbsp;' +
+                    '<a href="/Admin/FlickrAlbum/Edit/' + item.FlickrAlbumId + '">' + item.Name + '</a>' +
                     '</div>' +
                     '</div>');
             });

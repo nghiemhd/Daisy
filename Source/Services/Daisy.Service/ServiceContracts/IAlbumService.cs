@@ -19,5 +19,7 @@ namespace Daisy.Service.ServiceContracts
         PhotosetPhotoCollection GetPhotosByFlickrAlbum(string albumId);
 
         void ImportAlbums(IEnumerable<DaisyEntities.Album> entities);
+
+        Photoset GetFlickrAlbumById(string id);
     }
 }

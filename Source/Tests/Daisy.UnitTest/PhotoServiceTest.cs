@@ -14,12 +14,13 @@ namespace Daisy.UnitTest
     {
         IUnitOfWork unitOfWork;
         IPhotoService photoService;
+        IFlickrService flickrService;
 
         [TestInitialize]
         public void Setup()
         {
             unitOfWork = new MockUnitOfWork<MockDataContext>();
-            photoService = new PhotoService(unitOfWork);
+            photoService = new PhotoService(unitOfWork, flickrService);
         }
 
         [TestMethod]

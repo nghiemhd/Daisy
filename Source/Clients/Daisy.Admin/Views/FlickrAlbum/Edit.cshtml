@@ -3,10 +3,26 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<div class="spacer">
+    <div>
+        <button id="btnImport" class="btn btn-default">Import</button>
+    </div>
+</div>
+<hr />
+<h2>@Model.AlbumName</h2>
+<div id="gridPhotos">
+    @foreach (var photo in @Model.Photos)
+    {
+        <div class="col-sm-6 col-md-6 col-lg-4" style="background-color:#101010;">
+            <div class="album-thumbnail photo-list-album-view" style="background-image:url(@photo.MediumUrl)"></div>
+            <div class="album-title">
+                <input type="checkbox" value="@photo.FlickrPhotoId">&nbsp;@photo.FlickrPhotoId
+            </div>
+        </div>
+    }
+</div>
 
-@foreach (var photo in @Model.Photos)
+@section scripts
 {
-    <img src="@photo.PhotoUrl" />
+    <script src="~/Scripts/AlbumDetail/AlbumDetail.js"></script>
 }
-

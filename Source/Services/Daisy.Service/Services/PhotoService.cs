@@ -13,11 +13,13 @@ namespace Daisy.Service
     {
         private IUnitOfWork unitOfWork;
         private IRepository<Photo> photoRepository;
+        private IFlickrService flickrService;
 
-        public PhotoService(IUnitOfWork unitOfWork)
+        public PhotoService(IUnitOfWork unitOfWork, IFlickrService flickrService)
         {
             this.unitOfWork = unitOfWork;
             photoRepository = this.unitOfWork.GetRepository<Photo>();
+            this.flickrService = flickrService;
         }
 
         public IEnumerable<Photo> GetAllPhotos()
@@ -49,6 +51,11 @@ namespace Daisy.Service
         public void DeletePhotos(IEnumerable<Photo> photos)
         {
             throw new NotImplementedException();
+        }
+
+        public FlickrNet.PhotoInfo GetFlickrPhotoInfo(string id)
+        {
+            return flickrService.GetPhotoInfo(id);
         }
     }
 }

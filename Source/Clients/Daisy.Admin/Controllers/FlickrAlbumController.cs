@@ -20,10 +20,12 @@ namespace Daisy.Admin.Controllers
     public class FlickrAlbumController : Controller
     {
         private readonly IAlbumService albumService;
+        private readonly IPhotoService photoService;
 
-        public FlickrAlbumController(IAlbumService albumService)
+        public FlickrAlbumController(IAlbumService albumService, IPhotoService photoService)
         {
             this.albumService = albumService;
+            this.photoService = photoService;
         }
         
         public ActionResult Search()                
@@ -61,13 +63,21 @@ namespace Daisy.Admin.Controllers
         public ActionResult Edit(string id)
         {
             var photos = albumService.GetPhotosByFlickrAlbum(id);
-
+            var albumName = albumService.GetFlickrAlbumById(id).Title;
             var mappingPhotos = Mapper.Map<List<DaisyModels.Photo>>(photos);
             var model = new DaisyModels.AlbumDetailViewModel
             {
+                AlbumName = albumName,
                 Photos = mappingPhotos
             };
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ImportPhotos(IEnumerable<string> photoIds)
+        {
+            var test = photoService.GetFlickrPhotoInfo(photoIds.First());
+            return Json(ResponseStatus.Success.ToString());
         }
 
         [HttpPost]

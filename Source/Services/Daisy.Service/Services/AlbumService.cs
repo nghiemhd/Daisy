@@ -66,5 +66,10 @@ namespace Daisy.Service
                 unitOfWork.Commit();
             }
         }
+
+        public Photoset GetFlickrAlbumById(string id)
+        {
+            return flickrService.GetAlbumById(id);
+        }
     }
 }

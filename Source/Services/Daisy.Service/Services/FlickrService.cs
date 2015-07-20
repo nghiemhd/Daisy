@@ -20,12 +20,12 @@ namespace Daisy.Service
         {
             var apiKey = ConfigurationManager.AppSettings[Constants.FlickrApiKey];
             var sharedSecret = ConfigurationManager.AppSettings[Constants.FlickrSharedSecret];
-            flickr = new Flickr(apiKey, sharedSecret);
+            flickr = new Flickr(apiKey, sharedSecret, "72157653789881053-7a9476ba4e3767f6");
         }
 
         public FlickrService(string apiKey, string sharedSecret)
         {
-            flickr = new Flickr(apiKey, sharedSecret);
+            flickr = new Flickr(apiKey, sharedSecret, "");
         }
 
         public PhotosetCollection GetAllAlbums(string userId)
@@ -88,6 +88,18 @@ namespace Daisy.Service
             {
                 throw ex;
             }
+        }
+
+        public Photoset GetAlbumById(string id)
+        {
+            var photoset = flickr.PhotosetsGetInfo(id);
+            return photoset;
+        }
+
+        public PhotoInfo GetPhotoInfo(string id)
+        {
+            var photo = flickr.PhotosGetInfo(id);
+            return photo;
         }
     }
 }
