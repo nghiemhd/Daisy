@@ -84,11 +84,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="DataContracts\AlbumDetailDto.cs" />
+    <Compile Include="DataContracts\AlbumDto.cs" />
+    <Compile Include="DataContracts\PhotoDto.cs" />
     <Compile Include="DataContracts\SearchAlbumOptions.cs" />
     <Compile Include="ServiceContracts\IFlickrService.cs" />
     <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
-    <Compile Include="Common\ResponseStatusEnum.cs" />
+    <Compile Include="Common\Enums.cs" />
     <Compile Include="DataContracts\DataResponse.cs" />
     <Compile Include="Services\FlickrService.cs" />
     <Compile Include="Services\PhotoService.cs" />

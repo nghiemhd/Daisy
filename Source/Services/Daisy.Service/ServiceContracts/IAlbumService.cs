@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using FlickrNet;
 using Daisy.Common;
 using Daisy.Service.DataContracts;
@@ -21,5 +22,9 @@ namespace Daisy.Service.ServiceContracts
         void ImportAlbums(IEnumerable<DaisyEntities.Album> entities);
 
         Photoset GetFlickrAlbumById(string id);
+
+        IEnumerable<DaisyEntities.Album> FindAlbum(string flickrAlbumId);
+
+        void ImportAlbumDetail(AlbumDetailDto album);
     }
 }

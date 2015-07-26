@@ -9,7 +9,7 @@
     </div>
 </div>
 <hr />
-<div class="spacer">   
+<div class="spacer">
     <div class="form-horizontal">
         <div class="form-group">
             @Html.LabelFor(x => x.SearchOptions.AlbumName, new { @class = "control-label col-sm-1" })
@@ -31,15 +31,18 @@
         <div id="searchResultInfo" class="form-group" style="float:right;margin-top:20px;"></div>
     </div>
 </div>
+<div id="divSelectAll" class="container-fluid" style="display:none">
+    <input type="checkbox" id="chkSelectAll">&nbsp;Select all
+</div>
 <div id="gridAlbums" class="container-fluid"></div>
 <div id="loader" class="overlay" style="display:none">
     <img class="loader" src="~/Images/loading.gif" />
 </div>
-@Html.Hidden("FlickrAlbumSearchUrl", Url.Action("Search","FlickrAlbum"))
+@Html.Hidden("FlickrAlbumSearchUrl", Url.Action("Search", "FlickrAlbum"))
 
 @section scripts
 {
     <script src="~/Scripts/Common/common.js"></script>
-    <script src="~/Scripts/Album/Album.js"></script>
-    <script src="~/Scripts/Album/Main.js"></script>
+    <script src="~/Scripts/FlickrAlbum/Album.js"></script>
+    <script src="~/Scripts/FlickrAlbum/Main.js"></script>
 }

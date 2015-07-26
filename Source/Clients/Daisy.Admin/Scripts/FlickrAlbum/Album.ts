@@ -31,7 +31,7 @@
                 dataType: 'json',
                 data: data,
                 success: (response) => {
-                    this.searchCallback(response);
+                    this.searchCallback(response);                    
                 },
                 error: function (xhr, desc, err) {
                     console.log(xhr);
@@ -77,34 +77,36 @@
         private searchCallback(response: any) {
             this.albums = response.Albums.Items;
             this.cleanUI();
-            this.loadAlbums(response.Albums);
+            if (this.albums.length > 0) {
+                this.loadAlbums(this.albums);
 
-            var pagingInfo: Common.IPagination = {
-                HasNextPage: response.Albums.HasNextPage,
-                HasPreviousPage: response.Albums.HasPreviousPage,
-                PageIndex: response.Albums.PageIndex,
-                TotalPages: response.Albums.TotalPages
-            };
-            var searchOptions = <IAlbumSearchOptions>response.SearchOptions;
-            var loadPaginationArg: Common.ILoadPaginationArguments = {
-                Container: $('#paging')[0],
-                PagingInfo: pagingInfo,
-                ClassName: 'Album.FlickrAlbum',
-                FunctionToExecute: 'search',
-                FunctionArguments: searchOptions
-            };
-            Common.Helper.loadPagination(loadPaginationArg);
+                var pagingInfo: Common.IPagination = {
+                    HasNextPage: response.Albums.HasNextPage,
+                    HasPreviousPage: response.Albums.HasPreviousPage,
+                    PageIndex: response.Albums.PageIndex,
+                    TotalPages: response.Albums.TotalPages
+                };
+                var searchOptions = <IAlbumSearchOptions>response.SearchOptions;
+                var loadPaginationArg: Common.ILoadPaginationArguments = {
+                    Container: $('#paging')[0],
+                    PagingInfo: pagingInfo,
+                    ClassName: 'Album.FlickrAlbum',
+                    FunctionToExecute: 'search',
+                    FunctionArguments: searchOptions
+                };
+                Common.Helper.loadPagination(loadPaginationArg);
 
-            var loadPageSizesArg: Common.ILoadPageSizesArguments = {
-                Container: $('#searchResultInfo')[0],
-                DisplayedTotalString: 'Total ' + response.Albums.TotalCount + ' albums.',
-                PageSizeOptions: [10, 50, 100, 150],
-                SelectedPageSize: response.Albums.PageSize,
-                ClassName: 'Album.FlickrAlbum',
-                FunctionToExecute: 'search',
-                FunctionArguments: searchOptions
-            };
-            Common.Helper.loadPageSizes(loadPageSizesArg);
+                var loadPageSizesArg: Common.ILoadPageSizesArguments = {
+                    Container: $('#searchResultInfo')[0],
+                    DisplayedTotalString: 'Total ' + response.Albums.TotalCount + ' albums.',
+                    PageSizeOptions: [30, 50, 100, 150],
+                    SelectedPageSize: response.Albums.PageSize,
+                    ClassName: 'Album.FlickrAlbum',
+                    FunctionToExecute: 'search',
+                    FunctionArguments: searchOptions
+                };
+                Common.Helper.loadPageSizes(loadPageSizesArg);
+            }
         }
 
         private cleanUI()
@@ -112,11 +114,16 @@
             $('#gridAlbums').empty();
             $('#paging').empty();
             $('#searchResultInfo').empty();
+            $('#divSelectAll').hide();
         }
         
-        private loadAlbums(data: Common.IPagedList<IAlbum>) {
-            $.each(data.Items, function (index, item) {
-                $('#gridAlbums').append('<div class="col-sm-3 col-md-2 col-lg-2" style="background-color:#101010;">' +
+        private loadAlbums(albums: IAlbum[]) {
+            $('#divSelectAll').show();
+            $('#chkSelectAll').prop('checked', false);
+
+            $.each(albums, function (index, item) {
+                $('#gridAlbums').append(
+                    '<div class="col-sm-3 col-md-2 col-lg-2" style= "background-color:#101010;" > ' +
                     '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')"></div>' +
                     '<div class="album-title">' +
                     '<input type="checkbox" value="' + item.FlickrAlbumId + '">&nbsp;' +

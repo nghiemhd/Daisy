@@ -33,19 +33,39 @@ namespace Daisy.Admin
                 .ForMember(dest => dest.UpdatedDate, opt => opt.MapFrom(o => DateTime.Now))
                 .ForMember(dest => dest.UpdatedBy, opt => opt.MapFrom(o => HttpContext.Current.User.Identity.Name));
 
-            Mapper.CreateMap<FlickrNet.Photo, DaisyEntities.Photo>()
-                .ForMember(dest => dest.FlickrPhotoId, opt => opt.MapFrom(src => src.PhotoId))
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title))
-                .ForMember(dest => dest.SmallUrl, opt => opt.MapFrom(src => src.SmallUrl))
-                .ForMember(dest => dest.MediumUrl, opt => opt.MapFrom(src => src.MediumUrl))
-                .ForMember(dest => dest.LargeUrl, opt => opt.MapFrom(src => src.LargeUrl))
+            Mapper.CreateMap<DaisyModels.Album, AlbumDto>()
+                .ForMember(dest => dest.ThumbnailUrl, opt => opt.MapFrom(src => src.AlbumThumbnailUrl))
                 .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(o => DateTime.Now))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(o => HttpContext.Current.User.Identity.Name))
                 .ForMember(dest => dest.UpdatedDate, opt => opt.MapFrom(o => DateTime.Now))
                 .ForMember(dest => dest.UpdatedBy, opt => opt.MapFrom(o => HttpContext.Current.User.Identity.Name));
 
-            //Mapper.CreateMap<PagedList<FlickrNet.Photoset>, PagedList<DaisyModels.Album>>()
-            //    .ConstructUsing(x => new PagedList<DaisyModels.Album>(x.))
+            Mapper.CreateMap<AlbumDto, DaisyEntities.Album>();
+
+            Mapper.CreateMap<FlickrNet.Photo, DaisyEntities.Photo>()
+                .ForMember(dest => dest.FlickrPhotoId, opt => opt.MapFrom(src => src.PhotoId))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title))
+                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(o => DateTime.Now))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(o => HttpContext.Current.User.Identity.Name))
+                .ForMember(dest => dest.UpdatedDate, opt => opt.MapFrom(o => DateTime.Now))
+                .ForMember(dest => dest.UpdatedBy, opt => opt.MapFrom(o => HttpContext.Current.User.Identity.Name));
+
+            Mapper.CreateMap<DaisyModels.Photo, DaisyEntities.Photo>()
+                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(o => DateTime.Now))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(o => HttpContext.Current.User.Identity.Name))
+                .ForMember(dest => dest.UpdatedDate, opt => opt.MapFrom(o => DateTime.Now))
+                .ForMember(dest => dest.UpdatedBy, opt => opt.MapFrom(o => HttpContext.Current.User.Identity.Name));
+
+            Mapper.CreateMap<DaisyModels.Photo, PhotoDto>()
+                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(o => DateTime.Now))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(o => HttpContext.Current.User.Identity.Name))
+                .ForMember(dest => dest.UpdatedDate, opt => opt.MapFrom(o => DateTime.Now))
+                .ForMember(dest => dest.UpdatedBy, opt => opt.MapFrom(o => HttpContext.Current.User.Identity.Name));
+
+            Mapper.CreateMap<PhotoDto, DaisyEntities.Photo>();
+
+            Mapper.CreateMap<DaisyModels.AlbumDetailViewModel, AlbumDetailDto>();
+
         }
     }
 }

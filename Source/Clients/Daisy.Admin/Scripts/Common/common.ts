@@ -50,12 +50,6 @@
     }
 
     export class Helper {
-        static displayPageSizeList(selectedPageSize: number, totalCount: number) {
-            $('#totalCount').text(totalCount);
-            $('#cboPageSize').val(selectedPageSize.toString());
-            $('#searchResultInfo').show();
-        } 
-
         static loadPageSizes(arg: ILoadPageSizesArguments) {
             if (arg.PageSizeOptions.indexOf(arg.SelectedPageSize) != -1) {
                 var span = document.createElement('span');

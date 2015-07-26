@@ -44,8 +44,8 @@ namespace Daisy.Admin.Controllers
                 }
                 var searchOptions = Mapper.Map<SearchAlbumOptions>(options);
                 var albums = albumService.GetFlickrAlbums(searchOptions);
-                var mappingAlbums = Mapper.Map<List<DaisyModels.Album>>(albums.Items);
-                var pagedListAlbums = new PagedList<DaisyModels.Album>(mappingAlbums, albums.PageIndex, albums.PageSize, albums.TotalCount);
+                var albumsModel = Mapper.Map<List<DaisyModels.Album>>(albums.Items);
+                var pagedListAlbums = new PagedList<DaisyModels.Album>(albumsModel, albums.PageIndex, albums.PageSize, albums.TotalCount);
                 var result = new DaisyModels.PagedListAlbumViewModel
                 {
                     Albums = pagedListAlbums,
@@ -63,21 +63,32 @@ namespace Daisy.Admin.Controllers
         public ActionResult Edit(string id)
         {
             var photos = albumService.GetPhotosByFlickrAlbum(id);
-            var albumName = albumService.GetFlickrAlbumById(id).Title;
-            var mappingPhotos = Mapper.Map<List<DaisyModels.Photo>>(photos);
+            var album = albumService.GetFlickrAlbumById(id);
+            var albumModel = Mapper.Map<DaisyModels.Album>(album);
+            var photosModel = Mapper.Map<List<DaisyModels.Photo>>(photos);
             var model = new DaisyModels.AlbumDetailViewModel
             {
-                AlbumName = albumName,
-                Photos = mappingPhotos
+                Album = albumModel,
+                Photos = photosModel
             };
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult ImportPhotos(IEnumerable<string> photoIds)
+        public ActionResult ImportAlbumDetail(DaisyModels.AlbumDetailViewModel albumDetail)
         {
-            var test = photoService.GetFlickrPhotoInfo(photoIds.First());
-            return Json(ResponseStatus.Success.ToString());
+            try
+            {
+                var album = Mapper.Map<AlbumDetailDto>(albumDetail);
+
+                albumService.ImportAlbumDetail(album);
+
+                return Json(ResponseStatus.Success.ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }            
         }
 
         [HttpPost]

@@ -34,6 +34,7 @@ namespace Daisy.Core.Migrations
                         SmallUrl = c.String(),
                         MediumUrl = c.String(),
                         LargeUrl = c.String(),
+                        OriginalUrl = c.String(),  
                         FlickrPhotoId = c.String(maxLength: 50, unicode: false),
                         IsDisplayed = c.Boolean(nullable: false, defaultValue:true),
                         IsDeleted = c.Boolean(nullable: false, defaultValue: false),

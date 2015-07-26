@@ -1,13 +1,38 @@
-$(document).ready(function () {
+﻿$(document).ready(function () {   
     var album = new Album.FlickrAlbum();
+
+    $('#btnSearch').click(function () {      
+        var options: Album.IAlbumSearchOptions = {
+            AlbumName: $('#txtAlbumName').val(),
+            RequestUrl: $('#FlickrAlbumSearchUrl').val(),
+            PageIndex: 0,
+            PageSize: $('#cboPageSize').val()
+        }; 
+        
+        album.search(options);        
+    });
+
+    $('#chkSelectAll').change(function () {
+        if (this.checked) {
+            $('#gridAlbums input[type=checkbox]').each(function () {
+                this.checked = true;
+            });
+        }
+        else {
+            $('#gridAlbums input[type=checkbox]').each(function () {
+                this.checked = false;
+            });
+        }
+    });
+    
     $('#btnImport').click(function () {
-        var importedAlbums = [];
-        var index = 0;
+        var importedAlbums: Album.IAlbum[] = [];
         $('#gridAlbums input[type=checkbox]:checked').each(function () {
             var flickrAlbumId = $(this).val();
-            var item = $.grep(album.albums, function (e) { return e.FlickrAlbumId == flickrAlbumId; });
+            var item = $.grep(album.albums, function (e) { return e.FlickrAlbumId == flickrAlbumId });
             importedAlbums.push(item[0]);
         });
+        
         if (importedAlbums.length == 0) {
             BootstrapDialog.show({
                 type: BootstrapDialog.TYPE_WARNING,
@@ -26,5 +51,4 @@ $(document).ready(function () {
             album.importAlbums(importedAlbums);
         }
     });
-});
-//# sourceMappingURL=Main.js.map
+}); 

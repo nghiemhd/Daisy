@@ -14,8 +14,8 @@ namespace FlickrAuth
     {
         static void Main(string[] args)
         {
-            var secret = "a9f96d07c3481f94";
-            var key = "95b00fe5ec213d2e9dc52ebf72cea4e0";
+            var secret = "0fcae91b162fddb2";
+            var key = "d15bf67c8d6b7aedb85c4a9c43fd7bc0";
 
             var methodGetFrob = "flickr.auth.getFrob";
 

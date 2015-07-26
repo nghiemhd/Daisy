@@ -16,5 +16,7 @@ namespace Daisy.Admin.Models
         public string MediumUrl { get; set; }
 
         public string LargeUrl { get; set; }
+
+        public string OriginalUrl { get; set; }
     }
 }

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Album.cs" />
+    <Compile Include="Entities\AlbumPhoto.cs" />
     <Compile Include="Entities\Photo.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Infrastructure\BaseEntity.cs" />

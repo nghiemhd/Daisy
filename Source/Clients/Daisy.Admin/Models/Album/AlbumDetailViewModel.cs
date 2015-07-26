@@ -7,7 +7,7 @@ namespace Daisy.Admin.Models
 {
     public class AlbumDetailViewModel
     {
-        public string AlbumName { get; set; }
+        public Album Album { get; set; }
         public IList<Photo> Photos { get; set; }
     }
 }

@@ -9,7 +9,10 @@
     </div>
 </div>
 <hr />
-<h2>@Model.AlbumName</h2>
+<h2>@Model.Album.Name</h2>
+<div>
+    <input type="checkbox" id="chkSelectAll">&nbsp;Select all
+</div>
 <div id="gridPhotos">
     @foreach (var photo in @Model.Photos)
     {
@@ -21,8 +24,15 @@
         </div>
     }
 </div>
-
+<div id="loader" class="overlay" style="display:none">
+    <img class="loader" src="~/Images/loading.gif" />
+</div>
 @section scripts
 {
-    <script src="~/Scripts/AlbumDetail/AlbumDetail.js"></script>
+    <script src="~/Scripts/FlickrAlbum/AlbumDetail.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            Album.AlbumDetail.album = @Html.Raw(Json.Encode(Model));
+        });
+</script>
 }

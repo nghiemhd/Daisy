@@ -21,12 +21,16 @@ namespace Daisy.Service
     {
         private IUnitOfWork unitOfWork;
         private IRepository<DaisyEntities.Album> albumRepository;
+        private IRepository<DaisyEntities.Photo> photoRepository;
+        //private IRepository<DaisyEntities.AlbumPhoto> albumPhotoRepository;
         private IFlickrService flickrService;
 
         public AlbumService(IUnitOfWork unitOfWork, IFlickrService flickrService)
         {
             this.unitOfWork = unitOfWork;
             albumRepository = this.unitOfWork.GetRepository<DaisyEntities.Album>();
+            photoRepository = this.unitOfWork.GetRepository<DaisyEntities.Photo>();
+            //albumPhotoRepository = this.unitOfWork.GetRepository<DaisyEntities.AlbumPhoto>();
             this.flickrService = flickrService;
         }
 
@@ -70,6 +74,38 @@ namespace Daisy.Service
         public Photoset GetFlickrAlbumById(string id)
         {
             return flickrService.GetAlbumById(id);
+        }
+
+        public IEnumerable<DaisyEntities.Album> FindAlbum(string flickrAlbumId)
+        {
+            var albums = albumRepository.GetAll()
+                .Where(x => x.FlickrAlbumId == flickrAlbumId)
+                .ToArray();
+            return albums;
+        }
+
+        public void ImportAlbumDetail(AlbumDetailDto albumDetail)
+        {
+            var album = FindAlbum(albumDetail.Album.FlickrAlbumId).FirstOrDefault();
+            var photos = Mapper.Map<List<DaisyEntities.Photo>>(albumDetail.Photos);
+            if (album == null)
+            {
+                album = Mapper.Map<DaisyEntities.Album>(albumDetail.Album);
+                album.Photos = photos;
+
+                albumRepository.Insert(album);
+            }
+            else
+            {
+                var photosInDb = album.Photos.Select(x => x.FlickrPhotoId);
+                var photosNotInDb = photos.Where(x => !photosInDb.Contains(x.FlickrPhotoId)).ToList();
+                foreach (var photo in photosNotInDb)
+                {
+                    album.Photos.Add(photo);
+                }
+            }
+
+            unitOfWork.Commit();
         }
     }
 }

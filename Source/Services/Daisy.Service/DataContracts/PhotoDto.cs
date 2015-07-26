@@ -1,23 +1,14 @@
-﻿using Daisy.Core.Infrastructure;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Daisy.Core.Entities
+namespace Daisy.Service.DataContracts
 {
-    public class Photo : BaseEntity
+    public class PhotoDto
     {
-        public Photo()
-        {
-            Albums = new HashSet<Album>();
-        }
-
-        [Required]
-        [MaxLength(100)]
+        public int Id { get; set; }
         public string Name { get; set; }
         public string SmallUrl { get; set; }
         public string MediumUrl { get; set; }
@@ -25,7 +16,9 @@ namespace Daisy.Core.Entities
         public string OriginalUrl { get; set; }
         public string FlickrPhotoId { get; set; }
         public bool IsDisplayed { get; set; }
-
-        public virtual ICollection<Album> Albums { get; set; }
+        public DateTime UpdatedDate { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

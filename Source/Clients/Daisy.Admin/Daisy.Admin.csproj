@@ -169,7 +169,7 @@
     <Compile Include="Models\Album\AlbumListViewModel.cs" />
     <Compile Include="Models\Album\AlbumDetailViewModel.cs" />
     <Compile Include="Models\Album\PagedListAlbumViewModel.cs" />
-    <Compile Include="Models\Album\Photo.cs" />
+    <Compile Include="Models\Photo\Photo.cs" />
     <Compile Include="Models\Album\SearchAlbumModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -270,9 +270,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\AlbumDetail\AlbumDetail.ts" />
-    <TypeScriptCompile Include="Scripts\Album\Album.ts" />
-    <TypeScriptCompile Include="Scripts\Album\Main.ts" />
+    <TypeScriptCompile Include="Scripts\FlickrAlbum\AlbumDetail.ts" />
+    <TypeScriptCompile Include="Scripts\FlickrAlbum\Album.ts" />
+    <TypeScriptCompile Include="Scripts\FlickrAlbum\Main.ts" />
     <TypeScriptCompile Include="Scripts\Common\common.ts" />
     <TypeScriptCompile Include="Scripts\Typings\bootstrap-dialog.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\jquery.d.ts" />
