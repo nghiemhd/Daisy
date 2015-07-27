@@ -44,6 +44,12 @@ var Album;
                         toastr.success('import successfully');
                     }
                     else {
+                        toastr.options = {
+                            closeButton: true,
+                            positionClass: "toast-top-full-width",
+                            timeOut: 0,
+                            extendedTimeOut: 0
+                        };
                         toastr.error(response);
                     }
                 },

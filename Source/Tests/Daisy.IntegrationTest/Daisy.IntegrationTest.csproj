@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="AuthenticationServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LogTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Daisy.Core\Daisy.Core.csproj">

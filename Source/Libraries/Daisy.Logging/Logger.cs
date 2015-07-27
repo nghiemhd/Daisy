@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Daisy.Logging.Extensions;
 
 namespace Daisy.Logging
 {
@@ -19,42 +20,42 @@ namespace Daisy.Logging
 
         public void Info(string message)
         {
-            throw new NotImplementedException();
+            logger.Info(message);
         }
 
         public void Warn(string message)
         {
-            throw new NotImplementedException();
+            logger.Warn(message);
         }
 
         public void Debug(string message)
         {
-            throw new NotImplementedException();
+            logger.Debug(message);
         }
 
         public void Error(string message)
         {
-            throw new NotImplementedException();
+            logger.Error(message);
         }
 
         public void Error(string message, Exception ex)
         {
-            throw new NotImplementedException();
+            logger.Error(message, ex);
         }
 
         public void Error(Exception ex)
         {
-            throw new NotImplementedException();
+            logger.Error(ex.BuildExceptionMessage());
         }
 
         public void Fatal(string message)
         {
-            throw new NotImplementedException();
+            logger.Fatal(message);
         }
 
         public void Fatal(Exception ex)
         {
-            throw new NotImplementedException();
+            logger.Fatal(ex.BuildExceptionMessage());
         }
     }
 }

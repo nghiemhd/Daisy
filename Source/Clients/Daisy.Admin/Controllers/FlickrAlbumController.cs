@@ -10,6 +10,7 @@ using DaisyModels = Daisy.Admin.Models;
 using Daisy.Common;
 using Daisy.Common.Extensions;
 using DaisyEntities = Daisy.Core.Entities;
+using Daisy.Logging.Extensions;
 using Daisy.Service.DataContracts;
 using Daisy.Service.ServiceContracts;
 using Daisy.Service.Common;
@@ -20,12 +21,10 @@ namespace Daisy.Admin.Controllers
     public class FlickrAlbumController : Controller
     {
         private readonly IAlbumService albumService;
-        private readonly IPhotoService photoService;
 
-        public FlickrAlbumController(IAlbumService albumService, IPhotoService photoService)
+        public FlickrAlbumController(IAlbumService albumService)
         {
             this.albumService = albumService;
-            this.photoService = photoService;
         }
         
         public ActionResult Search()                
@@ -44,6 +43,7 @@ namespace Daisy.Admin.Controllers
                 }
                 var searchOptions = Mapper.Map<SearchAlbumOptions>(options);
                 var albums = albumService.GetFlickrAlbums(searchOptions);
+
                 var albumsModel = Mapper.Map<List<DaisyModels.Album>>(albums.Items);
                 var pagedListAlbums = new PagedList<DaisyModels.Album>(albumsModel, albums.PageIndex, albums.PageSize, albums.TotalCount);
                 var result = new DaisyModels.PagedListAlbumViewModel
@@ -87,7 +87,7 @@ namespace Daisy.Admin.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return Json(LogExtension.GetFinalInnerException(ex).Message);
             }            
         }
 
@@ -106,7 +106,7 @@ namespace Daisy.Admin.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return Json(LogExtension.GetFinalInnerException(ex).Message);
             }            
         }
     }

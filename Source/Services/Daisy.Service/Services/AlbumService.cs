@@ -14,6 +14,7 @@ using System.Web;
 using AutoMapper;
 using System.Transactions;
 using System.Data.Entity.Core;
+using Daisy.Logging;
 
 namespace Daisy.Service
 {
@@ -22,52 +23,84 @@ namespace Daisy.Service
         private IUnitOfWork unitOfWork;
         private IRepository<DaisyEntities.Album> albumRepository;
         private IRepository<DaisyEntities.Photo> photoRepository;
-        //private IRepository<DaisyEntities.AlbumPhoto> albumPhotoRepository;
+        private ILogger logger;        
         private IFlickrService flickrService;
 
-        public AlbumService(IUnitOfWork unitOfWork, IFlickrService flickrService)
+        public AlbumService(IUnitOfWork unitOfWork, ILogger logger, IFlickrService flickrService)
         {
             this.unitOfWork = unitOfWork;
             albumRepository = this.unitOfWork.GetRepository<DaisyEntities.Album>();
             photoRepository = this.unitOfWork.GetRepository<DaisyEntities.Photo>();
-            //albumPhotoRepository = this.unitOfWork.GetRepository<DaisyEntities.AlbumPhoto>();
+            this.logger = logger;
             this.flickrService = flickrService;
         }
 
         public PhotosetCollection GetAllFlickrAlbums(string userId)
         {
-            return flickrService.GetAllAlbums(userId);
+            try
+            {
+                return flickrService.GetAllAlbums(userId);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw ex;
+            }
         }
 
         public PagedList<Photoset> GetFlickrAlbums(SearchAlbumOptions options)
         {
-            return flickrService.GetAlbums(options);
+            try
+            {
+                return flickrService.GetAlbums(options);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw ex;
+            }
         }
 
         public PhotosetPhotoCollection GetPhotosByFlickrAlbum(string albumId)
         {
-            return flickrService.GetPhotosByAlbum(albumId);            
+            try
+            {
+                return flickrService.GetPhotosByAlbum(albumId);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw ex;
+            }
         }
 
         public void ImportAlbums(IEnumerable<DaisyEntities.Album> entities)
         {
-            if (entities != null && entities.Count() > 0)
+            try
             {
-                var newAlbumIds = entities.Select(x => x.FlickrAlbumId).ToArray();
-                var albumsInDb = albumRepository.GetAll()
-                    .Where(x => newAlbumIds.Contains(x.FlickrAlbumId))
-                    .Select(x => x.FlickrAlbumId).ToArray();
-                var albumsNotInDb = entities.Where(x => !albumsInDb.Contains(x.FlickrAlbumId));
-
-                foreach (var album in albumsNotInDb)
+                if (entities != null && entities.Count() > 0)
                 {
-                    var photos = flickrService.GetPhotosByAlbum(album.FlickrAlbumId);
-                    album.Photos = Mapper.Map<List<DaisyEntities.Photo>>(photos);
+                    var newAlbumIds = entities.Select(x => x.FlickrAlbumId).ToArray();
+                    var albumsInDb = albumRepository.GetAll()
+                        .Where(x => newAlbumIds.Contains(x.FlickrAlbumId))
+                        .Select(x => x.FlickrAlbumId).ToArray();
+                    var albumsNotInDb = entities.Where(x => !albumsInDb.Contains(x.FlickrAlbumId));
 
-                    albumRepository.Insert(album);
+                    foreach (var album in albumsNotInDb)
+                    {
+                        var photos = flickrService.GetPhotosByAlbum(album.FlickrAlbumId);
+                        album.Photos = Mapper.Map<List<DaisyEntities.Photo>>(photos);
+
+                        albumRepository.Insert(album);
+                    }
+
+                    unitOfWork.Commit();
                 }
-
-                unitOfWork.Commit();
+            }
+            catch(Exception ex)
+            {
+                logger.Error(ex);
+                throw ex;
             }
         }
 
@@ -78,34 +111,50 @@ namespace Daisy.Service
 
         public IEnumerable<DaisyEntities.Album> FindAlbum(string flickrAlbumId)
         {
-            var albums = albumRepository.GetAll()
-                .Where(x => x.FlickrAlbumId == flickrAlbumId)
-                .ToArray();
-            return albums;
+            try
+            {
+                var albums = albumRepository.GetAll()
+                    .Where(x => x.FlickrAlbumId == flickrAlbumId)
+                    .ToArray();
+                return albums;
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw ex;
+            }
         }
 
         public void ImportAlbumDetail(AlbumDetailDto albumDetail)
         {
-            var album = FindAlbum(albumDetail.Album.FlickrAlbumId).FirstOrDefault();
-            var photos = Mapper.Map<List<DaisyEntities.Photo>>(albumDetail.Photos);
-            if (album == null)
+            try
             {
-                album = Mapper.Map<DaisyEntities.Album>(albumDetail.Album);
-                album.Photos = photos;
-
-                albumRepository.Insert(album);
-            }
-            else
-            {
-                var photosInDb = album.Photos.Select(x => x.FlickrPhotoId);
-                var photosNotInDb = photos.Where(x => !photosInDb.Contains(x.FlickrPhotoId)).ToList();
-                foreach (var photo in photosNotInDb)
+                var album = FindAlbum(albumDetail.Album.FlickrAlbumId).FirstOrDefault();
+                var photos = Mapper.Map<List<DaisyEntities.Photo>>(albumDetail.Photos);
+                if (album == null)
                 {
-                    album.Photos.Add(photo);
-                }
-            }
+                    album = Mapper.Map<DaisyEntities.Album>(albumDetail.Album);
+                    album.Photos = photos;
 
-            unitOfWork.Commit();
+                    albumRepository.Insert(album);
+                }
+                else
+                {
+                    var photosInDb = album.Photos.Select(x => x.FlickrPhotoId);
+                    var photosNotInDb = photos.Where(x => !photosInDb.Contains(x.FlickrPhotoId)).ToList();
+                    foreach (var photo in photosNotInDb)
+                    {
+                        album.Photos.Add(photo);
+                    }
+                }
+
+                unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw ex;
+            }
         }
     }
 }

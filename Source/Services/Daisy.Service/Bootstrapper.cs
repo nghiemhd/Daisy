@@ -1,4 +1,5 @@
 ﻿using Daisy.Core.Infrastructure;
+using Daisy.Logging;
 using Daisy.Service.ServiceContracts;
 using Microsoft.Practices.Unity;
 using System;
@@ -32,6 +33,7 @@ namespace Daisy.Service
         {
             container.RegisterType<IDbContext, DataContext>();
             container.RegisterType<IUnitOfWork, UnitOfWork<DataContext>>();
+            container.RegisterType<ILogger, Logger>();
             container.RegisterType<IAuthenticationService, AuthenticationService>();
             container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor());
             //container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor(apiKey, sharedSecret));
