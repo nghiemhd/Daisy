@@ -3,7 +3,6 @@ $(document).ready(function () {
     $('#btnSearch').click(function () {
         var options = {
             AlbumName: $('#txtAlbumName').val(),
-            RequestUrl: $('#FlickrAlbumSearchUrl').val(),
             PageIndex: 0,
             PageSize: $('#cboPageSize').val()
         };
@@ -25,7 +24,7 @@ $(document).ready(function () {
         var importedAlbums = [];
         $('#gridAlbums input[type=checkbox]:checked').each(function () {
             var flickrAlbumId = $(this).val();
-            var item = $.grep(album.albums, function (e) { return e.FlickrAlbumId == flickrAlbumId; });
+            var item = $.grep(Album.FlickrAlbum.albums, function (e) { return e.FlickrAlbumId == flickrAlbumId; });
             importedAlbums.push(item[0]);
         });
         if (importedAlbums.length == 0) {

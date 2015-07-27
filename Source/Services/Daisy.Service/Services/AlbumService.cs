@@ -29,8 +29,8 @@ namespace Daisy.Service
         public AlbumService(IUnitOfWork unitOfWork, ILogger logger, IFlickrService flickrService)
         {
             this.unitOfWork = unitOfWork;
-            albumRepository = this.unitOfWork.GetRepository<DaisyEntities.Album>();
-            photoRepository = this.unitOfWork.GetRepository<DaisyEntities.Photo>();
+            this.albumRepository = this.unitOfWork.GetRepository<DaisyEntities.Album>();
+            this.photoRepository = this.unitOfWork.GetRepository<DaisyEntities.Photo>();
             this.logger = logger;
             this.flickrService = flickrService;
         }
@@ -97,7 +97,7 @@ namespace Daisy.Service
                     unitOfWork.Commit();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.Error(ex);
                 throw ex;

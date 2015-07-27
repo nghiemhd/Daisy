@@ -16,7 +16,7 @@ namespace Daisy.Core.Infrastructure
         public Repository(IDbContext context)
         {
             this.context = context;
-            dbSet = context.Set<T>();
+            this.dbSet = context.Set<T>();
         }
 
         public DbContext EFContext 
@@ -29,7 +29,7 @@ namespace Daisy.Core.Infrastructure
 
         public virtual IQueryable<T> GetAll()
         {
-            return dbSet;
+            return this.dbSet;
         }
 
         public virtual T Insert(T entity)
@@ -50,11 +50,11 @@ namespace Daisy.Core.Infrastructure
                     baseEntity.CreatedBy = Thread.CurrentPrincipal.Identity.Name;
                 }
                 baseEntity.UpdatedBy = baseEntity.CreatedBy;
-                return dbSet.Add(baseEntity as T);
+                return this.dbSet.Add(baseEntity as T);
             }
             else
             {
-                return dbSet.Add(entity);
+                return this.dbSet.Add(entity);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Daisy.Core.Infrastructure
 
         public virtual void Delete(T entity)
         {
-            dbSet.Remove(entity);
+            this.dbSet.Remove(entity);
         }
 
         public virtual void Update(T entity)
@@ -88,7 +88,7 @@ namespace Daisy.Core.Infrastructure
             if (baseEntity != null)
             {
                 baseEntity.UpdatedDate = DateTime.Now;
-                var dbEntityEntry = context.Entry(baseEntity);
+                var dbEntityEntry = this.context.Entry(baseEntity);
 
                 // Set RowVersion equal to value of client so that
                 // entity framework handles concurrency violation
@@ -102,7 +102,7 @@ namespace Daisy.Core.Infrastructure
 
         public virtual bool Any()
         {
-            return dbSet.Any();
+            return this.dbSet.Any();
         }
     }
 }

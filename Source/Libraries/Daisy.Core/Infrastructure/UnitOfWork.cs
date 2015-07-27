@@ -18,25 +18,25 @@ namespace Daisy.Core.Infrastructure
 
         ~UnitOfWork()
         {
-            Dispose(false);
+            this.Dispose(false);
         }
 
         public UnitOfWork()
         {
-            context = new TContext();
-            repositories = new Dictionary<Type, object>();
-            disposed = false;
+            this.context = new TContext();
+            this.repositories = new Dictionary<Type, object>();
+            this.disposed = false;
         }
 
         public IRepository<TEntity> GetRepository<TEntity>() where TEntity : class
         {
-            if (repositories.Keys.Contains(typeof(TEntity)))
+            if (this.repositories.Keys.Contains(typeof(TEntity)))
             {
-                return repositories[typeof(TEntity)] as IRepository<TEntity>;
+                return this.repositories[typeof(TEntity)] as IRepository<TEntity>;
             }
 
-            var repository = new Repository<TEntity>(context);
-            repositories.Add(typeof(TEntity), repository);
+            var repository = new Repository<TEntity>(this.context);
+            this.repositories.Add(typeof(TEntity), repository);
 
             return repository;
         }
@@ -45,28 +45,28 @@ namespace Daisy.Core.Infrastructure
         {
             try
             {
-                context.SaveChanges();
+                this.context.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Errors = GetExceptionErrors(ex);
+                this.Errors = this.GetExceptionErrors(ex);
                 throw ex;
             }
         }
 
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         private void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!this.disposed)
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    this.context.Dispose();
                 }
                 this.disposed = true;
             }
@@ -76,7 +76,7 @@ namespace Daisy.Core.Infrastructure
         {
             var errorList = new List<string>();
 
-            //DbEntityValidationException
+            // DbEntityValidationException
             if (ex is DbEntityValidationException)
             {
                 foreach (var validationResult in ((DbEntityValidationException)ex).EntityValidationErrors)
@@ -87,7 +87,7 @@ namespace Daisy.Core.Infrastructure
                     }
                 }
             }
-            //DbUpdateConcurrencyException
+            // DbUpdateConcurrencyException
             else if (ex is DbUpdateConcurrencyException)
             {
                 string customErrorMessage;
@@ -95,10 +95,10 @@ namespace Daisy.Core.Infrastructure
                 customErrorMessage += "The object you are editing has been changed by another user. Please refresh and update again.";
                 errorList.Add(customErrorMessage);
             }
-            //DbUpdateException
+            // DbUpdateException
             else if (ex is DbUpdateException)
             {
-                errorList = GetExceptionMessages(ex);
+                errorList = this.GetExceptionMessages(ex);
             }
             else
             {
@@ -113,7 +113,7 @@ namespace Daisy.Core.Infrastructure
             errorList.Add(ex.Message);
             if (ex.InnerException != null)
             {
-                errorList.AddRange(GetExceptionMessages(ex.InnerException));
+                errorList.AddRange(this.GetExceptionMessages(ex.InnerException));
             }
             return errorList;
         }

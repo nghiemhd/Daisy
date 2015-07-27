@@ -10,9 +10,9 @@ namespace Daisy.Core.Entities
 {
     public class AlbumPhoto
     {
-        [Key, Column(Order=0)]
+        [Key, Column(Order = 0)]
         public int AlbumId { get; set; }
-        [Key, Column(Order=1)]
+        [Key, Column(Order = 1)]
         public int PhotoId { get; set; }
     }
 }

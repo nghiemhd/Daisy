@@ -4,7 +4,6 @@
     $('#btnSearch').click(function () {      
         var options: Album.IAlbumSearchOptions = {
             AlbumName: $('#txtAlbumName').val(),
-            RequestUrl: $('#FlickrAlbumSearchUrl').val(),
             PageIndex: 0,
             PageSize: $('#cboPageSize').val()
         }; 
@@ -29,7 +28,7 @@
         var importedAlbums: Album.IAlbum[] = [];
         $('#gridAlbums input[type=checkbox]:checked').each(function () {
             var flickrAlbumId = $(this).val();
-            var item = $.grep(album.albums, function (e) { return e.FlickrAlbumId == flickrAlbumId });
+            var item = $.grep(Album.FlickrAlbum.albums, function (e) { return e.FlickrAlbumId == flickrAlbumId });
             importedAlbums.push(item[0]);
         });
         

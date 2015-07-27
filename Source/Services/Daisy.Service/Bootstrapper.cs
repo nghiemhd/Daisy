@@ -36,7 +36,6 @@ namespace Daisy.Service
             container.RegisterType<ILogger, Logger>();
             container.RegisterType<IAuthenticationService, AuthenticationService>();
             container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor());
-            //container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor(apiKey, sharedSecret));
             container.RegisterType<IAlbumService, AlbumService>();
         }
     }

@@ -12,7 +12,7 @@ var Album;
                 PageSize: options.PageSize
             };
             $.ajax({
-                url: options.RequestUrl,
+                url: '/Admin/FlickrAlbum/Search',
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -66,10 +66,10 @@ var Album;
             });
         };
         FlickrAlbum.prototype.searchCallback = function (response) {
-            this.albums = response.Albums.Items;
+            Album.FlickrAlbum.albums = response.Albums.Items;
             this.cleanUI();
-            if (this.albums.length > 0) {
-                this.loadAlbums(this.albums);
+            if (Album.FlickrAlbum.albums.length > 0) {
+                this.loadAlbums(Album.FlickrAlbum.albums);
                 var pagingInfo = {
                     HasNextPage: response.Albums.HasNextPage,
                     HasPreviousPage: response.Albums.HasPreviousPage,

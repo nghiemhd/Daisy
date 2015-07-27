@@ -18,7 +18,7 @@ namespace Daisy.Security
         private const int keySize = 256;  // can be 192 or 128
         private const string ENDKEY = "#####";
 
-        //For hashing password
+        // For hashing password
         private const int SALT_BYTE_SIZE = 24;
         private const int HASH_BYTE_SIZE = 24;
         private const int PBKDF2_ITERATIONS = 1000;

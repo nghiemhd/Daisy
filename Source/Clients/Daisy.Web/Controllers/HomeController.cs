@@ -20,21 +20,7 @@ namespace Daisy.Web.Controllers
         }
 
         public ActionResult Index()
-        {
-            //var model = new PhotosViewModel
-            //{
-            //    Photos = new List<Photo> { 
-            //        new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },   
-            //        new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },
-            //        new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },   
-            //        new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },
-            //        new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },   
-            //        new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },
-            //        new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },   
-            //        new Photo { Url = "https://c1.staticflickr.com/9/8816/17845449760_8a06d80820_h.jpg" },
-            //    }
-            //};
-
+        {            
             var options = new PhotoSearchOptions();
             options.PerPage = 10;
             options.Page = 1;

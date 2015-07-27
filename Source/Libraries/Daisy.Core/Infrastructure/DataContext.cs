@@ -13,7 +13,7 @@ namespace Daisy.Core.Infrastructure
     {
         static DataContext()
         {
-            //Ignore using Code First Migrations to update the database
+            // Ignore using Code First Migrations to update the database
             Database.SetInitializer<DataContext>(null);
         }
 
@@ -39,7 +39,6 @@ namespace Daisy.Core.Infrastructure
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<User> Users { get; set; }
-        //public DbSet<AlbumPhoto> AlbumPhotos { get; set; }
         #endregion DbSet
     }
 }
