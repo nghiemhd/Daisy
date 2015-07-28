@@ -1,20 +1,16 @@
-﻿using Daisy.Common;
-using DaisyEntities = Daisy.Core.Entities;
-using Daisy.Core.Infrastructure;
-using Daisy.Service.DataContracts;
-using Daisy.Service.ServiceContracts;
-using EntityFramework.BulkInsert.Extensions;
-using FlickrNet;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+
 using AutoMapper;
-using System.Transactions;
-using System.Data.Entity.Core;
+using Daisy.Common;
+using Daisy.Common.Extensions;
+using Daisy.Core.Infrastructure;
 using Daisy.Logging;
+using Daisy.Service.DataContracts;
+using Daisy.Service.ServiceContracts;
+using DaisyEntities = Daisy.Core.Entities;
+using FlickrNet;
 
 namespace Daisy.Service
 {
@@ -48,11 +44,11 @@ namespace Daisy.Service
             }
         }
 
-        public PagedList<Photoset> GetFlickrAlbums(SearchAlbumOptions options)
+        public PagedList<Photoset> SearchFlickrAlbums(SearchAlbumOptions options)
         {
             try
             {
-                return flickrService.GetAlbums(options);
+                return flickrService.SearchAlbums(options);
             }
             catch (Exception ex)
             {
@@ -81,7 +77,7 @@ namespace Daisy.Service
                 if (entities != null && entities.Count() > 0)
                 {
                     var newAlbumIds = entities.Select(x => x.FlickrAlbumId).ToArray();
-                    var albumsInDb = albumRepository.GetAll()
+                    var albumsInDb = albumRepository.Query()
                         .Where(x => newAlbumIds.Contains(x.FlickrAlbumId))
                         .Select(x => x.FlickrAlbumId).ToArray();
                     var albumsNotInDb = entities.Where(x => !albumsInDb.Contains(x.FlickrAlbumId));
@@ -113,7 +109,7 @@ namespace Daisy.Service
         {
             try
             {
-                var albums = albumRepository.GetAll()
+                var albums = albumRepository.Query()
                     .Where(x => x.FlickrAlbumId == flickrAlbumId)
                     .ToArray();
                 return albums;
@@ -155,6 +151,59 @@ namespace Daisy.Service
                 logger.Error(ex);
                 throw ex;
             }
+        }
+
+        public PagedList<DaisyEntities.Album> SearchAlbums(SearchAlbumOptions options)
+        {
+            try
+            {
+                var query = albumRepository.Query();
+                if (!options.AlbumName.IsNullOrEmpty())
+                {
+                    query = query.Where(x => x.Name.Contains(options.AlbumName));
+                }
+
+                if (options.IsPublished != null)
+                {
+                    query = query.Where(x => x.IsPublished == options.IsPublished);
+                }
+
+                if (options.PageSize <= 0 || options.PageSize > Constants.MaxPageSize)
+                {
+                    options.PageSize = Constants.DefaultPageSize;
+                }
+
+                if (options.PageIndex < 0)
+                {
+                    options.PageIndex = 0;
+                }
+
+                int totalCount = query.Count();
+                query = query
+                        .OrderBy(x => x.Id)
+                        .Skip(options.PageSize * options.PageIndex)
+                        .Take(options.PageSize);
+
+                var result = new PagedList<DaisyEntities.Album>(
+                    query.ToList(),
+                    options.PageIndex,
+                    options.PageSize,
+                    totalCount
+                );
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw ex;
+            }
+        }
+
+        public DaisyEntities.Album GetAlbumById(int id)
+        {
+            var album = albumRepository.Query().SingleOrDefault(x => x.Id == id);
+            return album;
         }
     }
 }

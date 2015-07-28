@@ -12,7 +12,7 @@ namespace Daisy.Service.ServiceContracts
     public interface IFlickrService
     {
         PhotosetCollection GetAllAlbums(string userId);
-        PagedList<Photoset> GetAlbums(SearchAlbumOptions options);
+        PagedList<Photoset> SearchAlbums(SearchAlbumOptions options);
         PhotosetPhotoCollection GetPhotosByAlbum(string photosetId);
         Photoset GetAlbumById(string id);
         PhotoInfo GetPhotoInfo(string id);

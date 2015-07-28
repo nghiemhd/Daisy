@@ -21,7 +21,7 @@ namespace Daisy.Core.Entities
 
         public string ThumbnailUrl { get; set; }
 
-        public bool IsDisplayed { get; set; }
+        public bool IsPublished { get; set; }
 
         [MaxLength(100)]
         public string FlickrAlbumId { get; set; }

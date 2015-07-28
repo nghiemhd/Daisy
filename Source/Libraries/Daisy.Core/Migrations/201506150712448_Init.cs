@@ -14,7 +14,7 @@ namespace Daisy.Core.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 100),
                         ThumbnailUrl = c.String(),
-                        IsDisplayed = c.Boolean(nullable: false, defaultValue: true),
+                        IsPublished = c.Boolean(nullable: false, defaultValue: true),
                         FlickrAlbumId = c.String(maxLength: 50, unicode: false),
                         IsDeleted = c.Boolean(nullable: false, defaultValue: false),
                         UpdatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
@@ -24,7 +24,9 @@ namespace Daisy.Core.Migrations
                         RowRevision = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
+            CreateIndex("Album", "FlickrAlbumId", true, "UNI_Album_FlickrAlbumId");
+
             CreateTable(
                 "Photo",
                 c => new
@@ -36,7 +38,7 @@ namespace Daisy.Core.Migrations
                         LargeUrl = c.String(),
                         OriginalUrl = c.String(),  
                         FlickrPhotoId = c.String(maxLength: 50, unicode: false),
-                        IsDisplayed = c.Boolean(nullable: false, defaultValue: true),
+                        IsPublished = c.Boolean(nullable: false, defaultValue: true),
                         IsDeleted = c.Boolean(nullable: false, defaultValue: false),
                         UpdatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
                         UpdatedBy = c.String(nullable: false, maxLength: 50, unicode: false, defaultValueSql: "suser_name()"),
@@ -45,6 +47,8 @@ namespace Daisy.Core.Migrations
                         RowRevision = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
                 .PrimaryKey(t => t.Id);
+
+            CreateIndex("Photo", "FlickrPhotoId", true, "UNI_Photo_FlickrPhotoId");
             
             CreateTable(
                 "User",

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-using FlickrNet;
 using Daisy.Common;
 using Daisy.Service.DataContracts;
 using DaisyEntities = Daisy.Core.Entities;
+using FlickrNet;
 
 namespace Daisy.Service.ServiceContracts
 {
@@ -15,7 +11,7 @@ namespace Daisy.Service.ServiceContracts
     {
         PhotosetCollection GetAllFlickrAlbums(string userId);
 
-        PagedList<Photoset> GetFlickrAlbums(SearchAlbumOptions options);
+        PagedList<Photoset> SearchFlickrAlbums(SearchAlbumOptions options);
 
         PhotosetPhotoCollection GetPhotosByFlickrAlbum(string albumId);
 
@@ -26,5 +22,9 @@ namespace Daisy.Service.ServiceContracts
         IEnumerable<DaisyEntities.Album> FindAlbum(string flickrAlbumId);
 
         void ImportAlbumDetail(AlbumDetailDto album);
+
+        PagedList<DaisyEntities.Album> SearchAlbums(SearchAlbumOptions options);
+
+        DaisyEntities.Album GetAlbumById(int id);        
     }
 }

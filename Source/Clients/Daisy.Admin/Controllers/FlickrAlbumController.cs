@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 using AutoMapper;
-using DaisyModels = Daisy.Admin.Models;
 using Daisy.Common;
-using Daisy.Common.Extensions;
-using DaisyEntities = Daisy.Core.Entities;
 using Daisy.Logging.Extensions;
+using Daisy.Service.Common;
 using Daisy.Service.DataContracts;
 using Daisy.Service.ServiceContracts;
-using Daisy.Service.Common;
+
+using DaisyEntities = Daisy.Core.Entities;
+using DaisyModels = Daisy.Admin.Models;
 
 namespace Daisy.Admin.Controllers
 {
@@ -27,7 +25,7 @@ namespace Daisy.Admin.Controllers
             this.albumService = albumService;
         }
         
-        public ActionResult Search()                
+        public ActionResult Index()                
         {
             return View();
         }
@@ -42,7 +40,7 @@ namespace Daisy.Admin.Controllers
                     throw new ArgumentNullException("options");
                 }
                 var searchOptions = Mapper.Map<SearchAlbumOptions>(options);
-                var albums = albumService.GetFlickrAlbums(searchOptions);
+                var albums = albumService.SearchFlickrAlbums(searchOptions);
 
                 var albumsModel = Mapper.Map<List<DaisyModels.Album>>(albums.Items);
                 var pagedListAlbums = new PagedList<DaisyModels.Album>(albumsModel, albums.PageIndex, albums.PageSize, albums.TotalCount);

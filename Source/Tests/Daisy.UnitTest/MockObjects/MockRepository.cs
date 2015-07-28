@@ -16,7 +16,7 @@ namespace Daisy.UnitTest.MockObjects
             this.Context = context;
         }
 
-        public IQueryable<T> GetAll()
+        public IQueryable<T> Query()
         {
             return Context.AsQueryable();
         }

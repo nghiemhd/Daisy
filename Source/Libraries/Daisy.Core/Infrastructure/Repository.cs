@@ -27,7 +27,7 @@ namespace Daisy.Core.Infrastructure
             }
         }
 
-        public virtual IQueryable<T> GetAll()
+        public virtual IQueryable<T> Query()
         {
             return this.dbSet;
         }

@@ -24,7 +24,7 @@ namespace Daisy.Core.Entities
         public string LargeUrl { get; set; }
         public string OriginalUrl { get; set; }
         public string FlickrPhotoId { get; set; }
-        public bool IsDisplayed { get; set; }
+        public bool IsPublished { get; set; }
 
         public virtual ICollection<Album> Albums { get; set; }
     }

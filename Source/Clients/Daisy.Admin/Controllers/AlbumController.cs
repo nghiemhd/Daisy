@@ -1,50 +1,84 @@
 ﻿using AutoMapper;
-using DaisyModels = Daisy.Admin.Models;
 using Daisy.Common;
+using Daisy.Logging.Extensions;
+using Daisy.Service.Common;
+using Daisy.Service.DataContracts;
 using Daisy.Service.ServiceContracts;
-using FlickrNet;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using DaisyModels = Daisy.Admin.Models;
 
 namespace Daisy.Admin.Controllers
 {
+    [Authorize]
     public class AlbumController : Controller
     {
         private readonly IAlbumService albumService;
-        private readonly string flickrUserId;
 
         public AlbumController(IAlbumService albumService)
         {
             this.albumService = albumService;
-            this.flickrUserId = ConfigurationManager.AppSettings[Constants.FlickrUserId];
         }
-        
+
         public ActionResult Index()
         {
-            var albums = albumService.GetAllFlickrAlbums(flickrUserId);
+            return View();
+        }
 
-            var mappingAlbums = Mapper.Map<List<DaisyModels.Album>>(albums);
-            var model = new DaisyModels.AlbumListViewModel 
-            { 
-                Albums = mappingAlbums
+        [HttpPost]
+        public JsonResult Search(DaisyModels.SearchAlbumModel options)
+        {
+            try
+            {
+                if (options == null)
+                {
+                    throw new ArgumentNullException("options");
+                }
+                var searchOptions = Mapper.Map<SearchAlbumOptions>(options);
+                var albums = albumService.SearchAlbums(searchOptions);
+
+                var albumsModel = Mapper.Map<List<DaisyModels.Album>>(albums.Items);
+                var pagedListAlbums = new PagedList<DaisyModels.Album>(albumsModel, albums.PageIndex, albums.PageSize, albums.TotalCount);
+                var result = new DaisyModels.PagedListAlbumViewModel
+                {
+                    Albums = pagedListAlbums,
+                    SearchOptions = options
+                };
+
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ActionResult Edit(int id)
+        {           
+            var album = albumService.GetAlbumById(id);
+            var albumModel = Mapper.Map<DaisyModels.Album>(album);
+            var photosModel = Mapper.Map<List<DaisyModels.Photo>>(album.Photos);
+            var model = new DaisyModels.AlbumDetailViewModel
+            {
+                Album = albumModel,
+                Photos = photosModel
             };
             return View(model);
         }
 
-        public ActionResult Detail(string id)
+        [HttpPost]
+        public JsonResult Publish(int[] albumIds)
         {
-            var photos = albumService.GetPhotosByFlickrAlbum(id);
-
-            var mappingPhotos = Mapper.Map<List<DaisyModels.Photo>>(photos);
-            var model = new DaisyModels.AlbumDetailViewModel
+            try
             {
-                Photos = mappingPhotos
-            };
-            return View(model);
+                return Json(ResponseStatus.Success.ToString());
+            }
+            catch (Exception ex)
+            {
+                return Json(LogExtension.GetFinalInnerException(ex).Message);
+            }         
         }
     }
 }

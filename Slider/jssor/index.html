@@ -1,0 +1,231 @@
+<html>
+    <head>
+        <title>Test slider</title>
+        <script type="text/javascript" src="scripts/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="scripts/jssor.js"></script>
+        <script type="text/javascript" src="scripts/jssor.slider.js"></script>
+    </head>
+<body>
+    <script>
+        init_jssor_slider1 = function (containerId) {
+            var options = {
+                $AutoPlay: false,                                   //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $SlideDuration: 500,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+
+                $ThumbnailNavigatorOptions: {                       //[Optional] Options to specify and enable thumbnail navigator or not
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+
+                    $ActionMode: 1,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
+                    $SpacingX: 8,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
+                    $DisplayPieces: 10,                             //[Optional] Number of pieces to display, default value is 1
+                    $ParkingPosition: 360                           //[Optional] The offset position to park thumbnail
+                },
+
+                $ArrowNavigatorOptions: {                       //[Optional] Options to specify and enable arrow navigator or not
+                    $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                    $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+                }
+            };
+
+            var jssor_slider1 = new $JssorSlider$(containerId, options);
+        };
+    </script>
+
+    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 800px;
+        height: 456px; background: #24262e; overflow: hidden;">
+        <!-- Slides Container -->
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 356px; overflow: hidden;">
+            <div>
+                <img u="image" src="https://farm6.staticflickr.com/5458/17845271348_b1488aef35_b.jpg" />
+                <img u="thumb" src="https://farm6.staticflickr.com/5458/17845271348_b1488aef35_m.jpg" />
+            </div>
+            <div>
+                <img u="image" src="https://farm8.staticflickr.com/7719/17846928139_85b082e7db_b.jpg" />
+                <img u="thumb" src="https://farm8.staticflickr.com/7719/17846928139_85b082e7db_m.jpg" />
+            </div>
+            <div>
+                <img u="image" src="https://farm8.staticflickr.com/7775/17846923709_d55cd09da0_b.jpg" />
+                <img u="thumb" src="https://farm8.staticflickr.com/7775/17846923709_d55cd09da0_m.jpg" />
+            </div>
+            <div>
+                <img u="image" src="https://farm6.staticflickr.com/5337/17410584624_c5c3bf81a2_b.jpg" />
+                <img u="thumb" src="https://farm6.staticflickr.com/5337/17410584624_c5c3bf81a2_m.jpg" />
+            </div>
+            <div>
+                <img u="image" src="https://farm8.staticflickr.com/7719/17846928139_85b082e7db_b.jpg" />
+                <img u="thumb" src="https://farm8.staticflickr.com/7719/17846928139_85b082e7db_m.jpg" />
+            </div>
+            <div>
+                <img u="image" src="https://farm8.staticflickr.com/7775/17846923709_d55cd09da0_b.jpg" />
+                <img u="thumb" src="https://farm8.staticflickr.com/7775/17846923709_d55cd09da0_m.jpg" />
+            </div>
+            <div>
+                <img u="image" src="https://farm6.staticflickr.com/5458/17845271348_b1488aef35_b.jpg" />
+                <img u="thumb" src="https://farm6.staticflickr.com/5458/17845271348_b1488aef35_m.jpg" />
+            </div>
+            <div>
+                <img u="image" src="https://farm8.staticflickr.com/7719/17846928139_85b082e7db_b.jpg" />
+                <img u="thumb" src="https://farm8.staticflickr.com/7719/17846928139_85b082e7db_m.jpg" />
+            </div>
+            <div>
+                <img u="image" src="https://farm8.staticflickr.com/7775/17846923709_d55cd09da0_b.jpg" />
+                <img u="thumb" src="https://farm8.staticflickr.com/7775/17846923709_d55cd09da0_m.jpg" />
+            </div>
+            <div>
+                <img u="image" src="https://farm6.staticflickr.com/5458/17845271348_b1488aef35_b.jpg" />
+                <img u="thumb" src="https://farm6.staticflickr.com/5458/17845271348_b1488aef35_m.jpg" />
+            </div>
+            <div>
+                <img u="image" src="https://farm8.staticflickr.com/7719/17846928139_85b082e7db_b.jpg" />
+                <img u="thumb" src="https://farm8.staticflickr.com/7719/17846928139_85b082e7db_m.jpg" />
+            </div>
+            <div>
+                <img u="image" src="https://farm8.staticflickr.com/7775/17846923709_d55cd09da0_b.jpg" />
+                <img u="thumb" src="https://farm8.staticflickr.com/7775/17846923709_d55cd09da0_m.jpg" />
+            </div>
+        </div>
+
+        <!--#region Thumbnail Navigator Skin Begin -->
+        <!-- Help: http://www.jssor.com/development/slider-with-thumbnail-navigator-jquery.html -->
+        <style>
+            /* jssor slider arrow navigator skin 22 css */
+            /*
+            .jssora22l                  (normal)
+            .jssora22r                  (normal)
+            .jssora22l:hover            (normal mouseover)
+            .jssora22r:hover            (normal mouseover)
+            .jssora22l.jssora22ldn      (mousedown)
+            .jssora22r.jssora22rdn      (mousedown)
+            */
+            .jssora22l, .jssora22r {
+                display: block;
+                position: absolute;
+                /* size of arrow element */
+                width: 40px;
+                height: 58px;
+                cursor: pointer;
+                background: url(images/a22.png) center center no-repeat;
+                overflow: hidden;
+            }
+            .jssora22l { background-position: -10px -31px; }
+            .jssora22r { background-position: -70px -31px; }
+            .jssora22l:hover { background-position: -130px -31px; }
+            .jssora22r:hover { background-position: -190px -31px; }
+            .jssora22l.jssora22ldn { background-position: -250px -31px; }
+            .jssora22r.jssora22rdn { background-position: -310px -31px; }
+
+            /* jssor slider thumbnail navigator skin 01 css */
+            /*
+            .jssort01 .p            (normal)
+            .jssort01 .p:hover      (normal mouseover)
+            .jssort01 .p.pav        (active)
+            .jssort01 .p.pdn        (mousedown)
+            */
+
+            .jssort01 {
+                position: absolute;
+                /* size of thumbnail navigator container */
+                width: 800px;
+                height: 100px;
+            }
+
+                .jssort01 .p {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 72px;
+                    height: 72px;
+                }
+
+                .jssort01 .t {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                }
+
+                .jssort01 .w {
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .jssort01 .c {
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    width: 68px;
+                    height: 68px;
+                    border: #000 2px solid;
+                    box-sizing: content-box;
+                    background: url(images/t01.png) -800px -800px no-repeat;
+                    _background: none;
+                }
+
+                .jssort01 .pav .c {
+                    top: 2px;
+                    _top: 0px;
+                    left: 2px;
+                    _left: 0px;
+                    width: 68px;
+                    height: 68px;
+                    border: #000 0px solid;
+                    _border: #fff 2px solid;
+                    background-position: 50% 50%;
+                }
+
+                .jssort01 .p:hover .c {
+                    top: 0px;
+                    left: 0px;
+                    width: 70px;
+                    height: 70px;
+                    border: #fff 1px solid;
+                    background-position: 50% 50%;
+                }
+
+                .jssort01 .p.pdn .c {
+                    background-position: 50% 50%;
+                    width: 68px;
+                    height: 68px;
+                    border: #000 2px solid;
+                }
+
+                * html .jssort01 .c, * html .jssort01 .pdn .c, * html .jssort01 .pav .c {
+                    /* ie quirks mode adjust */
+                    width /**/: 72px;
+                    height /**/: 72px;
+                }
+        </style>
+        <!-- thumbnail navigator container -->
+        <div u="thumbnavigator" class="jssort01" style="left: 0px; bottom: 0px;">
+            <!-- Thumbnail Item Skin Begin -->
+            <div u="slides" style="cursor: default;">
+                <div u="prototype" class="p">
+                    <div class=w><div u="thumbnailtemplate" class="t"></div></div>
+                    <div class=c></div>
+                </div>
+            </div>
+            <!-- Thumbnail Item Skin End -->
+        </div>
+        <!--#endregion Thumbnail Navigator Skin End -->
+        <!-- Arrow Left -->
+        <span u="arrowleft" class="jssora22l" style="top: 123px; left: 8px;">
+        </span>
+        <!-- Arrow Right -->
+        <span u="arrowright" class="jssora22r" style="top: 123px; right: 8px;">
+        </span>
+        <script>
+    init_jssor_slider1("slider1_container");
+        </script>
+
+    </div>
+
+</body>
+</html>

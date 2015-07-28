@@ -66,6 +66,10 @@ namespace Daisy.Admin
 
             Mapper.CreateMap<DaisyModels.AlbumDetailViewModel, AlbumDetailDto>();
 
+            Mapper.CreateMap<DaisyEntities.Album, DaisyModels.Album>()
+                .ForMember(dest => dest.AlbumThumbnailUrl, opt => opt.MapFrom(src => src.ThumbnailUrl));
+
+            Mapper.CreateMap<DaisyEntities.Photo, DaisyModels.Photo>();
         }
     }
 }

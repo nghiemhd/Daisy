@@ -225,9 +225,17 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Daisy.Common\Daisy.Common.csproj">
+      <Project>{05856d7e-0cff-42f2-9da0-3b447253d90e}</Project>
+      <Name>Daisy.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Daisy.Core\Daisy.Core.csproj">
       <Project>{b45bf591-6471-45fe-acb4-c697b9a0979f}</Project>
       <Name>Daisy.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Daisy.Logging\Daisy.Logging.csproj">
+      <Project>{bc355e9b-d6c7-411b-a72e-25ab14144fac}</Project>
+      <Name>Daisy.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\Daisy.Service\Daisy.Service.csproj">
       <Project>{61db9c60-07ab-4fda-bf6a-385113c8975b}</Project>

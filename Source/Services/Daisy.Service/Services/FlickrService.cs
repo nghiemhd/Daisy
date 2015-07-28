@@ -1,14 +1,13 @@
-﻿using Daisy.Common;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+
+using Daisy.Common;
 using Daisy.Common.Extensions;
 using Daisy.Service.DataContracts;
 using Daisy.Service.ServiceContracts;
 using FlickrNet;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Daisy.Service
 {
@@ -44,7 +43,7 @@ namespace Daisy.Service
             return flickr.PhotosetsGetPhotos(photosetId, PhotoSearchExtras.OriginalUrl);
         }
 
-        public PagedList<Photoset> GetAlbums(SearchAlbumOptions options)
+        public PagedList<Photoset> SearchAlbums(SearchAlbumOptions options)
         {
             try
             {

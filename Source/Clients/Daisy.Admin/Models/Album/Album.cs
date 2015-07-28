@@ -8,10 +8,14 @@ namespace Daisy.Admin.Models
 {
     public class Album
     {
+        public int Id { get; set; }
+
         public string FlickrAlbumId { get; set; }
 
         public string Name { get; set; }
 
         public string AlbumThumbnailUrl { get; set; }
+
+        public bool IsPublished { get; set; }
     }
 }

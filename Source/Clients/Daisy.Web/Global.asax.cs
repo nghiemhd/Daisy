@@ -18,6 +18,8 @@ namespace Daisy.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             AutoMapperConfig.RegisterMappings();
+
+            log4net.Config.XmlConfigurator.Configure();
         }
     }
 }

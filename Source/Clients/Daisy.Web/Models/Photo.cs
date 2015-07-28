@@ -7,6 +7,16 @@ namespace Daisy.Web.Models
 {
     public class Photo
     {
-        public string Url { get; set; }
+        public string Name { get; set; }
+
+        public string SmallUrl { get; set; }
+
+        public string MediumUrl { get; set; }
+
+        public string LargeUrl { get; set; }
+
+        public string OriginalUrl { get; set; }
+
+        public bool IsPublished { get; set; }
     }
 }

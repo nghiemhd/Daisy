@@ -1,12 +1,9 @@
-﻿using Daisy.Core.Entities;
+﻿using System.Linq;
+
+using Daisy.Core.Entities;
 using Daisy.Core.Infrastructure;
 using Daisy.Security;
 using Daisy.Service.ServiceContracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Daisy.Service
 {
@@ -23,7 +20,7 @@ namespace Daisy.Service
 
         public User GetUserByUsername(string username)
         {
-            var user = userRepository.GetAll().Where(x => x.Username == username).FirstOrDefault();
+            var user = userRepository.Query().Where(x => x.Username == username).FirstOrDefault();
             return user;
         }
 

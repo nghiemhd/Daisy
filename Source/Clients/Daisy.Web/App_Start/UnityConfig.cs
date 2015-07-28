@@ -1,9 +1,9 @@
-using System;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
-using Daisy.Service.ServiceContracts;
-using Daisy.Service;
 using Daisy.Core.Infrastructure;
+using Daisy.Logging;
+using Daisy.Service;
+using Daisy.Service.ServiceContracts;
+using Microsoft.Practices.Unity;
+using System;
 
 namespace Daisy.Web.App_Start
 {
@@ -41,6 +41,8 @@ namespace Daisy.Web.App_Start
             // TODO: Register your types here
             container.RegisterType<IDbContext, DataContext>();
             container.RegisterType<IUnitOfWork, UnitOfWork<DataContext>>();
+            container.RegisterType<ILogger, Logger>(new InjectionConstructor("DaisyWeb"));
+            container.RegisterType<IAlbumService, AlbumService>();
             container.RegisterType<IPhotoService, PhotoService>();
         }
     }

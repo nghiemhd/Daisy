@@ -18,5 +18,7 @@ namespace Daisy.Admin.Models
         public string LargeUrl { get; set; }
 
         public string OriginalUrl { get; set; }
+
+        public bool IsPublished { get; set; }
     }
 }

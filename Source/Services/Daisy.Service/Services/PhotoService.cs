@@ -24,18 +24,18 @@ namespace Daisy.Service
 
         public IEnumerable<Photo> GetAllPhotos()
         {
-            return photoRepository.GetAll().ToList();
+            return photoRepository.Query().ToList();
         }
 
         public IEnumerable<Photo> GetDisplayedPhotos()
         {
-            return photoRepository.GetAll().Where(x => x.IsDisplayed == true).ToList();
+            return photoRepository.Query().Where(x => x.IsPublished == true).ToList();
         }
 
         public Photo GetPhotoById(int id)
         {
             var photo = photoRepository
-                .GetAll()
+                .Query()
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
             return photo;

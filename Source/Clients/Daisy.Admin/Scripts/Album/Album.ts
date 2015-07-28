@@ -1,38 +1,25 @@
 ﻿module Album {
     'use strict';
 
-    export interface IAlbumSearchOptions extends Common.ISearchOptions {
-        AlbumName: string;
-        IsPublished?: boolean;
-        SttCreatedDate?: Date;
-        EndCreatedDate?: Date;
-    }
-
-    export interface IAlbum {
-        Id?: number;
-        FlickrAlbumId: string;
-        Name: string;
-        AlbumThumbnailUrl: string;
-    }    
-
-    export class FlickrAlbum {
+    export class DaisyAlbum {
         static albums: IAlbum[];
 
         search(options: IAlbumSearchOptions) {
             var data = {
                 AlbumName: options.AlbumName,
+                IsPublished: options.IsPublished,
                 PageIndex: options.PageIndex,
                 PageSize: options.PageSize
             };
 
             $.ajax({
-                url: '/Admin/FlickrAlbum/Search',
+                url: '/Admin/Album/Search',
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
                 data: data,
                 success: (response) => {
-                    this.searchCallback(response);                    
+                    this.searchCallback(response);
                 },
                 error: function (xhr, desc, err) {
                     console.log(xhr);
@@ -47,16 +34,16 @@
             });
         }
 
-        importAlbums(albums: IAlbum[]) {
+        publishAlbums(albumIds: number[]) {
             $.ajax({
-                url: '/Admin/FlickrAlbum/Import',
+                url: '/Admin/Album/Publish',
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
-                data: { albums: albums },
+                data: { albumIds: albumIds },
                 success: (response) => {
                     if (response == "Success") {
-                        toastr.success('import successfully');
+                        toastr.success('Publish successfully');
                     }
                     else {
                         toastr.options = {
@@ -66,7 +53,7 @@
                             extendedTimeOut: 0
                         };
                         toastr.error(response);
-                    }                    
+                    }        
                 },
                 error: function (xhr, desc, err) {
                     console.log(xhr);
@@ -77,15 +64,15 @@
                 },
                 complete: function () {
                     $('#loader').hide();
-                },
+                }
             });
         }
-
+       
         private searchCallback(response: any) {
-            Album.FlickrAlbum.albums  = response.Albums.Items;
+            Album.DaisyAlbum.albums = response.Albums.Items;
             this.cleanUI();
-            if (Album.FlickrAlbum.albums.length > 0) {
-                this.loadAlbums(Album.FlickrAlbum.albums);
+            if (Album.DaisyAlbum.albums.length > 0) {
+                this.loadAlbums(Album.DaisyAlbum.albums);
 
                 var pagingInfo: Common.IPagination = {
                     HasNextPage: response.Albums.HasNextPage,
@@ -97,7 +84,7 @@
                 var loadPaginationArg: Common.ILoadPaginationArguments = {
                     Container: $('#paging')[0],
                     PagingInfo: pagingInfo,
-                    ClassName: 'Album.FlickrAlbum',
+                    ClassName: 'Album.DaisyAlbum',
                     FunctionToExecute: 'search',
                     FunctionArguments: searchOptions
                 };
@@ -108,7 +95,7 @@
                     DisplayedTotalString: 'Total ' + response.Albums.TotalCount + ' albums.',
                     PageSizeOptions: [30, 50, 100, 150],
                     SelectedPageSize: response.Albums.PageSize,
-                    ClassName: 'Album.FlickrAlbum',
+                    ClassName: 'Album.DaisyAlbum',
                     FunctionToExecute: 'search',
                     FunctionArguments: searchOptions
                 };
@@ -116,14 +103,13 @@
             }
         }
 
-        private cleanUI()
-        {
+        private cleanUI() {
             $('#gridAlbums').empty();
             $('#paging').empty();
             $('#searchResultInfo').empty();
             $('#divSelectAll').hide();
         }
-        
+
         private loadAlbums(albums: IAlbum[]) {
             $('#divSelectAll').show();
             $('#chkSelectAll').prop('checked', false);
@@ -133,11 +119,11 @@
                     '<div class="col-sm-3 col-md-2 col-lg-2" style= "background-color:#101010;" > ' +
                     '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')"></div>' +
                     '<div class="album-title">' +
-                    '<input type="checkbox" value="' + item.FlickrAlbumId + '">&nbsp;' +
-                    '<a href="/Admin/FlickrAlbum/Edit/' + item.FlickrAlbumId + '">' + item.Name + '</a>' +
+                    '<input type="checkbox" value="' + item.Id + '">&nbsp;' +
+                    '<a href="/Admin/Album/Edit/' + item.Id + '">' + item.Name + '</a>' +
                     '</div>' +
                     '</div>');
             });
-        }                
+        }
     }
-}
+} 

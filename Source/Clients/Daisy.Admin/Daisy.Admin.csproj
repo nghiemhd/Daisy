@@ -170,7 +170,6 @@
     </Compile>
     <Compile Include="Models\Account\LogOnModel.cs" />
     <Compile Include="Models\Album\Album.cs" />
-    <Compile Include="Models\Album\AlbumListViewModel.cs" />
     <Compile Include="Models\Album\AlbumDetailViewModel.cs" />
     <Compile Include="Models\Album\PagedListAlbumViewModel.cs" />
     <Compile Include="Models\Photo\Photo.cs" />
@@ -238,8 +237,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Album\Index.cshtml" />
-    <Content Include="Views\Album\Detail.cshtml" />
-    <Content Include="Views\FlickrAlbum\Search.cshtml" />
+    <Content Include="Views\Album\Edit.cshtml" />
+    <Content Include="Views\FlickrAlbum\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\LogOn.cshtml" />
     <Content Include="Views\FlickrAlbum\Edit.cshtml" />
@@ -274,6 +273,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Album\Album.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Scripts\Album\Main.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\AlbumDetail.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\Album.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\Main.ts" />
