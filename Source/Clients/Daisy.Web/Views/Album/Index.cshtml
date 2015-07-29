@@ -1,0 +1,31 @@
+﻿@model Daisy.Web.Models.PagedListAlbumViewModel
+@{
+    ViewBag.Title = "Albums";
+}
+
+<div class="container-fluid spacer">
+    <div class="form-inline">
+        <div id="paging" class="form-group"></div>
+        <div id="searchResultInfo" class="form-group" style="float:right;margin-top:20px;"></div>
+    </div>
+</div>
+
+<div id="gridPhotos">
+    @foreach (var album in @Model.Albums.Items)
+    {
+        <div class="col-sm-4 col-md-3 col-lg-3" style="background-color:#fff;">
+            <div class="album-thumbnail photo-list-album-view" style="background-image:url(@album.AlbumThumbnailUrl)"></div>
+            <div class="">
+                <a href="/Album/@album.Id">@album.Name</a>
+            </div>
+        </div>
+    }
+</div>
+<div id="loader" class="overlay" style="display:none">
+    <img class="loader" src="~/Images/loading.gif" />
+</div>
+
+@section scripts
+{
+
+}

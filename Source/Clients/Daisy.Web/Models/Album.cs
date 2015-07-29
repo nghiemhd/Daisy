@@ -5,18 +5,12 @@ using System.Web;
 
 namespace Daisy.Web.Models
 {
-    public class Photo
+    public class Album
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public string SmallUrl { get; set; }
-
-        public string MediumUrl { get; set; }
-
-        public string LargeUrl { get; set; }
-
-        public string OriginalUrl { get; set; }
+        public string AlbumThumbnailUrl { get; set; }
     }
 }

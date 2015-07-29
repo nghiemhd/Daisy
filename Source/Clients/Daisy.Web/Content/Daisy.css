@@ -3,6 +3,61 @@
     width: 100%;
 }
 
-img.photo-grid-resize {
-    width: 100%;
+.daisy-top-menu {
+    background-color:#fff;
+}
+
+.album-thumbnail {
+    height: 250px;
+    margin: 10px 10px 10px 10px;
+}
+
+.album-title {
+    height: 2.6em;
+    color: #ffffff;
+    margin-left: 10px;
+}
+
+.album-thumbnail-border {
+    width:290px;
+    height: 290px;
+    background-color:#101010;
+}
+
+.photo-list-album-view {
+  background-size: cover;
+}
+
+.center {
+    margin: 0 auto;
+    float:none;
+}
+
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);/* For IE8 and earlier */
+}
+
+.loader {
+    left: 50%;
+    top: 50%;
+    position:absolute;
+}
+
+.pagination > li > a:hover {
+    cursor: pointer;
+}
+
+.spacer {
+	margin-top:20px;
+}
+
+.fotorama__wrap {
+    margin: 0 auto;
 }

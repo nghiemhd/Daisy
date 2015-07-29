@@ -21,10 +21,12 @@ namespace Daisy.Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/fotorama.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/fotorama/fotorama.css",
                       "~/Content/daisy.css",
                       "~/Content/site.css"));
         }

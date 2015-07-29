@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Daisy.Web.Models;
-using Entities = Daisy.Core.Entities;
+using DaisyEntities = Daisy.Core.Entities;
+using DaisyModels = Daisy.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,10 @@ namespace Daisy.Web
     {
         public static void RegisterMappings()
         {
-            Mapper.CreateMap<Entities.Photo, Photo>();
+            Mapper.CreateMap<DaisyEntities.Album, DaisyModels.Album>()
+                .ForMember(dest => dest.AlbumThumbnailUrl, opt => opt.MapFrom(src => src.ThumbnailUrl));
+
+            Mapper.CreateMap<DaisyEntities.Photo, DaisyModels.Photo>();
         }
     }
 }

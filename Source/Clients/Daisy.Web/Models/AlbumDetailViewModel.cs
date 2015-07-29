@@ -5,8 +5,9 @@ using System.Web;
 
 namespace Daisy.Web.Models
 {
-    public class PhotosViewModel
+    public class AlbumDetailViewModel
     {
-        public List<Photo> Photos { get; set; }
+        public Album Album { get; set; }
+        public IList<Photo> Photos { get; set; }
     }
 }

@@ -11,8 +11,22 @@
     <div class="daisy-header">
         <img class="daisy-header" src="https://farm6.staticflickr.com/5344/coverphoto/18555104@N00_h.jpg" />
     </div>
-    <div>
-
+    <div class="navbar">
+        <div class="navbar-header">
+            <div class="navbar-inverse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style="background-color:#333">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Albums", "Index", "Album")</li>
+            </ul>
+        </div>
     </div>
     <div class="container-fluid">
         @RenderBody()

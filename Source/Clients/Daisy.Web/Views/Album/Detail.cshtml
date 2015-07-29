@@ -1,0 +1,11 @@
+﻿@model Daisy.Web.Models.AlbumDetailViewModel
+@{
+    ViewBag.Title = "Album " + @Model.Album.Name;
+}
+
+<div id="gridPhotos" class="fotorama" data-allow-full-screen="native" data-nav="thumbs" data-keyboard="true">
+    @foreach (var photo in @Model.Photos)
+    {
+        <img src="@photo.LargeUrl" alt="@photo.Name" />
+    }
+</div>
