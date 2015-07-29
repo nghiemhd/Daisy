@@ -13,6 +13,7 @@
         FlickrAlbumId: string;
         Name: string;
         AlbumThumbnailUrl: string;
+        IsPublished?: boolean;
     }    
 
     export class FlickrAlbum {

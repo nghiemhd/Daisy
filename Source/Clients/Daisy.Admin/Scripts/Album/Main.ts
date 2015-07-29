@@ -40,7 +40,26 @@
             });
         }
         else {
-            album.publishAlbums(publishedAlbums);
+            album.publishAlbums(publishedAlbums, true);
+        }
+    });
+
+    $('#btnUnpublish').click(function () {
+        var publishedAlbums: number[] = [];
+        $('#gridAlbums input[type=checkbox]:checked').each(function () {
+            var albumId = $(this).val();
+            publishedAlbums.push(albumId);
+        });
+
+        if (publishedAlbums.length <= 0) {
+            BootstrapDialog.show({
+                type: BootstrapDialog.TYPE_WARNING,
+                title: 'Unpublish album',
+                message: 'Please choose album(s) to unpublish.'
+            });
+        }
+        else {
+            album.publishAlbums(publishedAlbums, false);
         }
     });
 }); 

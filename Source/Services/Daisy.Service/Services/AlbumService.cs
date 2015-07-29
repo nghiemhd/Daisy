@@ -11,6 +11,7 @@ using Daisy.Service.DataContracts;
 using Daisy.Service.ServiceContracts;
 using DaisyEntities = Daisy.Core.Entities;
 using FlickrNet;
+using System.Threading;
 
 namespace Daisy.Service
 {
@@ -204,6 +205,32 @@ namespace Daisy.Service
         {
             var album = albumRepository.Query().SingleOrDefault(x => x.Id == id);
             return album;
+        }
+
+        public void PublishAlbums(IList<int> albumIds, bool isPublished)
+        {
+            try
+            {
+                var updatedAlbums = albumRepository.Query()
+                    .Where(x => albumIds.Contains(x.Id) && x.IsPublished != isPublished).ToList();
+                updatedAlbums.ForEach(album => { 
+                    album.IsPublished = isPublished;
+                    album.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;
+                    album.UpdatedDate = DateTime.Now;
+                    album.Photos.ToList().ForEach(photo => { 
+                        photo.IsPublished = isPublished;
+                        photo.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;
+                        photo.UpdatedDate = DateTime.Now;
+                    });
+                });
+
+                this.unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw ex;
+            }
         }
     }
 }

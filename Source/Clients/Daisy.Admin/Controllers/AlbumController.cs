@@ -69,10 +69,11 @@ namespace Daisy.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult Publish(int[] albumIds)
+        public JsonResult Publish(int[] albumIds, bool isPublished)
         {
             try
             {
+                albumService.PublishAlbums(albumIds, isPublished);
                 return Json(ResponseStatus.Success.ToString());
             }
             catch (Exception ex)

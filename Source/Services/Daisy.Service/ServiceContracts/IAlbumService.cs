@@ -25,6 +25,8 @@ namespace Daisy.Service.ServiceContracts
 
         PagedList<DaisyEntities.Album> SearchAlbums(SearchAlbumOptions options);
 
-        DaisyEntities.Album GetAlbumById(int id);        
+        DaisyEntities.Album GetAlbumById(int id);
+
+        void PublishAlbums(IList<int> albumIds, bool isPublished);        
     }
 }

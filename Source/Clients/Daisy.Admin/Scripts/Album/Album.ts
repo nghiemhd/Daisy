@@ -34,16 +34,24 @@
             });
         }
 
-        publishAlbums(albumIds: number[]) {
+        publishAlbums(albumIds: number[], isPublished: boolean) {
             $.ajax({
                 url: '/Admin/Album/Publish',
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
-                data: { albumIds: albumIds },
+                data: {
+                    albumIds: albumIds,
+                    isPublished: isPublished
+                },
                 success: (response) => {
                     if (response == "Success") {
-                        toastr.success('Publish successfully');
+                        if (isPublished) {
+                            toastr.success('Publish successfully');
+                        }
+                        else {
+                            toastr.success('Unpublish successfully');
+                        }
                     }
                     else {
                         toastr.options = {
@@ -115,14 +123,18 @@
             $('#chkSelectAll').prop('checked', false);
 
             $.each(albums, function (index, item) {
-                $('#gridAlbums').append(
-                    '<div class="col-sm-3 col-md-2 col-lg-2" style= "background-color:#101010;" > ' +
-                    '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')"></div>' +
-                    '<div class="album-title">' +
-                    '<input type="checkbox" value="' + item.Id + '">&nbsp;' +
-                    '<a href="/Admin/Album/Edit/' + item.Id + '">' + item.Name + '</a>' +
-                    '</div>' +
-                    '</div>');
+                var grid = '<div class="col-sm-3 col-md-2 col-lg-2" style= "background-color:#101010;" > ' +
+                    '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')">';
+                if (item.IsPublished) {
+                    grid += '<img src="/Images/symbol_check.png" alt="published" style="width:30px;float:right;" />';
+                }
+                grid += '</div>' +
+                '<div class="album-title">' +
+                '<input type="checkbox" value="' + item.Id + '">&nbsp;' +
+                '<a href="/Admin/Album/Edit/' + item.Id + '">' + item.Name + '</a>' +
+                '</div>' +
+                '</div>';
+                $('#gridAlbums').append(grid);
             });
         }
     }

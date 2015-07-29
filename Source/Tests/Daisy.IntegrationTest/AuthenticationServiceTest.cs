@@ -26,10 +26,16 @@ namespace Daisy.IntegrationTest
         [TestMethod]
         public void TestRegisterUser()
         {
-            var user = new User 
-            { 
-                Username = "daisyadmin",
-                Password = "daisy@123"
+            //var user = new User 
+            //{ 
+            //    Username = "daisyadmin",
+            //    Password = "daisy@123"
+            //};
+
+            var user = new User
+            {
+                Username = "nghiemhd",
+                Password = "nghiemhd"
             };
 
             var authenticationService = container.Resolve<IAuthenticationService>();

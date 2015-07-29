@@ -8,6 +8,7 @@ using System.Web.Security;
 
 namespace Daisy.Admin.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly IAuthenticationService authenticationService;
@@ -71,6 +72,14 @@ namespace Daisy.Admin.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
