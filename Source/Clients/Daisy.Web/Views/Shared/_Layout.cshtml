@@ -22,17 +22,19 @@
             </div>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("Albums", "Index", "Album")</li>
+            <ul class="nav navbar-nav links">
+                <li class="link">@Html.ActionLink("Home", "Index", "Home")</li>
+                <li class="link">@Html.ActionLink("Albums", "Index", "Album")</li>
             </ul>
         </div>
     </div>
     <div class="container-fluid">
         @RenderBody()
         <hr />
+    </div>
+    <div class="container-fluid">
         <footer>
-            <p>&copy; @DateTime.Now.Year - Daisy Studio</p>
+            <p>&copy; @DateTime.Now.Year - Daisy studio</p>
         </footer>
     </div>
 

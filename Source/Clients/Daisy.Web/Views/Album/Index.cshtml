@@ -5,12 +5,52 @@
 
 <div class="container-fluid spacer">
     <div class="form-inline">
-        <div id="paging" class="form-group"></div>
+        <div id="paging" class="form-group">
+            @if (Model.Albums.Items.Count() > 0)
+            {
+                int selectedPage = Model.Albums.PageIndex + 1;
+                <ul class="pagination">
+                    @if (!Model.Albums.HasPreviousPage)
+                    {
+                        <li class="disabled"><a>&laquo;</a></li>
+                    }
+                    else
+                    {
+                        string url = "/album/page" + (selectedPage - 1).ToString();
+                        <li><a href=@url>&laquo;</a></li>
+                    }
+
+                    @for (int i = 1; i <= Model.Albums.TotalPages; i++)
+                    {
+                        string url = "/album/page" + i.ToString();
+                        bool isSelected = i == selectedPage;
+                        if (isSelected)
+                        {
+                            <li class="active"><a>@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href=@url>@i</a></li>
+                        }
+                    }
+
+                    @if (!Model.Albums.HasNextPage)
+                    {
+                        <li class="disabled"><a>&raquo;</a></li>
+                    }
+                    else
+                    {
+                        string url = "/album/page" + (selectedPage + 1).ToString();
+                        <li><a href=@url>&raquo;</a></li>
+                    }
+                </ul>
+            }
+        </div>
         <div id="searchResultInfo" class="form-group" style="float:right;margin-top:20px;"></div>
     </div>
 </div>
 
-<div id="gridPhotos">
+<div class="container-fluid">
     @foreach (var album in @Model.Albums.Items)
     {
         <div class="col-sm-4 col-md-3 col-lg-3" style="background-color:#fff;">

@@ -47,7 +47,7 @@ namespace Daisy.Web.Controllers
             {
                 IsPublished = true,
                 PageIndex = pageIndex,
-                PageSize = 10
+                PageSize = 50
             };
             var albums = albumService.SearchAlbums(searchOptions);
 

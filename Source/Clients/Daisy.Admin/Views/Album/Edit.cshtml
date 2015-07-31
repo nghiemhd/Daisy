@@ -2,7 +2,11 @@
 @{
     ViewBag.Title = "Album " + @Model.Album.Name;
 }
-
+<div class="spacer btn-group">
+    <button id="btnPublish" class="btn btn-primary">Publish</button>
+    <button id="btnUnpublish" class="btn btn-primary">Unpublish</button>
+</div>
+<hr />
 <h2>@Model.Album.Name</h2>
 <div>
     <input type="checkbox" id="chkSelectAll">&nbsp;Select all
@@ -11,7 +15,12 @@
     @foreach (var photo in @Model.Photos)
     {
         <div class="col-sm-6 col-md-6 col-lg-4" style="background-color:#101010;">
-            <div class="album-thumbnail photo-list-album-view" style="background-image:url(@photo.MediumUrl)"></div>
+            <div class="album-thumbnail photo-list-album-view" style="background-image:url(@photo.MediumUrl)">
+                @if (@photo.IsPublished)
+                {
+                    <img src="/Images/symbol_check.png" alt="published" style="width:30px;float:right;" />
+                }
+            </div>            
             <div class="album-title">
                 <input type="checkbox" value="@photo.FlickrPhotoId">&nbsp;@photo.FlickrPhotoId
             </div>
