@@ -27,6 +27,8 @@ namespace Daisy.Service.ServiceContracts
 
         DaisyEntities.Album GetAlbumById(int id);
 
-        void PublishAlbums(IList<int> albumIds, bool isPublished);        
+        void PublishAlbums(IList<int> albumIds, bool isPublished);
+
+        void PublishPhotos(int albumId, IList<int> photoIds, bool isPublished);
     }
 }

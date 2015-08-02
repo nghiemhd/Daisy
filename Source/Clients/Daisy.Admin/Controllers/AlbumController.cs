@@ -81,5 +81,19 @@ namespace Daisy.Admin.Controllers
                 return Json(LogExtension.GetFinalInnerException(ex).Message);
             }         
         }
+
+        [HttpPost]
+        public JsonResult PublishPhotos(int albumId, int[] photoIds, bool isPublished)
+        {
+            try
+            {
+                albumService.PublishPhotos(albumId, photoIds, isPublished);
+                return Json(ResponseStatus.Success.ToString());
+            }
+            catch (Exception ex)
+            {
+                return Json(LogExtension.GetFinalInnerException(ex).Message);
+            }
+        }
     }
 }

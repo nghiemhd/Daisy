@@ -75,6 +75,49 @@
                 }
             });
         }
+
+        publishPhotos(albumId: number, photoIds: number[], isPublished: boolean) {
+            $.ajax({
+                url: '/Admin/Album/PublishPhotos',
+                type: 'POST',
+                content: 'application/json; charset=utf-8',
+                dataType: 'json',
+                data: {
+                    albumId: albumId,
+                    photoIds: photoIds,
+                    isPublished: isPublished
+                },
+                success: (response) => {
+                    if (response == "Success") {
+                        if (isPublished) {
+                            toastr.success('Publish successfully');
+                        }
+                        else {
+                            toastr.success('Unpublish successfully');
+                        }
+                    }
+                    else {
+                        toastr.options = {
+                            closeButton: true,
+                            positionClass: "toast-top-full-width",
+                            timeOut: 0,
+                            extendedTimeOut: 0
+                        };
+                        toastr.error(response);
+                    }
+                },
+                error: function (xhr, desc, err) {
+                    console.log(xhr);
+                    console.log('Desc: ' + desc + '\nErr:' + err);
+                },
+                beforeSend: function () {
+                    $('#loader').show();
+                },
+                complete: function () {
+                    $('#loader').hide();
+                }
+            });
+        }
        
         private searchCallback(response: any) {
             Album.DaisyAlbum.albums = response.Albums.Items;

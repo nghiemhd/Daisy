@@ -7,6 +7,8 @@ namespace Daisy.Admin.Models
 {
     public class Photo
     {
+        public int Id { get; set; }
+
         public string FlickrPhotoId { get; set; }
 
         public string Name { get; set; }

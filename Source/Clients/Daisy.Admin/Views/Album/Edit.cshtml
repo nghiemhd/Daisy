@@ -8,6 +8,7 @@
 </div>
 <hr />
 <h2>@Model.Album.Name</h2>
+@Html.HiddenFor(x => x.Album.Id, new { id = "albumId" })
 <div>
     <input type="checkbox" id="chkSelectAll">&nbsp;Select all
 </div>
@@ -22,7 +23,7 @@
                 }
             </div>            
             <div class="album-title">
-                <input type="checkbox" value="@photo.FlickrPhotoId">&nbsp;@photo.FlickrPhotoId
+                <input type="checkbox" value="@photo.Id">&nbsp;@photo.Id
             </div>
         </div>
     }
@@ -32,12 +33,8 @@
 </div>
 @section scripts
 {
-    <script src="~/Scripts/FlickrAlbum/AlbumDetail.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            Album.AlbumDetail.album = @Html.Raw(Json.Encode(Model));
-        });
-    </script>
+<script src="~/Scripts/Album/Album.js"></script>    
+    <script src="~/Scripts/Album/AlbumDetail.js"></script>    
 }
 
 

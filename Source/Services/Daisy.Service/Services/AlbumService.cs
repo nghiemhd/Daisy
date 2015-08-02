@@ -232,5 +232,51 @@ namespace Daisy.Service
                 throw ex;
             }
         }
+
+        public void PublishPhotos(int albumId, IList<int> photoIds, bool isPublished)
+        {
+            try
+            {
+                if(!isPublished)
+                {
+                    UnpublishPhotos(photoIds);
+                }
+                else
+                {
+                    var album = albumRepository.Query()
+                        .Where(x => x.Id == albumId).FirstOrDefault();
+                    if (album != null)
+                    {
+                        album.IsPublished = true;
+                        album.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;
+                        album.UpdatedDate = DateTime.Now;
+                        album.Photos.Where(x => photoIds.Contains(x.Id))
+                        .ToList().ForEach(photo =>
+                        {
+                            photo.IsPublished = true;
+                            photo.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;
+                            photo.UpdatedDate = DateTime.Now;
+                        });
+                    }
+                }
+                this.unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw ex;                
+            }
+        }
+
+        private void UnpublishPhotos(IList<int> photoIds)
+        {
+            var photos = photoRepository.Query()
+                .Where(x => photoIds.Contains(x.Id)).ToList();
+            photos.ForEach(photo => {
+                photo.IsPublished = false;
+                photo.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;
+                photo.UpdatedDate = DateTime.Now;
+            });
+        }
     }
 }
