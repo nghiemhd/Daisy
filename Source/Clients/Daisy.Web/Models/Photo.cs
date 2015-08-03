@@ -17,6 +17,10 @@ namespace Daisy.Web.Models
 
         public string LargeUrl { get; set; }
 
+        public string Large1600Url { get; set; }
+
+        public string Large2048Url { get; set; }
+
         public string OriginalUrl { get; set; }
     }
 }

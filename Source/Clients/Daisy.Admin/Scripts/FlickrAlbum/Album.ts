@@ -57,7 +57,7 @@
                 data: { albums: albums },
                 success: (response) => {
                     if (response == "Success") {
-                        toastr.success('import successfully');
+                        toastr.success('Import successfully');
                     }
                     else {
                         toastr.options = {

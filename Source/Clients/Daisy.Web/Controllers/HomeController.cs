@@ -34,5 +34,12 @@ namespace Daisy.Web.Controllers
 
             return View();
         }
+
+        public FileResult Quote()
+        {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@"D:\Programming Projects\Daisy\Source\Clients\Daisy.Admin\Upload\Quotes\avatar.jpg");
+            string fileName = "avatar.jpg";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
     }
 }

@@ -16,7 +16,7 @@ var Album;
                 data: data,
                 success: function (response) {
                     if (response == "Success") {
-                        toastr.success('import successfully');
+                        toastr.success('Import successfully');
                     }
                     else {
                         toastr.error(response);
