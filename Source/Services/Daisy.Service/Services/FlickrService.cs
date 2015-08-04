@@ -17,6 +17,7 @@ namespace Daisy.Service
 
         public FlickrService()
         {
+            Flickr.CacheDisabled = true;
             var apiKey = ConfigurationManager.AppSettings[Constants.FlickrApiKey];
             var sharedSecret = ConfigurationManager.AppSettings[Constants.FlickrSharedSecret];
             var token = ConfigurationManager.AppSettings[Constants.FlickrToken];

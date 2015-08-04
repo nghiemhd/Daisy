@@ -6,6 +6,7 @@ $(document).ready(function () {
             PageIndex: 0,
             PageSize: $('#cboPageSize').val()
         };
+        Album.FlickrAlbum.searchRequestUrl = $(this).data('request-url');
         album.search(options);
     });
     $('#chkSelectAll').change(function () {
@@ -42,6 +43,7 @@ $(document).ready(function () {
             });
         }
         else {
+            Album.FlickrAlbum.importAlbumsRequestUrl = $(this).data('request-url');
             album.importAlbums(importedAlbums);
         }
     });

@@ -7,7 +7,7 @@
             PageIndex: 0,
             PageSize: $('#cboPageSize').val()
         }; 
-        
+        Album.FlickrAlbum.searchRequestUrl = $(this).data('request-url');
         album.search(options);        
     });
 
@@ -47,6 +47,7 @@
             });
         }
         else {
+            Album.FlickrAlbum.importAlbumsRequestUrl = $(this).data('request-url');
             album.importAlbums(importedAlbums);
         }
     });

@@ -247,10 +247,13 @@ namespace Daisy.Service
                         .Where(x => x.Id == albumId).FirstOrDefault();
                     if (album != null)
                     {
-                        album.IsPublished = true;
-                        album.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;
-                        album.UpdatedDate = DateTime.Now;
-                        album.Photos.Where(x => photoIds.Contains(x.Id))
+                        if (!album.IsPublished)
+                        {
+                            album.IsPublished = true;
+                            album.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;
+                            album.UpdatedDate = DateTime.Now;
+                        }
+                        album.Photos.Where(x => photoIds.Contains(x.Id) && !x.IsPublished)
                         .ToList().ForEach(photo =>
                         {
                             photo.IsPublished = true;
@@ -271,7 +274,8 @@ namespace Daisy.Service
         private void UnpublishPhotos(IList<int> photoIds)
         {
             var photos = photoRepository.Query()
-                .Where(x => photoIds.Contains(x.Id)).ToList();
+                .Where(x => photoIds.Contains(x.Id) && x.IsPublished)
+                .ToList();
             photos.ForEach(photo => {
                 photo.IsPublished = false;
                 photo.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;

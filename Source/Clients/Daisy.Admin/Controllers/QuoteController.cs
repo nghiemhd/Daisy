@@ -28,7 +28,7 @@ namespace Daisy.Admin.Controllers
         public ActionResult Upload(HttpPostedFileBase file)
         {
             var uploadPath = ConfigurationManager.AppSettings[Constants.UploadPath];
-            uploadPath = Server.MapPath(uploadPath);
+            //uploadPath = Server.MapPath(uploadPath);
 
             uploadService.Upload(file, uploadPath);
 

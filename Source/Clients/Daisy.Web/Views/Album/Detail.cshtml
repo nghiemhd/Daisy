@@ -6,6 +6,13 @@
 <div id="gridPhotos" class="fotorama" data-allow-full-screen="native" data-nav="thumbs" data-keyboard="true">
     @foreach (var photo in @Model.Photos)
     {
-        <img src="@photo.Large1600Url" alt="@photo.Name" data-full="@photo.Large2048Url" />
+        if (photo.Large1600Url == null)
+        {
+            <img src="@photo.LargeUrl" alt="@photo.Name" />
+        }
+        else
+        {
+            <img src="@photo.Large1600Url" alt="@photo.Name" data-full="@photo.Large2048Url" />
+        }
     }
 </div>

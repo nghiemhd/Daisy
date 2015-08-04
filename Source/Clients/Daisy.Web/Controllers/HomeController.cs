@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
+using System.IO;
 
 namespace Daisy.Web.Controllers
 {
@@ -37,8 +39,10 @@ namespace Daisy.Web.Controllers
 
         public FileResult Quote()
         {
-            byte[] fileBytes = System.IO.File.ReadAllBytes(@"D:\Programming Projects\Daisy\Source\Clients\Daisy.Admin\Upload\Quotes\avatar.jpg");
-            string fileName = "avatar.jpg";
+            var quotePath = ConfigurationManager.AppSettings["QuotePath"];
+            var filePath = Path.Combine(quotePath, "quote.pdf");
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+            string fileName = "quote.pdf";
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
     }

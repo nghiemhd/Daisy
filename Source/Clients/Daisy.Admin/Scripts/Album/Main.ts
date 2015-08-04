@@ -9,6 +9,7 @@
             PageSize: $('#cboPageSize').val()
         };
 
+        Album.DaisyAlbum.searchRequestUrl = $(this).data('request-url');
         album.search(options);
     });
 
@@ -40,6 +41,7 @@
             });
         }
         else {
+            Album.DaisyAlbum.publishAlbumsRequestUrl = $(this).data('request-url');
             album.publishAlbums(publishedAlbums, true);
         }
     });
@@ -59,6 +61,7 @@
             });
         }
         else {
+            Album.DaisyAlbum.publishAlbumsRequestUrl = $(this).data('request-url');
             album.publishAlbums(publishedAlbums, false);
         }
     });

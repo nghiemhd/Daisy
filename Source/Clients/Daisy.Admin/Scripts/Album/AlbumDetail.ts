@@ -30,6 +30,7 @@
             });
         }
         else {
+            Album.DaisyAlbum.publishPhotosRequestUrl = $(this).data('request-url');
             album.publishPhotos(albumId, publishedPhotos, true);
         }
     });
@@ -49,6 +50,7 @@
             });
         }
         else {
+            Album.DaisyAlbum.publishPhotosRequestUrl = $(this).data('request-url');
             album.publishPhotos(albumId, unpublishedPhotos, false);
         }
     });

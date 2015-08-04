@@ -26,6 +26,13 @@ namespace Daisy.Service
                 if (file.ContentLength > 0)
                 {
                     var fileName = Path.GetFileName(file.FileName);
+
+                    var pathExists = Directory.Exists(uploadPath);
+                    if (!pathExists)
+                    {
+                        Directory.CreateDirectory(uploadPath);
+                    }
+
                     var path = Path.Combine(uploadPath, fileName);
                     
                     file.SaveAs(path);

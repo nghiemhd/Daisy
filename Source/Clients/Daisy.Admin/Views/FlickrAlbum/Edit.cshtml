@@ -5,7 +5,7 @@
 
 <div class="spacer">
     <div>
-        <button id="btnImport" class="btn btn-primary">Import</button>
+        <button id="btnImport" data-request-url="@Url.Action("ImportAlbumDetail", "FlickrAlbum")" class="btn btn-primary">Import</button>
     </div>
 </div>
 <hr />
@@ -32,7 +32,7 @@
     <script src="~/Scripts/FlickrAlbum/AlbumDetail.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            Album.AlbumDetail.album = @Html.Raw(Json.Encode(Model));
+            Album.FlickrAlbumDetail.album = @Html.Raw(Json.Encode(Model));
         });
 </script>
 }

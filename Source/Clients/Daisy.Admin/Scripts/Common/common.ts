@@ -50,6 +50,7 @@
     }
 
     export class Helper {
+        static applicationRoot: string;
         static loadPageSizes(arg: ILoadPageSizesArguments) {
             if (arg.PageSizeOptions.indexOf(arg.SelectedPageSize) != -1) {
                 var span = document.createElement('span');

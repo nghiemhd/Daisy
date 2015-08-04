@@ -13,8 +13,9 @@
         Photos: IPhoto[]; 
     }
 
-    export class AlbumDetail {
+    export class FlickrAlbumDetail {
         static album: IAlbumDetail;
+        static importAlbumDetailRequestUrl: string;
 
         importAlbumDetail(albumDetail: Album.IAlbumDetail) {
             var data = {
@@ -22,7 +23,7 @@
                 Photos: albumDetail.Photos
             };
             $.ajax({
-                url: '/Admin/FlickrAlbum/ImportAlbumDetail',
+                url: FlickrAlbumDetail.importAlbumDetailRequestUrl,
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -51,7 +52,7 @@
 }
 
 $(document).ready(function () {
-    var albumDetail = new Album.AlbumDetail();
+    var albumDetail = new Album.FlickrAlbumDetail();
 
     $('#chkSelectAll').change(function () {
         if (this.checked) {
@@ -67,7 +68,7 @@ $(document).ready(function () {
     });
     
     $('#btnImport').click(function () {
-        var albumModel = Album.AlbumDetail.album;
+        var albumModel = Album.FlickrAlbumDetail.album;
         var importedAlbum: Album.IAlbumDetail = {
             Album: albumModel.Album,
             Photos: []
@@ -87,6 +88,7 @@ $(document).ready(function () {
             });
         }
         else {
+            Album.FlickrAlbumDetail.importAlbumDetailRequestUrl = $(this).data('request-url');
             albumDetail.importAlbumDetail(importedAlbum);
         }
     });

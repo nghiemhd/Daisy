@@ -12,7 +12,7 @@ var Album;
                 PageSize: options.PageSize
             };
             $.ajax({
-                url: '/Admin/FlickrAlbum/Search',
+                url: FlickrAlbum.searchRequestUrl,
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -34,7 +34,7 @@ var Album;
         };
         FlickrAlbum.prototype.importAlbums = function (albums) {
             $.ajax({
-                url: '/Admin/FlickrAlbum/Import',
+                url: FlickrAlbum.importAlbumsRequestUrl,
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -66,10 +66,10 @@ var Album;
             });
         };
         FlickrAlbum.prototype.searchCallback = function (response) {
-            Album.FlickrAlbum.albums = response.Albums.Items;
+            FlickrAlbum.albums = response.Albums.Items;
             this.cleanUI();
-            if (Album.FlickrAlbum.albums.length > 0) {
-                this.loadAlbums(Album.FlickrAlbum.albums);
+            if (FlickrAlbum.albums.length > 0) {
+                this.loadAlbums(FlickrAlbum.albums);
                 var pagingInfo = {
                     HasNextPage: response.Albums.HasNextPage,
                     HasPreviousPage: response.Albums.HasPreviousPage,
@@ -111,7 +111,7 @@ var Album;
                     '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')"></div>' +
                     '<div class="album-title">' +
                     '<input type="checkbox" value="' + item.FlickrAlbumId + '">&nbsp;' +
-                    '<a href="/Admin/FlickrAlbum/Edit/' + item.FlickrAlbumId + '">' + item.Name + '</a>' +
+                    '<a href="' + Common.Helper.applicationRoot + 'Admin/FlickrAlbum/Edit/' + item.FlickrAlbumId + '">' + item.Name + '</a>' +
                     '</div>' +
                     '</div>');
             });

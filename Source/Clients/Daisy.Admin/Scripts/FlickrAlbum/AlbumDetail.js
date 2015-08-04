@@ -1,15 +1,15 @@
 var Album;
 (function (Album) {
-    var AlbumDetail = (function () {
-        function AlbumDetail() {
+    var FlickrAlbumDetail = (function () {
+        function FlickrAlbumDetail() {
         }
-        AlbumDetail.prototype.importAlbumDetail = function (albumDetail) {
+        FlickrAlbumDetail.prototype.importAlbumDetail = function (albumDetail) {
             var data = {
                 Album: albumDetail.Album,
                 Photos: albumDetail.Photos
             };
             $.ajax({
-                url: '/Admin/FlickrAlbum/ImportAlbumDetail',
+                url: FlickrAlbumDetail.importAlbumDetailRequestUrl,
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -34,12 +34,12 @@ var Album;
                 },
             });
         };
-        return AlbumDetail;
+        return FlickrAlbumDetail;
     })();
-    Album.AlbumDetail = AlbumDetail;
+    Album.FlickrAlbumDetail = FlickrAlbumDetail;
 })(Album || (Album = {}));
 $(document).ready(function () {
-    var albumDetail = new Album.AlbumDetail();
+    var albumDetail = new Album.FlickrAlbumDetail();
     $('#chkSelectAll').change(function () {
         if (this.checked) {
             $('#gridPhotos input[type=checkbox]').each(function () {
@@ -53,7 +53,7 @@ $(document).ready(function () {
         }
     });
     $('#btnImport').click(function () {
-        var albumModel = Album.AlbumDetail.album;
+        var albumModel = Album.FlickrAlbumDetail.album;
         var importedAlbum = {
             Album: albumModel.Album,
             Photos: []
@@ -71,6 +71,7 @@ $(document).ready(function () {
             });
         }
         else {
+            Album.FlickrAlbumDetail.importAlbumDetailRequestUrl = $(this).data('request-url');
             albumDetail.importAlbumDetail(importedAlbum);
         }
     });

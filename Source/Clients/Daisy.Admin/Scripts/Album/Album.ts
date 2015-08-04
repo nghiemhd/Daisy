@@ -3,6 +3,9 @@
 
     export class DaisyAlbum {
         static albums: IAlbum[];
+        static searchRequestUrl: string;
+        static publishAlbumsRequestUrl: string;
+        static publishPhotosRequestUrl: string;
 
         search(options: IAlbumSearchOptions) {
             var data = {
@@ -13,7 +16,7 @@
             };
 
             $.ajax({
-                url: '/Admin/Album/Search',
+                url: DaisyAlbum.searchRequestUrl,
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -36,7 +39,7 @@
 
         publishAlbums(albumIds: number[], isPublished: boolean) {
             $.ajax({
-                url: '/Admin/Album/Publish',
+                url: DaisyAlbum.publishAlbumsRequestUrl,
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -78,7 +81,7 @@
 
         publishPhotos(albumId: number, photoIds: number[], isPublished: boolean) {
             $.ajax({
-                url: '/Admin/Album/PublishPhotos',
+                url: DaisyAlbum.publishPhotosRequestUrl,
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -169,12 +172,12 @@
                 var grid = '<div class="col-sm-3 col-md-2 col-lg-2" style= "background-color:#101010;" > ' +
                     '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')">';
                 if (item.IsPublished) {
-                    grid += '<img src="/Images/symbol_check.png" alt="published" style="width:30px;float:right;" />';
+                    grid += '<img src="' + Common.Helper.applicationRoot + 'Images/symbol_check.png" alt="published" style="width:30px;float:right;" />';
                 }
                 grid += '</div>' +
                 '<div class="album-title">' +
                 '<input type="checkbox" value="' + item.Id + '">&nbsp;' +
-                '<a href="/Admin/Album/Edit/' + item.Id + '">' + item.Name + '</a>' +
+                '<a href="' + Common.Helper.applicationRoot + 'Admin/Album/Edit/' + item.Id + '">' + item.Name + '</a>' +
                 '</div>' +
                 '</div>';
                 $('#gridAlbums').append(grid);

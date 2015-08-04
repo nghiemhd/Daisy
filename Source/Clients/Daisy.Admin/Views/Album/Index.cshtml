@@ -3,8 +3,8 @@
     ViewBag.Title = "Albums";
 }
 <div class="spacer btn-group">
-    <button id="btnPublish" class="btn btn-primary">Publish</button>
-    <button id="btnUnpublish" class="btn btn-primary">Unpublish</button>
+    <button id="btnPublish" data-request-url="@Url.Action("Publish", "Album")" class="btn btn-primary">Publish</button>
+    <button id="btnUnpublish" data-request-url="@Url.Action("Publish", "Album")" class="btn btn-primary">Unpublish</button>
 </div>
 <hr />
 <div class="spacer">
@@ -27,7 +27,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-3">
-                <button id="btnSearch" class="btn btn-primary">Search</button>
+                <button id="btnSearch" data-request-url="@Url.Action("Search", "Album")" class="btn btn-primary">Search</button>
             </div>
         </div>
     </div>
@@ -52,4 +52,7 @@
     <script src="~/Scripts/Common/common.js"></script>
     <script src="~/Scripts/Album/Album.js"></script>
     <script src="~/Scripts/Album/Main.js"></script>
+    <script type="text/javascript">
+        Common.Helper.applicationRoot = '@Url.Content("~")';
+    </script>
 }
