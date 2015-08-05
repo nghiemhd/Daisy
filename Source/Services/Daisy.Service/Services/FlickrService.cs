@@ -41,13 +41,7 @@ namespace Daisy.Service
 
         public PhotosetPhotoCollection GetPhotosByAlbum(string photosetId)
         {                     
-            var photos = flickr.PhotosetsGetPhotos(photosetId, PhotoSearchExtras.OriginalUrl);
-            foreach (var photo in photos)
-            {
-                var sizes = flickr.PhotosGetSizes(photo.PhotoId);
-                photo.Large1600Url = sizes.Where(x => x.Width == 1600).Select(x => x.Source).FirstOrDefault();
-                photo.Large2048Url = sizes.Where(x => x.Width == 2048).Select(x => x.Source).FirstOrDefault();
-            }
+            var photos = flickr.PhotosetsGetPhotos(photosetId, PhotoSearchExtras.OriginalUrl | PhotoSearchExtras.Large1600Url | PhotoSearchExtras.Large2048Url);
             return photos;
         }
 
