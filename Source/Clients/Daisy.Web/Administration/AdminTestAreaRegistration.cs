@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
 
-namespace Daisy.Web.Areas.Administration
+namespace Daisy.AdminTest
 {
-    public class AdministrationAreaRegistration : AreaRegistration 
+    public class AdminTestAreaRegistration: AreaRegistration 
     {
         public override string AreaName 
         {
@@ -17,8 +17,8 @@ namespace Daisy.Web.Areas.Administration
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "Daisy.Web.Areas.Administration.Controllers" }
+                new { controller = "Home", action = "Index", area = "Admin", id = "" },
+                new[] { "Daisy.AdminTest.Controllers" }
             );
         }
     }

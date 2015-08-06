@@ -163,8 +163,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
-    <Compile Include="Areas\Administration\Controllers\HomeController.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -196,10 +194,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="FlickrNet.chm" />
-    <Content Include="Areas\Administration\Views\web.config" />
-    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Administration\Views\Home\Index.cshtml" />
     <None Include="Properties\PublishProfiles\daisytestweb.pubxml" />
     <None Include="Properties\PublishProfiles\TestWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -241,7 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Scripts\Album\" />
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +257,10 @@
     <ProjectReference Include="..\..\Services\Daisy.Service\Daisy.Service.csproj">
       <Project>{61db9c60-07ab-4fda-bf6a-385113c8975b}</Project>
       <Name>Daisy.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Daisy.Web.Framework\Daisy.Web.Framework.csproj">
+      <Project>{781c0e49-1328-4456-9929-afa5f054449b}</Project>
+      <Name>Daisy.Web.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

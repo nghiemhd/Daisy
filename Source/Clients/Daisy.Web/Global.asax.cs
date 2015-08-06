@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daisy.Web.Framework.ViewEngines.Razor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,9 @@ namespace Daisy.Web
     {
         protected void Application_Start()
         {
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new CustomRazorViewEngine());
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -20,6 +24,6 @@ namespace Daisy.Web
             AutoMapperConfig.RegisterMappings();
 
             log4net.Config.XmlConfigurator.Configure();
-        }
+        }        
     }
 }
