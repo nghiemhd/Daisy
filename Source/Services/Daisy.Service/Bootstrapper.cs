@@ -33,10 +33,12 @@ namespace Daisy.Service
         {
             container.RegisterType<IDbContext, DataContext>();
             container.RegisterType<IUnitOfWork, UnitOfWork<DataContext>>();
-            container.RegisterType<ILogger, Logger>();
+            container.RegisterType<ILogger, Logger>(new InjectionConstructor("DaisyWeb"));
             container.RegisterType<IAuthenticationService, AuthenticationService>();
             container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor());
             container.RegisterType<IAlbumService, AlbumService>();
+            container.RegisterType<IPhotoService, PhotoService>();
+            container.RegisterType<IUploadService, UploadService>();
         }
     }
 }

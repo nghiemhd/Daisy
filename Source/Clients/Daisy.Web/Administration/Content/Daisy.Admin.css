@@ -1,0 +1,78 @@
+﻿.album-thumbnail {
+    height: 250px;
+    margin: 10px 10px 10px 10px;
+}
+
+.album-title {
+    height: 2.6em;
+    color: #ffffff;
+    margin-left: 10px;
+}
+
+.album-thumbnail-border {
+    width:290px;
+    height: 290px;
+    background-color:#101010;
+}
+
+.photo-list-album-view {
+  background-size: cover;
+}
+
+.center {
+    margin: 0 auto;
+    float:none;
+}
+
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);/* For IE8 and earlier */
+}
+
+.loader {
+    left: 50%;
+    top: 50%;
+    position:absolute;
+}
+
+.pagination > li > a:hover {
+    cursor: pointer;
+}
+
+.spacer {
+	margin-top:20px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}

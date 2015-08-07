@@ -1,0 +1,38 @@
+﻿@model Daisy.Admin.Models.AlbumDetailViewModel
+@{
+    ViewBag.Title = "Album " + @Model.Album.Name;
+}
+
+<div class="spacer">
+    <div>
+        <button id="btnImport" data-request-url="@Url.Action("ImportAlbumDetail", "FlickrAlbum")" class="btn btn-primary">Import</button>
+    </div>
+</div>
+<hr />
+<h2>@Model.Album.Name</h2>
+<div>
+    <input type="checkbox" id="chkSelectAll">&nbsp;Select all
+</div>
+<div id="gridPhotos">
+    @foreach (var photo in @Model.Photos)
+    {
+        <div class="col-sm-6 col-md-6 col-lg-4" style="background-color:#101010;">
+            <div class="album-thumbnail photo-list-album-view" style="background-image:url(@photo.MediumUrl)"></div>
+            <div class="album-title">
+                <input type="checkbox" value="@photo.FlickrPhotoId">&nbsp;@photo.FlickrPhotoId
+            </div>
+        </div>
+    }
+</div>
+<div id="loader" class="overlay" style="display:none">
+    <img class="loader" src="~/Administration/Images/loading.gif" />
+</div>
+@section scripts
+{
+    <script src="~/Administration/Scripts/FlickrAlbum/AlbumDetail.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            Album.FlickrAlbumDetail.album = @Html.Raw(Json.Encode(Model));
+        });
+</script>
+}

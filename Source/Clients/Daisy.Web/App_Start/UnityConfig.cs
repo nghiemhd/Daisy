@@ -39,12 +39,7 @@ namespace Daisy.Web.App_Start
             // container.LoadConfiguration();
 
             // TODO: Register your types here
-            container.RegisterType<IDbContext, DataContext>();
-            container.RegisterType<IUnitOfWork, UnitOfWork<DataContext>>();
-            container.RegisterType<ILogger, Logger>(new InjectionConstructor("DaisyWeb"));
-            container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor());
-            container.RegisterType<IAlbumService, AlbumService>();
-            container.RegisterType<IPhotoService, PhotoService>();
+            Daisy.Service.Bootstrapper.RegisterTypes(container);
         }
     }
 }

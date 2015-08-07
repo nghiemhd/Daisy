@@ -1,0 +1,63 @@
+﻿@using (Html.BeginForm("Upload", "Quote", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal spacer">
+        <div class="form-group">
+            @Html.Label("Filename", new { @class = "control-label col-sm-1" })
+            <div class="col-sm-3">
+                <input type="file" name="file" id="file" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-3">
+                <button id="btnUpload" class="btn btn-primary" type="submit">Upload</button>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            debugger
+            var error = '@TempData["error"]';
+            var message = '@TempData["message"]';
+            if (error != '') {
+                toastr.error(error);
+            }
+            else if (message != '') {
+                toastr.success(message);
+            }
+
+            $('#btnUpload').click(function () {
+                debugger
+                var maxSize = getMaxFileUploadSize();
+                var file = $('#file')[0].files[0];
+                if (file == null)
+                {
+                    BootstrapDialog.show({
+                        type: BootstrapDialog.TYPE_WARNING,
+                        title: 'Upload',
+                        message: 'Please choose file to upload.'
+                    });
+
+                    return false;
+                }
+                else if (file.size > maxSize) {
+                    BootstrapDialog.show({
+                        type: BootstrapDialog.TYPE_WARNING,
+                        title: 'Upload',
+                        message: 'Cannot upload file more than ' + maxSize/(1024*1024) + ' MB.'
+                    });
+
+                    return false;
+                }
+            });
+        });
+
+        var getMaxFileUploadSize = function () {
+            var value = '@ViewBag.maxAllowedContentLength';
+            return parseInt(value);
+        };
+</script>
+}

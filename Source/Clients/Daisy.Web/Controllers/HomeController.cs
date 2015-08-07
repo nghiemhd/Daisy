@@ -40,9 +40,20 @@ namespace Daisy.Web.Controllers
         public FileResult Quote()
         {
             var quotePath = ConfigurationManager.AppSettings["QuotePath"];
-            var filePath = Path.Combine(quotePath, "quote.pdf");
-            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
-            string fileName = "quote.pdf";
+            if (quotePath != Path.GetFullPath(quotePath))
+            {
+                var rootPath = Server.MapPath("~");
+                quotePath = Path.Combine(rootPath, quotePath);
+            }
+
+            var directory = new DirectoryInfo(quotePath);
+            var latestQuote = directory
+                .GetFiles()
+                .OrderByDescending(x => x.LastWriteTime)
+                .FirstOrDefault();
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(latestQuote.FullName);
+            string fileName = latestQuote.Name;
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
     }

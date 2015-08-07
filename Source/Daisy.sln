@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Logging", "Libraries\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Common", "Libraries\Daisy.Common\Daisy.Common.csproj", "{05856D7E-0CFF-42F2-9DA0-3B447253D90E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.AdminTest", "Clients\Daisy.Web\Administration\Daisy.AdminTest.csproj", "{75B7656C-A8D4-4F04-BC44-4AA0E6E9A7E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.AdminArea", "Clients\Daisy.Web\Administration\Daisy.AdminArea.csproj", "{75B7656C-A8D4-4F04-BC44-4AA0E6E9A7E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Web.Framework", "Clients\Daisy.Web.Framework\Daisy.Web.Framework.csproj", "{781C0E49-1328-4456-9929-AFA5F054449B}"
 EndProject

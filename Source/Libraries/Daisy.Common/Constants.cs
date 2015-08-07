@@ -18,5 +18,6 @@ namespace Daisy.Common
         public static readonly int MaxAlbumImport = 30;
 
         public static readonly string UploadPath = "UploadPath";
+        public static readonly string QuotePath = "QuotePath";
     }
 }
