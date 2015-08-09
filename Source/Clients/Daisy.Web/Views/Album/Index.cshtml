@@ -5,7 +5,7 @@
 
 <div class="container-fluid spacer">
     <div class="form-inline">
-        <div id="paging" class="form-group">
+        <div id="paging" @*class="form-group"*@>
             @if (Model.Albums.Items.Count() > 0)
             {
                 int selectedPage = Model.Albums.PageIndex + 1;
@@ -46,7 +46,7 @@
                 </ul>
             }
         </div>
-        <div id="searchResultInfo" class="form-group" style="float:right;margin-top:20px;"></div>
+        @*<div id="searchResultInfo" class="form-group" style="float:right;margin-top:20px;"></div>*@
     </div>
 </div>
 

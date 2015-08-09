@@ -8,8 +8,8 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
-    <ProjectView>ShowAllFiles</ProjectView>
-    <NameOfLastUsedPublishProfile>TestWeb</NameOfLastUsedPublishProfile>
+    <ProjectView>ProjectFiles</ProjectView>
+    <NameOfLastUsedPublishProfile>daisytestweb</NameOfLastUsedPublishProfile>
     <WebStackScaffolding_AreaDialogWidth>600</WebStackScaffolding_AreaDialogWidth>
   </PropertyGroup>
   <ProjectExtensions>

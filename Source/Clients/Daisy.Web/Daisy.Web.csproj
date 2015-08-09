@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -21,6 +22,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <WebGreaseLibPath>..\..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +40,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
@@ -183,7 +186,10 @@
     <Content Include="Content\fotorama\fotorama%402x.png" />
     <Content Include="Content\fotorama\fotorama.css" />
     <Content Include="Content\fotorama\fotorama.png" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -194,11 +200,18 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="FlickrNet.chm" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\daisytestweb.pubxml" />
-    <None Include="Properties\PublishProfiles\TestWeb.pubxml" />
+    <None Include="Properties\PublishProfiles\DaisyWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
+    <Content Include="Images\bg.png" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Images\logo.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\fotorama.js" />
@@ -268,6 +281,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
@@ -298,4 +312,35 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  <Target Name="ExcludeRootBinariesDeployment">
+    <ItemGroup>
+      <RootBinFiles Include="bin\*">
+        <InProject>false</InProject>
+      </RootBinFiles>
+    </ItemGroup>
+    <PropertyGroup>
+      <ExcludeFilesFromDeployment>
+		**\*.Debug.config;
+		**\*.Release.config;
+		**\obj\**;
+		**\bin\*.xml;
+		**\*.cs;
+		**\packages.config;
+		**\*.csproj;
+		**\*.csproj.user;
+		Administration\bin\**;		
+		bin\Daisy.Admin.dll.config;
+		bin\Daisy.Web.dll.config;
+		Properties\**\*;
+      </ExcludeFilesFromDeployment>
+    </PropertyGroup>
+  </Target>
+  <Target Name="ExcludeRootBinariesPackage" DependsOnTargets="ExcludeRootBinariesDeployment" BeforeTargets="ExcludeFilesFromPackage">
+    <ItemGroup>
+      <ExcludeFromPackageFiles Include="$(ExcludeFilesFromDeployment)" />
+    </ItemGroup>
+  </Target>
+  <Target Name="AfterBuild" DependsOnTargets="MvcBuildViews">
+    <CallTarget Targets="ExcludeRootBinariesDeployment" />
+  </Target>
 </Project>

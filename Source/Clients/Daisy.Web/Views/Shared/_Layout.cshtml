@@ -8,11 +8,19 @@
     @Scripts.Render("~/bundles/modernizr")
     <meta name="description" content="The description of my page" />
 </head>
-<body>
+<body background="~/Images/bg.png">
     <div class="daisy-header">
-        <img class="daisy-header" src="https://farm6.staticflickr.com/5344/coverphoto/18555104@N00_h.jpg" />
+        <div style="float:left">
+            <img class="daisy-logo" src="~/Images/logo.gif" />
+        </div>
+        <div style="float:right" class="social">
+            <ul>
+                <li><a href="https://www.facebook.com/daisystudio.vn"><i class="fa fa-lg fa-facebook"></i></a></li>
+                <li><a href="https://www.flickr.com/photos/18555104@N00/"><i class="fa fa-lg fa-flickr"></i></a></li>
+            </ul>
+        </div>
     </div>
-    <div class="navbar">
+    <div class="navbar spacer">
         <div class="navbar-header">
             <div class="navbar-inverse">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style="background-color:#333">
@@ -23,10 +31,11 @@
             </div>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav links">
-                <li class="link">@Html.ActionLink("Home", "Index", "Home")</li>
-                <li class="link">@Html.ActionLink("Albums", "Index", "Album")</li>
-                <li class="link">@Html.ActionLink("Báo giá", "Quote", "Home")</li>
+            <ul class="nav navbar-nav daisy-top-menu">
+                <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                <li>@Html.ActionLink("Albums", "Index", "Album")</li>
+                <li>@Html.ActionLink("Báo giá", "Quote", "Home")</li>
+                <li>@Html.ActionLink("Liên hệ", "Quote", "Home")</li>
             </ul>
         </div>
     </div>
@@ -35,8 +44,10 @@
         <hr />
     </div>
     <div class="container-fluid">
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Daisy studio</p>
+        <footer class="daisy-footer">
+            <div style="float:right">
+                <p>Daisy studio &copy; @DateTime.Now.Year All Rights Reserved</p>
+            </div>            
         </footer>
     </div>
 

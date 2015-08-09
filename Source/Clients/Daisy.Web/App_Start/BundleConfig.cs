@@ -26,6 +26,7 @@ namespace Daisy.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/font-awesome.css",
                       "~/Content/fotorama/fotorama.css",
                       "~/Content/daisy.css",
                       "~/Content/site.css"));
