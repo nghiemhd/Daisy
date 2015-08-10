@@ -38,6 +38,11 @@ namespace Daisy.Web.Controllers
             return View();
         }
 
+        public ActionResult Blog()
+        {
+            return View();
+        }
+
         public FileResult Quote()
         {
             var quotePath = ConfigurationManager.AppSettings["QuotePath"];

@@ -13,19 +13,30 @@
 }
 
 .daisy-footer {
-    color: #eee;
+    color: #000;
 }
 
 .daisy-top-menu {
-    color: #eee;
+    color: #000;
     font-size: 1.5em;
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
 }
 
+/* prevent wrapping */
+.daisy-top-menu ul {
+    white-space: nowrap;
+}
+
+.daisy-top-menu > ul > li {
+    display: inline-block;
+    float: none;
+}
+/* prevent wrapping */
+
 .daisy-top-menu a {
-    color: #eee;
-    margin:0 50px 0 0;
+    color: #000;
+    margin:0 60px 0 0;
 }
 
 .daisy-top-menu a:hover, .daisy-top-menu a:focus {
@@ -157,4 +168,24 @@
 
 #gmap_canvas {
     height: 390px;
+}
+
+.daisy-feedback {
+    margin-left: 20px;
+}
+
+.height300 {
+    height: 500px;
+}
+
+.height100 {
+    height: 250px;
+}
+
+pre {
+white-space: -moz-pre-wrap; /* Mozilla, supported since 1999 */
+white-space: -pre-wrap; /* Opera 4 - 6 */
+white-space: -o-pre-wrap; /* Opera 7 */
+white-space: pre-wrap; /* CSS3 - Text module (Candidate Recommendation) http://www.w3.org/TR/css3-text/#white-space */
+word-wrap: break-word; /* IE 5.5+ */
 }

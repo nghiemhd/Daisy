@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <meta name="description" content="The description of my page" />    
 </head>
-<body background="~/Images/bg.png">
+<body @*background="~/Images/bg.png"*@>
     <div class="daisy-header">
         <div class="daisy-logo">
             <img src="~/Images/logo.gif" alt="logo" />
@@ -36,11 +36,12 @@
                 <li class="@Html.ActivePage("Home", "Index")">@Html.ActionLink("Trang chủ", "Index", "Home")</li>
                 <li class="@Html.ActivePage("Album", "Index")">@Html.ActionLink("Albums", "Index", "Album")</li>
                 <li>@Html.ActionLink("Báo giá", "Quote", "Home")</li>
+                <li class="@Html.ActivePage("Home", "Blog")">@Html.ActionLink("Blogs", "Blog", "Home")</li>
                 <li class="@Html.ActivePage("Home", "Contact")">@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
             </ul>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="">
         @RenderBody()        
     </div>
     <div class="container-fluid">
