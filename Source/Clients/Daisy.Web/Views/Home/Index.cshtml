@@ -1,56 +1,84 @@
-﻿@model List<Daisy.Web.Models.Photo>
-@{
-    ViewBag.Title = "Home Page";
+﻿<div class="container">
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12 text-center">
+                <div id="carousel-example-generic" class="carousel slide">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators hidden-xs">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img class="img-responsive img-full" src="https://farm9.staticflickr.com/8705/17016677211_6543162cfc_b.jpg" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive img-full" src="https://farm8.staticflickr.com/7624/16397422673_00ee3deb1a_b.jpg" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive img-full" src="https://farm9.staticflickr.com/8689/16810151517_b1437a1569_b.jpg" alt="">
+                        </div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="icon-prev"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="icon-next"></span>
+                    </a>
+                </div>
+                <h2 class="brand-before">
+                    <small>Welcome to</small>
+                </h2>
+                <h1 class="brand-name">Daisy Studio</h1>
+                <hr class="tagline-divider">
+                <h2>
+                    <small>
+                        By
+                        <strong>Start Bootstrap</strong>
+                    </small>
+                </h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12">
+                <hr>
+                <h2 class="intro-text text-center">
+                    Build a website
+                    <strong>worth visiting</strong>
+                </h2>
+                <hr>
+                <img class="img-responsive img-border img-left" src="https://farm3.staticflickr.com/2818/9310694849_74c51d94f9.jpg" alt="">
+                <hr class="visible-xs">
+                <p>The boxes used in this template are nested inbetween a normal Bootstrap row and the start of your column layout. The boxes will be full-width boxes, so if you want to make them smaller then you will need to customize.</p>
+                <p>A huge thanks to <a href="http://join.deathtothestockphoto.com/" target="_blank">Death to the Stock Photo</a> for allowing us to use the beautiful photos that make this template really come to life. When using this template, make sure your photos are decent. Also make sure that the file size on your photos is kept to a minumum to keep load times to a minimum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat diam quis nisl vestibulum dignissim. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12">
+                <hr>
+                <h2 class="intro-text text-center">
+                    Beautiful boxes
+                    <strong>to showcase your content</strong>
+                </h2>
+                <hr>
+                <p>Use as many boxes as you like, and put anything you want in them! They are great for just about anything, the sky's the limit!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat diam quis nisl vestibulum dignissim. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $('.carousel').carousel({
+            interval: 5000 //changes the speed
+        })
+    </script>
 }
-
-@*<div id="gridPhotos" class="fotorama" data-allow-full-screen="native" data-nav="thumbs" data-keyboard="true" data-autoplay="true" data-transition="crossfade">
-    @foreach (var photo in @Model)
-    {
-        if (photo.Large1600Url == null)
-        {
-            <img src="@photo.LargeUrl" alt="@photo.Name" />
-        }
-        else
-        {
-            <img src="@photo.Large1600Url" alt="@photo.Name" data-full="@photo.Large2048Url" />
-        }
-    }
-</div>*@
-
-<div>
-    <div class="col-lg-4">
-        <div class="photo-list-album-view height300" style="margin-bottom:30px; background-image:url(https://farm7.staticflickr.com/6231/6280439170_08cb6364bc_b.jpg)"></div>
-        <div class="photo-list-album-view height100" style="margin-bottom:30px; background-image:url(https://farm7.staticflickr.com/6231/6280439170_08cb6364bc_b.jpg)"></div>
-        <div class="photo-list-album-view height100" style="margin-bottom:30px; background-image:url(https://farm7.staticflickr.com/6229/6279944669_2b185c8468_b.jpg)"></div>
-    </div>
-    <div class="col-lg-4">
-        <div class="photo-list-album-view height100" style="margin-bottom:30px; background-image:url(https://farm7.staticflickr.com/6228/6279949749_2bf3102dc6_b.jpg)"></div>
-        <div class="photo-list-album-view height100" style="margin-bottom:30px; background-image:url(https://farm7.staticflickr.com/6231/6280474158_d934fdffd1_b.jpg)"></div>
-        <div class="photo-list-album-view height300" style="margin-bottom:30px; background-image:url(https://farm7.staticflickr.com/6106/6279962847_77ce81cfb3_b.jpg)"></div>
-    </div>
-    <div class="col-lg-4">
-        <div class="photo-list-album-view height300" style="margin-bottom:30px; background-image:url(https://farm7.staticflickr.com/6056/6280486024_30f6d01cc4_b.jpg)"></div>
-        <div class="photo-list-album-view height100" style="margin-bottom:30px; background-image:url(https://farm7.staticflickr.com/6229/6285829809_6ea9a83252_b.jpg)"></div>
-        <div class="photo-list-album-view height100" style="margin-bottom:30px; background-image:url(https://farm7.staticflickr.com/6222/6286356120_bc63a0df6f_b.jpg)"></div>
-    </div>
-</div>
-<div class="container-fluid">    
-    <p>
-        Daisy studio chuyên cung cấp dịch vụ chụp ảnh cưới ngoại cảnh và trong studio, chụp ảnh gia đình và trẻ em ngoại cảnh và trong studio, chụp ảnh chân dung ngoại cảnh và trong studio.
-    </p>
-    <p>
-        Ảnh của Daisy studio theo phong cách tự nhiên, mộc mạc và đầy cảm xúc. Bạn sẽ phải ngạc nhiên khi thấy mình đẹp hơn nhưng vẫn là chính bạn trong những bức ảnh rất có hồn và cực kỳ dung dị của Daisy studio.
-    </p>
-    <p>
-        Daisy studio có studio tại tp Hồ Chí Minh nhưng có thể đi theo bạn đến mọi miền của đất nước để ghi lại những khoảnh khắc đẹp nhất của bạn bên người thân yêu: ngoài ảnh cưới tại tp HCM, Daisy studio còn chụp tại Bình Dương, Vũng Tàu, Hồ Cốc, Đà Lạt, Nha Trang, Đà Nẵng, Hội An, Côn Đảo, Phú Quốc, Hà Nội...
-    </p>
-    <p>
-        Rất mong được đón tiếp các bạn tại Daisy studio
-    </p>
-    <p>
-        Wedding Photography in Vietnam
-    </p>
-    <p>
-        Daisy studio Photography specializes in wedding photography, family and kids photos, and individual and couple portraits. Many of our clients are overseas Vietnamese or mixed couples who appreciate the upscale, western-styled design of our wedding photos and albums. Shoots are usually set in unique locations in Saigon (Ho Chi Minh City), Da Lat, Ho Coc, Nha Trang, Hoi An, and elsewhere around Vietnam. Our studio is located in Saigon (Ho Chi Minh City), Vietnam.
-    </p>
-</div>

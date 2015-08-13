@@ -88,6 +88,8 @@
     <Compile Include="DataContracts\AlbumDto.cs" />
     <Compile Include="DataContracts\PhotoDto.cs" />
     <Compile Include="DataContracts\SearchAlbumOptions.cs" />
+    <Compile Include="DataContracts\SliderDto.cs" />
+    <Compile Include="ServiceContracts\IContentService.cs" />
     <Compile Include="ServiceContracts\IFlickrService.cs" />
     <Compile Include="ServiceContracts\IUploadService.cs" />
     <Compile Include="Services\AlbumService.cs" />

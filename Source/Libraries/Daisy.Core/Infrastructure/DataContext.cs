@@ -32,6 +32,16 @@ namespace Daisy.Core.Infrastructure
                     ap.MapLeftKey("AlbumId");
                     ap.MapRightKey("PhotoId");
                     ap.ToTable("AlbumPhoto");
+                });            
+
+            modelBuilder.Entity<Slider>()
+                .HasMany<Photo>(s => s.Photos)
+                .WithMany(p => p.Sliders)
+                .Map(sp =>
+                {
+                    sp.MapLeftKey("SliderId");
+                    sp.MapRightKey("PhotoId");
+                    sp.ToTable("SliderPhoto");
                 });
         }
 
@@ -39,6 +49,7 @@ namespace Daisy.Core.Infrastructure
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
         #endregion DbSet
     }
 }
