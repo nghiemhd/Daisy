@@ -183,6 +183,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\business-casual.css" />
     <Content Include="Content\Daisy.css" />
     <Content Include="Content\fotorama\fotorama%402x.png" />
     <Content Include="Content\fotorama\fotorama.css" />
@@ -207,10 +208,11 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\daisytestweb.pubxml" />
-    <None Include="Properties\PublishProfiles\DaisyWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
+    <Content Include="Images\bg.jpg" />
     <Content Include="Images\bg.png" />
+    <Content Include="Images\bg3.jpg" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\logo.gif" />
     <Content Include="Scripts\bootstrap.js" />
@@ -238,7 +240,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout1.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -247,6 +249,9 @@
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Album\Detail.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

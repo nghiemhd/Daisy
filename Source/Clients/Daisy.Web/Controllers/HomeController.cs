@@ -24,6 +24,12 @@ namespace Daisy.Web.Controllers
             return View(model);
         }
 
+        public ActionResult Index2()
+        {
+            var model = GetPhotos();
+            return View(model);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
