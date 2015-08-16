@@ -190,6 +190,13 @@
     <Content Include="Content\fotorama\fotorama.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\wowslider\arrows.png" />
+    <Content Include="Content\wowslider\bullet.png" />
+    <Content Include="Content\wowslider\pause.png" />
+    <Content Include="Content\wowslider\play.png" />
+    <Content Include="Content\wowslider\style.css" />
+    <Content Include="Content\wowslider\style.mod.css" />
+    <Content Include="Content\wowslider\triangle.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -217,7 +224,7 @@
     <Content Include="Images\logo.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\fotorama.js" />
+    <Content Include="Scripts\fotorama\fotorama.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -229,6 +236,9 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\wowslider\script.js" />
+    <Content Include="Scripts\wowslider\wowslider.js" />
+    <Content Include="Scripts\wowslider\wowslider.mod.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -242,13 +252,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Album\Detail.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
-    <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>

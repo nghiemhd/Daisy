@@ -169,6 +169,7 @@
     <Compile Include="AdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\FlickrAlbumController.cs" />
     <Compile Include="Controllers\HomeController.cs">
       <SubType>
@@ -183,6 +184,7 @@
     <Compile Include="Models\Album\AlbumDetailViewModel.cs" />
     <Compile Include="Models\Album\PagedListAlbumViewModel.cs" />
     <Compile Include="Models\Album\SearchAlbumModel.cs" />
+    <Compile Include="Models\Content\SliderViewModel.cs" />
     <Compile Include="Models\Photo\Photo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -201,6 +203,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Content\Slider.cshtml" />
+    <Content Include="Views\Shared\_Album.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -236,6 +240,7 @@
     <TypeScriptCompile Include="Scripts\Album\AlbumDetail.ts" />
     <TypeScriptCompile Include="Scripts\Album\Main.ts" />
     <TypeScriptCompile Include="Scripts\Common\common.ts" />
+    <TypeScriptCompile Include="Scripts\Content\SliderMain.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\Album.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\AlbumDetail.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\Main.ts" />

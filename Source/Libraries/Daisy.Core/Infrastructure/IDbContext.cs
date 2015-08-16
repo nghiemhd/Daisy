@@ -14,5 +14,7 @@ namespace Daisy.Core.Infrastructure
         DbSet<T> Set<T>() where T : class;
         DbEntityEntry<T> Entry<T>(T entity) where T : class;
         int SaveChanges();
+
+        int ExecuteSqlCommand(string sql, params object[] parameters);
     }
 }

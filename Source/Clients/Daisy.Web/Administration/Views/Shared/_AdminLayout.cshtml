@@ -6,6 +6,13 @@
     <title>@ViewBag.Title - Daisy Admin</title>
     @Styles.Render("~/Content/admin/css")
     @Scripts.Render("~/bundles/admin/modernizr")
+    <style>
+        .modal-content {
+            width: 800px !important;
+            margin: 30px auto !important;
+        }
+    </style>
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,6 +31,16 @@
                     <li>@Html.ActionLink("Albums", "Index", "Album")</li>
                     <li>@Html.ActionLink("Flickr albums", "Index", "FlickrAlbum")</li>
                     <li>@Html.ActionLink("Quote", "Index", "Quote")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Content
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Slider", "Slider", "Content")</li>
+                            <li>@Html.ActionLink("Blogs", "Blogs", "Content")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LogonPartial")
             </div>

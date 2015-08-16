@@ -16,6 +16,14 @@ namespace Daisy.Core.Infrastructure
 
         public IList<string> Errors { get; set; }
 
+        public IDbContext DbContext
+        {
+            get
+            {
+                return context;
+            }
+        }
+
         ~UnitOfWork()
         {
             this.Dispose(false);
@@ -26,7 +34,7 @@ namespace Daisy.Core.Infrastructure
             this.context = new TContext();
             this.repositories = new Dictionary<Type, object>();
             this.disposed = false;
-        }
+        }        
 
         public IRepository<TEntity> GetRepository<TEntity>() where TEntity : class
         {

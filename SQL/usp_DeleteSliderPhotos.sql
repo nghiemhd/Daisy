@@ -1,0 +1,15 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE usp_DeleteSliderPhotos
+	@SliderId int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+    DELETE SliderPhoto
+	WHERE SliderId = @SliderId
+END
+GO

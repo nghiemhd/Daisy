@@ -71,6 +71,23 @@ namespace Daisy.Core.Migrations
                 .PrimaryKey(t => t.Id);
 
             CreateTable(
+                "Slider",
+                c => new
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Name = c.String(maxLength: 100, unicode: false),
+                    Page = c.String(maxLength: 100, unicode: false),
+                    Order = c.Int(nullable: false),
+                    IsDeleted = c.Boolean(nullable: false, defaultValue: false),
+                    UpdatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
+                    UpdatedBy = c.String(nullable: false, maxLength: 50, unicode: false, defaultValueSql: "suser_name()"),
+                    CreatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
+                    CreatedBy = c.String(nullable: false, maxLength: 50, unicode: false, defaultValueSql: "suser_name()"),
+                    RowRevision = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                })
+                .PrimaryKey(t => t.Id);
+
+            CreateTable(
                 "AlbumPhoto",
                 c => new
                 {
@@ -82,6 +99,19 @@ namespace Daisy.Core.Migrations
                 .ForeignKey("Album", t => t.AlbumId, cascadeDelete: true)
                 .Index(t => t.PhotoId)
                 .Index(t => t.AlbumId);
+
+            CreateTable(
+                "SliderPhoto",
+                c => new
+                {
+                    SliderId = c.Int(nullable: false),
+                    PhotoId = c.Int(nullable: false),
+                })
+                .PrimaryKey(t => new { t.SliderId, t.PhotoId })
+                .ForeignKey("Photo", t => t.PhotoId, cascadeDelete: true)
+                .ForeignKey("Slider", t => t.SliderId, cascadeDelete: true)
+                .Index(t => t.PhotoId)
+                .Index(t => t.SliderId);
             
         }
         

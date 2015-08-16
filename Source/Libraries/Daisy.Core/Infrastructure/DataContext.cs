@@ -45,11 +45,16 @@ namespace Daisy.Core.Infrastructure
                 });
         }
 
+        public int ExecuteSqlCommand(string sql, params object[] parameters)
+        {
+            return Database.ExecuteSqlCommand(sql, parameters);
+        }
+
         #region DbSet
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Slider> Sliders { get; set; }
-        #endregion DbSet
+        #endregion DbSet        
     }
 }

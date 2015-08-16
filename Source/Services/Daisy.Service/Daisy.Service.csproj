@@ -96,6 +96,7 @@
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="DataContracts\DataResponse.cs" />
+    <Compile Include="Services\ContentService.cs" />
     <Compile Include="Services\FlickrService.cs" />
     <Compile Include="Services\PhotoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

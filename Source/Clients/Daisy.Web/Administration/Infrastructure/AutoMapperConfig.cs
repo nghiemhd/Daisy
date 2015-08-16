@@ -72,6 +72,8 @@ namespace Daisy.Admin.Infrastructure
                 .ForMember(dest => dest.AlbumThumbnailUrl, opt => opt.MapFrom(src => src.ThumbnailUrl));
 
             Mapper.CreateMap<DaisyEntities.Photo, DaisyModels.Photo>();
+
+            Mapper.CreateMap<DaisyEntities.Slider, DaisyModels.SliderViewModel>();
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Daisy.Core.Infrastructure
 {
     public interface IUnitOfWork : IDisposable
     {
+        IDbContext DbContext { get; }
         IRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
         void Commit();
     }
