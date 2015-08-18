@@ -62,5 +62,10 @@ namespace Daisy.UnitTest.MockObjects
         {
             
         }
+
+        public IDbContext IUnitOfWork.DbContext
+        {
+            get { return (IDbContext)context; }
+        }
     }
 }

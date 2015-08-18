@@ -5,8 +5,7 @@
 
 <div class="spacer btn-group">
     <button id="btnDeletePhotos" data-request-url="@Url.Action("DeleletePhotos", "Content")" class="btn btn-primary">Delete photos</button>
-    <button id="btnAddPhotos" data-request-url="@Url.Action("AddPhotos", "Content")" class="btn btn-primary modal-link">Add photos</button>
-    @Html.ActionLink("Add photos", "ViewAlbums", "Content", null, new { @class = "modal-link btn btn-success" })
+    @Html.ActionLink("Add photos", "ViewPhotos", "Content", null, new { @class = "modal-link btn btn-success" })
 </div>
 <hr />
 @Html.HiddenFor(x => x.Id, new { id = "sliderId" })

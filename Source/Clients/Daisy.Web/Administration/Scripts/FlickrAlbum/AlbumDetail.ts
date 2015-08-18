@@ -5,6 +5,8 @@
         SmallUrl: string;
         MediumUrl: string;
         LargeUrl: string;
+        Large1600Url: string;
+        Large2048Url: string;
         OriginalUrl: string;
     }
 

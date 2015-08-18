@@ -28,6 +28,8 @@ namespace Daisy.Admin.Infrastructure
 
             Mapper.CreateMap<DaisyModels.SearchAlbumModel, SearchAlbumOptions>();
 
+            Mapper.CreateMap<DaisyModels.SearchPhotoModel, SearchPhotoOptions>();
+
             Mapper.CreateMap<DaisyModels.Album, DaisyEntities.Album>()
                 .ForMember(dest => dest.ThumbnailUrl, opt => opt.MapFrom(src => src.AlbumThumbnailUrl))
                 .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(o => DateTime.Now))

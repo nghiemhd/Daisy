@@ -6,13 +6,7 @@
     <title>@ViewBag.Title - Daisy Admin</title>
     @Styles.Render("~/Content/admin/css")
     @Scripts.Render("~/bundles/admin/modernizr")
-    <style>
-        .modal-content {
-            width: 800px !important;
-            margin: 30px auto !important;
-        }
-    </style>
-
+    @RenderSection("styles", false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">

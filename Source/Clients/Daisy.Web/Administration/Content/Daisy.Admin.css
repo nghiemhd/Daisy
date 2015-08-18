@@ -76,3 +76,8 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.modal-content {
+    width: 90% !important;
+    margin: 30px auto !important;
+}

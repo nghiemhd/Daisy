@@ -184,8 +184,10 @@
     <Compile Include="Models\Album\AlbumDetailViewModel.cs" />
     <Compile Include="Models\Album\PagedListAlbumViewModel.cs" />
     <Compile Include="Models\Album\SearchAlbumModel.cs" />
+    <Compile Include="Models\Content\PagedListPhotoViewModel.cs" />
     <Compile Include="Models\Content\SliderViewModel.cs" />
     <Compile Include="Models\Photo\Photo.cs" />
+    <Compile Include="Models\Photo\SearchPhotoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +207,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Content\Slider.cshtml" />
     <Content Include="Views\Shared\_Album.cshtml" />
+    <Content Include="Views\Content\ViewPhotos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -244,6 +247,7 @@
     <TypeScriptCompile Include="Scripts\FlickrAlbum\Album.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\AlbumDetail.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\Main.ts" />
+    <TypeScriptCompile Include="Scripts\Photo\Photo.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap-dialog.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr.d.ts" />
