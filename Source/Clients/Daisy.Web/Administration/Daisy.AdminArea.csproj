@@ -247,8 +247,10 @@
     <TypeScriptCompile Include="Scripts\FlickrAlbum\Album.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\AlbumDetail.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\Main.ts" />
+    <TypeScriptCompile Include="Scripts\Photo\Main.ts" />
     <TypeScriptCompile Include="Scripts\Photo\Photo.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap-dialog.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr.d.ts" />
   </ItemGroup>

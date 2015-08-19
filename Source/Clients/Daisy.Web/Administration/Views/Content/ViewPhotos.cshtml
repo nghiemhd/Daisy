@@ -5,7 +5,7 @@
 
 <div class="modal-body">
     <div class="spacer btn-group">
-        <button id="btnSave" class="btn btn-primary">Save</button>
+        <button id="btnSave" data-request-url="@Url.Action("UpdateSlider", "Content")" class="btn btn-primary">Save</button>
     </div>
     <hr />
     <div class="spacer">
@@ -48,10 +48,11 @@
         <img class="loader" src="~/Administration/Images/loading.gif" />
     </div>
 </div>
-    @section scripts
+@section scripts
 {
     <script src="~/Administration/Scripts/Common/common.js"></script>
     <script src="~/Administration/Scripts/Photo/Photo.js"></script>
+    <script src="~/Administration/Scripts/Photo/Main.js"></script>
     <script type="text/javascript">
         Common.Helper.applicationRoot = '@Url.Content("~")';
     </script>

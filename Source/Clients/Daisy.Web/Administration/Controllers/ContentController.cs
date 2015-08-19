@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Daisy.Service.DataContracts;
 using Daisy.Common;
+using Daisy.Service.Common;
 
 namespace Daisy.Admin.Controllers
 {
@@ -68,6 +69,12 @@ namespace Daisy.Admin.Controllers
             {
                 throw ex;
             }
+        }
+
+        [HttpPost]
+        public JsonResult UpdateSlider(int[] photoIds)
+        {
+            return Json(ResponseStatus.Success.ToString());
         }
     }
 }

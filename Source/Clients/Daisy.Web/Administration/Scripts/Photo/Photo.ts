@@ -21,8 +21,7 @@
     export class DaisyPhoto {
         static photos: IPhoto[];
         static searchRequestUrl: string;
-        static publishAlbumsRequestUrl: string;
-        static publishPhotosRequestUrl: string;
+        static updateSliderRequestUrl: string;
 
         search(options: IPhotoSearchOptions) {
             var data = {
@@ -54,6 +53,43 @@
             });
         }
 
+        updateSliderPhotos(photoIds: number[]) {
+            $.ajax({
+                url: DaisyPhoto.updateSliderRequestUrl,
+                type: 'POST',
+                content: 'application/json; charset=utf-8',
+                dataType: 'json',
+                data: {
+                    photoIds: photoIds
+                },
+                success: (response) => {
+                    if (response == "Success") {
+                        toastr.success('Update successfully');
+                        $('#modal-container').modal('hide');
+                    }
+                    else {
+                        toastr.options = {
+                            closeButton: true,
+                            positionClass: "toast-top-full-width",
+                            timeOut: 0,
+                            extendedTimeOut: 0
+                        };
+                        toastr.error(response);
+                    }
+                },
+                error: function (xhr, desc, err) {
+                    console.log(xhr);
+                    console.log('Desc: ' + desc + '\nErr:' + err);
+                },
+                beforeSend: function () {
+                    $('#loader').show();
+                },
+                complete: function () {
+                    $('#loader').hide();
+                }
+            });
+        }
+
         private searchCallback(response: any) {
             Photo.DaisyPhoto.photos = response.Photos.Items;
             this.cleanUI();
@@ -61,16 +97,16 @@
                 this.loadPhotos(Photo.DaisyPhoto.photos);
 
                 var pagingInfo: Common.IPagination = {
-                    HasNextPage: response.Albums.HasNextPage,
-                    HasPreviousPage: response.Albums.HasPreviousPage,
-                    PageIndex: response.Albums.PageIndex,
-                    TotalPages: response.Albums.TotalPages
+                    HasNextPage: response.Photos.HasNextPage,
+                    HasPreviousPage: response.Photos.HasPreviousPage,
+                    PageIndex: response.Photos.PageIndex,
+                    TotalPages: response.Photos.TotalPages
                 };
                 var searchOptions = <IPhotoSearchOptions>response.SearchOptions;
                 var loadPaginationArg: Common.ILoadPaginationArguments = {
                     Container: $('#paging')[0],
                     PagingInfo: pagingInfo,
-                    ClassName: 'Album.DaisyAlbum',
+                    ClassName: 'Photo.DaisyPhoto',
                     FunctionToExecute: 'search',
                     FunctionArguments: searchOptions
                 };
@@ -78,9 +114,9 @@
 
                 var loadPageSizesArg: Common.ILoadPageSizesArguments = {
                     Container: $('#searchResultInfo')[0],
-                    DisplayedTotalString: 'Total ' + response.Albums.TotalCount + ' albums.',
+                    DisplayedTotalString: 'Total ' + response.Photos.TotalCount + ' photos.',
                     PageSizeOptions: [30, 50, 100, 150],
-                    SelectedPageSize: response.Albums.PageSize,
+                    SelectedPageSize: response.Photos.PageSize,
                     ClassName: 'Photo.DaisyPhoto',
                     FunctionToExecute: 'search',
                     FunctionArguments: searchOptions
@@ -97,6 +133,7 @@
         }
 
         private loadPhotos(photos: IPhoto[]) {
+            debugger
             $('#divSelectAll').show();
             $('#chkSelectAll').prop('checked', false);
 

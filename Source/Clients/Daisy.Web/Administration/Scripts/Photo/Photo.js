@@ -33,31 +33,67 @@ var Photo;
                 }
             });
         };
+        DaisyPhoto.prototype.updateSliderPhotos = function (photoIds) {
+            $.ajax({
+                url: DaisyPhoto.updateSliderRequestUrl,
+                type: 'POST',
+                content: 'application/json; charset=utf-8',
+                dataType: 'json',
+                data: {
+                    photoIds: photoIds
+                },
+                success: function (response) {
+                    if (response == "Success") {
+                        toastr.success('Update successfully');
+                        $('#modal-container').modal('hide');
+                    }
+                    else {
+                        toastr.options = {
+                            closeButton: true,
+                            positionClass: "toast-top-full-width",
+                            timeOut: 0,
+                            extendedTimeOut: 0
+                        };
+                        toastr.error(response);
+                    }
+                },
+                error: function (xhr, desc, err) {
+                    console.log(xhr);
+                    console.log('Desc: ' + desc + '\nErr:' + err);
+                },
+                beforeSend: function () {
+                    $('#loader').show();
+                },
+                complete: function () {
+                    $('#loader').hide();
+                }
+            });
+        };
         DaisyPhoto.prototype.searchCallback = function (response) {
             Photo.DaisyPhoto.photos = response.Photos.Items;
             this.cleanUI();
             if (Photo.DaisyPhoto.photos.length > 0) {
                 this.loadPhotos(Photo.DaisyPhoto.photos);
                 var pagingInfo = {
-                    HasNextPage: response.Albums.HasNextPage,
-                    HasPreviousPage: response.Albums.HasPreviousPage,
-                    PageIndex: response.Albums.PageIndex,
-                    TotalPages: response.Albums.TotalPages
+                    HasNextPage: response.Photos.HasNextPage,
+                    HasPreviousPage: response.Photos.HasPreviousPage,
+                    PageIndex: response.Photos.PageIndex,
+                    TotalPages: response.Photos.TotalPages
                 };
                 var searchOptions = response.SearchOptions;
                 var loadPaginationArg = {
                     Container: $('#paging')[0],
                     PagingInfo: pagingInfo,
-                    ClassName: 'Album.DaisyAlbum',
+                    ClassName: 'Photo.DaisyPhoto',
                     FunctionToExecute: 'search',
                     FunctionArguments: searchOptions
                 };
                 Common.Helper.loadPagination(loadPaginationArg);
                 var loadPageSizesArg = {
                     Container: $('#searchResultInfo')[0],
-                    DisplayedTotalString: 'Total ' + response.Albums.TotalCount + ' albums.',
+                    DisplayedTotalString: 'Total ' + response.Photos.TotalCount + ' photos.',
                     PageSizeOptions: [30, 50, 100, 150],
-                    SelectedPageSize: response.Albums.PageSize,
+                    SelectedPageSize: response.Photos.PageSize,
                     ClassName: 'Photo.DaisyPhoto',
                     FunctionToExecute: 'search',
                     FunctionArguments: searchOptions
@@ -72,6 +108,7 @@ var Photo;
             $('#divSelectAll').hide();
         };
         DaisyPhoto.prototype.loadPhotos = function (photos) {
+            debugger;
             $('#divSelectAll').show();
             $('#chkSelectAll').prop('checked', false);
             $.each(photos, function (index, item) {
