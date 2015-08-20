@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Daisy.Service.DataContracts;
 using Daisy.Common;
 using Daisy.Service.Common;
+using Daisy.Logging.Extensions;
 
 namespace Daisy.Admin.Controllers
 {
@@ -28,11 +29,6 @@ namespace Daisy.Admin.Controllers
         public ActionResult Slider()
         {
             var slider = contentService.GetFirstSlider();
-            if (slider == null)
-            {
-                slider = new DaisyEntities.Slider();
-            }
-
             var model = Mapper.Map<DaisyModels.SliderViewModel>(slider);
 
             return View(model);
@@ -74,14 +70,35 @@ namespace Daisy.Admin.Controllers
         [HttpPost]
         public ActionResult UpdateSlider(int[] photoIds)
         {
-            if (photoIds.Length > Constants.MaxSliderPhotos)
+            try
             {
-                return Json("Cannot add more than 10 photos.");
+                if (photoIds.Length > Constants.MaxSliderPhotos)
+                {
+                    return Json("Cannot add more than 10 photos.");
+                }
+                var slider = contentService.GetFirstSlider();
+                contentService.AddSliderPhotos(slider, photoIds);
+                return Json(ResponseStatus.Success.ToString());
             }
-            var slider = contentService.GetFirstSlider();
-            contentService.AddSliderPhotos(slider, photoIds);
+            catch (Exception ex)
+            {
+                return Json(LogExtension.GetFinalInnerException(ex).Message);
+            }            
+        }
 
-            return RedirectToAction("Slider");
+        [HttpPost]
+        public ActionResult DeleteSliderPhotos(int sliderId, int[] photoIds)
+        {
+            try
+            {
+                var slider = contentService.GetSliderBy(sliderId);
+                contentService.DeleteSliderPhotos(slider, photoIds);
+                return Json(ResponseStatus.Success.ToString());
+            }
+            catch (Exception ex)
+            {                
+                return Json(LogExtension.GetFinalInnerException(ex).Message);
+            }
         }
     }
 }

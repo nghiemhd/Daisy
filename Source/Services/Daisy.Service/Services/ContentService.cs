@@ -63,5 +63,15 @@ namespace Daisy.Service
 
             this.unitOfWork.Commit();
         }
+
+        public void DeleteSliderPhotos(DaisyEntities.Slider slider, int[] photoIds)
+        {
+            var photosToDelete = photoRepository.Query().Where(x => photoIds.Contains(x.Id)).ToList();
+            foreach (var photo in photosToDelete)
+            {
+                slider.Photos.Remove(photo);
+            }
+            this.unitOfWork.Commit();
+        }
     }
 }

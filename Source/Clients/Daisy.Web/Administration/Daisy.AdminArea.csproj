@@ -244,6 +244,7 @@
     <TypeScriptCompile Include="Scripts\Album\AlbumDetail.ts" />
     <TypeScriptCompile Include="Scripts\Album\Main.ts" />
     <TypeScriptCompile Include="Scripts\Common\common.ts" />
+    <TypeScriptCompile Include="Scripts\Content\Slider.ts" />
     <TypeScriptCompile Include="Scripts\Content\SliderMain.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\Album.ts" />
     <TypeScriptCompile Include="Scripts\FlickrAlbum\AlbumDetail.ts" />

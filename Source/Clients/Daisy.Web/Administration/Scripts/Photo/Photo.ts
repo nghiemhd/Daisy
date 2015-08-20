@@ -66,6 +66,7 @@
                     debugger
                     if (response == "Success") {
                         toastr.success('Update successfully');
+                        window.location.href = '/Admin/Content/Slider';
                     }
                     else {
                         toastr.options = {

@@ -4,56 +4,43 @@
 }
 
 <div class="spacer btn-group">
-    <button id="btnDeletePhotos" data-request-url="@Url.Action("DeleletePhotos", "Content")" class="btn btn-primary">Delete photos</button>
+    <button id="btnDeletePhotos" data-request-url="@Url.Action("DeleteSliderPhotos", "Content")" class="btn btn-primary">Delete photos</button>
     @Html.ActionLink("Add photos", "ViewPhotos", "Content", null, new { @class = "modal-link btn btn-primary" })
 </div>
 <hr />
 @Html.HiddenFor(x => x.Id, new { id = "sliderId" })
-<div>
-    <input type="checkbox" id="chkSelectAll">&nbsp;Select all
-</div>
-<div id="gridSliderPhotos">
-    @foreach (var photo in @Model.Photos)
-    {
-        <div class="col-sm-6 col-md-6 col-lg-4" style="background-color:#101010;">
-            <div class="album-thumbnail photo-list-album-view" style="background-image:url(@photo.MediumUrl)">
-            </div>
-            <div class="album-title">
-                <input type="checkbox" value="@photo.Id">&nbsp;@photo.Id
-            </div>
+@if (@Model != null)
+{
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog" style="overflow:scroll">
+        <div class="modal-content"></div>
+    </div>
+
+    if(@Model.Photos.Count > 0)
+    { 
+        <div>
+            <input type="checkbox" id="chkSelectAll">&nbsp;Select all
+        </div>
+        <div id="gridSliderPhotos" class="container-fluid">
+            @foreach (var photo in @Model.Photos)
+            {
+                <div class="col-sm-6 col-md-6 col-lg-4" style="background-color:#101010;">
+                    <div class="album-thumbnail photo-list-album-view" style="background-image:url(@photo.MediumUrl)">
+                    </div>
+                    <div class="album-title">
+                        <input type="checkbox" value="@photo.Id">&nbsp;@photo.Id
+                    </div>
+                </div>
+            }
         </div>
     }
-</div>
-<div id="modal-container" class="modal fade" tabindex="-1" role="dialog" style="overflow:scroll">
-    <div class="modal-content"></div>
-</div>
+}
 <div id="loader" class="overlay" style="display:none">
     <img class="loader" src="~/Administration/Images/loading.gif" />
 </div>
 @section scripts
 {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Initialize modal dialog
-            // attach modal-container bootstrap attributes to links with .modal-link class.
-            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
-            $('body').on('click', '.modal-link', function (e) {
-                $(this).attr('data-target', '#modal-container');
-                $(this).attr('data-toggle', 'modal');
-            });
-            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
-            $('body').on('click', '.modal-close-btn', function () {
-                $('#modal-container').modal('hide');
-            });
-            //clear modal cache, so that new content can be loaded
-            $('#modal-container').on('hidden.bs.modal', function () {
-                $(this).removeData('bs.modal');
-            });
-            $('#CancelModal').on('click', function () {
-                return false;
-            });
-        });
-    </script>
+    <script src="~/Administration/Scripts/Content/SliderMain.js"></script>
+<script src="~/Administration/Scripts/Content/Slider.js"></script>
 }
 
 

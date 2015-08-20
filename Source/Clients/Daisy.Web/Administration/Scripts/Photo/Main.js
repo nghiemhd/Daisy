@@ -43,6 +43,7 @@ $(document).ready(function () {
             });
         }
         else {
+            debugger;
             Photo.DaisyPhoto.updateSliderRequestUrl = $(this).data('request-url');
             photo.updateSliderPhotos(photoIds);
         }
