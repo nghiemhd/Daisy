@@ -13,5 +13,9 @@ namespace Daisy.Service.ServiceContracts
         void UpdateSlider(SliderDto slider);
 
         Slider GetSliderBy(int id);
+
+        Slider GetFirstSlider();
+
+        void AddSliderPhotos(Slider slider, int[] photoIds);
     }
 }

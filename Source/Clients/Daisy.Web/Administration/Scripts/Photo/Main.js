@@ -10,7 +10,7 @@ $(document).ready(function () {
         Photo.DaisyPhoto.searchRequestUrl = $(this).data('request-url');
         photo.search(options);
     });
-    $('#chkSelectAll').change(function () {
+    $('#chkSelectAllPhotos').change(function () {
         if (this.checked) {
             $('#gridPhotos input[type=checkbox]').each(function () {
                 this.checked = true;
@@ -31,8 +31,15 @@ $(document).ready(function () {
         if (photoIds.length <= 0) {
             BootstrapDialog.show({
                 type: BootstrapDialog.TYPE_WARNING,
-                title: 'Add photos',
+                title: 'Add photos to slider',
                 message: 'Please choose photo(s).'
+            });
+        }
+        else if (photoIds.length > 10) {
+            BootstrapDialog.show({
+                type: BootstrapDialog.TYPE_WARNING,
+                title: 'Add photos to slider',
+                message: 'Cannot add more than 10 photos.'
             });
         }
         else {

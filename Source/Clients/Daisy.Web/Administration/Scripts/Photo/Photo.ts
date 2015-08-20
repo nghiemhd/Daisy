@@ -63,9 +63,9 @@
                     photoIds: photoIds
                 },
                 success: (response) => {
+                    debugger
                     if (response == "Success") {
                         toastr.success('Update successfully');
-                        $('#modal-container').modal('hide');
                     }
                     else {
                         toastr.options = {
@@ -133,12 +133,11 @@
         }
 
         private loadPhotos(photos: IPhoto[]) {
-            debugger
             $('#divSelectAll').show();
             $('#chkSelectAll').prop('checked', false);
 
             $.each(photos, function (index, item) {
-                var grid = '<div class="col-sm-3 col-md-2 col-lg-2" style= "background-color:#101010;" > ' +
+                var grid = '<div class="col-sm-6 col-md-6 col-lg-4" style="background-color:#101010;"> ' +
                     '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.LargeUrl + ')">';
                 grid += '</div>' +
                 '<div class="album-title">' +

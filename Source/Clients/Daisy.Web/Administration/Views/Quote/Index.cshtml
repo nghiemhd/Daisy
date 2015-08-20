@@ -19,7 +19,6 @@
 {
     <script type="text/javascript">
         $(document).ready(function () {
-            debugger
             var error = '@TempData["error"]';
             var message = '@TempData["message"]';
             if (error != '') {
@@ -30,7 +29,6 @@
             }
 
             $('#btnUpload').click(function () {
-                debugger
                 var maxSize = getMaxFileUploadSize();
                 var file = $('#file')[0].files[0];
                 if (file == null)

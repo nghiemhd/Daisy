@@ -13,7 +13,7 @@
         photo.search(options);
     });
 
-    $('#chkSelectAll').change(function () {
+    $('#chkSelectAllPhotos').change(function () {
         if (this.checked) {
             $('#gridPhotos input[type=checkbox]').each(function () {
                 this.checked = true;
@@ -32,12 +32,19 @@
             var photoId = $(this).val();
             photoIds.push(photoId);
         });
-
         if (photoIds.length <= 0) {
             BootstrapDialog.show({
                 type: BootstrapDialog.TYPE_WARNING,
-                title: 'Add photos',
+                title: 'Add photos to slider',
                 message: 'Please choose photo(s).'
+            });
+        }
+        else if (photoIds.length > 10)
+        {
+            BootstrapDialog.show({
+                type: BootstrapDialog.TYPE_WARNING,
+                title: 'Add photos to slider',
+                message: 'Cannot add more than 10 photos.'
             });
         }
         else {

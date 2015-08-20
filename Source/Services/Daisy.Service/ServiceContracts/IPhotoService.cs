@@ -18,5 +18,6 @@ namespace Daisy.Service.ServiceContracts
         void DeletePhotos(IEnumerable<DaisyEntities.Photo> photos);
         FlickrNet.PhotoInfo GetFlickrPhotoInfo(string id);
         PagedList<DaisyEntities.Photo> SearchPhotos(SearchPhotoOptions options);
+        IEnumerable<DaisyEntities.Photo> GetPhotosBy(int[] photoIds);
     }
 }

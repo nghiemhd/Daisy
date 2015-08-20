@@ -30,12 +30,12 @@ namespace Daisy.Service
 
         public IEnumerable<DaisyEntities.Photo> GetAllPhotos()
         {
-            return photoRepository.Query().ToList();
+            return photoRepository.Query().AsEnumerable();
         }
 
         public IEnumerable<DaisyEntities.Photo> GetDisplayedPhotos()
         {
-            return photoRepository.Query().Where(x => x.IsPublished == true).ToList();
+            return photoRepository.Query().Where(x => x.IsPublished == true).AsEnumerable();
         }
 
         public DaisyEntities.Photo GetPhotoById(int id)
@@ -109,6 +109,12 @@ namespace Daisy.Service
                 logger.Error(ex);
                 throw ex;
             }
+        }
+
+        public IEnumerable<DaisyEntities.Photo> GetPhotosBy(int[] photoIds)
+        {
+            var photos = photoRepository.Query().Where(x => photoIds.Contains(x.Id));
+            return photos.AsEnumerable();
         }
     }
 }

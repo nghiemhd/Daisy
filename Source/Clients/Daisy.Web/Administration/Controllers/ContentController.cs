@@ -27,7 +27,7 @@ namespace Daisy.Admin.Controllers
 
         public ActionResult Slider()
         {
-            var slider = contentService.GetSliderBy(1);
+            var slider = contentService.GetFirstSlider();
             if (slider == null)
             {
                 slider = new DaisyEntities.Slider();
@@ -72,9 +72,16 @@ namespace Daisy.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateSlider(int[] photoIds)
+        public ActionResult UpdateSlider(int[] photoIds)
         {
-            return Json(ResponseStatus.Success.ToString());
+            if (photoIds.Length > Constants.MaxSliderPhotos)
+            {
+                return Json("Cannot add more than 10 photos.");
+            }
+            var slider = contentService.GetFirstSlider();
+            contentService.AddSliderPhotos(slider, photoIds);
+
+            return RedirectToAction("Slider");
         }
     }
 }

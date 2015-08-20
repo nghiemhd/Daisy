@@ -14,19 +14,17 @@ namespace Daisy.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
-        {            
+        private readonly IContentService contentService;
+
+        public HomeController(IContentService contentService)
+        {
+            this.contentService = contentService;
         }
 
         public ActionResult Index()
         {
-            var model = GetPhotos();
-            return View(model);
-        }
-
-        public ActionResult Index2()
-        {
-            var model = GetPhotos();
+            var photos = contentService.GetFirstSlider().Photos.ToList();
+            var model = Mapper.Map<List<DaisyModels.Photo>>(photos);
             return View(model);
         }
 

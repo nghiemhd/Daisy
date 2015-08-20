@@ -41,13 +41,27 @@ namespace Daisy.Service
                     slider.Photos = photos;
                     unitOfWork.Commit();
                 }
-            }
-            
+            }            
         }
+
+
 
         public DaisyEntities.Slider GetSliderBy(int id)
         {
+            return sliderRepository.Query().Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        public DaisyEntities.Slider GetFirstSlider()
+        {
             return sliderRepository.Query().FirstOrDefault();
+        }
+
+        public void AddSliderPhotos(DaisyEntities.Slider slider, int[] photoIds)
+        {            
+            var photos = photoRepository.Query().Where(x => photoIds.Contains(x.Id)).ToList();
+            slider.Photos = photos;
+
+            this.unitOfWork.Commit();
         }
     }
 }

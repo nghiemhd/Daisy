@@ -24,6 +24,7 @@ namespace Daisy.Admin.Infrastructure
             bundles.Add(new ScriptBundle("~/bundles/admin/bootstrap").Include(
                       "~/Administration/Scripts/bootstrap.js",
                       "~/Administration/Scripts/bootstrap-dialog.js",
+                      "~/Administration/Scripts/hotfixBootstrapModal.js",
                       "~/Administration/Scripts/toastr.js",
                       "~/Administration/Scripts/respond.js"));
 
