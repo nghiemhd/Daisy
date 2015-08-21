@@ -44,8 +44,6 @@ namespace Daisy.Service
             }            
         }
 
-
-
         public DaisyEntities.Slider GetSliderBy(int id)
         {
             return sliderRepository.Query().Where(x => x.Id == id).FirstOrDefault();
@@ -59,7 +57,10 @@ namespace Daisy.Service
         public void AddSliderPhotos(DaisyEntities.Slider slider, int[] photoIds)
         {            
             var photos = photoRepository.Query().Where(x => photoIds.Contains(x.Id)).ToList();
-            slider.Photos = photos;
+            foreach (var photo in photos)
+            {
+                slider.Photos.Add(photo);
+            }
 
             this.unitOfWork.Commit();
         }

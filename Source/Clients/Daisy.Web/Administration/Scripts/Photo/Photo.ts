@@ -139,7 +139,7 @@
 
             $.each(photos, function (index, item) {
                 var grid = '<div class="col-sm-6 col-md-6 col-lg-4" style="background-color:#101010;"> ' +
-                    '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.LargeUrl + ')">';
+                    '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.MediumUrl + ')">';
                 grid += '</div>' +
                 '<div class="album-title">' +
                 '<input type="checkbox" value="' + item.Id + '">&nbsp;' + item.Id +

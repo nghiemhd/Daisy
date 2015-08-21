@@ -192,6 +192,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\wowslider\arrows.png" />
     <Content Include="Content\wowslider\bullet.png" />
+    <Content Include="Content\wowslider\fullscreen.svg" />
     <Content Include="Content\wowslider\pause.png" />
     <Content Include="Content\wowslider\play.png" />
     <Content Include="Content\wowslider\style.css" />
@@ -214,6 +215,9 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\wowslider\fullscreen.eot" />
+    <Content Include="Content\wowslider\fullscreen.ttf" />
+    <Content Include="Content\wowslider\fullscreen.woff" />
     <None Include="Properties\PublishProfiles\daisytestweb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />

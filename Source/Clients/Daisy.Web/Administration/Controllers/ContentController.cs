@@ -76,7 +76,13 @@ namespace Daisy.Admin.Controllers
                 {
                     return Json("Cannot add more than 10 photos.");
                 }
+
                 var slider = contentService.GetFirstSlider();
+                if (slider.Photos.Count + photoIds.Count() > Constants.MaxSliderPhotos)
+                {
+                    return Json("Slider cannot have more than 10 photos.");
+                }
+
                 contentService.AddSliderPhotos(slider, photoIds);
                 return Json(ResponseStatus.Success.ToString());
             }
