@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<title>jQuery Flipbook Image Scroller</title>
+
+<link rel="stylesheet" type="text/css" href="icons/ss-standard.css" />
+<link rel="stylesheet" type="text/css" href="pictureflip.css" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+
+<!--<script type="text/javascript" src="http://use.typekit.net/vue1oix.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>-->
+
+<script src="modernizr.js"></script>
+<script src="jquery.js"></script>
+<script src="jquery.pictureflip.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+	$('#flipbook').pageFlip({
+		time : 1,
+		shadow : true,
+		slideTime: 0.2,
+		autoRun: true,
+		autoTime: 3
+	});
+
+});
+</script>
+</head>
+<body>
+
+<div id="flipbook">
+	<div class="slide">
+		<img src="https://farm9.staticflickr.com/8705/17016677211_420329ec88_k.jpg" alt="" /> 
+	</div>
+	<div class="slide">
+		<img src="https://farm8.staticflickr.com/7624/16397422673_dcbd2e3f9c_k.jpg" alt="" /> 
+	</div>
+	<div class="slide">
+		<img src="https://farm8.staticflickr.com/7626/16395129314_d60d9bc222_k.jpg" alt="" /> 
+	</div>
+	<div class="slide">
+		<img src="https://farm9.staticflickr.com/8663/16622365675_0723f4eb57_k.jpg" alt="" /> 
+	</div>
+	<div class="slide">
+		<img src="https://farm6.staticflickr.com/5501/11974536743_7622f238a3_k.jpg" alt="" /> 
+	</div>
+	<div class="slide">
+		<img src="https://farm8.staticflickr.com/7451/11974412263_aafa5f0913_k.jpg" alt="" /> 
+	</div>
+	<div class="slide">
+		<img src="https://farm4.staticflickr.com/3751/10066443413_0beae5a54e_k.jpg" alt="" /> 
+	</div>		
+	<a class="icon_fullscreen"></a>
+</div>
+
+</body>
+</html>
