@@ -1,12 +1,13 @@
 ﻿@model List<Daisy.Web.Models.Photo>
 @section styles{
-    <link rel="stylesheet" type="text/css" href="~/Content/wowslider/style.css" />
+    @*<link rel="stylesheet" type="text/css" href="~/Content/flipbook/pictureflip.css" />*@
+<link rel="stylesheet" type="text/css" href="~/Content/wowslider/style.css" />
 }
 <div class="container">
     <div class="row">
         <div class="box">
             <div class="col-lg-12 text-center">
-                <div id="carousel-example-generic" class="carousel">
+                <div id="carousel-example-generic" class="carousel shadow">
                     @*<!-- Indicators -->
                         <ol class="carousel-indicators hidden-xs">
                             @for (int i = 0; i < Model.Count(); i++)
@@ -49,6 +50,7 @@
                         </a>*@
                     <!--wowslider-->
                     <div class="carousel-inner">
+                        <div id="wowslider_engine"></div>
                         <div id="wowslider-container1">
                             <div class="ws_images">
                                 <ul>
@@ -69,6 +71,17 @@
                             <div class="ws_shadow"></div>
                         </div>
                     </div>
+
+                    <!--flipbook-->
+                    @*<div id="flipbook">
+                        @for (int i = 0; i < Model.Count(); i++)
+                        {
+                            <div class="slide">
+                                <img src="@Model[i].Large1600Url" alt="" />
+                            </div>
+                        }
+                    </div>*@
+                    
                 </div>
                 <h2 class="brand-before">
                     <small>Welcome to</small>
@@ -125,4 +138,19 @@
             interval: 4000 //changes the speed
         })
     </script>
+
+@*<script src="~/Scripts/flipbook/jquery.pictureflip.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger
+        $('#flipbook').pageFlip({
+            time: 1,
+            shadow: true,
+            slideTime: 0.2,
+            autoRun: true,
+            autoTime: 3
+        });
+
+    });
+</script>*@
 }

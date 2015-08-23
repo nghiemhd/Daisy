@@ -53,8 +53,62 @@ $(document).ready(function() {
 	<div class="slide">
 		<img src="https://farm4.staticflickr.com/3751/10066443413_0beae5a54e_k.jpg" alt="" /> 
 	</div>		
-	<a class="icon_fullscreen"></a>
+	<a class="icon_fullscreen" onclick="javascript:toggleFullScreen()"></a>
 </div>
+
+<script>
+	// mozfullscreenerror event handler
+function errorHandler() {
+   alert('mozfullscreenerror');
+}
+document.documentElement.addEventListener('mozfullscreenerror', errorHandler, false);
+
+// toggle full screen
+function toggleFullScreen() {
+	debugger
+	if (!document.fullscreenElement &&    // alternative standard method
+		!document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+		addWrapper();
+		
+		if (document.documentElement.requestFullscreen) {
+		  document.documentElement.requestFullscreen();
+		} else if (document.documentElement.mozRequestFullScreen) {
+		  document.documentElement.mozRequestFullScreen();
+		} else if (document.documentElement.webkitRequestFullscreen) {
+		  document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+		}
+	} else {	
+		removeWrapper();
+		if (document.cancelFullScreen) {
+		  document.cancelFullScreen();
+		} else if (document.mozCancelFullScreen) {
+		  document.mozCancelFullScreen();
+		} else if (document.webkitCancelFullScreen) {
+		  document.webkitCancelFullScreen();
+		}	
+	}
+}
+
+function changeHandler(){       
+	debugger
+	if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null)
+	{
+		removeWrapper();
+	}                                                        
+}                                                                         
+document.addEventListener("fullscreenchange", changeHandler, false);      
+document.addEventListener("webkitfullscreenchange", changeHandler, false);
+document.addEventListener("mozfullscreenchange", changeHandler, false);
+document.addEventListener('MSFullscreenChange', changeHandler, false);
+
+function addWrapper(){
+	$( "#flipbook" ).wrap( "<div class='fs-wapper'></div>" );
+}
+
+function removeWrapper(){
+	$( "#flipbook" ).unwrap();
+}
+</script>
 
 </body>
 </html>

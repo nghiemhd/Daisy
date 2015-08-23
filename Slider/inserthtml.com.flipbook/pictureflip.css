@@ -260,3 +260,43 @@ a.icon_fullscreen {
 #flipbook div.icon_prev:hover {
 	background-position: 0 100%; 
 }
+
+.fs-wapper {
+	width:100%;
+	height: 100%;
+	background: #181818;
+}
+
+.fs-wapper > #flipbook {
+	margin:0 auto;
+	max-width: 100%;
+	max-height: none;
+	width: 100%;
+	/*top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);*/
+}
+
+.fs-wapper > #flipbook .icon_fullscreen:after {
+	content: '\e801';
+}
+
+
+:-moz-full-screen #flipbook {
+    width: 95% !important;
+    max-width: 100% !important;
+    max-height: inherit;
+}
+
+:-webkit-full-screen #flipbook {
+    width: 95% !important;
+    max-width: 100% !important;
+    max-height: inherit;
+}
+
+:fullscreen #flipbook {
+    width: 95% !important;
+    max-width: 100% !important;
+    max-height: inherit;
+}
+

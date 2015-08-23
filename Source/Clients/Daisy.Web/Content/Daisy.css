@@ -1,5 +1,5 @@
 ﻿.daisy-header {
-    height: 250px;
+    height: 220px;
 }
 
 .daisy-logo {
@@ -85,6 +85,10 @@
 
 .fotorama__wrap {
     margin: 0 auto;
+}
+
+.shadow {
+    box-shadow: 1px 5px 10px 1px #888888;
 }
 
 .social {
