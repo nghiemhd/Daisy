@@ -111,11 +111,11 @@
 }
 
 .social i {
-    width: 50px;
-    height: 50px;
-    color: #FFF;
+    width: 1.7em;
+    height: 1.7em;
+    color: #fff;
     background-color: #909AA0;
-    font-size: 30px;
+    font-size: 2em;
     text-align:center;
     padding-top: 15px;
     border-radius: 50%;
