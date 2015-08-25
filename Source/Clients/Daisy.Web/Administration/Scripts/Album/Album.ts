@@ -55,6 +55,7 @@
                         else {
                             toastr.success('Unpublish successfully');
                         }
+                        this.updateCheckIcon(albumIds, isPublished);
                     }
                     else {
                         toastr.options = {
@@ -98,6 +99,7 @@
                         else {
                             toastr.success('Unpublish successfully');
                         }
+                        this.updateCheckIcon(photoIds, isPublished);
                     }
                     else {
                         toastr.options = {
@@ -170,7 +172,7 @@
 
             $.each(albums, function (index, item) {
                 var grid = '<div class="col-sm-3 col-md-2 col-lg-2" style= "background-color:#101010;" > ' +
-                    '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')">';
+                    '<div id="' + item.Id + '" class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')">';
                 if (item.IsPublished) {
                     grid += '<img src="' + Common.Helper.applicationRoot + 'Administration/Images/symbol_check.png" alt="published" style="width:30px;float:right;" />';
                 }
@@ -182,6 +184,26 @@
                 '</div>';
                 $('#gridAlbums').append(grid);
             });
+        }
+
+        private updateCheckIcon(ids: number[], checked: boolean)
+        {
+            var imgIcon = '<img src="' + Common.Helper.applicationRoot + 'Administration/Images/symbol_check.png" alt="published" style="width:30px;float:right;" />';
+
+            for (var i = 0; i < ids.length; i++)
+            {
+                var img = $('#' + ids[i] + ' img')[0];
+                if (checked) {
+                    if (img == null) {
+                        $('#' + ids[i] + '').append(imgIcon);
+                    }
+                }
+                else {
+                    if (img != null) {
+                        $('#' + ids[i] + ' img').remove();
+                    }
+                }
+            }
         }
     }
 } 

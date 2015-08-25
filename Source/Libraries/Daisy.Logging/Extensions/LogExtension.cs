@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace Daisy.Logging.Extensions
 {
     public static class LogExtension
     {
+
         public static string BuildExceptionMessage(this Exception ex)
         {
             StringBuilder message = new StringBuilder();
@@ -55,6 +57,20 @@ namespace Daisy.Logging.Extensions
                 result = GetFinalInnerException(ex.InnerException);
             }
             return result;                        
+        }
+    }
+
+    public class CustomLock : log4net.Appender.FileAppender.MinimalLock
+    {
+        public override void ReleaseLock()
+        {
+            base.ReleaseLock();
+
+            var logFile = new FileInfo(CurrentAppender.File);
+            if (logFile.Exists && logFile.Length <= 0)
+            {
+                logFile.Delete();
+            }
         }
     }
 }

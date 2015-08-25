@@ -15,7 +15,7 @@ using System.Threading;
 
 namespace Daisy.Service
 {
-    public class AlbumService : IAlbumService
+    public class AlbumService : HandleErrorService, IAlbumService
     {
         private IUnitOfWork unitOfWork;
         private IRepository<DaisyEntities.Album> albumRepository;
@@ -24,6 +24,7 @@ namespace Daisy.Service
         private IFlickrService flickrService;
 
         public AlbumService(IUnitOfWork unitOfWork, ILogger logger, IFlickrService flickrService)
+            : base(logger)
         {
             this.unitOfWork = unitOfWork;
             this.albumRepository = this.unitOfWork.GetRepository<DaisyEntities.Album>();
@@ -103,7 +104,15 @@ namespace Daisy.Service
 
         public Photoset GetFlickrAlbumById(string id)
         {
-            return flickrService.GetAlbumById(id);
+            try
+            {
+                return flickrService.GetAlbumById(id);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw ex;
+            }            
         }
 
         public IEnumerable<DaisyEntities.Album> FindAlbum(string flickrAlbumId)
@@ -203,21 +212,26 @@ namespace Daisy.Service
 
         public DaisyEntities.Album GetAlbumById(int id)
         {
-            var album = albumRepository.Query().SingleOrDefault(x => x.Id == id);
-            return album;
+            var result = Process(() => {
+                var album = albumRepository.Query().SingleOrDefault(x => x.Id == id);
+                return album;
+            });
+
+            return result as DaisyEntities.Album;
         }
 
         public void PublishAlbums(IList<int> albumIds, bool isPublished)
         {
-            try
-            {
+            Process(() => {
                 var updatedAlbums = albumRepository.Query()
                     .Where(x => albumIds.Contains(x.Id) && x.IsPublished != isPublished).ToList();
-                updatedAlbums.ForEach(album => { 
+                updatedAlbums.ForEach(album =>
+                {
                     album.IsPublished = isPublished;
                     album.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;
                     album.UpdatedDate = DateTime.Now;
-                    album.Photos.ToList().ForEach(photo => { 
+                    album.Photos.ToList().ForEach(photo =>
+                    {
                         photo.IsPublished = isPublished;
                         photo.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;
                         photo.UpdatedDate = DateTime.Now;
@@ -225,19 +239,13 @@ namespace Daisy.Service
                 });
 
                 this.unitOfWork.Commit();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-                throw ex;
-            }
+            });
         }
 
         public void PublishPhotos(int albumId, IList<int> photoIds, bool isPublished)
-        {
-            try
-            {
-                if(!isPublished)
+        {            
+            Process(() => {
+                if (!isPublished)
                 {
                     UnpublishPhotos(photoIds);
                 }
@@ -263,12 +271,7 @@ namespace Daisy.Service
                     }
                 }
                 this.unitOfWork.Commit();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-                throw ex;                
-            }
+            });
         }
 
         private void UnpublishPhotos(IList<int> photoIds)
@@ -276,11 +279,12 @@ namespace Daisy.Service
             var photos = photoRepository.Query()
                 .Where(x => photoIds.Contains(x.Id) && x.IsPublished)
                 .ToList();
-            photos.ForEach(photo => {
+            photos.ForEach(photo =>
+            {
                 photo.IsPublished = false;
                 photo.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;
                 photo.UpdatedDate = DateTime.Now;
-            });
+            });           
         }
     }
 }

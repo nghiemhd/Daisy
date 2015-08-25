@@ -99,6 +99,7 @@
     <Compile Include="DataContracts\DataResponse.cs" />
     <Compile Include="Services\ContentService.cs" />
     <Compile Include="Services\FlickrService.cs" />
+    <Compile Include="Services\HandleErrorService.cs" />
     <Compile Include="Services\PhotoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceContracts\IAlbumService.cs" />

@@ -34,7 +34,7 @@
 
 .album-thumbnail {
     height: 250px;
-    margin: 10px 10px 10px 10px;
+    margin: 10px 10px 20px 10px;
 }
 
 .album-title {
@@ -53,9 +53,20 @@
   background-size: cover;
 }
 
-.center {
-    margin: 0 auto;
-    float:none;
+div.scale {
+    -webkit-transition: all 0.3s ease; /* Safari and Chrome */
+    -moz-transition: all 0.3s ease; /* Firefox */
+    -ms-transition: all 0.3s ease; /* IE 9 */
+    -o-transition: all 0.3s ease; /* Opera */
+    transition: all 0.3s ease;
+}
+
+div.scale:hover {
+   -webkit-transform: scale(1.1, 1.1);
+   -moz-transform: scale(1.1, 1.1);
+   -ms-transform: scale(1.1, 1.1);
+   -o-transform: scale(1.1, 1.1);
+   transform: scale(1.1, 1.1)
 }
 
 .overlay {

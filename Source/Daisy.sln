@@ -33,6 +33,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.AdminArea", "Clients\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daisy.Web.Framework", "Clients\Daisy.Web.Framework\Daisy.Web.Framework.csproj", "{781C0E49-1328-4456-9929-AFA5F054449B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Snippets", "Snippets", "{E761F335-3513-4A77-BAAB-28B702616B55}"
+	ProjectSection(SolutionItems) = preProject
+		Snippets\serviceprocess.snippet = Snippets\serviceprocess.snippet
+		Snippets\trycatchService.snippet = Snippets\trycatchService.snippet
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,5 +105,6 @@ Global
 		{05856D7E-0CFF-42F2-9DA0-3B447253D90E} = {A139063C-D574-450D-A204-2FAFE7089C3C}
 		{75B7656C-A8D4-4F04-BC44-4AA0E6E9A7E0} = {99FD763D-B54A-4D7B-9B81-76E3C5E724A9}
 		{781C0E49-1328-4456-9929-AFA5F054449B} = {99FD763D-B54A-4D7B-9B81-76E3C5E724A9}
+		{E761F335-3513-4A77-BAAB-28B702616B55} = {A139063C-D574-450D-A204-2FAFE7089C3C}
 	EndGlobalSection
 EndGlobal
