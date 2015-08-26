@@ -195,6 +195,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\wowslider\arrows.png" />
     <Content Include="Content\wowslider\bullet.png" />
+    <Content Include="Content\wowslider\fotorama.png" />
     <Content Include="Content\wowslider\fullscreen.svg" />
     <Content Include="Content\wowslider\pause.png" />
     <Content Include="Content\wowslider\play.png" />
@@ -235,7 +236,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\flipbook\jquery.pictureflip.js" />
+    <Content Include="Scripts\fotorama\css-classes.js" />
     <Content Include="Scripts\fotorama\fotorama.js" />
+    <Content Include="Scripts\fotorama\fotorama.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
