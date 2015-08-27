@@ -1,4 +1,9 @@
-﻿@{
+﻿@using CaptchaMvc;
+@using CaptchaMvc.HtmlHelpers;
+@using CaptchaMvc.Models;
+
+@model Daisy.Web.Models.FeedbackViewModel
+@{
     ViewBag.Title = "Contact";
 }
 
@@ -9,7 +14,7 @@
                 <hr>
                 <h2 class="intro-text text-center">
                     Contact
-                    <strong>business casual</strong>
+                    <strong>Daisy Studio</strong>
                 </h2>
                 <hr>
             </div>
@@ -25,7 +30,7 @@
                 </p>
                 <p>
                     Email:
-                    <strong><a href="mailto:name@example.com">name@example.com</a></strong>
+                    <strong><a href="mailto:nghiem419ddt@gmail.com">nghiem419ddt@gmail.com</a></strong>
                 </p>
                 <p>
                     DC:
@@ -47,38 +52,50 @@
                     <strong>form</strong>
                 </h2>
                 <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, vitae, distinctio, possimus repudiandae cupiditate ipsum excepturi dicta neque eaque voluptates tempora veniam esse earum sapiente optio deleniti consequuntur eos voluptatem.</p>
-                <form role="form">
+                <p>
+                    Thanks for your interested in Daisy Studio.
+                    Please use this form if you have any questions about our services.
+                    If you would prefer to discuss in person or over the phone,
+                    please include the necessary details in your message and we will get back to you very soon.
+                </p>
+                @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true)
                     <div class="row">
                         <div class="form-group col-lg-4">
-                            <label>Name</label>
-                            <input type="text" class="form-control">
+                            @Html.LabelFor(x => x.Name)
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Name)
                         </div>
                         <div class="form-group col-lg-4">
-                            <label>Email Address</label>
-                            <input type="email" class="form-control">
+                            @Html.LabelFor(x => x.Email)
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Email)
                         </div>
                         <div class="form-group col-lg-4">
-                            <label>Phone Number</label>
-                            <input type="tel" class="form-control">
+                            @Html.LabelFor(x => x.PhoneNumber)
+                            @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.PhoneNumber)
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group col-lg-12">
-                            <label>Message</label>
-                            <textarea class="form-control" rows="6"></textarea>
+                            @Html.LabelFor(x => x.Message)
+                            @Html.TextAreaFor(x => x.Message, new { @class = "form-control", @rows = "6" })
+                            @Html.ValidationMessageFor(x => x.Message)
                         </div>
-                        <div class="form-group col-lg-12">
-                            <input type="hidden" name="save" value="contact">
+                        <div class="form-group col-lg-4">
+                            @Html.MathCaptcha("_MathCaptcha")
+                        </div>
+                        <div id="Submit" class="form-group col-lg-12">
                             <button type="submit" class="btn btn-default">Submit</button>
                         </div>
                     </div>
-                </form>
+                }
             </div>
         </div>
     </div>
 </div>
 <!-- /.container -->
-
 @section scripts
 {
     <script src="https://maps.googleapis.com/maps/api/js"></script>
@@ -101,5 +118,9 @@
             infowindow.open(map, marker);
         }
         google.maps.event.addDomListener(window, 'load', init_map);
+
+        $(document).ready(function () {
+            window.location = '#Submit';
+        });
     </script>
 }

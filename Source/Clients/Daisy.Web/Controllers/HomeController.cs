@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CaptchaMvc.HtmlHelpers;
 using DaisyModels = Daisy.Web.Models;
 using Daisy.Service.ServiceContracts;
 using FlickrNet;
@@ -38,6 +39,19 @@ namespace Daisy.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Contact(DaisyModels.FeedbackViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (this.IsCaptchaValid("Captcha is not valid"))
+                {
+
+                }
+            }
+            return View(model);
+        }
+
         public ActionResult Blog()
         {
             return View();
@@ -60,7 +74,39 @@ namespace Daisy.Web.Controllers
 
             byte[] fileBytes = System.IO.File.ReadAllBytes(latestQuote.FullName);
             string fileName = latestQuote.Name;
-            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+            //return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+            Response.AppendHeader("Content-Disposition", "inline; filename=" + fileName);
+            return File(fileBytes, "application/pdf");
+        }
+
+        public ActionResult QuotePage()
+        {
+            var quotePath = ConfigurationManager.AppSettings["QuotePath"]; 
+            if (quotePath != Path.GetFullPath(quotePath))
+            {
+                var rootPath = Server.MapPath("~");
+                quotePath = Path.Combine(rootPath, quotePath);
+            }
+
+            var directory = new DirectoryInfo(quotePath);
+            var latestQuote = directory
+                .GetFiles()
+                .OrderByDescending(x => x.LastWriteTime)
+                .FirstOrDefault();
+
+            var url = MapURL(Path.Combine(quotePath, latestQuote.Name));
+            var model = new DaisyModels.Quote 
+            {
+                Url = url
+            };
+
+            return View(model);
+        }
+
+        private string MapURL(string path)
+        {
+            string appPath = Server.MapPath("/").ToLower();
+            return string.Format("/{0}", path.ToLower().Replace(appPath, "").Replace(@"\", "/"));
         }
     }
 }

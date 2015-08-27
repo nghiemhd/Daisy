@@ -17,7 +17,7 @@
 <div class="container-fluid">
     <div class="form-inline">
         <div id="paging" class="text-center">
-            @if (Model.Albums.Items.Count() > 0)
+            @if (Model.Albums.TotalPages > 1)
             {
                 int selectedPage = Model.Albums.PageIndex + 1;
                 <ul class="pagination">

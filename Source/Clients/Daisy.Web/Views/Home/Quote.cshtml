@@ -1,0 +1,14 @@
+﻿@model Daisy.Web.Models.Quote
+@{
+    ViewBag.Title = "Quote";
+}
+
+@section scripts {
+    <script src="~/Scripts/pdf/pdfobject.js"></script> 
+    <script>
+        $(document).ready(function () {
+            var myPDF = new PDFObject({ url: '@Model.Url' }).embed();
+        });
+</script>
+}
+
