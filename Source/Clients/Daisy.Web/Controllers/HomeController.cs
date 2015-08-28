@@ -10,6 +10,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
 using System.IO;
+using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Net.Configuration;
+using System.Net;
+using Daisy.Common;
 
 namespace Daisy.Web.Controllers
 {
@@ -40,16 +45,47 @@ namespace Daisy.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Contact(DaisyModels.FeedbackViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SendMessage(DaisyModels.FeedbackViewModel model)
         {
+            var error = "Invalid";
             if (ModelState.IsValid)
             {
-                if (this.IsCaptchaValid("Captcha is not valid"))
+                if (!this.IsCaptchaValid("The answer is not correct."))
                 {
-
+                    TempData["error"] = error;
+                }
+                else
+                {
+                    try
+                    {
+                        var toEmail = ConfigurationManager.AppSettings[Constants.DaisyEmail];
+                        var body = "<p>Email: {0} ({1})</p>" +
+                            "<p>Phone Number: {2}</p>" +
+                            "<p>Message:</p><p>{3}</p>";
+                        var message = new MailMessage();
+                        message.To.Add(new MailAddress(toEmail));
+                        message.Subject = "[Daisy Studio] Customer's message";
+                        message.Body = string.Format(body, model.Name, model.Email, model.PhoneNumber, model.Message);
+                        message.IsBodyHtml = true;
+                        using (var smtp = new SmtpClient())
+                        {
+                            await smtp.SendMailAsync(message);                            
+                        }
+                        TempData["message"] = "Your message has been sent successfully. We will get back to you very soon.";
+                        return RedirectToAction("Contact");
+                    }
+                    catch(Exception ex)
+                    {
+                        throw ex;
+                    }                    
                 }
             }
-            return View(model);
+            else
+            {
+                TempData["error"] = error;
+            }
+            return View("Contact", model);
         }
 
         public ActionResult Blog()

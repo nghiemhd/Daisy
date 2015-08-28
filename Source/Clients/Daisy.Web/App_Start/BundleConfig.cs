@@ -21,10 +21,12 @@ namespace Daisy.Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/toastr.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/toastr.css",
                       "~/Content/business-casual.css",
                       "~/Content/font-awesome.css",
                       "~/Content/daisy.css",

@@ -40,6 +40,7 @@ namespace Daisy.Core.Migrations
                         Large2048Url = c.String(),
                         OriginalUrl = c.String(),  
                         FlickrPhotoId = c.String(maxLength: 50, unicode: false),
+                        Content = c.Binary(nullable: true),
                         IsPublished = c.Boolean(nullable: false, defaultValue: true),
                         IsDeleted = c.Boolean(nullable: false, defaultValue: false),
                         UpdatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
@@ -112,6 +113,23 @@ namespace Daisy.Core.Migrations
                 .ForeignKey("Slider", t => t.SliderId, cascadeDelete: true)
                 .Index(t => t.PhotoId)
                 .Index(t => t.SliderId);
+
+            CreateTable(
+                "Blog",
+                c => new
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Title = c.String(nullable: false, maxLength: 200, unicode: true),
+                    Content = c.String(nullable: false, unicode: true),
+                    IsPublished = c.Boolean(nullable: false, defaultValue: true),
+                    IsDeleted = c.Boolean(nullable: false, defaultValue: false),
+                    UpdatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
+                    UpdatedBy = c.String(nullable: false, maxLength: 50, unicode: false, defaultValueSql: "suser_name()"),
+                    CreatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
+                    CreatedBy = c.String(nullable: false, maxLength: 50, unicode: false, defaultValueSql: "suser_name()"),
+                    RowRevision = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
+                })
+                .PrimaryKey(t => t.Id);
             
         }
         

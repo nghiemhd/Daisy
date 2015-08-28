@@ -199,6 +199,8 @@
     <Content Include="Content\fotorama\fotorama.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="Content\wowslider\arrows.png" />
     <Content Include="Content\wowslider\bullet.png" />
     <Content Include="Content\wowslider\fotorama.png" />
@@ -231,6 +233,8 @@
     <Content Include="Content\flipbook\fullscreen.eot" />
     <Content Include="Content\flipbook\fullscreen.ttf" />
     <Content Include="Content\flipbook\fullscreen.woff" />
+    <Content Include="Content\toastr.less" />
+    <Content Include="Content\toastr.scss" />
     <None Include="Properties\PublishProfiles\daisytestweb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
@@ -257,6 +261,8 @@
     <Content Include="Scripts\pdf\pdfobject.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\wowslider\script.js" />
     <Content Include="Scripts\wowslider\wowslider.js" />
     <Content Include="Scripts\wowslider\wowslider.mod.js" />

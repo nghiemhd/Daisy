@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Album.cs" />
+    <Compile Include="Entities\Blog.cs" />
+    <Compile Include="Entities\BlogPhoto.cs" />
     <Compile Include="Entities\Photo.cs" />
     <Compile Include="Entities\Slider.cs" />
     <Compile Include="Entities\User.cs" />

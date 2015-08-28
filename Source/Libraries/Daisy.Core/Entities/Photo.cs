@@ -35,10 +35,14 @@ namespace Daisy.Core.Entities
 
         public string FlickrPhotoId { get; set; }
 
+        public byte[] Content { get; set; }
+
         public bool IsPublished { get; set; }
 
         public virtual ICollection<Album> Albums { get; set; }
 
         public virtual ICollection<Slider> Sliders { get; set; }
+
+        public virtual ICollection<Blog> Blogs { get; set; }
     }
 }

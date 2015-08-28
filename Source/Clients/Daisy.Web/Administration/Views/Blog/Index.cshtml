@@ -1,0 +1,81 @@
+﻿@model Daisy.Admin.Models.PagedListBlogViewModel
+@{
+    ViewBag.Title = "Blogs";
+}
+<div class="spacer btn-group">
+    <button id="btnAddBlog" class="btn btn-primary">Add blog</button>    
+</div>
+<hr />
+<div class="spacer">
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(x => x.SearchOptions.Title, new { @class = "control-label col-sm-1" })
+            <div class="col-lg-2 col-md-3 col-sm-3">
+                @Html.TextBoxFor(x => x.SearchOptions.Title, new { id = "txtTitle", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                @Html.LabelFor(x => x.SearchOptions.FromDate, new { @class = "control-label col-lg-1 col-md-1 col-sm-1" })
+                <div class="col-lg-2 col-md-3 col-sm-3">
+                    @Html.TextBoxFor(x => x.SearchOptions.FromDate, new { id = "txtFromDate", @class = "form-control" })
+                </div>
+            </div>
+
+                    <div>
+                        @Html.LabelFor(x => x.SearchOptions.ToDate, new { @class = "control-label col-lg-1 col-md-1 col-sm-1" })
+                        <div class="col-lg-2 col-md-3 col-sm-3">
+                            @Html.TextBoxFor(x => x.SearchOptions.ToDate, new { id = "txtToDate", @class = "form-control" })
+                        </div>
+                    </div>
+                    
+                      
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.SearchOptions.FromDate, new { @class = "control-label col-lg-1 col-md-1 col-sm-1" })
+            <div class="col-xs-5 dateContainer">
+                <div class="input-group input-append date" id="fromDatePicker">
+                    <input type="text" class="form-control" name="fromDate" />
+                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.SearchOptions.IsPublished, new { @class = "control-label col-sm-1" })
+            <div class="col-lg-2 col-md-3 col-sm-3">
+                <select id="cboPublishStatus" class="form-control dropdown">
+                    <option>All</option>
+                    <option value="true">Published</option>
+                    <option value="false">Unpublished</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-3">
+                <button id="btnSearch" data-request-url="@Url.Action("Search", "Blog")" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid spacer">
+    <div class="form-inline">
+        <div id="paging" class="form-group"></div>
+        <div id="searchResultInfo" class="form-group" style="float:right;margin-top:20px;"></div>
+    </div>
+</div>
+
+<div id="gridBlogs" class="container-fluid"></div>
+<div id="loader" class="overlay" style="display:none">
+    <img class="loader" src="~/Administration/Images/loading.gif" />
+</div>
+
+@section scripts
+{
+    <script src="~/Administration/Scripts/Common/common.js"></script>
+    <script src="~/Administration/Scripts/Album/Album.js"></script>
+    <script src="~/Administration/Scripts/Album/Main.js"></script>
+    <script type="text/javascript">
+        Common.Helper.applicationRoot = '@Url.Content("~")';
+    </script>
+}

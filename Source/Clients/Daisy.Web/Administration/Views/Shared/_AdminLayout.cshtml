@@ -4,8 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Daisy Admin</title>
+
+    <!-- Include Bootstrap Datepicker -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />    
+
     @Styles.Render("~/Content/admin/css")
     @Scripts.Render("~/bundles/admin/modernizr")
+    @Scripts.Render("~/bundles/admin/jquery")
+    @Scripts.Render("~/bundles/admin/bootstrap")
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
     @RenderSection("styles", false)
 </head>
 <body>
@@ -32,7 +40,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Slider", "Slider", "Content")</li>
-                            <li>@Html.ActionLink("Blogs", "Blogs", "Content")</li>
+                            <li>@Html.ActionLink("Blogs", "Index", "Blog")</li>
                         </ul>
                     </li>
                 </ul>
@@ -49,9 +57,7 @@
             <p>&copy; @DateTime.Now.Year - Daisy studio</p>
         </footer>
     </div>
-    
-    @Scripts.Render("~/bundles/admin/jquery")
-    @Scripts.Render("~/bundles/admin/bootstrap")
+        
     @RenderSection("scripts", required: false)
 </body>
 </html>

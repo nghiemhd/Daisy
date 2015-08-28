@@ -55,6 +55,8 @@ namespace Daisy.Core.Infrastructure
         public DbSet<Album> Albums { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Slider> Sliders { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogPhoto> BlogPhotos { get; set; }
         #endregion DbSet        
     }
 }

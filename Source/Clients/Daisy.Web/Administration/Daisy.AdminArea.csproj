@@ -170,6 +170,7 @@
     <Compile Include="AdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\FlickrAlbumController.cs" />
     <Compile Include="Controllers\HomeController.cs">
@@ -185,6 +186,9 @@
     <Compile Include="Models\Album\AlbumDetailViewModel.cs" />
     <Compile Include="Models\Album\PagedListAlbumViewModel.cs" />
     <Compile Include="Models\Album\SearchAlbumModel.cs" />
+    <Compile Include="Models\Blog\Blog.cs" />
+    <Compile Include="Models\Blog\PagedListBlogViewModel.cs" />
+    <Compile Include="Models\Blog\SearchBlogModel.cs" />
     <Compile Include="Models\Content\PagedListPhotoViewModel.cs" />
     <Compile Include="Models\Content\SliderViewModel.cs" />
     <Compile Include="Models\Photo\Photo.cs" />
@@ -207,8 +211,8 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Content\Slider.cshtml" />
-    <Content Include="Views\Shared\_Album.cshtml" />
     <Content Include="Views\Content\ViewPhotos.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
