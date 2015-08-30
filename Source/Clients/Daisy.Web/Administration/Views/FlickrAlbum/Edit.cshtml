@@ -11,7 +11,8 @@
 <hr />
 <h2>@Model.Album.Name</h2>
 <div>
-    <input type="checkbox" id="chkSelectAll">&nbsp;Select all
+    <input type="checkbox" id="chkSelectAll" class="css-checkbox lrg" />
+    <label for="chkSelectAll" class="css-label lrg klaus">Select all</label>
 </div>
 <div id="gridPhotos">
     @foreach (var photo in @Model.Photos)
@@ -19,7 +20,8 @@
         <div class="col-sm-6 col-md-6 col-lg-4" style="background-color:#101010;">
             <div class="album-thumbnail photo-list-album-view" style="background-image:url(@photo.MediumUrl)"></div>
             <div class="album-title">
-                <input type="checkbox" value="@photo.FlickrPhotoId">&nbsp;@photo.FlickrPhotoId
+                <input type="checkbox" id="_@photo.FlickrPhotoId" class="css-checkbox lrg" value="@photo.FlickrPhotoId" />
+                <label for="_@photo.FlickrPhotoId" class="css-label lrg klaus">@photo.FlickrPhotoId</label>
             </div>
         </div>
     }

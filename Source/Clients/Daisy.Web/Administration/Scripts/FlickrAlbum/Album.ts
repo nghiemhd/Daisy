@@ -136,7 +136,8 @@
                     '<div class="col-sm-3 col-md-2 col-lg-2" style= "background-color:#101010;" > ' +
                     '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')"></div>' +
                     '<div class="album-title">' +
-                    '<input type="checkbox" value="' + item.FlickrAlbumId + '">&nbsp;' +
+                    '<input type="checkbox" id="chk' + item.FlickrAlbumId + '" value="' + item.FlickrAlbumId + '" class="css-checkbox lrg">' +
+                    '<label for="chk' + item.FlickrAlbumId + '" class="css-label lrg klaus"></label>' +
                     '<a href="' + Common.Helper.applicationRoot + 'Admin/FlickrAlbum/Edit/' + item.FlickrAlbumId + '">' + item.Name + '</a>' +
                     '</div>' +
                     '</div>');

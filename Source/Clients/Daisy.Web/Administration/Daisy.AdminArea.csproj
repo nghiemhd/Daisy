@@ -74,7 +74,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -122,18 +124,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datepicker3.css" />
+    <Content Include="Content\bootstrap-datepicker3.min.css" />
     <Content Include="Content\bootstrap-dialog.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\checkbox.css" />
     <Content Include="Content\Daisy.Admin.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Icon.png" />
+    <Content Include="Images\klaus.png" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Images\minus.png" />
+    <Content Include="Images\plus.png" />
     <Content Include="Images\symbol_check.png" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -146,9 +154,13 @@
     <Content Include="Content\toastr.less" />
     <None Include="Properties\PublishProfiles\DaisyAdmin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap-dialog.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\FormValidation\formValidation.bootstrap.min.js" />
+    <Content Include="Scripts\FormValidation\formValidation.min.js" />
     <Content Include="Scripts\hotfixBootstrapModal.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -247,6 +259,8 @@
     <TypeScriptCompile Include="Scripts\Album\Album.ts" />
     <TypeScriptCompile Include="Scripts\Album\AlbumDetail.ts" />
     <TypeScriptCompile Include="Scripts\Album\Main.ts" />
+    <TypeScriptCompile Include="Scripts\Blog\Blog.ts" />
+    <TypeScriptCompile Include="Scripts\Blog\Main.ts" />
     <TypeScriptCompile Include="Scripts\Common\common.ts" />
     <TypeScriptCompile Include="Scripts\Content\Slider.ts" />
     <TypeScriptCompile Include="Scripts\Content\SliderMain.ts" />
@@ -257,6 +271,7 @@
     <TypeScriptCompile Include="Scripts\Photo\Photo.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap-dialog.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\bootstrap.datepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr.d.ts" />
   </ItemGroup>

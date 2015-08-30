@@ -178,7 +178,8 @@
                 }
                 grid += '</div>' +
                 '<div class="album-title">' +
-                '<input type="checkbox" value="' + item.Id + '">&nbsp;' +
+                '<input type="checkbox" id="chk' + item.Id + '" value="' + item.Id + '" class="css-checkbox lrg">' +
+                '<label for="chk' + item.Id + '" class="css-label lrg klaus"></label>' +
                 '<a href="' + Common.Helper.applicationRoot + 'Admin/Album/Edit/' + item.Id + '">' + item.Name + '</a>' +
                 '</div>' +
                 '</div>';

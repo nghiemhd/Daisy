@@ -25,14 +25,17 @@ namespace Daisy.Admin.Infrastructure
                       "~/Administration/Scripts/bootstrap.js",
                       "~/Administration/Scripts/bootstrap-dialog.js",
                       "~/Administration/Scripts/hotfixBootstrapModal.js",
+                      "~/Administration/Scripts/bootstrap-datepicker.js",
                       "~/Administration/Scripts/toastr.js",
                       "~/Administration/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/admin/css").Include(
                       "~/Administration/Content/bootstrap.css",
                       "~/Administration/Content/bootstrap-dialog.css",
+                      "~/Administration/Content/bootstrap-datepicker3.css",
                       "~/Administration/Content/toastr.css",
                       "~/Administration/Content/daisy.admin.css",
+                      "~/Administration/Content/checkbox.css",
                       "~/Administration/Content/site.css"));
         }
     }

@@ -10,7 +10,8 @@
 <h2>@Model.Album.Name</h2>
 @Html.HiddenFor(x => x.Album.Id, new { id = "albumId" })
 <div>
-    <input type="checkbox" id="chkSelectAll">&nbsp;Select all
+    <input type="checkbox" id="chkSelectAll" class="css-checkbox lrg" />
+    <label for="chkSelectAll" class="css-label lrg klaus">Select all</label>
 </div>
 <div id="gridPhotos">
     @foreach (var photo in @Model.Photos)
@@ -23,7 +24,8 @@
                 }
             </div>            
             <div class="album-title">
-                <input type="checkbox" value="@photo.Id">&nbsp;@photo.Id
+                <input type="checkbox" id="_@photo.Id" class="css-checkbox lrg" value="@photo.Id" />
+                <label for="_@photo.Id" class="css-label lrg klaus">@photo.Id</label>
             </div>
         </div>
     }

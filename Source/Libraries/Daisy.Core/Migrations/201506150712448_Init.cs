@@ -130,7 +130,21 @@ namespace Daisy.Core.Migrations
                     RowRevision = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                 })
                 .PrimaryKey(t => t.Id);
-            
+
+            CreateTable(
+                "BlogPhoto",
+                c => new
+                {
+                    BlogId = c.Int(nullable: false),
+                    PhotoId = c.Int(nullable: false),
+                    Order = c.Int(nullable: false),
+                    Position = c.String(nullable: true, maxLength: 50, unicode: false)
+                })
+                .PrimaryKey(t => new { t.BlogId, t.PhotoId })
+                .ForeignKey("Photo", t => t.PhotoId, cascadeDelete: true)
+                .ForeignKey("Blog", t => t.BlogId, cascadeDelete: true)
+                .Index(t => t.PhotoId)
+                .Index(t => t.BlogId);
         }
         
         public override void Down()

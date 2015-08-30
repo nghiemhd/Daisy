@@ -9,3 +9,6 @@
 /// <reference path="respond.js" />
 /// <reference path="toastr.js" />
 /// <reference path="hotfixbootstrapmodal.js" />
+/// <reference path="bootstrap-datepicker.js" />
+/// <reference path="formvalidation/formvalidation.min.js" />
+/// <reference path="formvalidation/formvalidation.bootstrap.min.js" />

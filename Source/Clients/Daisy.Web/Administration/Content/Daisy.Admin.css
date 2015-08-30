@@ -81,3 +81,29 @@ input[type="checkbox"].input-validation-error {
     width: 90% !important;
     margin: 30px auto !important;
 }
+
+.table-hover > tbody > tr:hover {
+    background-color: #c1ebeb;
+}
+
+.search-collapse {
+    overflow: hidden;
+    white-space: nowrap;
+}
+.search-collapse hr {
+    display: inline-block;
+    width: calc(100% - 50px);
+}
+.search-collapse .toggle-icon {
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    vertical-align:super;
+    background: url(/Administration/Images/minus.png);
+}
+.search-collapse .toggle-icon.collapse {
+    background: url(/Administration/Images/plus.png);
+}
+.search-collapse .toggle-icon:hover {
+    cursor: pointer;        
+}
