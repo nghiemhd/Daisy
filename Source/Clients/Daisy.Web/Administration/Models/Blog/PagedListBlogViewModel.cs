@@ -9,6 +9,6 @@ namespace Daisy.Admin.Models
     public class PagedListBlogViewModel
     {
         public SearchBlogModel SearchOptions { get; set; }
-        public PagedList<Blog> Albums { get; set; }
+        public PagedList<Blog> Blogs { get; set; }
     }
 }

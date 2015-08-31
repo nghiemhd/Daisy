@@ -159,6 +159,7 @@
     <Content Include="Scripts\bootstrap-dialog.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\date.format.js" />
     <Content Include="Scripts\FormValidation\formValidation.bootstrap.min.js" />
     <Content Include="Scripts\FormValidation\formValidation.min.js" />
     <Content Include="Scripts\hotfixBootstrapModal.js" />
@@ -225,6 +226,8 @@
     <Content Include="Views\Content\Slider.cshtml" />
     <Content Include="Views\Content\ViewPhotos.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\Create.cshtml" />
+    <Content Include="Views\Shared\_Blog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -272,6 +275,7 @@
     <TypeScriptCompile Include="Scripts\typings\bootstrap-dialog.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap.datepicker.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\date.format.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr.d.ts" />
   </ItemGroup>

@@ -1,4 +1,6 @@
-﻿using Daisy.Core.Infrastructure;
+﻿using Daisy.Common;
+using Daisy.Common.Extensions;
+using Daisy.Core.Infrastructure;
 using Daisy.Logging;
 using Daisy.Service.DataContracts;
 using Daisy.Service.ServiceContracts;
@@ -17,6 +19,7 @@ namespace Daisy.Service
         private IUnitOfWork unitOfWork;
         private IRepository<DaisyEntities.Slider> sliderRepository;
         private IRepository<DaisyEntities.Photo> photoRepository;
+        private IRepository<DaisyEntities.Blog> blogRepository;
         private ILogger logger;
 
         public ContentService(IUnitOfWork unitOfWork, ILogger logger)
@@ -26,6 +29,7 @@ namespace Daisy.Service
             this.logger = logger;
             this.sliderRepository = this.unitOfWork.GetRepository<DaisyEntities.Slider>();
             this.photoRepository = this.unitOfWork.GetRepository<DaisyEntities.Photo>();
+            this.blogRepository = this.unitOfWork.GetRepository<DaisyEntities.Blog>();
         }
 
         public void UpdateSlider(SliderDto sliderDto)
@@ -88,6 +92,78 @@ namespace Daisy.Service
                 }
                 this.unitOfWork.Commit();
             });            
+        }
+
+        public void UpdateBlog(DaisyEntities.Blog blog)
+        {
+            Process(() =>
+            {
+                if (blog == null)
+                {
+                    throw new ArgumentNullException("blog");
+                }
+
+                if (blog.Id <= 0)
+                {
+                    blogRepository.Insert(blog);
+                }
+                else
+                {
+                    blogRepository.Update(blog);
+                }
+
+                this.unitOfWork.Commit();
+            });
+        }
+
+        public Daisy.Common.PagedList<DaisyEntities.Blog> SearchBlogs(SearchBlogOptions options)
+        {
+            var query = blogRepository.Query();
+
+            if (!options.Title.IsNullOrEmpty())
+            {
+                query = query.Where(x => x.Title.Contains(options.Title));
+            }
+
+            if (options.IsPublished != null)
+            {
+                query = query.Where(x => x.IsPublished == options.IsPublished);
+            }
+
+            if (options.FromCreatedDate != null)
+            {
+                query = query.Where(x => x.CreatedDate >= options.FromCreatedDate);
+            }
+
+            if (options.ToCreatedDate != null)
+            {
+                query = query.Where(x => x.CreatedDate <= options.ToCreatedDate);
+            }
+
+            if (options.PageSize <= 0 || options.PageSize > Constants.MaxPageSize)
+            {
+                options.PageSize = Constants.DefaultPageSize;
+            }
+
+            if (options.PageIndex < 0)
+            {
+                options.PageIndex = 0;
+            }
+
+            int totalCount = query.Count();
+            query = query
+                    .OrderByDescending(x => x.Id)
+                    .Skip(options.PageSize * options.PageIndex)
+                    .Take(options.PageSize);
+
+            var result = new PagedList<DaisyEntities.Blog>(
+                query.ToList(),
+                options.PageIndex,
+                options.PageSize,
+                totalCount
+            );
+
+            return result;
         }
     }
 }

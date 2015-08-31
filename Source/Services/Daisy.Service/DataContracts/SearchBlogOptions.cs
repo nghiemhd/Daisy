@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Daisy.Admin.Models
+namespace Daisy.Service.DataContracts
 {
-    public class SearchBlogModel
+    public class SearchBlogOptions
     {
         public string Title { get; set; }
 
-        [DisplayName("From")]
+        public bool? IsPublished { get; set; }
+
         public DateTime? FromCreatedDate { get; set; }
 
-        [DisplayName("To")]
         public DateTime? ToCreatedDate { get; set; }
-
-        [DisplayName("Status")]
-        public bool? IsPublished { get; set; }
 
         public int PageIndex { get; set; }
 

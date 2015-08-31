@@ -171,5 +171,11 @@
 
             return scope;
         }     
+
+        static getDateTimeValue = function (date: string) {
+            date = date.replace('/Date(', '');
+            date = date.replace(')/', '');
+            return Number(date);
+        }
     }
 } 

@@ -26,6 +26,7 @@ namespace Daisy.Admin.Infrastructure
                       "~/Administration/Scripts/bootstrap-dialog.js",
                       "~/Administration/Scripts/hotfixBootstrapModal.js",
                       "~/Administration/Scripts/bootstrap-datepicker.js",
+                      "~/Administration/Scripts/date.format.js",
                       "~/Administration/Scripts/toastr.js",
                       "~/Administration/Scripts/respond.js"));
 

@@ -111,6 +111,7 @@ input[type=checkbox].css-checkbox.sme:checked + label.css-label.sme{
 
     background-position: 0 -16px;
 }
+
 input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
 	padding-left:22px;
     height:20px; 
@@ -124,6 +125,23 @@ input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
 }
 
 input[type=checkbox].css-checkbox.lrg:checked + label.css-label.lrg{
+
+    background-position: 0 -20px;
+}
+
+input[type=checkbox].css-checkbox.lrg + input[type=hidden] + label.css-label.lrg {
+	padding-left:22px;
+    height:20px; 
+	display:inline-block;
+	line-height:20px;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	font-size:15px;
+	vertical-align:middle;
+    cursor:pointer;
+}
+
+input[type=checkbox].css-checkbox.lrg:checked + input[type=hidden] + label.css-label.lrg{
 
     background-position: 0 -20px;
 }

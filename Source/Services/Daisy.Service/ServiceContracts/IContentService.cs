@@ -1,4 +1,5 @@
-﻿using Daisy.Core.Entities;
+﻿using Daisy.Common;
+using DaisyEntities = Daisy.Core.Entities;
 using Daisy.Service.DataContracts;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,16 @@ namespace Daisy.Service.ServiceContracts
     {
         void UpdateSlider(SliderDto slider);
 
-        Slider GetSliderBy(int id);
+        DaisyEntities.Slider GetSliderBy(int id);
 
-        Slider GetFirstSlider();
+        DaisyEntities.Slider GetFirstSlider();
 
-        void AddSliderPhotos(Slider slider, int[] photoIds);
+        void AddSliderPhotos(DaisyEntities.Slider slider, int[] photoIds);
 
-        void DeleteSliderPhotos(Slider slider, int[] photoIds);
+        void DeleteSliderPhotos(DaisyEntities.Slider slider, int[] photoIds);
+
+        void UpdateBlog(DaisyEntities.Blog blog);
+
+        PagedList<DaisyEntities.Blog> SearchBlogs(SearchBlogOptions options);
     }
 }

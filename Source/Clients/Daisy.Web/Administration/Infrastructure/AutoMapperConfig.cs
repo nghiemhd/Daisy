@@ -76,6 +76,12 @@ namespace Daisy.Admin.Infrastructure
             Mapper.CreateMap<DaisyEntities.Photo, DaisyModels.Photo>();
 
             Mapper.CreateMap<DaisyEntities.Slider, DaisyModels.SliderViewModel>();
+
+            Mapper.CreateMap<DaisyModels.Blog, DaisyEntities.Blog>();
+
+            Mapper.CreateMap<DaisyEntities.Blog, DaisyModels.Blog>();
+
+            Mapper.CreateMap<DaisyModels.SearchBlogModel, SearchBlogOptions>();
         }
     }
 }

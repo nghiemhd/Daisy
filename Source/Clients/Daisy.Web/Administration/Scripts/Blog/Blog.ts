@@ -4,8 +4,8 @@
     export interface IBlogSearchOptions extends Common.ISearchOptions {
         Title: string;
         IsPublished?: boolean;
-        SttCreatedDate?: Date;
-        EndCreatedDate?: Date;
+        FromCreatedDate: string;
+        ToCreatedDate: string;
     }
 
     export interface IBlog {
@@ -22,8 +22,8 @@
         search(options: IBlogSearchOptions) {
             var data = {
                 Title: options.Title,
-                SttCreatedDate: options.SttCreatedDate,
-                EndCreatedDate: options.EndCreatedDate,
+                FromCreatedDate: options.FromCreatedDate,
+                ToCreatedDate: options.ToCreatedDate,
                 IsPublished: options.IsPublished,
                 PageIndex: options.PageIndex,
                 PageSize: options.PageSize
@@ -75,9 +75,9 @@
 
                 var loadPageSizesArg: Common.ILoadPageSizesArguments = {
                     Container: $('#searchResultInfo')[0],
-                    DisplayedTotalString: 'Total ' + response.Albums.TotalCount + ' albums.',
+                    DisplayedTotalString: 'Total ' + response.Blogs.TotalCount + ' blog(s).',
                     PageSizeOptions: [30, 50, 100, 150],
-                    SelectedPageSize: response.Albums.PageSize,
+                    SelectedPageSize: response.Blogs.PageSize,
                     ClassName: 'Cotent.Blog',
                     FunctionToExecute: 'search',
                     FunctionArguments: searchOptions
@@ -87,30 +87,31 @@
         }
 
         private cleanUI() {
-            $('#gridAlbums').empty();
+            $('#gridBlogs tbody').empty();
             $('#paging').empty();
             $('#searchResultInfo').empty();
-            $('#divSelectAll').hide();
         }
 
         private loadBlogs(blogs: IBlog[]) {
-            $('#divSelectAll').show();
             $('#chkSelectAll').prop('checked', false);
 
-            //$.each(blogs, function (index, item) {
-            //    var grid = '<div class="col-sm-3 col-md-2 col-lg-2" style= "background-color:#101010;" > ' +
-            //        '<div id="' + item.Id + '" class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')">';
-            //    if (item.IsPublished) {
-            //        grid += '<img src="' + Common.Helper.applicationRoot + 'Administration/Images/symbol_check.png" alt="published" style="width:30px;float:right;" />';
-            //    }
-            //    grid += '</div>' +
-            //    '<div class="album-title">' +
-            //    '<input type="checkbox" value="' + item.Id + '">&nbsp;' +
-            //    '<a href="' + Common.Helper.applicationRoot + 'Admin/Album/Edit/' + item.Id + '">' + item.Name + '</a>' +
-            //    '</div>' +
-            //    '</div>';
-            //    $('#gridAlbums').append(grid);
-            //});
+            $.each(blogs, function (index, item) {
+                var createdDate: number = Common.Helper.getDateTimeValue(item.CreatedDate);
+                var date = dateFormat(new Date(createdDate), 'yyyy-mm-dd HH:MM:ss');
+                var row =
+                    '<tr>' +
+                    '<td>' +
+                    '<input type="checkbox" id="chk' + item.Id + '" value="' + item.Id + '" class="css-checkbox lrg">' +
+                    '<label for="chk' + item.Id + '" class="css-label lrg klaus"></label>' +
+                    '</td>' +
+                    '<td>' + item.Title + '</td>' +
+                    '<td>' + item.IsPublished + '</td>' +
+                    '<td>' + date + '</td>' +
+                    '</tr>';
+                $('#gridBlogs tbody').append(row);
+            });
+
+            $('#gridBlogs').show();
         }
         
     }
