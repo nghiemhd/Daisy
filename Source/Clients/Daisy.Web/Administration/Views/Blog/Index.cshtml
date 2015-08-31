@@ -22,14 +22,14 @@
         <div class="form-group">
             @Html.LabelFor(x => x.SearchOptions.FromCreatedDate, new { @class = "control-label col-lg-1 col-md-1 col-sm-1" })
             <div class="col-lg-2 col-md-3 col-sm-3">
-                <div class="input-group date">
-                    <input id="txtFromCreatedDate" type="text" data-date-format="dd/mm/yyyy" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>                    
+                <div id="fromCreatedDate" class="input-group date">
+                    <input type="text" data-date-format="dd/mm/yyyy" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>                    
                 </div>
             </div>
             @Html.LabelFor(x => x.SearchOptions.ToCreatedDate, new { @class = "control-label col-lg-1 col-md-1 col-sm-1" })
             <div class="col-lg-2 col-md-3 col-sm-3">
-                <div class="input-group date">
-                    <input id="txtToCreatedDate" type="text" data-date-format="dd/mm/yyyy" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <div id="toCreatedDate" class="input-group date">
+                    <input type="text" data-date-format="dd/mm/yyyy" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-3">
-                <button id="btnSearch" data-request-url="@Url.Action("Search", "Blog")" class="btn btn-primary">Search</button>
+                <button id="btnSearch" type="button" data-request-url="@Url.Action("Search", "Blog")" class="btn btn-primary">Search</button>
             </div>
         </div>
     </div>

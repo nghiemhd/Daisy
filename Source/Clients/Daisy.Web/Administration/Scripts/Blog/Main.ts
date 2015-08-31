@@ -1,16 +1,21 @@
 ﻿$(document).ready(function () {
     var blog = new Content.Blog();
 
-    $('#txtFromCreatedDate').datepicker({
+    $('#fromCreatedDate').datetimepicker({
         format: 'dd/mm/yyyy',
         todayHighlight: true,
-        todayBtn: true
+        todayBtn: true,
+        pickerPosition: 'bottom-left',
+        startView: 0,
+        minView: 0,
+        maxView: 0
     });
 
-    $('#txtToCreatedDate').datepicker({
+    $('#toCreatedDate').datetimepicker({
         format: 'dd/mm/yyyy',
         todayHighlight: true,
-        todayBtn: true
+        todayBtn: true,
+        pickerPosition: 'bottom-left'
     });
 
     $('.search-collapse').click(function () {
@@ -22,14 +27,14 @@
     $('#btnSearch').click(function () {
         Content.Blog.searchRequestUrl = $(this).data('request-url');
 
-        var fromDate = $('#txtFromCreatedDate').datepicker('getDate').valueOf();
+        var fromDate = $('#fromCreatedDate').datetimepicker('getDate').valueOf();
         var fromCreatedDate: string = null;
         if (fromDate > 0)
         {
             fromCreatedDate = dateFormat(new Date(Number(fromDate)), 'yyyy-mm-dd');
         }
 
-        var toDate = $('#txtToCreatedDate').datepicker('getDate').valueOf();
+        var toDate = $('#toCreatedDate').datetimepicker('getDate').valueOf();
         var toCreatedDate: string = null;
         if (toDate > 0) {
             toCreatedDate = dateFormat(new Date(Number(toDate)), 'yyyy-mm-dd');
