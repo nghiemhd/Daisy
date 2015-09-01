@@ -16,6 +16,19 @@ namespace Daisy.Web.Infrastructure
                 .ForMember(dest => dest.AlbumThumbnailUrl, opt => opt.MapFrom(src => src.ThumbnailUrl));
 
             Mapper.CreateMap<DaisyEntities.Photo, DaisyModels.Photo>();
+
+            Mapper.CreateMap<DaisyEntities.Blog, DaisyModels.Blog>()
+                .ForMember(dest => dest.Content, opt => opt.ResolveUsing(src =>
+                {
+                    if (src.Content.Length > 500)
+                    {
+                        return src.Content.Substring(0, 500) + "...";
+                    }
+                    else
+                    {
+                        return src.Content;
+                    }
+                }));
         }
     }
 }

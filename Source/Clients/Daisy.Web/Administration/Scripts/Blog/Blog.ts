@@ -11,6 +11,7 @@
     export interface IBlog {
         Id?: number;
         Title: string;
+        Content: string;
         CreatedDate: string;
         IsPublished: boolean;
     }    
@@ -18,6 +19,7 @@
     export class Blog {
         static blogs: IBlog[];
         static searchRequestUrl: string;
+        static publishBlogsRequestUrl: string;
 
         search(options: IBlogSearchOptions) {
             var data = {
@@ -37,6 +39,49 @@
                 data: data,
                 success: (response) => {
                     this.searchCallback(response);
+                },
+                error: function (xhr, desc, err) {
+                    console.log(xhr);
+                    console.log('Desc: ' + desc + '\nErr:' + err);
+                },
+                beforeSend: function () {
+                    $('#loader').show();
+                },
+                complete: function () {
+                    $('#loader').hide();
+                }
+            });
+        }
+
+        publishBlogs(blogIds: number[], isPublished: boolean) {
+            $.ajax({
+                url: Blog.publishBlogsRequestUrl,
+                type: 'POST',
+                content: 'application/json; charset=utf-8',
+                dataType: 'json',
+                data: {
+                    blogIds: blogIds,
+                    isPublished: isPublished
+                },
+                success: (response) => {
+                    if (response == "Success") {
+                        if (isPublished) {
+                            toastr.success('Publish successfully');
+                        }
+                        else {
+                            toastr.success('Unpublish successfully');
+                        }
+                        this.updatePublishStatus(blogIds, isPublished);
+                    }
+                    else {
+                        toastr.options = {
+                            closeButton: true,
+                            positionClass: "toast-top-full-width",
+                            timeOut: 0,
+                            extendedTimeOut: 0
+                        };
+                        toastr.error(response);
+                    }
                 },
                 error: function (xhr, desc, err) {
                     console.log(xhr);
@@ -78,7 +123,7 @@
                     DisplayedTotalString: 'Total ' + response.Blogs.TotalCount + ' blog(s).',
                     PageSizeOptions: [30, 50, 100, 150],
                     SelectedPageSize: response.Blogs.PageSize,
-                    ClassName: 'Cotent.Blog',
+                    ClassName: 'Content.Blog',
                     FunctionToExecute: 'search',
                     FunctionArguments: searchOptions
                 };
@@ -104,8 +149,9 @@
                     '<input type="checkbox" id="chk' + item.Id + '" value="' + item.Id + '" class="css-checkbox lrg">' +
                     '<label for="chk' + item.Id + '" class="css-label lrg klaus"></label>' +
                     '</td>' +
-                    '<td>' + item.Title + '</td>' +
-                    '<td>' + item.IsPublished + '</td>' +
+                    '<td><a class="table-link" href="/Admin/Blog/Edit/' + item.Id + '">' + item.Title + '</a></td>' +
+                    '<td>' + item.Content + '</td>' +
+                    '<td id="status' + item.Id + '">' + item.IsPublished + '</td>' +
                     '<td>' + date + '</td>' +
                     '</tr>';
                 $('#gridBlogs tbody').append(row);
@@ -114,5 +160,10 @@
             $('#gridBlogs').show();
         }
         
+        private updatePublishStatus(ids: number[], checked: boolean) {
+            for (var i = 0; i < ids.length; i++) {
+                $('#status' + ids[i]).html(checked.toString());                
+            }
+        }
     }
 }  

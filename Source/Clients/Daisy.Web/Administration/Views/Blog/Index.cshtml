@@ -4,8 +4,8 @@
 }
 <div class="spacer btn-group">
     <button id="btnAddBlog" class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Create", "Blog")'">Add blog</button>
-    <button id="btnPublish" class="btn btn-primary">Publish</button>
-    <button id="btnUnpublish" class="btn btn-primary">Unpublish</button>
+    <button id="btnPublish" class="btn btn-primary" data-request-url="@Url.Action("Publish", "Blog")">Publish</button>
+    <button id="btnUnpublish" class="btn btn-primary" data-request-url="@Url.Action("Publish", "Blog")">Unpublish</button>
 </div>
 <div class="search-collapse">
     <hr />
@@ -23,13 +23,13 @@
             @Html.LabelFor(x => x.SearchOptions.FromCreatedDate, new { @class = "control-label col-lg-1 col-md-1 col-sm-1" })
             <div class="col-lg-2 col-md-3 col-sm-3">
                 <div id="fromCreatedDate" class="input-group date">
-                    <input type="text" data-date-format="dd/mm/yyyy" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>                    
+                    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>                    
                 </div>
             </div>
             @Html.LabelFor(x => x.SearchOptions.ToCreatedDate, new { @class = "control-label col-lg-1 col-md-1 col-sm-1" })
             <div class="col-lg-2 col-md-3 col-sm-3">
                 <div id="toCreatedDate" class="input-group date">
-                    <input type="text" data-date-format="dd/mm/yyyy" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </div>
         </div>
@@ -68,6 +68,7 @@
                     <label for="chkSelectAll" class="css-label lrg klaus"></label>
                 </th>
                 <th>Title</th>
+                <th>Content</th>
                 <th>Published</th>
                 <th>Created Date</th>
             </tr>

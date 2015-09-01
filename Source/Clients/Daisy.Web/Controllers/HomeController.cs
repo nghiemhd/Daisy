@@ -88,11 +88,6 @@ namespace Daisy.Web.Controllers
             return View("Contact", model);
         }
 
-        public ActionResult Blog()
-        {
-            return View();
-        }
-
         public FileResult Quote()
         {
             var quotePath = ConfigurationManager.AppSettings["QuotePath"];

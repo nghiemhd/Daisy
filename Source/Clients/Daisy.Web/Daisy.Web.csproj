@@ -170,6 +170,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -178,8 +179,10 @@
     <Compile Include="Infrastructure\AutoMapperConfig.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\AlbumDetailViewModel.cs" />
+    <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\FeedbackViewModel.cs" />
     <Compile Include="Models\PagedListAlbumViewModel.cs" />
+    <Compile Include="Models\PagedListBlogViewModel.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Quote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -283,11 +286,11 @@
     <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Album\Detail.cshtml" />
-    <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Quote.cshtml" />
     <Content Include="Views\Shared\_MathCaptcha.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

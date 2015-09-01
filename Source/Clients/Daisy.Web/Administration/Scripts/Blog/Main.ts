@@ -2,20 +2,13 @@
     var blog = new Content.Blog();
 
     $('#fromCreatedDate').datetimepicker({
-        format: 'dd/mm/yyyy',
-        todayHighlight: true,
-        todayBtn: true,
-        pickerPosition: 'bottom-left',
-        startView: 0,
-        minView: 0,
-        maxView: 0
+        format: 'DD/MM/YYYY',
+        showTodayButton: true
     });
 
     $('#toCreatedDate').datetimepicker({
-        format: 'dd/mm/yyyy',
-        todayHighlight: true,
-        todayBtn: true,
-        pickerPosition: 'bottom-left'
+        format: 'DD/MM/YYYY',
+        showTodayButton: true
     });
 
     $('.search-collapse').click(function () {
@@ -26,19 +19,20 @@
 
     $('#btnSearch').click(function () {
         Content.Blog.searchRequestUrl = $(this).data('request-url');
-
-        var fromDate = $('#fromCreatedDate').datetimepicker('getDate').valueOf();
         var fromCreatedDate: string = null;
+        var toCreatedDate: string = null;
+
+        var fromDate = $('#fromCreatedDate').data('DateTimePicker').date();        
         if (fromDate > 0)
         {
-            fromCreatedDate = dateFormat(new Date(Number(fromDate)), 'yyyy-mm-dd');
+            fromCreatedDate = moment(fromDate).format('YYYY-MM-DD');
         }
 
-        var toDate = $('#toCreatedDate').datetimepicker('getDate').valueOf();
-        var toCreatedDate: string = null;
+        var toDate = $('#toCreatedDate').data('DateTimePicker').date();        
         if (toDate > 0) {
-            toCreatedDate = dateFormat(new Date(Number(toDate)), 'yyyy-mm-dd');
+            toCreatedDate = moment(toDate).format('YYYY-MM-DD');
         }
+
         var options: Content.IBlogSearchOptions = {
             Title: $('#txtTitle').val(),
             FromCreatedDate: fromCreatedDate,
@@ -51,4 +45,56 @@
         blog.search(options);
     });
 
+    $('#chkSelectAll').change(function () {
+        if (this.checked) {
+            $('#gridBlogs input[type=checkbox]').each(function () {
+                this.checked = true;
+            });
+        }
+        else {
+            $('#gridBlogs input[type=checkbox]').each(function () {
+                this.checked = false;
+            });
+        }
+    });
+
+    $('#btnPublish').click(function () {
+        var publishedBlogs: number[] = [];
+        $('#gridBlogs tbody input[type=checkbox]:checked').each(function () {
+            var blogId = $(this).val();
+            publishedBlogs.push(blogId);
+        });
+
+        if (publishedBlogs.length <= 0) {
+            BootstrapDialog.show({
+                type: BootstrapDialog.TYPE_WARNING,
+                title: 'Publish blog',
+                message: 'Please choose blog(s) to publish.'
+            });
+        }
+        else {
+            Content.Blog.publishBlogsRequestUrl = $(this).data('request-url');
+            blog.publishBlogs(publishedBlogs, true);
+        }
+    });
+
+    $('#btnUnpublish').click(function () {
+        var unpublishedBlogs: number[] = [];
+        $('#gridBlogs tbody input[type=checkbox]:checked').each(function () {
+            var blogId = $(this).val();
+            unpublishedBlogs.push(blogId);
+        });
+
+        if (unpublishedBlogs.length <= 0) {
+            BootstrapDialog.show({
+                type: BootstrapDialog.TYPE_WARNING,
+                title: 'Unpublish blog',
+                message: 'Please choose blog(s) to unpublish.'
+            });
+        }
+        else {
+            Content.Blog.publishBlogsRequestUrl = $(this).data('request-url');
+            blog.publishBlogs(unpublishedBlogs, false);
+        }
+    });
 });

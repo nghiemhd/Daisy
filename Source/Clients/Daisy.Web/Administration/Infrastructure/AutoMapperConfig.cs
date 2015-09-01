@@ -79,7 +79,18 @@ namespace Daisy.Admin.Infrastructure
 
             Mapper.CreateMap<DaisyModels.Blog, DaisyEntities.Blog>();
 
-            Mapper.CreateMap<DaisyEntities.Blog, DaisyModels.Blog>();
+            Mapper.CreateMap<DaisyEntities.Blog, DaisyModels.Blog>()
+                .ForMember(dest => dest.Content, opt => opt.ResolveUsing(src =>
+                {
+                    if (src.Content.Length > 50)
+                    {
+                        return src.Content.Substring(0, 50) + "...";
+                    }
+                    else
+                    {
+                        return src.Content;
+                    }
+                }));
 
             Mapper.CreateMap<DaisyModels.SearchBlogModel, SearchBlogOptions>();
         }

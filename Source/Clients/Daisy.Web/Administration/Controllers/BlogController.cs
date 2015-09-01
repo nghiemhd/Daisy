@@ -1,14 +1,16 @@
-﻿using DaisyModels = Daisy.Admin.Models;
+﻿using AutoMapper;
+using Daisy.Common;
+using Daisy.Logging.Extensions;
+using Daisy.Service.Common;
+using Daisy.Service.DataContracts;
+using Daisy.Service.ServiceContracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
 using DaisyEntities = Daisy.Core.Entities;
-using Daisy.Service.ServiceContracts;
-using Daisy.Service.DataContracts;
-using Daisy.Common;
+using DaisyModels = Daisy.Admin.Models;
 
 namespace Daisy.Admin.Controllers
 {
@@ -32,22 +34,41 @@ namespace Daisy.Admin.Controllers
             return View();
         }
 
+        public ActionResult Edit(int id)
+        {
+            var blog = contentService.GetBlogBy(id);
+            var model = Mapper.Map<DaisyModels.Blog>(blog);
+            model.Content = blog.Content;
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult Create(DaisyModels.Blog model)
         {
-            var entity = Mapper.Map<DaisyEntities.Blog>(model);
-            contentService.UpdateBlog(entity);
+            if (ModelState.IsValid)
+            {
+                var entity = Mapper.Map<DaisyEntities.Blog>(model);
+                contentService.UpdateBlog(entity);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult Edit(DaisyModels.Blog model)
         {
-            var entity = Mapper.Map<DaisyEntities.Blog>(model);
-            contentService.UpdateBlog(entity);
+            if (ModelState.IsValid)
+            {
+                var entity = contentService.GetBlogBy(model.Id);
+                entity.Title = model.Title;
+                entity.IsPublished = model.IsPublished;
+                entity.Content = model.Content;
+                contentService.UpdateBlog(entity);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
 
         [HttpPost]
@@ -75,6 +96,20 @@ namespace Daisy.Admin.Controllers
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Publish(int[] blogIds, bool isPublished)
+        {
+            try
+            {
+                contentService.PublishBlogs(blogIds, isPublished);
+                return Json(ResponseStatus.Success.ToString());
+            }
+            catch (Exception ex)
+            {
+                return Json(LogExtension.GetFinalInnerException(ex).Message);
             }
         }
     }

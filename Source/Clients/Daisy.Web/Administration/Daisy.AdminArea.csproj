@@ -125,8 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datetimepicker.css" />
-    <Content Include="Content\bootstrap-datepicker.css" />
-    <Content Include="Content\bootstrap-datepicker.min.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-dialog.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -155,9 +154,6 @@
     <Content Include="Content\toastr.less" />
     <None Include="Properties\PublishProfiles\DaisyAdmin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\Blog\test.js" />
-    <Content Include="Scripts\bootstrap-datepicker.js" />
-    <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-dialog.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -232,6 +228,7 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\Create.cshtml" />
     <Content Include="Views\Shared\_Blog.cshtml" />
+    <Content Include="Views\Blog\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -279,9 +276,10 @@
     <TypeScriptCompile Include="Scripts\typings\bootstrap-dialog.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap.datetimepicker.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\bootstrap.datepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\date.format.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\moment-node.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\moment.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\toastr.d.ts" />
   </ItemGroup>
   <PropertyGroup>

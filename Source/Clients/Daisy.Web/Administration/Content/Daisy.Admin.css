@@ -67,6 +67,10 @@ input[type="checkbox"].input-validation-error {
     border: 0 none;
 }
 
+textarea.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
 .validation-summary-errors {
     color: #e80c4d;
     font-weight: bold;
@@ -106,4 +110,18 @@ input[type="checkbox"].input-validation-error {
 }
 .search-collapse .toggle-icon:hover {
     cursor: pointer;        
+}
+
+a.table-link {
+    color: #337ab7;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.table-link:hover {
+    color: #3598f0;
+}
+
+input.form-control.max-width {
+    max-width: 100%;
 }

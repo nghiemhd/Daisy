@@ -12,7 +12,5 @@
 /// <reference path="formvalidation/formvalidation.min.js" />
 /// <reference path="formvalidation/formvalidation.bootstrap.min.js" />
 /// <reference path="date.format.js" />
-/// <reference path="bootstrap-datepicker.js" />
 /// <reference path="moment.js" />
-/// <reference path="blog/test.js" />
 /// <reference path="bootstrap-datetimepicker.js" />

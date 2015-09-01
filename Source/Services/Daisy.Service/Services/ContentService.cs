@@ -1,4 +1,5 @@
-﻿using Daisy.Common;
+﻿using AutoMapper;
+using Daisy.Common;
 using Daisy.Common.Extensions;
 using Daisy.Core.Infrastructure;
 using Daisy.Logging;
@@ -6,9 +7,11 @@ using Daisy.Service.DataContracts;
 using Daisy.Service.ServiceContracts;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using DaisyEntities = Daisy.Core.Entities;
 
@@ -32,22 +35,22 @@ namespace Daisy.Service
             this.blogRepository = this.unitOfWork.GetRepository<DaisyEntities.Blog>();
         }
 
-        public void UpdateSlider(SliderDto sliderDto)
-        {
-            if (sliderDto.Id > 0)
-            {                 
-                var slider = sliderRepository.Query().Where(x => x.Id == sliderDto.Id).FirstOrDefault();
-                if (slider != null)
-                {
-                    var sql = "DELETE SliderPhoto WHERE SliderId = @SliderId";
-                    this.unitOfWork.DbContext.ExecuteSqlCommand(sql, new SqlParameter("@SliderId", sliderDto.Id));
+        //public void UpdateSlider(SliderDto sliderDto)
+        //{
+        //    if (sliderDto.Id > 0)
+        //    {                 
+        //        var slider = sliderRepository.Query().Where(x => x.Id == sliderDto.Id).FirstOrDefault();
+        //        if (slider != null)
+        //        {
+        //            var sql = "DELETE SliderPhoto WHERE SliderId = @SliderId";
+        //            this.unitOfWork.DbContext.ExecuteSqlCommand(sql, new SqlParameter("@SliderId", sliderDto.Id));
 
-                    var photos = photoRepository.Query().Where(x => sliderDto.PhotoIds.Contains(x.Id)).ToList();
-                    slider.Photos = photos;
-                    unitOfWork.Commit();
-                }
-            }            
-        }
+        //            var photos = photoRepository.Query().Where(x => sliderDto.PhotoIds.Contains(x.Id)).ToList();
+        //            slider.Photos = photos;
+        //            unitOfWork.Commit();
+        //        }
+        //    }            
+        //}
 
         public DaisyEntities.Slider GetSliderBy(int id)
         {
@@ -118,52 +121,82 @@ namespace Daisy.Service
 
         public Daisy.Common.PagedList<DaisyEntities.Blog> SearchBlogs(SearchBlogOptions options)
         {
-            var query = blogRepository.Query();
+            var blogs = Process(() => {
+                var query = blogRepository.Query();
 
-            if (!options.Title.IsNullOrEmpty())
+                if (!options.Title.IsNullOrEmpty())
+                {
+                    query = query.Where(x => x.Title.Contains(options.Title));
+                }
+
+                if (options.IsPublished != null)
+                {
+                    query = query.Where(x => x.IsPublished == options.IsPublished);
+                }
+
+                if (options.FromCreatedDate != null)
+                {
+                    query = query.Where(x => DbFunctions.TruncateTime(x.CreatedDate) >= options.FromCreatedDate);
+                }
+
+                if (options.ToCreatedDate != null)
+                {
+                    query = query.Where(x => DbFunctions.TruncateTime(x.CreatedDate) <= options.ToCreatedDate);
+                }
+
+                if (options.PageSize <= 0 || options.PageSize > Constants.MaxPageSize)
+                {
+                    options.PageSize = Constants.DefaultPageSize;
+                }
+
+                if (options.PageIndex < 0)
+                {
+                    options.PageIndex = 0;
+                }
+
+                int totalCount = query.Count();
+                query = query
+                        .OrderByDescending(x => x.Id)
+                        .Skip(options.PageSize * options.PageIndex)
+                        .Take(options.PageSize);
+
+                var result = new PagedList<DaisyEntities.Blog>(
+                    query.ToList(),
+                    options.PageIndex,
+                    options.PageSize,
+                    totalCount
+                );
+
+                return result;
+            });
+
+            return blogs as PagedList<DaisyEntities.Blog>;
+        }
+
+        public void PublishBlogs(IList<int> blogIds, bool isPublished)
+        {
+            Process(() =>
             {
-                query = query.Where(x => x.Title.Contains(options.Title));
-            }
+                var updatedBlogs = blogRepository.Query()
+                    .Where(x => blogIds.Contains(x.Id) && x.IsPublished != isPublished).ToList();
+                updatedBlogs.ForEach(blog =>
+                {
+                    blog.IsPublished = isPublished;
+                    blog.UpdatedBy = Thread.CurrentPrincipal.Identity.Name;
+                    blog.UpdatedDate = DateTime.Now;
+                });
 
-            if (options.IsPublished != null)
+                this.unitOfWork.Commit();
+            });
+        }
+
+        public DaisyEntities.Blog GetBlogBy(int id)
+        {
+            var blog = Process(() =>
             {
-                query = query.Where(x => x.IsPublished == options.IsPublished);
-            }
-
-            if (options.FromCreatedDate != null)
-            {
-                query = query.Where(x => x.CreatedDate >= options.FromCreatedDate);
-            }
-
-            if (options.ToCreatedDate != null)
-            {
-                query = query.Where(x => x.CreatedDate <= options.ToCreatedDate);
-            }
-
-            if (options.PageSize <= 0 || options.PageSize > Constants.MaxPageSize)
-            {
-                options.PageSize = Constants.DefaultPageSize;
-            }
-
-            if (options.PageIndex < 0)
-            {
-                options.PageIndex = 0;
-            }
-
-            int totalCount = query.Count();
-            query = query
-                    .OrderByDescending(x => x.Id)
-                    .Skip(options.PageSize * options.PageIndex)
-                    .Take(options.PageSize);
-
-            var result = new PagedList<DaisyEntities.Blog>(
-                query.ToList(),
-                options.PageIndex,
-                options.PageSize,
-                totalCount
-            );
-
-            return result;
+                return blogRepository.Query().Where(x => x.Id == id).FirstOrDefault();
+            });
+            return blog as DaisyEntities.Blog;
         }
     }
 }

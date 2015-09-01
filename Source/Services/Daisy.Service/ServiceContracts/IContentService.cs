@@ -11,8 +11,6 @@ namespace Daisy.Service.ServiceContracts
 {
     public interface IContentService
     {
-        void UpdateSlider(SliderDto slider);
-
         DaisyEntities.Slider GetSliderBy(int id);
 
         DaisyEntities.Slider GetFirstSlider();
@@ -24,5 +22,9 @@ namespace Daisy.Service.ServiceContracts
         void UpdateBlog(DaisyEntities.Blog blog);
 
         PagedList<DaisyEntities.Blog> SearchBlogs(SearchBlogOptions options);
+
+        void PublishBlogs(IList<int> blogIds, bool isPublished);
+
+        DaisyEntities.Blog GetBlogBy(int id);
     }
 }

@@ -1,0 +1,11 @@
+﻿@model Daisy.Admin.Models.Blog
+@{
+    ViewBag.Title = "Edit Blog";
+}
+
+<div class="spacer"></div>
+@using (Html.BeginForm("Edit", "Blog", FormMethod.Post))
+{
+    Html.RenderPartial("_Blog", @Model);
+}
+
