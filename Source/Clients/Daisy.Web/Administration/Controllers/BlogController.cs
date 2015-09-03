@@ -43,7 +43,7 @@ namespace Daisy.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(DaisyModels.Blog model)
+        public ActionResult Create([Bind(Exclude = "Id")] DaisyModels.Blog model)
         {
             if (ModelState.IsValid)
             {

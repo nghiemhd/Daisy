@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Daisy.Admin.Models
 {
@@ -14,6 +15,7 @@ namespace Daisy.Admin.Models
         public string Title { get; set; }
 
         [Required]
+        [AllowHtml]
         public string Content { get; set; }
 
         [Display(Name="Published")]

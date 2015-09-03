@@ -229,3 +229,17 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.daisy-font1 {
+    font-family: "Open Sans Condensed";
+    word-spacing: 2px;
+}
+
+.daisy-font2 {
+    font-family: "Noto Serif";
+}
+
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
