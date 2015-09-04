@@ -65,3 +65,5 @@
 /// <reference path="tinymce/plugins/compat3x/utils/editable_selects.js" />
 /// <reference path="tinymce/plugins/compat3x/tiny_mce_popup.js" />
 /// <reference path="tinymce/plugins/compat3x/plugin.min.js" />
+/// <reference path="tinymce/plugins/moxiemanager/plugin.min.js" />
+/// <reference path="tinymce/plugins/moxiemanager/js/moxman.api.min.js" />

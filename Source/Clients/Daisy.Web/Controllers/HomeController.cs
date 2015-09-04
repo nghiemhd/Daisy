@@ -15,6 +15,7 @@ using System.Net.Mail;
 using System.Net.Configuration;
 using System.Net;
 using Daisy.Common;
+using Daisy.Security;
 
 namespace Daisy.Web.Controllers
 {
@@ -70,6 +71,12 @@ namespace Daisy.Web.Controllers
                         message.IsBodyHtml = true;
                         using (var smtp = new SmtpClient())
                         {
+                            NetworkCredential credential = (NetworkCredential)smtp.Credentials;
+                            if (Encryption.IsEncrypt(credential.Password))
+                            {
+                                credential.Password = Encryption.Decrypt(credential.Password);
+                            }
+                            
                             await smtp.SendMailAsync(message);                            
                         }
                         TempData["message"] = "Your message has been sent successfully. We will get back to you very soon.";

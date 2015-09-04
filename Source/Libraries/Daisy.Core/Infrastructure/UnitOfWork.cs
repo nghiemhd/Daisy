@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
@@ -11,6 +12,7 @@ namespace Daisy.Core.Infrastructure
     public class UnitOfWork<TContext> : IUnitOfWork where TContext : IDbContext, new()
     {
         private readonly IDbContext context;
+        private readonly IUnityContainer container;
         private Dictionary<Type, object> repositories;
         private bool disposed;
 
@@ -29,9 +31,10 @@ namespace Daisy.Core.Infrastructure
             this.Dispose(false);
         }
 
-        public UnitOfWork()
+        public UnitOfWork(IUnityContainer container)
         {
-            this.context = new TContext();
+            this.container = container;
+            this.context = this.container.Resolve<TContext>();
             this.repositories = new Dictionary<Type, object>();
             this.disposed = false;
         }        

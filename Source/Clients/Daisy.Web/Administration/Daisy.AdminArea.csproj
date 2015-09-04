@@ -260,6 +260,9 @@
     <Content Include="Scripts\tinymce\plugins\media\moxieplayer.swf" />
     <Content Include="Scripts\tinymce\plugins\media\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\moxiemanager\api.php" />
+    <Content Include="Scripts\tinymce\plugins\moxiemanager\js\moxman.api.min.js" />
+    <Content Include="Scripts\tinymce\plugins\moxiemanager\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\noneditable\plugin.js" />

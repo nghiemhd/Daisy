@@ -1,9 +1,6 @@
-﻿using Daisy.Web.Framework.ViewEngines.Razor;
+﻿using Daisy.Common;
+using Daisy.Web.Framework.ViewEngines.Razor;
 using Daisy.Web.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -14,6 +11,8 @@ namespace Daisy.Web
     {
         protected void Application_Start()
         {
+            Utilities.EncryptData();
+
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new CustomRazorViewEngine());
 
@@ -24,7 +23,7 @@ namespace Daisy.Web
 
             AutoMapperConfig.RegisterMappings();
 
-            log4net.Config.XmlConfigurator.Configure();
-        }        
+            log4net.Config.XmlConfigurator.Configure();            
+        }
     }
 }

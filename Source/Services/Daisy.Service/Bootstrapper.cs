@@ -1,9 +1,11 @@
 ﻿using Daisy.Core.Infrastructure;
 using Daisy.Logging;
+using Daisy.Security;
 using Daisy.Service.ServiceContracts;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +33,14 @@ namespace Daisy.Service
 
         public static void RegisterTypes(IUnityContainer container)
         {
-            container.RegisterType<IDbContext, DataContext>();
+            var connection = ConfigurationManager.ConnectionStrings["DataContext"];
+            var connectionString = connection.ConnectionString;
+            if (Encryption.IsEncrypt(connectionString))
+            {
+                connectionString = Encryption.Decrypt(connectionString);
+            }
+
+            container.RegisterType<IDbContext, DataContext>(new InjectionConstructor(connectionString));
             container.RegisterType<IUnitOfWork, UnitOfWork<DataContext>>();
             container.RegisterType<ILogger, Logger>(new InjectionConstructor("DaisyWeb"));
             container.RegisterType<IAuthenticationService, AuthenticationService>();
