@@ -13,7 +13,6 @@
                     photoIds: photoIds
                 },
                 success: (response) => {
-                    debugger
                     if (response == "Success") {
                         toastr.success('Delete successfully');
                         window.location.href = '/Admin/Content/Slider';

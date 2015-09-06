@@ -30,5 +30,7 @@ namespace Daisy.Service.ServiceContracts
         void PublishAlbums(IList<int> albumIds, bool isPublished);
 
         void PublishPhotos(int albumId, IList<int> photoIds, bool isPublished);
+
+        void DeleteAlbums(int[] albumIds);
     }
 }

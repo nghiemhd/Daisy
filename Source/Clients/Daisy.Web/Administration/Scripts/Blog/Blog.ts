@@ -150,7 +150,7 @@
                     '<label for="chk' + item.Id + '" class="css-label lrg klaus"></label>' +
                     '</td>' +
                     '<td><a class="table-link" href="/Admin/Blog/Edit/' + item.Id + '">' + item.Title + '</a></td>' +
-                    '<td>' + item.Content + '</td>' +
+                    //'<td>' + item.Content + '</td>' +
                     '<td id="status' + item.Id + '">' + item.IsPublished + '</td>' +
                     '<td>' + date + '</td>' +
                     '</tr>';

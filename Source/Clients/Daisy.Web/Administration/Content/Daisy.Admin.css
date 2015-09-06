@@ -125,3 +125,29 @@ a.table-link:hover {
 input.form-control.max-width {
     max-width: 100%;
 }
+
+input.max-width {
+    width: 100%;
+    max-width: 100%;
+}
+
+.icon_fullscreen {
+	display: none;
+    cursor: pointer;
+    position: absolute;
+	width: 32px;
+    height: 32px;
+    top: 2px;
+    right: 2px;   
+    background: url(/Content/fotorama/fotorama.png) no-repeat;    
+    background-position-x: 0;
+    background-position-y: -32px;
+}
+
+.photo {
+    position: relative;
+}
+
+.photo:hover .icon_fullscreen{
+    display: block;
+}

@@ -70,13 +70,13 @@ interface IBootstrapDialogInstance {
 }
 
 interface IBootstrapDialogButton {
-    id: string;
+    id?: string;
     label: string;
     /** Hotkey char code */
-    hotkey: number;
-    icon: string;
-    cssClass: string;
-    autospin: boolean;
+    hotkey?: number;
+    icon?: string;
+    cssClass?: string;
+    autospin?: boolean;
     action: (dialog: IBootstrapDialogContext) => void;
 }
 

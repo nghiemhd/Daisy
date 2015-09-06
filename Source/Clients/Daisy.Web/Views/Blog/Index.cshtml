@@ -20,13 +20,12 @@
                 foreach (var blog in Model.Blogs.Items)
                 {
                     <div class="col-lg-12 text-center">
-                        <img class="img-responsive img-border img-full" src="https://farm9.staticflickr.com/8015/7689928804_4d51543c63_b.jpg" alt="">
                         <h2>
                             <span class="daisy-font2">@blog.Title</span>
                             <br>
                             <small><span class="daisy-font1">@blog.CreatedDate.ToString("MMMM dd, yyyy")</span></small>
                         </h2>
-                        <p class="text-justify">@blog.Content</p>
+                        <p class="text-justify">@Html.Raw(HttpUtility.HtmlDecode(@blog.Content))</p>
                         <a href="/blog/@blog.Id" class="btn btn-default btn-lg">Read More</a>
                         <hr>
                     </div>

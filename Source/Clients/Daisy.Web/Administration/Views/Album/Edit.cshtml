@@ -2,6 +2,11 @@
 @{
     ViewBag.Title = "Album " + @Model.Album.Name;
 }
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="~/Administration/Content/fotorama/fotorama.css" />
+}
+
 <div class="spacer btn-group">
     <button id="btnPublish" data-request-url="@Url.Action("PublishPhotos", "Album")" class="btn btn-primary">Publish</button>
     <button id="btnUnpublish" data-request-url="@Url.Action("PublishPhotos", "Album")" class="btn btn-primary">Unpublish</button>
@@ -9,27 +14,43 @@
 <hr />
 <h2>@Model.Album.Name</h2>
 @Html.HiddenFor(x => x.Album.Id, new { id = "albumId" })
-<div>
+<div class="container-fluid">
     <input type="checkbox" id="chkSelectAll" class="css-checkbox lrg" />
     <label for="chkSelectAll" class="css-label lrg klaus">Select all</label>
 </div>
-<div id="gridPhotos">
-    @foreach (var photo in @Model.Photos)
+<div id="gridPhotos" class="container-fluid">
+    @for (var i = 0; i < Model.Photos.Count; i++)
     {
         <div class="col-sm-6 col-md-6 col-lg-4" style="background-color:#101010;">
-            <div id="@photo.Id" class="album-thumbnail photo-list-album-view" style="background-image:url(@photo.MediumUrl)">
-                @if (@photo.IsPublished)
+            <div id="@Model.Photos[i].Id" class="album-thumbnail photo-list-album-view photo" style="background-image:url(@Model.Photos[i].MediumUrl)" data-index="@i">
+                @if (@Model.Photos[i].IsPublished)
                 {
                     <img src="~/Administration/Images/symbol_check.png" alt="published" style="width:30px;float:right;" />
                 }
+                <div class="icon_fullscreen"></div>
             </div>            
             <div class="album-title">
-                <input type="checkbox" id="_@photo.Id" class="css-checkbox lrg" value="@photo.Id" />
-                <label for="_@photo.Id" class="css-label lrg klaus">@photo.Id</label>
+                <input type="checkbox" id="_@Model.Photos[i].Id" class="css-checkbox lrg" value="@Model.Photos[i].Id" />
+                <label for="_@Model.Photos[i].Id" class="css-label lrg klaus">@Model.Photos[i].Id</label>
             </div>
         </div>
     }
 </div>
+
+<div id="gridPhotosFullScreen" class="fotorama" data-allow-full-screen="native" data-nav="thumbs" data-keyboard="true" style="display:none;">
+    @foreach (var photo in @Model.Photos)
+    {
+        if (photo.Large1600Url == null)
+        {
+            <img src="@photo.LargeUrl" alt="@photo.Name" />
+        }
+        else
+        {
+            <img src="@photo.Large1600Url" alt="@photo.Name" data-full="@photo.Large2048Url" />
+        }
+    }
+</div>
+
 <div id="loader" class="overlay" style="display:none">
     <img class="loader" src="~/Administration/Images/loading.gif" />
 </div>
@@ -37,9 +58,29 @@
 {
     <script src="~/Administration/Scripts/Common/common.js"></script>
     <script src="~/Administration/Scripts/Album/Album.js"></script>    
-    <script src="~/Administration/Scripts/Album/AlbumDetail.js"></script>    
+    <script src="~/Administration/Scripts/Album/AlbumDetail.js"></script>
+    <script src="~/Administration/Scripts/fotorama/fotorama.min.js"></script>
     <script type="text/javascript">
-        Common.Helper.applicationRoot = '@Url.Content("~")';
+    Common.Helper.applicationRoot = '@Url.Content("~")';
+
+        $(document).ready(function(){
+            $('#gridPhotosFullScreen').hide();
+
+            $('.icon_fullscreen').click(function () {
+                var index = $(this).parent('.photo').data('index');
+                $('#gridPhotosFullScreen').show();
+
+                var fotorama = $('.fotorama')
+                  //.fotorama({ allowfullscreen: true })
+                  .data('fotorama');
+                fotorama.show(index);
+                fotorama.requestFullScreen();
+            });
+
+            $('.fotorama').on('fotorama:fullscreenexit', function (e, fotorama, extra) {
+                $('#gridPhotosFullScreen').hide();
+            });
+        });
     </script>
 }
 

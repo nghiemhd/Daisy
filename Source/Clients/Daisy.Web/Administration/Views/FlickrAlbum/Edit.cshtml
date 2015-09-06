@@ -3,6 +3,10 @@
     ViewBag.Title = "Album " + @Model.Album.Name;
 }
 
+@section styles{
+    <link rel="stylesheet" type="text/css" href="~/Administration/Content/fotorama/fotorama.css" />
+}
+
 <div class="spacer">
     <div>
         <button id="btnImport" data-request-url="@Url.Action("ImportAlbumDetail", "FlickrAlbum")" class="btn btn-primary">Import</button>
@@ -10,31 +14,73 @@
 </div>
 <hr />
 <h2>@Model.Album.Name</h2>
-<div>
+<div class="container-fluid">
     <input type="checkbox" id="chkSelectAll" class="css-checkbox lrg" />
     <label for="chkSelectAll" class="css-label lrg klaus">Select all</label>
 </div>
-<div id="gridPhotos">
-    @foreach (var photo in @Model.Photos)
+<div id="gridPhotos" class="container-fluid">
+    @for (var i = 0; i < Model.Photos.Count; i++)
     {
         <div class="col-sm-6 col-md-6 col-lg-4" style="background-color:#101010;">
-            <div class="album-thumbnail photo-list-album-view" style="background-image:url(@photo.MediumUrl)"></div>
-            <div class="album-title">
-                <input type="checkbox" id="_@photo.FlickrPhotoId" class="css-checkbox lrg" value="@photo.FlickrPhotoId" />
-                <label for="_@photo.FlickrPhotoId" class="css-label lrg klaus">@photo.FlickrPhotoId</label>
+            <div class="album-thumbnail photo-list-album-view photo" style="background-image:url(@Model.Photos[i].MediumUrl)" data-index="@i">
+                <div class="icon_fullscreen"></div>
+            </div>
+            <div>
+                <input class="max-width" type="text" value="@Model.Photos[i].LargeUrl" />
+                <input class="max-width" type="text" value="@Model.Photos[i].Large1600Url" />
+                <input class="max-width" type="text" value="@Model.Photos[i].Large2048Url" />
+            </div>
+            <div class="album-title">                
+                <div>
+                    <input type="checkbox" id="_@Model.Photos[i].FlickrPhotoId" class="css-checkbox lrg" value="@Model.Photos[i].FlickrPhotoId" />
+                    <label for="_@Model.Photos[i].FlickrPhotoId" class="css-label lrg klaus">@Model.Photos[i].FlickrPhotoId</label>
+                </div>
             </div>
         </div>
     }
 </div>
+
+<div id="gridPhotosFullScreen" class="fotorama" data-allow-full-screen="native" data-nav="thumbs" data-keyboard="true" style="display:none;">
+    @foreach (var photo in @Model.Photos)
+    {
+        if (photo.Large1600Url == null)
+        {
+            <img src="@photo.LargeUrl" alt="@photo.Name" />
+        }
+        else
+        {
+            <img src="@photo.Large1600Url" alt="@photo.Name" data-full="@photo.Large2048Url" />
+        }
+    }
+</div>
+
 <div id="loader" class="overlay" style="display:none">
     <img class="loader" src="~/Administration/Images/loading.gif" />
 </div>
 @section scripts
 {
     <script src="~/Administration/Scripts/FlickrAlbum/AlbumDetail.js"></script>
+    <script src="~/Administration/Scripts/fotorama/fotorama.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             Album.FlickrAlbumDetail.album = @Html.Raw(Json.Encode(Model));
+
+            $('#gridPhotosFullScreen').hide();
+
+            $('.icon_fullscreen').click(function () {
+                var index = $(this).parent('.photo').data('index');
+                $('#gridPhotosFullScreen').show();
+
+                var fotorama = $('.fotorama')
+                  //.fotorama({ allowfullscreen: true })
+                  .data('fotorama');
+                fotorama.show(index);
+                fotorama.requestFullScreen();
+            });
+
+            $('.fotorama').on('fotorama:fullscreenexit', function (e, fotorama, extra) {
+                $('#gridPhotosFullScreen').hide();
+            });
         });
 </script>
 }

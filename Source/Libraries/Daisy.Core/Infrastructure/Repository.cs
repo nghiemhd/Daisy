@@ -74,7 +74,7 @@ namespace Daisy.Core.Infrastructure
 
         public virtual void Delete(T entity)
         {
-            this.dbSet.Remove(entity);
+            this.dbSet.Remove(entity);                        
         }
 
         public virtual void Update(T entity)
@@ -103,6 +103,11 @@ namespace Daisy.Core.Infrastructure
         public virtual bool Any()
         {
             return this.dbSet.Any();
+        }
+
+        public void RemoveRange(IEnumerable<T> entities)
+        {
+            this.EFContext.Set<T>().RemoveRange(entities);
         }
     }
 }

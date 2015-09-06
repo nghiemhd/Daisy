@@ -3,6 +3,7 @@
     ViewBag.Title = "Albums";
 }
 <div class="spacer btn-group">
+    <button id="btnDelete" data-request-url="@Url.Action("DeleteAlbums", "Album")" class="btn btn-primary">Delete</button>
     <button id="btnPublish" data-request-url="@Url.Action("Publish", "Album")" class="btn btn-primary">Publish</button>
     <button id="btnUnpublish" data-request-url="@Url.Action("Publish", "Album")" class="btn btn-primary">Unpublish</button>
 </div>

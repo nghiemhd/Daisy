@@ -241,7 +241,6 @@
     <Content Include="Content\toastr.scss" />
     <None Include="Properties\PublishProfiles\daisytestweb.pubxml" />
     <None Include="Properties\PublishProfiles\hostbuddy.pubxml" />
-    <None Include="Properties\PublishProfiles\lib.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
     <Content Include="Images\bg.jpg" />
@@ -273,7 +272,9 @@
     <Content Include="Scripts\wowslider\wowslider.js" />
     <Content Include="Scripts\wowslider\wowslider.mod.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

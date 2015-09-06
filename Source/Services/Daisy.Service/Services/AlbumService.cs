@@ -286,5 +286,22 @@ namespace Daisy.Service
                 photo.UpdatedDate = DateTime.Now;
             });           
         }
+
+        public void DeleteAlbums(int[] albumIds)
+        {
+            Process(() => {
+                var photos = photoRepository.Query()
+                    .Where(x => x.Albums.Any(album => albumIds.Contains(album.Id)))
+                    .ToList();
+                photoRepository.RemoveRange(photos);
+
+                var albums = albumRepository.Query()
+                    .Where(x => albumIds.Contains(x.Id))
+                    .ToList();
+                albumRepository.RemoveRange(albums);
+
+                this.unitOfWork.Commit();
+            });
+        }
     }
 }

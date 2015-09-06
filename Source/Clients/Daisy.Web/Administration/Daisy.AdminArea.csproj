@@ -133,6 +133,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\checkbox.css" />
     <Content Include="Content\Daisy.Admin.css" />
+    <Content Include="Content\fotorama\fotorama%402x.png" />
+    <Content Include="Content\fotorama\fotorama.css" />
+    <Content Include="Content\fotorama\fotorama.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
@@ -161,6 +164,9 @@
     <Content Include="Scripts\date.format.js" />
     <Content Include="Scripts\FormValidation\formValidation.bootstrap.min.js" />
     <Content Include="Scripts\FormValidation\formValidation.min.js" />
+    <Content Include="Scripts\fotorama\css-classes.js" />
+    <Content Include="Scripts\fotorama\fotorama.js" />
+    <Content Include="Scripts\fotorama\fotorama.min.js" />
     <Content Include="Scripts\hotfixBootstrapModal.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

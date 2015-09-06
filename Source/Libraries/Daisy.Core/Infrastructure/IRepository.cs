@@ -14,5 +14,6 @@ namespace Daisy.Core.Infrastructure
         void Delete(T entity);
         void Update(T entity);
         bool Any();
+        void RemoveRange(IEnumerable<T> entities);
     }
 }

@@ -95,5 +95,20 @@ namespace Daisy.Admin.Controllers
                 return Json(LogExtension.GetFinalInnerException(ex).Message);
             }
         }
+
+        [HttpPost]
+        public JsonResult DeleteAlbums(int[] albumIds)
+        {
+            try
+            {
+                albumService.DeleteAlbums(albumIds);
+                return Json(ResponseStatus.Success.ToString());
+            }
+            catch (Exception ex)
+            {
+
+                return Json(LogExtension.GetFinalInnerException(ex).Message);
+            }
+        }
     }
 }

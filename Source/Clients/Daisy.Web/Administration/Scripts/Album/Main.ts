@@ -65,4 +65,43 @@
             album.publishAlbums(publishedAlbums, false);
         }
     });
+
+    $('#btnDelete').click(function () {
+        var albums: number[] = [];
+        Album.DaisyAlbum.deleteAlbumsRequestUrl = $(this).data('request-url');
+
+        $('#gridAlbums input[type=checkbox]:checked').each(function () {
+            var albumId = $(this).val();
+            albums.push(albumId);
+        });
+
+        if (albums.length <= 0) {
+            BootstrapDialog.show({
+                type: BootstrapDialog.TYPE_WARNING,
+                title: 'Delete album',
+                message: 'Please choose album(s) to delete.'
+            });
+        }
+        else {
+            var buttons: IBootstrapDialogButton[] = [{
+                label: 'OK',
+                action: function (dialog) {                    
+                    dialog.close();
+                    album.deleteAlbums(albums);
+                }
+            }, {
+                    label: 'Cancel',
+                    action: function (dialog) {
+                        dialog.close();
+                    }
+                }];
+
+            BootstrapDialog.show({
+                type: BootstrapDialog.TYPE_WARNING,
+                title: 'Delete album',
+                message: 'Do you want to delete selected album(s)?',
+                buttons: buttons
+            });
+        }
+    });
 }); 

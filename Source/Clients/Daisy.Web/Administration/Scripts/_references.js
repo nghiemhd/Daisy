@@ -67,3 +67,5 @@
 /// <reference path="tinymce/plugins/compat3x/plugin.min.js" />
 /// <reference path="tinymce/plugins/moxiemanager/plugin.min.js" />
 /// <reference path="tinymce/plugins/moxiemanager/js/moxman.api.min.js" />
+/// <reference path="fotorama/css-classes.js" />
+/// <reference path="fotorama/fotorama.js" />
