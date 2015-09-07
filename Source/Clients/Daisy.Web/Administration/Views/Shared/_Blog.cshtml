@@ -10,22 +10,41 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(x => x.ImageUrl, new { @class = "col-md-1" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control max-width" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Highlight, new { @class = "col-md-1" })
+        <div class="col-md-11 blog-width">
+            @Html.TextAreaFor(x => x.Highlight, new { @class = "blog-width form-control" })
+            @Html.ValidationMessageFor(x => x.Highlight)
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(x => x.IsPublished, new { @class = "col-md-1" })
         <div class="col-md-3">            
-            @Html.CheckBoxFor(x => x.IsPublished, new { @id = "test", @class = "css-checkbox lrg" })
-            <label for="test" class="css-label lrg klaus"></label>
+            @Html.CheckBoxFor(x => x.IsPublished, new { @id = "chkPublish", @class = "css-checkbox lrg" })
+            <label for="chkPublish" class="css-label lrg klaus"></label>
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.Content, new { @class = "col-md-1" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(x => x.Content, new { @class = "form-control" })
+        <div class="col-md-3">
+            <input type="button" id="btnToggle" class="btn" value="Test" />
+            <a class="table-link" href="javascript:;" onclick="tinymce.execCommand('mceToggleEditor', false, '#txtContent');"><span>Toggle TinyMCE</span></a>
+        </div>        
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-11 blog-width">
+            @Html.TextAreaFor(x => x.Content, new { @id="txtContent", @class = "blog-width form-control mceEditor" })
             @Html.ValidationMessageFor(x => x.Content)
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-1 col-md-1">
-            <input type="submit" class="btn btn-primary" value="Save" />
+            <input id="btnSubmit" type="submit" class="btn btn-primary" value="Save" />
         </div>
     </div>
 </div>

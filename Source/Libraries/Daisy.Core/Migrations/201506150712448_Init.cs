@@ -120,6 +120,8 @@ namespace Daisy.Core.Migrations
                 {
                     Id = c.Int(nullable: false, identity: true),
                     Title = c.String(nullable: false, maxLength: 200, unicode: true),
+                    Highlight = c.String(nullable: false, maxLength: 500, unicode: true),
+                    ImageUrl = c.String(nullable: true),
                     Content = c.String(nullable: false, unicode: true),
                     IsPublished = c.Boolean(nullable: false, defaultValue: true),
                     IsDeleted = c.Boolean(nullable: false, defaultValue: false),

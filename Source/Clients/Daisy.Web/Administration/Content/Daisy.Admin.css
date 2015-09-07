@@ -131,6 +131,15 @@ input.max-width {
     max-width: 100%;
 }
 
+.blog-width {
+    max-width: 1175px;
+}
+
+textarea.blog-width {
+    height: 150px;
+    resize: vertical;
+}
+
 .icon_fullscreen {
 	display: none;
     cursor: pointer;

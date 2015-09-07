@@ -22,5 +22,12 @@ namespace Daisy.Admin.Models
         public bool IsPublished { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+        [Required]
+        [MaxLength(500)]
+        public string Highlight { get; set; }
+
+        [Display(Name="Image")]
+        public string ImageUrl { get; set; }
     }
 }

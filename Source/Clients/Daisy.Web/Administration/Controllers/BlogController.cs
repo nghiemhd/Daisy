@@ -38,7 +38,6 @@ namespace Daisy.Admin.Controllers
         {
             var blog = contentService.GetBlogBy(id);
             var model = Mapper.Map<DaisyModels.Blog>(blog);
-            model.Content = blog.Content;
             return View(model);
         }
 
@@ -62,6 +61,8 @@ namespace Daisy.Admin.Controllers
             {
                 var entity = contentService.GetBlogBy(model.Id);
                 entity.Title = model.Title;
+                entity.Highlight = model.Highlight;
+                entity.ImageUrl = model.ImageUrl;
                 entity.IsPublished = model.IsPublished;
                 entity.Content = model.Content;
                 contentService.UpdateBlog(entity);

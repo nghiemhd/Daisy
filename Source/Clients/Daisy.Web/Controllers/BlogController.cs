@@ -49,7 +49,6 @@ namespace Daisy.Web.Controllers
             }
 
             var blogModel = Mapper.Map<DaisyModels.Blog>(blog);
-            blogModel.Content = blog.Content;
 
             var model = new DaisyModels.BlogDetailViewModel
             {

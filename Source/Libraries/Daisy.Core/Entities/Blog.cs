@@ -20,6 +20,10 @@ namespace Daisy.Core.Entities
 
         public bool IsPublished { get; set; }
 
+        public string Highlight { get; set; }
+
+        public string ImageUrl { get; set; }
+
         public virtual ICollection<Photo> Photos { get; set; }
     }
 }
