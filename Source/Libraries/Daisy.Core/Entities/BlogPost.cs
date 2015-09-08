@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Daisy.Core.Entities
 {
-    public class Blog : BaseEntity
+    public class BlogPost : BaseEntity
     {
-        public Blog()
+        public BlogPost()
         {
             Photos = new HashSet<Photo>();
         }
@@ -24,6 +24,16 @@ namespace Daisy.Core.Entities
 
         public string ImageUrl { get; set; }
 
+        public string Tags { get; set; }
+
+        public string MetaKeywords { get; set; }
+
+        public string MetaDescription { get; set; }
+
+        public string MetaTitle { get; set; }
+
         public virtual ICollection<Photo> Photos { get; set; }
+
+        public virtual Language Language { get; set; }
     }
 }

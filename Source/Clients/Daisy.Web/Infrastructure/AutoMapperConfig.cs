@@ -17,7 +17,7 @@ namespace Daisy.Web.Infrastructure
 
             Mapper.CreateMap<DaisyEntities.Photo, DaisyModels.Photo>();
 
-            Mapper.CreateMap<DaisyEntities.Blog, DaisyModels.Blog>();
+            Mapper.CreateMap<DaisyEntities.BlogPost, DaisyModels.Blog>();
         }
     }
 }

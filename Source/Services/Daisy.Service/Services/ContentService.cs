@@ -22,7 +22,7 @@ namespace Daisy.Service
         private IUnitOfWork unitOfWork;
         private IRepository<DaisyEntities.Slider> sliderRepository;
         private IRepository<DaisyEntities.Photo> photoRepository;
-        private IRepository<DaisyEntities.Blog> blogRepository;
+        private IRepository<DaisyEntities.BlogPost> blogRepository;
         private ILogger logger;
 
         public ContentService(IUnitOfWork unitOfWork, ILogger logger)
@@ -32,7 +32,7 @@ namespace Daisy.Service
             this.logger = logger;
             this.sliderRepository = this.unitOfWork.GetRepository<DaisyEntities.Slider>();
             this.photoRepository = this.unitOfWork.GetRepository<DaisyEntities.Photo>();
-            this.blogRepository = this.unitOfWork.GetRepository<DaisyEntities.Blog>();
+            this.blogRepository = this.unitOfWork.GetRepository<DaisyEntities.BlogPost>();
         }
 
         //public void UpdateSlider(SliderDto sliderDto)
@@ -97,7 +97,7 @@ namespace Daisy.Service
             });            
         }
 
-        public void UpdateBlog(DaisyEntities.Blog blog)
+        public void UpdateBlog(DaisyEntities.BlogPost blog)
         {
             Process(() =>
             {
@@ -119,7 +119,7 @@ namespace Daisy.Service
             });
         }
 
-        public Daisy.Common.PagedList<DaisyEntities.Blog> SearchBlogs(SearchBlogOptions options)
+        public Daisy.Common.PagedList<DaisyEntities.BlogPost> SearchBlogs(SearchBlogOptions options)
         {
             var blogs = Process(() => {
                 var query = blogRepository.Query();
@@ -160,7 +160,7 @@ namespace Daisy.Service
                         .Skip(options.PageSize * options.PageIndex)
                         .Take(options.PageSize);
 
-                var result = new PagedList<DaisyEntities.Blog>(
+                var result = new PagedList<DaisyEntities.BlogPost>(
                     query.ToList(),
                     options.PageIndex,
                     options.PageSize,
@@ -170,7 +170,7 @@ namespace Daisy.Service
                 return result;
             });
 
-            return blogs as PagedList<DaisyEntities.Blog>;
+            return blogs as PagedList<DaisyEntities.BlogPost>;
         }
 
         public void PublishBlogs(IList<int> blogIds, bool isPublished)
@@ -190,13 +190,13 @@ namespace Daisy.Service
             });
         }
 
-        public DaisyEntities.Blog GetBlogBy(int id)
+        public DaisyEntities.BlogPost GetBlogBy(int id)
         {
             var blog = Process(() =>
             {
                 return blogRepository.Query().Where(x => x.Id == id).FirstOrDefault();
             });
-            return blog as DaisyEntities.Blog;
+            return blog as DaisyEntities.BlogPost;
         }
     }
 }

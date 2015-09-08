@@ -19,12 +19,12 @@ namespace Daisy.Service.ServiceContracts
 
         void DeleteSliderPhotos(DaisyEntities.Slider slider, int[] photoIds);
 
-        void UpdateBlog(DaisyEntities.Blog blog);
+        void UpdateBlog(DaisyEntities.BlogPost blog);
 
-        PagedList<DaisyEntities.Blog> SearchBlogs(SearchBlogOptions options);
+        PagedList<DaisyEntities.BlogPost> SearchBlogs(SearchBlogOptions options);
 
         void PublishBlogs(IList<int> blogIds, bool isPublished);
 
-        DaisyEntities.Blog GetBlogBy(int id);
+        DaisyEntities.BlogPost GetBlogBy(int id);
     }
 }

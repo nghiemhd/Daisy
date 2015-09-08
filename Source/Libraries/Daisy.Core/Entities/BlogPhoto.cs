@@ -20,7 +20,7 @@ namespace Daisy.Core.Entities
 
         public string Position { get; set; }
 
-        public virtual Blog Blog { get; set; }
+        public virtual BlogPost Blog { get; set; }
 
         public virtual Photo Photo { get; set; }
     }

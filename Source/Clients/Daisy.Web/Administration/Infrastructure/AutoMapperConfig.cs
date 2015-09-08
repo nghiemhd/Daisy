@@ -77,9 +77,9 @@ namespace Daisy.Admin.Infrastructure
 
             Mapper.CreateMap<DaisyEntities.Slider, DaisyModels.SliderViewModel>();
 
-            Mapper.CreateMap<DaisyModels.Blog, DaisyEntities.Blog>();
+            Mapper.CreateMap<DaisyModels.Blog, DaisyEntities.BlogPost>();
 
-            Mapper.CreateMap<DaisyEntities.Blog, DaisyModels.Blog>();
+            Mapper.CreateMap<DaisyEntities.BlogPost, DaisyModels.Blog>();
 
             Mapper.CreateMap<DaisyModels.SearchBlogModel, SearchBlogOptions>();
         }

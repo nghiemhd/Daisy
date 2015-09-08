@@ -115,15 +115,20 @@ namespace Daisy.Core.Migrations
                 .Index(t => t.SliderId);
 
             CreateTable(
-                "Blog",
+                "BlogPost",
                 c => new
                 {
                     Id = c.Int(nullable: false, identity: true),
+                    LanguageId = c.Int(nullable: false),
                     Title = c.String(nullable: false, maxLength: 200, unicode: true),
                     Highlight = c.String(nullable: false, maxLength: 500, unicode: true),
                     ImageUrl = c.String(nullable: true),
                     Content = c.String(nullable: false, unicode: true),
                     IsPublished = c.Boolean(nullable: false, defaultValue: true),
+                    Tags = c.String(nullable: true),
+                    MetaKeywords = c.String(nullable: true, maxLength: 400),
+                    MetaDescription = c.String(nullable: true),
+                    MetaTitle = c.String(nullable: true, maxLength: 400),
                     IsDeleted = c.Boolean(nullable: false, defaultValue: false),
                     UpdatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
                     UpdatedBy = c.String(nullable: false, maxLength: 50, unicode: false, defaultValueSql: "suser_name()"),
@@ -131,7 +136,9 @@ namespace Daisy.Core.Migrations
                     CreatedBy = c.String(nullable: false, maxLength: 50, unicode: false, defaultValueSql: "suser_name()"),
                     RowRevision = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                 })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("Language", t => t.LanguageId, cascadeDelete: false)
+                .Index(t => t.LanguageId);
 
             CreateTable(
                 "BlogPhoto",
@@ -147,6 +154,34 @@ namespace Daisy.Core.Migrations
                 .ForeignKey("Blog", t => t.BlogId, cascadeDelete: true)
                 .Index(t => t.PhotoId)
                 .Index(t => t.BlogId);
+
+            CreateTable(
+                "UrlRecord",
+                c => new
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    EntityId = c.Int(nullable: false),
+                    EntityName = c.String(nullable: false, maxLength: 100, unicode: false),
+                    Slug = c.String(maxLength: 100, unicode: false),
+                    IsActive = c.Boolean(nullable: false, defaultValue: true),
+                    LanguageId = c.Int(nullable: false, defaultValue: 0)
+                })
+                .PrimaryKey(t => t.Id);
+
+            CreateTable(
+                "Language",
+                c => new
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Name = c.String(nullable: false, maxLength: 100),
+                    LanguageCulture = c.String(nullable: false, maxLength: 20, unicode: false),
+                    UniqueSeoCode = c.String(maxLength: 2, unicode: false),
+                    FlagImageFileName = c.String(maxLength: 50, unicode: false),
+                    Rtl = c.Boolean(nullable: false, defaultValue: false),
+                    IsPublished = c.Boolean(nullable: false, defaultValue: false),
+                    DisplayOrder = c.Int(nullable: false, defaultValue: 0)
+                })
+                .PrimaryKey(t => t.Id);
         }
         
         public override void Down()

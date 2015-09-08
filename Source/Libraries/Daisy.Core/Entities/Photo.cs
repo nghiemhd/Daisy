@@ -43,6 +43,6 @@ namespace Daisy.Core.Entities
 
         public virtual ICollection<Slider> Sliders { get; set; }
 
-        public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<BlogPost> Blogs { get; set; }
     }
 }

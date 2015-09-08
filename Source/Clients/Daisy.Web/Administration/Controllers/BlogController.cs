@@ -46,7 +46,7 @@ namespace Daisy.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var entity = Mapper.Map<DaisyEntities.Blog>(model);
+                var entity = Mapper.Map<DaisyEntities.BlogPost>(model);
                 contentService.UpdateBlog(entity);
 
                 return RedirectToAction("Index");
