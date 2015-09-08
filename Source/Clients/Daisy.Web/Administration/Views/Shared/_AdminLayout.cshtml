@@ -1,15 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using Daisy.Web.Framework.Extentions
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Daisy Admin</title>
-
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
     @Styles.Render("~/Content/admin/css")
     @Scripts.Render("~/bundles/admin/modernizr")
     @Scripts.Render("~/bundles/admin/jquery")
     @Scripts.Render("~/bundles/admin/bootstrap")
-    @RenderSection("styles", false)
+    @Html.EmitRequiredScripts()
+    @RenderSection("styles", false)    
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -54,5 +59,9 @@
     </div>
         
     @RenderSection("scripts", required: false)
+
+    <script>
+        Common.Helper.applicationRoot = '@Url.Content("~")';
+    </script>
 </body>
 </html>

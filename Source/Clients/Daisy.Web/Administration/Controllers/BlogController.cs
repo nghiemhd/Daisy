@@ -66,8 +66,7 @@ namespace Daisy.Admin.Controllers
                 entity.IsPublished = model.IsPublished;
                 entity.Content = model.Content;
                 contentService.UpdateBlog(entity);
-
-                return RedirectToAction("Index");
+                TempData["message"] = "Update successfully";
             }
             return View(model);
         }

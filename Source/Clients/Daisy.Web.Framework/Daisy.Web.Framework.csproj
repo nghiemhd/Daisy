@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extentions\HtmlExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewEngines\CustomVirtualPathProviderViewEngine.cs" />
     <Compile Include="ViewEngines\Razor\CustomRazorViewEngine.cs" />
