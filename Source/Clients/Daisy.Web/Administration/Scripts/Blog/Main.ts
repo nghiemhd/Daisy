@@ -34,6 +34,7 @@
         }
 
         var options: Content.IBlogSearchOptions = {
+            LanguageId: $('#cboLanguages').val(),
             Title: $('#txtTitle').val(),
             FromCreatedDate: fromCreatedDate,
             ToCreatedDate: toCreatedDate,

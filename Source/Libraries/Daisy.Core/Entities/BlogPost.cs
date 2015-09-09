@@ -1,6 +1,7 @@
 ﻿using Daisy.Core.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace Daisy.Core.Entities
         {
             Photos = new HashSet<Photo>();
         }
+
+        public int LanguageId { get; set; }
 
         public string Title { get; set; }
 
@@ -34,6 +37,7 @@ namespace Daisy.Core.Entities
 
         public virtual ICollection<Photo> Photos { get; set; }
 
+        [ForeignKey("LanguageId")]
         public virtual Language Language { get; set; }
     }
 }

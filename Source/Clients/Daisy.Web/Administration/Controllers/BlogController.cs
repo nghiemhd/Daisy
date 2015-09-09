@@ -18,14 +18,17 @@ namespace Daisy.Admin.Controllers
     public class BlogController : Controller
     {
         private readonly IContentService contentService;
+        private readonly ILocalizationService localizationService;
 
-        public BlogController(IContentService contentService)
+        public BlogController(IContentService contentService, ILocalizationService localizationService)
         {
             this.contentService = contentService;
+            this.localizationService = localizationService;
         }
 
         public ActionResult Index()
         {
+            ViewData["languages"] = this.localizationService.GetLanguages().ToList();
             return View();
         }
 

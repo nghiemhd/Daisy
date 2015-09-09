@@ -14,6 +14,19 @@
 <div class="spacer">
     <div id="divOptions" class="form-horizontal">
         <div class="form-group">
+            @Html.LabelFor(x => x.SearchOptions.LanguageId, new { @class = "control-label col-sm-1" })
+            <div class="col-lg-2 col-md-3 col-sm-3">
+                <select id="cboLanguages" class="form-control dropdown">
+                    <option>All</option>
+                    @foreach (var item in ViewData["languages"] as List<Daisy.Core.Entities.Language>)
+                    {
+                        <option value="@item.Id">@item.Name</option>                        
+                    }
+                </select>
+
+            </div>
+        </div>
+        <div class="form-group">
             @Html.LabelFor(x => x.SearchOptions.Title, new { @class = "control-label col-sm-1" })
             <div class="col-lg-2 col-md-3 col-sm-3">
                 @Html.TextBoxFor(x => x.SearchOptions.Title, new { id = "txtTitle", @class = "form-control" })

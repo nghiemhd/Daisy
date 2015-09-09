@@ -140,20 +140,20 @@ namespace Daisy.Core.Migrations
                 .ForeignKey("Language", t => t.LanguageId, cascadeDelete: false)
                 .Index(t => t.LanguageId);
 
-            CreateTable(
-                "BlogPhoto",
-                c => new
-                {
-                    BlogId = c.Int(nullable: false),
-                    PhotoId = c.Int(nullable: false),
-                    Order = c.Int(nullable: false),
-                    Position = c.String(nullable: true, maxLength: 50, unicode: false)
-                })
-                .PrimaryKey(t => new { t.BlogId, t.PhotoId })
-                .ForeignKey("Photo", t => t.PhotoId, cascadeDelete: true)
-                .ForeignKey("Blog", t => t.BlogId, cascadeDelete: true)
-                .Index(t => t.PhotoId)
-                .Index(t => t.BlogId);
+            //CreateTable(
+            //    "BlogPhoto",
+            //    c => new
+            //    {
+            //        BlogId = c.Int(nullable: false),
+            //        PhotoId = c.Int(nullable: false),
+            //        Order = c.Int(nullable: false),
+            //        Position = c.String(nullable: true, maxLength: 50, unicode: false)
+            //    })
+            //    .PrimaryKey(t => new { t.BlogId, t.PhotoId })
+            //    .ForeignKey("Photo", t => t.PhotoId, cascadeDelete: true)
+            //    .ForeignKey("Blog", t => t.BlogId, cascadeDelete: true)
+            //    .Index(t => t.PhotoId)
+            //    .Index(t => t.BlogId);
 
             CreateTable(
                 "UrlRecord",

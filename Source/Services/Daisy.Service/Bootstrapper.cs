@@ -49,6 +49,7 @@ namespace Daisy.Service
             container.RegisterType<IPhotoService, PhotoService>();
             container.RegisterType<IUploadService, UploadService>();
             container.RegisterType<IContentService, ContentService>();
+            container.RegisterType<ILocalizationService, LocalizationService>();
         }
     }
 }

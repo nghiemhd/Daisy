@@ -144,6 +144,11 @@ namespace Daisy.Service
                     query = query.Where(x => DbFunctions.TruncateTime(x.CreatedDate) <= options.ToCreatedDate);
                 }
 
+                if (options.LanguageId != null)
+                {
+                    query = query.Where(x => x.LanguageId == options.LanguageId.Value);
+                }
+
                 if (options.PageSize <= 0 || options.PageSize > Constants.MaxPageSize)
                 {
                     options.PageSize = Constants.DefaultPageSize;

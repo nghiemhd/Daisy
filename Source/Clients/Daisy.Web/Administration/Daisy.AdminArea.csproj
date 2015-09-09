@@ -468,6 +468,7 @@
     <Compile Include="Models\Blog\SearchBlogModel.cs" />
     <Compile Include="Models\Content\PagedListPhotoViewModel.cs" />
     <Compile Include="Models\Content\SliderViewModel.cs" />
+    <Compile Include="Models\Localization\Language.cs" />
     <Compile Include="Models\Photo\Photo.cs" />
     <Compile Include="Models\Photo\SearchPhotoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

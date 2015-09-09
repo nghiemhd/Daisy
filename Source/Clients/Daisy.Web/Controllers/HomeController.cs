@@ -70,13 +70,12 @@ namespace Daisy.Web.Controllers
                         message.Body = string.Format(body, model.Name, model.Email, model.PhoneNumber, model.Message);
                         message.IsBodyHtml = true;
                         using (var smtp = new SmtpClient())
-                        {
+                        {                            
                             NetworkCredential credential = (NetworkCredential)smtp.Credentials;
                             if (Encryption.IsEncrypt(credential.Password))
                             {
                                 credential.Password = Encryption.Decrypt(credential.Password);
                             }
-                            
                             await smtp.SendMailAsync(message);                            
                         }
                         TempData["message"] = "Your message has been sent successfully. We will get back to you very soon.";

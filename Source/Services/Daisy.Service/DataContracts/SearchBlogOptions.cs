@@ -16,6 +16,8 @@ namespace Daisy.Service.DataContracts
 
         public DateTime? ToCreatedDate { get; set; }
 
+        public int? LanguageId { get; set; }
+
         public int PageIndex { get; set; }
 
         public int PageSize { get; set; }

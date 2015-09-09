@@ -2,6 +2,7 @@
     'use strict';
 
     export interface IBlogSearchOptions extends Common.ISearchOptions {
+        LanguageId?: number;
         Title: string;
         IsPublished?: boolean;
         FromCreatedDate: string;
@@ -23,6 +24,7 @@
 
         search(options: IBlogSearchOptions) {
             var data = {
+                LanguageId: options.LanguageId,
                 Title: options.Title,
                 FromCreatedDate: options.FromCreatedDate,
                 ToCreatedDate: options.ToCreatedDate,

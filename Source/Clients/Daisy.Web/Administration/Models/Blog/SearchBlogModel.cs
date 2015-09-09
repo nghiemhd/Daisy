@@ -8,6 +8,9 @@ namespace Daisy.Admin.Models
 {
     public class SearchBlogModel
     {
+        [DisplayName("Language")]
+        public int? LanguageId { get; set; }
+
         public string Title { get; set; }
 
         [DisplayName("From")]

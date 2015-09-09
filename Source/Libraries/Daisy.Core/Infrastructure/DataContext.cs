@@ -56,7 +56,6 @@ namespace Daisy.Core.Infrastructure
         public DbSet<User> Users { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<BlogPost> Blogs { get; set; }
-        public DbSet<BlogPhoto> BlogPhotos { get; set; }
         public DbSet<UrlRecord> UrlRecords { get; set; }
         public DbSet<Language> Languages { get; set; }
         #endregion DbSet        
