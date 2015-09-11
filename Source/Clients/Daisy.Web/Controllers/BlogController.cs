@@ -24,6 +24,7 @@ namespace Daisy.Web.Controllers
         {
             var searchOptions = new SearchBlogOptions
             {
+                LanguageId = 1,
                 IsPublished = true,
                 PageSize = 10
             };

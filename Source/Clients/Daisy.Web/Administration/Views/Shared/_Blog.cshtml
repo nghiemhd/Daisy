@@ -1,49 +1,108 @@
 ﻿@using Daisy.Web.Framework.Extentions
 @model Daisy.Admin.Models.Blog
 
-<div class="form-horizontal">
-    @Html.HiddenFor(x => x.Id)
-    <div class="form-group">
-        @Html.LabelFor(x => x.Title, new { @class = "col-md-1" })
-        <div class="col-md-5">
-            @Html.TextBoxFor(x => x.Title, new { @class = "form-control max-width" })
-            @Html.ValidationMessageFor(x => x.Title)
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#blogInfo">Info</a></li>
+    <li><a data-toggle="tab" href="#blogSEO">SEO</a></li>
+</ul>
+<div class="tab-content">
+    <div id="blogInfo" class="tab-pane fade in active">
+        <div class="spacer"></div>
+        <div class="form-horizontal">
+            @Html.HiddenFor(x => x.Id)
+            <div class="form-group">
+                @Html.LabelFor(x => x.Language, new { @class = "col-md-1" })
+                <div class="col-md-3">
+                    @Html.DropDownListFor(
+                        x => x.LanguageId,
+                        new SelectList(Model.Languages, "Id", "Name", Model.LanguageId),
+                        new { @class = "form-control dropdown" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Title, new { @class = "col-md-1" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control max-width" })
+                    @Html.ValidationMessageFor(x => x.Title)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.ImageUrl, new { @class = "col-md-1" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control max-width" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Highlight, new { @class = "col-md-1" })
+                <div class="col-md-11 blog-width">
+                    @Html.TextAreaFor(x => x.Highlight, new { @id = "txtHighlight", @class = "blog-width form-control" })
+                    @Html.ValidationMessageFor(x => x.Highlight)
+                    <div id="textarea_feedback"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.IsPublished, new { @class = "col-md-1" })
+                <div class="col-md-3">
+                    @Html.CheckBoxFor(x => x.IsPublished, new { @id = "chkPublish", @class = "css-checkbox lrg" })
+                    <label for="chkPublish" class="css-label lrg klaus"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Content, new { @class = "col-md-1" })
+                <div class="col-md-11 blog-width">
+                    @Html.TextAreaFor(x => x.Content, new { @id = "txtContent", @class = "blog-width form-control mceEditor" })
+                    @Html.ValidationMessageFor(x => x.Content)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-1">
+                    <input id="btnSubmit" type="submit" class="btn btn-primary" value="Save" />
+                </div>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.ImageUrl, new { @class = "col-md-1" })
-        <div class="col-md-5">
-            @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control max-width" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Highlight, new { @class = "col-md-1" })
-        <div class="col-md-11 blog-width">
-            @Html.TextAreaFor(x => x.Highlight, new { @id = "txtHighlight", @class = "blog-width form-control" })
-            @Html.ValidationMessageFor(x => x.Highlight)
-            <div id="textarea_feedback"></div>
-        </div>        
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.IsPublished, new { @class = "col-md-1" })
-        <div class="col-md-3">            
-            @Html.CheckBoxFor(x => x.IsPublished, new { @id = "chkPublish", @class = "css-checkbox lrg" })
-            <label for="chkPublish" class="css-label lrg klaus"></label>
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Content, new { @class = "col-md-1" })
-        <div class="col-md-11 blog-width">
-            @Html.TextAreaFor(x => x.Content, new { @id = "txtContent", @class = "blog-width form-control mceEditor" })
-            @Html.ValidationMessageFor(x => x.Content)
-        </div>            
-    </div>    
-    <div class="form-group">
-        <div class="col-md-offset-1 col-md-1">
-            <input id="btnSubmit" type="submit" class="btn btn-primary" value="Save" />
+    <div id="blogSEO" class="tab-pane fade">
+        <div class="spacer"></div>
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Slug, new { @class = "col-md-1" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(x => x.Slug, new { @id = "txtSlug", @class = "form-control max-width" })
+                    @Html.ValidationMessageFor(x => x.Slug)
+                    <div id="slug_feedback"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.MetaTitle, new { @class = "col-md-1" })
+                <div class="col-md-11 blog-width">
+                    @Html.TextAreaFor(x => x.MetaTitle, new { @id = "txtMetaTitle", @class = "form-control", @style = "max-width:1175px;height:100px;resize:none;" })
+                    @Html.ValidationMessageFor(x => x.MetaTitle)
+                    <div id="metatitle_feedback"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.MetaKeywords, new { @class = "col-md-1" })
+                <div class="col-md-11 blog-width">
+                    @Html.TextAreaFor(x => x.MetaKeywords, new { @id = "txtMetaKeywords", @class = "form-control", @style = "max-width:1175px;height:100px;resize:none;" })
+                    @Html.ValidationMessageFor(x => x.MetaKeywords)
+                    <div id="metakeywords_feedback"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Tags, new { @class = "col-md-1" })
+                <div class="col-md-11 blog-width">
+                    @Html.TextAreaFor(x => x.Tags, new { @class = "blog-width form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.MetaDescription, new { @class = "col-md-1" })
+                <div class="col-md-11 blog-width">
+                    @Html.TextAreaFor(x => x.MetaDescription, new { @class = "blog-width form-control" })
+                </div>
+            </div>
         </div>
     </div>
 </div>
 @Html.RequireScript("/Administration/Scripts/common/common.js")
 @Html.RequireScript("/Administration/Scripts/tinymce3/tiny_mce.js")
-@Html.RequireScript("/Administration/Scripts/Blog/handletinymce.js")
+@Html.RequireScript("/Administration/Scripts/Blog/BlogDetail.js")

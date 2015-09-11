@@ -10,5 +10,7 @@ namespace Daisy.Service.ServiceContracts
     public interface ILocalizationService
     {
         IEnumerable<Language> GetLanguages();
+
+        Language GetLanguageBy(int id);
     }
 }

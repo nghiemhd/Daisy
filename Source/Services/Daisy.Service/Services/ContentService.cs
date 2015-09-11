@@ -23,6 +23,7 @@ namespace Daisy.Service
         private IRepository<DaisyEntities.Slider> sliderRepository;
         private IRepository<DaisyEntities.Photo> photoRepository;
         private IRepository<DaisyEntities.BlogPost> blogRepository;
+        private IRepository<DaisyEntities.UrlRecord> urlRecordRepository;
         private ILogger logger;
 
         public ContentService(IUnitOfWork unitOfWork, ILogger logger)
@@ -33,6 +34,7 @@ namespace Daisy.Service
             this.sliderRepository = this.unitOfWork.GetRepository<DaisyEntities.Slider>();
             this.photoRepository = this.unitOfWork.GetRepository<DaisyEntities.Photo>();
             this.blogRepository = this.unitOfWork.GetRepository<DaisyEntities.BlogPost>();
+            this.urlRecordRepository = this.unitOfWork.GetRepository<DaisyEntities.UrlRecord>();
         }
 
         //public void UpdateSlider(SliderDto sliderDto)
@@ -97,22 +99,22 @@ namespace Daisy.Service
             });            
         }
 
-        public void UpdateBlog(DaisyEntities.BlogPost blog)
+        public void UpdateBlog(DaisyEntities.BlogPost entity, string slug)
         {
             Process(() =>
             {
-                if (blog == null)
+                if (entity == null)
                 {
-                    throw new ArgumentNullException("blog");
+                    throw new ArgumentNullException("entity");
                 }
 
-                if (blog.Id <= 0)
+                if (entity.Id <= 0)
                 {
-                    blogRepository.Insert(blog);
+                    var blog = blogRepository.Insert(entity);                    
                 }
                 else
                 {
-                    blogRepository.Update(blog);
+                    blogRepository.Update(entity);
                 }
 
                 this.unitOfWork.Commit();

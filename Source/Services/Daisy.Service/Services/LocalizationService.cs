@@ -33,5 +33,15 @@ namespace Daisy.Service
 
             return languages as IEnumerable<Language>;
         }
+
+        public Language GetLanguageBy(int id)
+        {
+            var language = Process(() =>
+            {
+                return this.languageRepository.Query().Where(x => x.Id == id).FirstOrDefault();
+            });
+
+            return language as Language;
+        }
     }
 }

@@ -12,8 +12,10 @@
     export interface IBlog {
         Id?: number;
         Title: string;
+        Language: string;
         Content: string;
         CreatedDate: string;
+        UpdatedDate: string;
         IsPublished: boolean;
     }    
 
@@ -144,7 +146,9 @@
 
             $.each(blogs, function (index, item) {
                 var createdDate: number = Common.Helper.getDateTimeValue(item.CreatedDate);
-                var date = dateFormat(new Date(createdDate), 'yyyy-mm-dd HH:MM:ss');
+                var updatedDate: number = Common.Helper.getDateTimeValue(item.UpdatedDate);
+                var cdate = dateFormat(new Date(createdDate), 'yyyy-mm-dd HH:MM:ss');
+                var udate = dateFormat(new Date(updatedDate), 'yyyy-mm-dd HH:MM:ss');
                 var row =
                     '<tr>' +
                     '<td>' +
@@ -152,9 +156,10 @@
                     '<label for="chk' + item.Id + '" class="css-label lrg klaus"></label>' +
                     '</td>' +
                     '<td><a class="table-link" href="/Admin/Blog/Edit/' + item.Id + '">' + item.Title + '</a></td>' +
-                    //'<td>' + item.Content + '</td>' +
+                    '<td>' + item.Language + '</td>' +
                     '<td id="status' + item.Id + '">' + item.IsPublished + '</td>' +
-                    '<td>' + date + '</td>' +
+                    '<td>' + cdate + '</td>' +
+                    '<td>' + udate + '</td>' +
                     '</tr>';
                 $('#gridBlogs tbody').append(row);
             });

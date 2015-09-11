@@ -2,7 +2,7 @@
     [Id] [int] NOT NULL IDENTITY,
     [EntityId] [int] NOT NULL,
     [EntityName] [varchar](100) NOT NULL,
-    [Slug] [varchar](100),
+    [Slug] [varchar](100) NOT NULL,
     [IsActive] [bit] NOT NULL DEFAULT 1,
     [LanguageId] [int] NOT NULL DEFAULT 0,
     CONSTRAINT [PK_UrlRecord] PRIMARY KEY ([Id])

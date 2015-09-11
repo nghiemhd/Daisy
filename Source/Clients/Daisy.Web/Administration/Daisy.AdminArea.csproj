@@ -158,7 +158,7 @@
     <Content Include="Content\toastr.less" />
     <None Include="Properties\PublishProfiles\DaisyAdmin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\Blog\handleTinymce.js" />
+    <Content Include="Scripts\Blog\BlogDetail.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-dialog.js" />
     <Content Include="Scripts\bootstrap.js" />

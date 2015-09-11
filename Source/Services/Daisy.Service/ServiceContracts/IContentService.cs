@@ -19,7 +19,7 @@ namespace Daisy.Service.ServiceContracts
 
         void DeleteSliderPhotos(DaisyEntities.Slider slider, int[] photoIds);
 
-        void UpdateBlog(DaisyEntities.BlogPost blog);
+        void UpdateBlog(DaisyEntities.BlogPost entity, string slug);
 
         PagedList<DaisyEntities.BlogPost> SearchBlogs(SearchBlogOptions options);
 

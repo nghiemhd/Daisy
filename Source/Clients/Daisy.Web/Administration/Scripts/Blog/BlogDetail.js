@@ -1,4 +1,4 @@
-﻿function LoadTinymce() {
+﻿function loadTinymce() {
     tinymce.init({
         mode: "textareas",
         editor_selector: "mceEditor",
@@ -39,18 +39,39 @@
     });
 }
 
-$(document).ready(function () {
-    LoadTinymce();
-
-    var text_max = 500;
-    var text_length = $('#txtHighlight').val().length;
+function countCharacters(maxCharacter, textareaId, labelId)
+{
+    var text_max = maxCharacter;
+    var text_length = $(textareaId).val().length;
     var text_remaining = text_max - text_length;
-    $('#textarea_feedback').html(text_remaining + ' characters remaining');
+    $(labelId).html(text_remaining + ' characters remaining');
 
-    $('#txtHighlight').keyup(function () {
-        text_length = $('#txtHighlight').val().length;
+    $(textareaId).keyup(function () {
+        text_length = $(textareaId).val().length;
         text_remaining = text_max - text_length;
 
-        $('#textarea_feedback').html(text_remaining + ' characters remaining');
+        $(labelId).html(text_remaining + ' characters remaining');
     });
+}
+
+$(document).ready(function () {
+    loadTinymce();
+
+    countCharacters(500, '#txtHighlight', '#textarea_feedback');
+    countCharacters(100, '#txtSlug', '#slug_feedback');
+    countCharacters(400, '#txtMetaTitle', '#metatitle_feedback');
+    countCharacters(400, '#txtMetaKeywords', '#metakeywords_feedback');
+
+    //var text_max = 500;
+    //var text_length = $('#txtHighlight').val().length;
+    //var text_remaining = text_max - text_length;
+    //$('#textarea_feedback').html(text_remaining + ' characters remaining');
+
+    //$('#txtHighlight').keyup(function () {
+    //    text_length = $('#txtHighlight').val().length;
+    //    text_remaining = text_max - text_length;
+
+    //    $('#textarea_feedback').html(text_remaining + ' characters remaining');
+    //});
 });
+

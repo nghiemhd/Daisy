@@ -162,7 +162,7 @@ namespace Daisy.Core.Migrations
                     Id = c.Int(nullable: false, identity: true),
                     EntityId = c.Int(nullable: false),
                     EntityName = c.String(nullable: false, maxLength: 100, unicode: false),
-                    Slug = c.String(maxLength: 100, unicode: false),
+                    Slug = c.String(nullable: false, maxLength: 100, unicode: false),
                     IsActive = c.Boolean(nullable: false, defaultValue: true),
                     LanguageId = c.Int(nullable: false, defaultValue: 0)
                 })
