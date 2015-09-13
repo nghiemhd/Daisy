@@ -91,14 +91,18 @@
     <Compile Include="DataContracts\SearchBlogOptions.cs" />
     <Compile Include="DataContracts\SearchPhotoOptions.cs" />
     <Compile Include="DataContracts\SliderDto.cs" />
+    <Compile Include="Seo\SeoExtensions.cs" />
+    <Compile Include="ServiceContracts\IBlogService.cs" />
     <Compile Include="ServiceContracts\IContentService.cs" />
     <Compile Include="ServiceContracts\IFlickrService.cs" />
     <Compile Include="ServiceContracts\ILocalizationService.cs" />
     <Compile Include="ServiceContracts\IUploadService.cs" />
+    <Compile Include="ServiceContracts\IUrlRecordService.cs" />
     <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="DataContracts\DataResponse.cs" />
+    <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\ContentService.cs" />
     <Compile Include="Services\FlickrService.cs" />
     <Compile Include="Services\HandleErrorService.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="ServiceContracts\IAuthenticationService.cs" />
     <Compile Include="ServiceContracts\IPhotoService.cs" />
     <Compile Include="Services\UploadService.cs" />
+    <Compile Include="Services\UrlRecordService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Daisy.Common\Daisy.Common.csproj">

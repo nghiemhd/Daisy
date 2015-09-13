@@ -10,11 +10,6 @@ namespace Daisy.Core.Entities
 {
     public class BlogPost : BaseEntity
     {
-        public BlogPost()
-        {
-            Photos = new HashSet<Photo>();
-        }
-
         public int LanguageId { get; set; }
 
         public string Title { get; set; }
@@ -34,8 +29,6 @@ namespace Daisy.Core.Entities
         public string MetaDescription { get; set; }
 
         public string MetaTitle { get; set; }
-
-        public virtual ICollection<Photo> Photos { get; set; }
 
         [ForeignKey("LanguageId")]
         public virtual Language Language { get; set; }

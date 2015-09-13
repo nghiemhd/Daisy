@@ -74,6 +74,10 @@ namespace Daisy.Core.Infrastructure
 
         public virtual void Delete(T entity)
         {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
             this.dbSet.Remove(entity);                        
         }
 
@@ -107,6 +111,10 @@ namespace Daisy.Core.Infrastructure
 
         public void RemoveRange(IEnumerable<T> entities)
         {
+            if (entities == null)
+            {
+                throw new ArgumentNullException("entities");
+            }
             this.EFContext.Set<T>().RemoveRange(entities);
         }
     }

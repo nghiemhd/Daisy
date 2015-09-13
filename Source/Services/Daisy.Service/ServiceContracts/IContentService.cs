@@ -17,14 +17,6 @@ namespace Daisy.Service.ServiceContracts
 
         void AddSliderPhotos(DaisyEntities.Slider slider, int[] photoIds);
 
-        void DeleteSliderPhotos(DaisyEntities.Slider slider, int[] photoIds);
-
-        void UpdateBlog(DaisyEntities.BlogPost entity, string slug);
-
-        PagedList<DaisyEntities.BlogPost> SearchBlogs(SearchBlogOptions options);
-
-        void PublishBlogs(IList<int> blogIds, bool isPublished);
-
-        DaisyEntities.BlogPost GetBlogBy(int id);
+        void DeleteSliderPhotos(DaisyEntities.Slider slider, int[] photoIds);        
     }
 }

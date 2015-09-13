@@ -42,7 +42,5 @@ namespace Daisy.Core.Entities
         public virtual ICollection<Album> Albums { get; set; }
 
         public virtual ICollection<Slider> Sliders { get; set; }
-
-        public virtual ICollection<BlogPost> Blogs { get; set; }
     }
 }

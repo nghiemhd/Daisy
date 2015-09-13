@@ -1,4 +1,5 @@
-﻿using Daisy.Core.Infrastructure;
+﻿using Daisy.Core.Caching;
+using Daisy.Core.Infrastructure;
 using Daisy.Logging;
 using Daisy.Security;
 using Daisy.Service.ServiceContracts;
@@ -43,13 +44,16 @@ namespace Daisy.Service
             container.RegisterType<IDbContext, DataContext>(new InjectionConstructor(connectionString));
             container.RegisterType<IUnitOfWork, UnitOfWork<DataContext>>();
             container.RegisterType<ILogger, Logger>(new InjectionConstructor("DaisyWeb"));
+            container.RegisterType<ICacheManager, MemoryCacheManager>();
             container.RegisterType<IAuthenticationService, AuthenticationService>();
             container.RegisterType<IFlickrService, FlickrService>(new InjectionConstructor());
             container.RegisterType<IAlbumService, AlbumService>();
             container.RegisterType<IPhotoService, PhotoService>();
             container.RegisterType<IUploadService, UploadService>();
             container.RegisterType<IContentService, ContentService>();
+            container.RegisterType<IBlogService, BlogService>();
             container.RegisterType<ILocalizationService, LocalizationService>();
+            container.RegisterType<IUrlRecordService, UrlRecordService>();
         }
     }
 }

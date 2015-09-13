@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
+using RouteDebug;
+
 namespace Daisy.Web
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -23,7 +25,8 @@ namespace Daisy.Web
 
             AutoMapperConfig.RegisterMappings();
 
-            log4net.Config.XmlConfigurator.Configure();            
+            log4net.Config.XmlConfigurator.Configure();
+
         }
     }
 }

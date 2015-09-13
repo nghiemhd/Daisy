@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Daisy.Common;
+using Daisy.Common.Extensions;
 using Daisy.Logging.Extensions;
 using Daisy.Service.Common;
 using Daisy.Service.DataContracts;
@@ -17,13 +18,15 @@ namespace Daisy.Admin.Controllers
     [Authorize]
     public class BlogController : Controller
     {
-        private readonly IContentService contentService;
+        private readonly IBlogService blogService;
         private readonly ILocalizationService localizationService;
+        private readonly IUrlRecordService urlRecordService;
 
-        public BlogController(IContentService contentService, ILocalizationService localizationService)
+        public BlogController(IBlogService blogService, ILocalizationService localizationService, IUrlRecordService urlRecordService)
         {
-            this.contentService = contentService;
+            this.blogService = blogService;
             this.localizationService = localizationService;
+            this.urlRecordService = urlRecordService;
         }
 
         public ActionResult Index()
@@ -49,11 +52,13 @@ namespace Daisy.Admin.Controllers
         }
 
         public ActionResult Edit(int id)
-        {
+        {            
             var languages = GetLanguages();
-            var blog = contentService.GetBlogBy(id);
+            var blog = blogService.GetBlogBy(id);
+            var slug = urlRecordService.GetActiveSlug(blog.Id, typeof(DaisyEntities.BlogPost).Name, blog.LanguageId);
             var model = Mapper.Map<DaisyModels.Blog>(blog);
             model.Languages = languages;
+            model.Slug = slug;
             return View(model);
         }
 
@@ -63,7 +68,13 @@ namespace Daisy.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var entity = Mapper.Map<DaisyEntities.BlogPost>(model);
-                contentService.UpdateBlog(entity, model.Slug);
+                blogService.UpdateBlog(entity);
+
+                if (model.Slug.IsNullOrEmpty())
+                {
+                    model.Slug = model.Title;
+                }
+                urlRecordService.SaveSlug<DaisyEntities.BlogPost>(entity, model.Slug, model.LanguageId);
 
                 return RedirectToAction("Index");
             }
@@ -78,15 +89,27 @@ namespace Daisy.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var entity = contentService.GetBlogBy(model.Id);
+                var entity = blogService.GetBlogBy(model.Id);
                 entity.LanguageId = model.LanguageId;
                 entity.Title = model.Title;
                 entity.Highlight = model.Highlight;
                 entity.ImageUrl = model.ImageUrl;
                 entity.IsPublished = model.IsPublished;
                 entity.Content = model.Content;
-                contentService.UpdateBlog(entity, model.Slug);
+
+                entity.MetaDescription = model.MetaDescription;
+                entity.MetaKeywords = model.MetaKeywords;
+                entity.MetaTitle = model.MetaTitle;
+                entity.Tags = model.Tags;
+
+                blogService.UpdateBlog(entity);
+                if (model.Slug.IsNullOrEmpty())
+                {
+                    model.Slug = model.Title;
+                }
+                model.Slug = urlRecordService.SaveSlug<DaisyEntities.BlogPost>(entity, model.Slug, model.LanguageId);
                 TempData["message"] = "Update successfully";
+                ModelState.Clear();
             }
             var languages = GetLanguages();
             model.Languages = languages;
@@ -103,7 +126,7 @@ namespace Daisy.Admin.Controllers
                     throw new ArgumentNullException("options");
                 }
                 var searchOptions = Mapper.Map<SearchBlogOptions>(options);
-                var blogs = contentService.SearchBlogs(searchOptions);
+                var blogs = blogService.SearchBlogs(searchOptions);
                 var languages = localizationService.GetLanguages();
                 var blogsModel = Mapper.Map<List<DaisyModels.Blog>>(blogs.Items);
                 foreach (var blog in blogsModel)
@@ -130,7 +153,7 @@ namespace Daisy.Admin.Controllers
         {
             try
             {
-                contentService.PublishBlogs(blogIds, isPublished);
+                blogService.PublishBlogs(blogIds, isPublished);
                 return Json(ResponseStatus.Success.ToString());
             }
             catch (Exception ex)

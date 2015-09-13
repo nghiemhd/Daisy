@@ -30,7 +30,7 @@
                             <small><span class="daisy-font1">@blog.CreatedDate.ToString("MMMM dd, yyyy")</span></small>
                         </h2>
                         <p class="text-justify">@blog.Highlight</p>
-                        <a href="/blog/@blog.Id" class="btn btn-default btn-lg">Read More</a>
+                        <a href="@Url.RouteUrl("BlogPost", new { slug = blog.Slug })" class="btn btn-default btn-lg">Read More</a>
                         <hr>
                     </div>
                 }

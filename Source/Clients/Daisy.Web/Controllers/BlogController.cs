@@ -7,17 +7,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DaisyEntities = Daisy.Core.Entities;
 using DaisyModels = Daisy.Web.Models;
 
 namespace Daisy.Web.Controllers
 {
     public class BlogController : Controller
     {
-        private readonly IContentService contentService;
+        private readonly IBlogService blogService;
+        private readonly IUrlRecordService urlRecordService;
 
-        public BlogController(IContentService contentService)
+        public BlogController(IBlogService blogService, IUrlRecordService urlRecordService)
         {
-            this.contentService = contentService;
+            this.blogService = blogService;
+            this.urlRecordService = urlRecordService;
         }
 
         public ActionResult Index()
@@ -28,9 +31,15 @@ namespace Daisy.Web.Controllers
                 IsPublished = true,
                 PageSize = 10
             };
-            var blogs = contentService.SearchBlogs(searchOptions);
+            var blogs = blogService.SearchBlogs(searchOptions);
 
             var blogsModel = Mapper.Map<List<DaisyModels.Blog>>(blogs.Items);
+
+            foreach (var blog in blogsModel)
+            {
+                blog.Slug = urlRecordService.GetActiveSlug(blog.Id, typeof(DaisyEntities.BlogPost).Name, searchOptions.LanguageId.Value);
+            }
+
             var pagedListBlogs = new PagedList<DaisyModels.Blog>(blogsModel, blogs.PageIndex, blogs.PageSize, blogs.TotalCount);
             var result = new DaisyModels.PagedListBlogViewModel
             {
@@ -40,10 +49,33 @@ namespace Daisy.Web.Controllers
             return View(result);
         }
 
-        [Route("blog/{blogId:int}")]
-        public ActionResult Detail(int blogId)
+        //[Route("blog/{blogId:int}")]
+        //public ActionResult Detail(int blogId)
+        //{
+        //    var blog = blogService.GetBlogBy(blogId);
+        //    if (blog == null || !blog.IsPublished)
+        //    {
+        //        return PartialView("PageNotFound");
+        //    }
+
+        //    var blogModel = Mapper.Map<DaisyModels.Blog>(blog);
+
+        //    var model = new DaisyModels.BlogDetailViewModel
+        //    {
+        //        Blog = blogModel
+        //    };
+
+        //    return View(model);
+        //}
+
+        public ActionResult Detail(string slug)
         {
-            var blog = contentService.GetBlogBy(blogId);
+            var urlRecord = urlRecordService.GetUrlRecordBy(typeof(DaisyEntities.BlogPost).Name, slug, 1);
+            if (urlRecord == null || !urlRecord.IsActive)
+            {
+                return PartialView("PageNotFound");
+            }
+            var blog = blogService.GetBlogBy(urlRecord.EntityId);
             if (blog == null || !blog.IsPublished)
             {
                 return PartialView("PageNotFound");

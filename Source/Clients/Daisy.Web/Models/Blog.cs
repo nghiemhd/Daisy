@@ -17,6 +17,8 @@ namespace Daisy.Web.Models
 
         public string ImageUrl { get; set; }
 
+        public string Slug { get; set; }
+
         public DateTime CreatedDate { get; set; }
     }
 }
