@@ -16,6 +16,7 @@ namespace Daisy.Core.Migrations
                         ThumbnailUrl = c.String(),
                         IsPublished = c.Boolean(nullable: false, defaultValue: true),
                         FlickrAlbumId = c.String(maxLength: 50, unicode: false),
+                        DisplayOrder = c.Int(nullable:false, defaultValue: 0),
                         IsDeleted = c.Boolean(nullable: false, defaultValue: false),
                         UpdatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
                         UpdatedBy = c.String(nullable: false, maxLength: 50, unicode: false, defaultValueSql: "suser_name()"),

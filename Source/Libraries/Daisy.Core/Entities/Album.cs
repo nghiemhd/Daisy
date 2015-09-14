@@ -26,6 +26,8 @@ namespace Daisy.Core.Entities
         [MaxLength(100)]
         public string FlickrAlbumId { get; set; }
 
+        public int DisplayOrder { get; set; }
+
         public virtual ICollection<Photo> Photos { get; set; }
     }
 }

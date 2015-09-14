@@ -209,7 +209,7 @@
             $('#chkSelectAll').prop('checked', false);
 
             $.each(albums, function (index, item) {
-                var grid = '<div class="col-sm-3 col-md-2 col-lg-2" style= "background-color:#101010;" > ' +
+                var grid = '<div class="col-sm-3 col-md-2 col-lg-2 draggable-item" style= "background-color:#101010;" draggable="true"> ' +
                     '<div id="' + item.Id + '" class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.AlbumThumbnailUrl + ')">';
                 if (item.IsPublished) {
                     grid += '<img src="' + Common.Helper.applicationRoot + 'Administration/Images/symbol_check.png" alt="published" style="width:30px;float:right;" />';
@@ -222,6 +222,15 @@
                 '</div>' +
                 '</div>';
                 $('#gridAlbums').append(grid);
+            });
+
+            Common.DragDropHandler.items = document.querySelectorAll('#gridAlbums .draggable-item');
+            [].forEach.call(Common.DragDropHandler.items, function (item) {
+                item.addEventListener('dragenter', Common.DragDropHandler.handleDragEnter, false);
+                item.addEventListener('dragover', Common.DragDropHandler.handleDragOver, false);
+                item.addEventListener('dragleave', Common.DragDropHandler.handleDragLeave, false);
+                item.addEventListener('drop', Common.DragDropHandler.handleDrop, false);
+                item.addEventListener('dragend', Common.DragDropHandler.handleDragEnd, false);
             });
         }
 

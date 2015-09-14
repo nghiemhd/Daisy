@@ -190,7 +190,8 @@ namespace Daisy.Service
 
                 int totalCount = query.Count();
                 query = query
-                        .OrderBy(x => x.Id)
+                        .OrderByDescending(x => x.DisplayOrder)
+                        .ThenByDescending(x => x.Id)
                         .Skip(options.PageSize * options.PageIndex)
                         .Take(options.PageSize);
 

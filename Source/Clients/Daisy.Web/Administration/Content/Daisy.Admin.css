@@ -160,3 +160,11 @@ textarea.blog-width {
 .photo:hover .icon_fullscreen{
     display: block;
 }
+
+.draggable-item {
+    cursor: move;
+    border: 2px solid #000;
+}
+.draggable-item.over {
+    border: 2px dashed #fff;
+}

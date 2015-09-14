@@ -139,7 +139,8 @@ namespace Daisy.Service
             }
 
             this.unitOfWork.Commit();
-
+            string key = string.Format(URLRECORD_ACTIVE_BY_ID_NAME_LANGUAGE_KEY, entity.Id, entityName, languageId);
+            cacheManager.Remove(key);
             return urlRecord.Slug;
         }
 

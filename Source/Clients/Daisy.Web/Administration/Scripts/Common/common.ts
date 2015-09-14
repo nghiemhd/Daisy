@@ -178,4 +178,43 @@
             return Number(date);
         }
     }
+
+    export class DragDropHandler {
+        static items;
+        static handleDragOver = function (e) {
+            if (e.preventDefault) {
+                e.preventDefault(); // Necessary. Allows us to drop.
+            }
+            e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+            return false;
+        }
+
+        static handleDragEnter = function (e) {
+            // this / e.target is the current hover target.
+            this.classList.add('over');
+        }
+
+        static handleDragLeave = function (e) {
+            this.classList.remove('over');  // this / e.target is previous target element.
+        }
+
+        static handleDrop = function (e) {
+            // this / e.target is current target element.
+
+            if (e.stopPropagation) {
+                e.stopPropagation(); // stops the browser from redirecting.
+            }
+
+            // See the section on the DataTransfer object.
+
+            return false;
+        }
+
+        static handleDragEnd = function (e) {
+            // this/e.target is the source node.
+            [].forEach.call(DragDropHandler.items, function (item) {
+                item.classList.remove('over');
+            });
+        }
+    }
 } 

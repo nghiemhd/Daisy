@@ -127,7 +127,7 @@ namespace Daisy.Admin.Controllers
                 }
                 var searchOptions = Mapper.Map<SearchBlogOptions>(options);
                 var blogs = blogService.SearchBlogs(searchOptions);
-                var languages = localizationService.GetLanguages();
+                var languages = localizationService.GetLanguages().ToList();
                 var blogsModel = Mapper.Map<List<DaisyModels.Blog>>(blogs.Items);
                 foreach (var blog in blogsModel)
                 {
