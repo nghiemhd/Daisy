@@ -181,6 +181,15 @@
 
     export class DragDropHandler {
         static items;
+        static dragSrcEl = null;
+
+        static handleDragStart = function (e) {
+            DragDropHandler.dragSrcEl = this;
+
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+        }
+
         static handleDragOver = function (e) {
             if (e.preventDefault) {
                 e.preventDefault(); // Necessary. Allows us to drop.
@@ -204,8 +213,11 @@
             if (e.stopPropagation) {
                 e.stopPropagation(); // stops the browser from redirecting.
             }
-
-            // See the section on the DataTransfer object.
+            if (DragDropHandler.dragSrcEl != this) {
+                // Set the source item's HTML to the HTML of the item we dropped on.
+                DragDropHandler.dragSrcEl.innerHTML = this.innerHTML;
+                this.innerHTML = e.dataTransfer.getData('text/html');
+            }
 
             return false;
         }

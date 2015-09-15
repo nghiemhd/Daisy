@@ -190,7 +190,7 @@ namespace Daisy.Service
 
                 int totalCount = query.Count();
                 query = query
-                        .OrderByDescending(x => x.DisplayOrder)
+                        .OrderBy(x => x.DisplayOrder)
                         .ThenByDescending(x => x.Id)
                         .Skip(options.PageSize * options.PageIndex)
                         .Take(options.PageSize);
@@ -300,6 +300,28 @@ namespace Daisy.Service
                     .Where(x => albumIds.Contains(x.Id))
                     .ToList();
                 albumRepository.RemoveRange(albums);
+
+                this.unitOfWork.Commit();
+            });
+        }
+
+        public void UpdateAlbumOrder(int[] albumIds)
+        {
+            Process(() =>
+            {
+                var albums = albumRepository.Query()
+                    .Where(x => albumIds.Contains(x.Id))
+                    .OrderBy(x => x.DisplayOrder)
+                    .ToList();
+
+                var minOrder = albums.Select(x => x.DisplayOrder).FirstOrDefault();
+
+                foreach (int albumId in albumIds)
+                {
+                    var album = albums.Where(x => x.Id == albumId).First();
+                    album.DisplayOrder = minOrder;
+                    minOrder++;
+                }
 
                 this.unitOfWork.Commit();
             });

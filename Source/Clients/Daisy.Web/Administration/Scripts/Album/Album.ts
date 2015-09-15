@@ -7,6 +7,7 @@
         static publishAlbumsRequestUrl: string;
         static publishPhotosRequestUrl: string;
         static deleteAlbumsRequestUrl: string;
+        static updateAlbumOrderRequestUrl: string;
 
         search(options: IAlbumSearchOptions) {
             var data = {
@@ -161,6 +162,42 @@
                 }
             });
         }
+
+        updateAlbumOrder(albumIds: number[]) {
+            $.ajax({
+                url: DaisyAlbum.updateAlbumOrderRequestUrl,
+                type: 'POST',
+                content: 'application/json; charset=utf-8',
+                dataType: 'json',
+                data: {
+                    albumIds: albumIds
+                },
+                success: (response) => {
+                    if (response == "Success") {
+                        toastr.success('Update successfully');
+                    }
+                    else {
+                        toastr.options = {
+                            closeButton: true,
+                            positionClass: "toast-top-full-width",
+                            timeOut: 0,
+                            extendedTimeOut: 0
+                        };
+                        toastr.error(response);
+                    }
+                },
+                error: function (xhr, desc, err) {
+                    console.log(xhr);
+                    console.log('Desc: ' + desc + '\nErr:' + err);
+                },
+                beforeSend: function () {
+                    $('#loader').show();
+                },
+                complete: function () {
+                    $('#loader').hide();
+                }
+            });
+        }
        
         private searchCallback(response: any) {
             Album.DaisyAlbum.albums = response.Albums.Items;
@@ -226,6 +263,7 @@
 
             Common.DragDropHandler.items = document.querySelectorAll('#gridAlbums .draggable-item');
             [].forEach.call(Common.DragDropHandler.items, function (item) {
+                item.addEventListener('dragstart', Common.DragDropHandler.handleDragStart, false);
                 item.addEventListener('dragenter', Common.DragDropHandler.handleDragEnter, false);
                 item.addEventListener('dragover', Common.DragDropHandler.handleDragOver, false);
                 item.addEventListener('dragleave', Common.DragDropHandler.handleDragLeave, false);

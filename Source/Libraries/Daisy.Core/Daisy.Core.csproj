@@ -87,7 +87,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Migrations\script.sql" />
+    <Content Include="Migrations\UpdateData.sql" />
+    <Content Include="Migrations\UpdateSchema.sql" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

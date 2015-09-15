@@ -106,7 +106,20 @@ namespace Daisy.Admin.Controllers
             }
             catch (Exception ex)
             {
+                return Json(LogExtension.GetFinalInnerException(ex).Message);
+            }
+        }
 
+        [HttpPost]
+        public JsonResult UpdateAlbumOrder(int[] albumIds)
+        {
+            try
+            {
+                albumService.UpdateAlbumOrder(albumIds);
+                return Json(ResponseStatus.Success.ToString());
+            }
+            catch (Exception ex)
+            {
                 return Json(LogExtension.GetFinalInnerException(ex).Message);
             }
         }
