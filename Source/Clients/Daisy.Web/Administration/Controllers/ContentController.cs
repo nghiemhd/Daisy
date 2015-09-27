@@ -29,7 +29,10 @@ namespace Daisy.Admin.Controllers
         public ActionResult Slider()
         {
             var slider = contentService.GetFirstSlider();
+            var photos = contentService.GetPhotosOfSlider(slider.Id);
+
             var model = Mapper.Map<DaisyModels.SliderViewModel>(slider);
+            model.Photos = Mapper.Map<List<DaisyModels.Photo>>(photos);
 
             return View(model);
         }
@@ -74,13 +77,13 @@ namespace Daisy.Admin.Controllers
             {
                 if (photoIds.Length > Constants.MaxSliderPhotos)
                 {
-                    return Json("Cannot add more than 10 photos.");
+                    return Json(string.Format("Cannot add more than {0} photos.", Constants.MaxSliderPhotos));
                 }
 
                 var slider = contentService.GetFirstSlider();
-                if (slider.Photos.Count + photoIds.Count() > Constants.MaxSliderPhotos)
+                if (slider.SliderPhotos.Count + photoIds.Count() > Constants.MaxSliderPhotos)
                 {
-                    return Json("Slider cannot have more than 10 photos.");
+                    return Json(string.Format("Slider cannot have more than {0} photos.", Constants.MaxSliderPhotos));
                 }
 
                 contentService.AddSliderPhotos(slider, photoIds);
@@ -103,6 +106,20 @@ namespace Daisy.Admin.Controllers
             }
             catch (Exception ex)
             {                
+                return Json(LogExtension.GetFinalInnerException(ex).Message);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult UpdatePhotoOrder(int sliderId, int[] photoIds)
+        {
+            try
+            {
+                contentService.UpdateSliderPhotoOrder(sliderId, photoIds);
+                return Json(ResponseStatus.Success.ToString());
+            }
+            catch (Exception ex)
+            {
                 return Json(LogExtension.GetFinalInnerException(ex).Message);
             }
         }

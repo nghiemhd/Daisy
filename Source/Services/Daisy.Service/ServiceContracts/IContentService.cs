@@ -17,6 +17,10 @@ namespace Daisy.Service.ServiceContracts
 
         void AddSliderPhotos(DaisyEntities.Slider slider, int[] photoIds);
 
-        void DeleteSliderPhotos(DaisyEntities.Slider slider, int[] photoIds);        
+        void DeleteSliderPhotos(DaisyEntities.Slider slider, int[] photoIds);
+
+        List<DaisyEntities.Photo> GetPhotosOfSlider(int sliderId);
+
+        void UpdateSliderPhotoOrder(int sliderId, int[] photoIds);
     }
 }

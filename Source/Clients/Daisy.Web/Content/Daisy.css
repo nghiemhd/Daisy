@@ -243,3 +243,7 @@ input[type="checkbox"].input-validation-error {
     text-align: justify;
     text-justify: inter-word;
 }
+
+.custom-p p {
+    font-size: 1.2em;
+}

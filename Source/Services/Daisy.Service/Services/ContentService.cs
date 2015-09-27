@@ -1,6 +1,7 @@
 ﻿using Daisy.Core.Infrastructure;
 using Daisy.Logging;
 using Daisy.Service.ServiceContracts;
+using System.Collections.Generic;
 using System.Linq;
 using DaisyEntities = Daisy.Core.Entities;
 
@@ -11,6 +12,7 @@ namespace Daisy.Service
         private IUnitOfWork unitOfWork;
         private IRepository<DaisyEntities.Slider> sliderRepository;
         private IRepository<DaisyEntities.Photo> photoRepository;
+        private IRepository<DaisyEntities.SliderPhoto> sliderPhotoRepository;
         private ILogger logger;
 
         public ContentService(IUnitOfWork unitOfWork, ILogger logger)
@@ -20,6 +22,7 @@ namespace Daisy.Service
             this.logger = logger;
             this.sliderRepository = this.unitOfWork.GetRepository<DaisyEntities.Slider>();
             this.photoRepository = this.unitOfWork.GetRepository<DaisyEntities.Photo>();
+            this.sliderPhotoRepository = this.unitOfWork.GetRepository<DaisyEntities.SliderPhoto>();
         }
 
         //public void UpdateSlider(SliderDto sliderDto)
@@ -61,10 +64,14 @@ namespace Daisy.Service
         {
             Process(() =>
             {
-                var photos = photoRepository.Query().Where(x => photoIds.Contains(x.Id)).ToList();
-                foreach (var photo in photos)
+                foreach (var photoId in photoIds)
                 {
-                    slider.Photos.Add(photo);
+                    var sliderPhoto = new DaisyEntities.SliderPhoto
+                    {
+                        SliderId = slider.Id,
+                        PhotoId = photoId
+                    };
+                    sliderPhotoRepository.Insert(sliderPhoto);
                 }
 
                 this.unitOfWork.Commit();
@@ -75,13 +82,50 @@ namespace Daisy.Service
         {
             Process(() =>
             {
-                var photosToDelete = photoRepository.Query().Where(x => photoIds.Contains(x.Id)).ToList();
-                foreach (var photo in photosToDelete)
-                {
-                    slider.Photos.Remove(photo);
-                }
+                var photosToDelete = sliderPhotoRepository.Query().Where(x => photoIds.Contains(x.PhotoId)).ToList();
+                sliderPhotoRepository.RemoveRange(photosToDelete);
                 this.unitOfWork.Commit();
             });            
-        }        
+        }
+
+        public List<DaisyEntities.Photo> GetPhotosOfSlider(int sliderId)
+        {
+            var result = Process(() =>
+            {
+                var query = from sp in sliderPhotoRepository.Query()
+                            join p in photoRepository.Query()
+                            on sp.PhotoId equals p.Id
+                            where sp.SliderId == sliderId
+                            orderby sp.DisplayOrder
+                            select p;
+
+                return query.ToList();
+            });
+
+            return (List<DaisyEntities.Photo>)result;
+        }
+
+        public void UpdateSliderPhotoOrder(int sliderId, int[] photoIds)
+        {
+            Process(() =>
+            {
+                var minOrder = sliderPhotoRepository.Query()
+                    .Where(x => x.SliderId == sliderId && photoIds.Contains(x.PhotoId))
+                    .OrderBy(x => x.DisplayOrder)
+                    .Select(x => x.DisplayOrder)
+                    .FirstOrDefault();
+
+                foreach (var photoId in photoIds)
+                {
+                    var sliderPhoto = sliderPhotoRepository.Query()
+                        .Where(x => x.SliderId == sliderId && x.PhotoId == photoId).First();
+
+                    sliderPhoto.DisplayOrder = minOrder;
+                    minOrder++;
+                }
+
+                this.unitOfWork.Commit();
+            });
+        }
     }
 }

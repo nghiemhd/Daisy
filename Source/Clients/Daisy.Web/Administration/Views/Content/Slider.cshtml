@@ -4,8 +4,9 @@
 }
 
 <div class="spacer btn-group">
-    <button id="btnDeletePhotos" data-request-url="@Url.Action("DeleteSliderPhotos", "Content")" class="btn btn-primary">Delete photos</button>
+    <button id="btnDeletePhotos" class="btn btn-primary">Delete photos</button>
     @Html.ActionLink("Add photos", "ViewPhotos", "Content", null, new { @class = "modal-link btn btn-primary" })
+    <button id="btnUpdateOrders" class="btn btn-primary">Update</button>
 </div>
 <hr />
 @Html.HiddenFor(x => x.Id, new { id = "sliderId" })
@@ -17,17 +18,19 @@
 
     if(@Model.Photos.Count > 0)
     { 
-        <div>
-            <input type="checkbox" id="chkSelectAll">&nbsp;Select all
+        <div class="container-fluid">
+            <input type="checkbox" id="chkSelectAll" class="css-checkbox lrg" />
+            <label for="chkSelectAll" class="css-label lrg klaus">Select all</label>
         </div>
         <div id="gridSliderPhotos" class="container-fluid">
-            @foreach (var photo in @Model.Photos)
+            @for (var i = 0; i < Model.Photos.Count; i++)
             {
-                <div class="col-sm-6 col-md-6 col-lg-4" style="background-color:#101010;">
-                    <div class="album-thumbnail photo-list-album-view" style="background-image:url(@photo.MediumUrl)">
+                <div class="col-sm-6 col-md-6 col-lg-4 draggable-item" draggable="true" style="background-color:#101010;">
+                    <div class="album-thumbnail photo-list-album-view" style="background-image:url(@Model.Photos[i].MediumUrl)">
                     </div>
                     <div class="album-title">
-                        <input type="checkbox" value="@photo.Id">&nbsp;@photo.Id
+                        <input type="checkbox" id="_@Model.Photos[i].Id" class="css-checkbox lrg" value="@Model.Photos[i].Id" />
+                        <label for="_@Model.Photos[i].Id" class="css-label lrg klaus">@Model.Photos[i].Id</label>
                     </div>
                 </div>
             }

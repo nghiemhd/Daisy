@@ -29,7 +29,8 @@ namespace Daisy.Admin.Infrastructure
                       "~/Administration/Scripts/bootstrap-datetimepicker.js",
                       "~/Administration/Scripts/date.format.js",
                       "~/Administration/Scripts/toastr.js",
-                      "~/Administration/Scripts/respond.js"));
+                      "~/Administration/Scripts/respond.js",
+                      "~/Administration/Scripts/Common/common.js"));
 
             bundles.Add(new StyleBundle("~/Content/admin/css").Include(
                       "~/Administration/Content/bootstrap.css",

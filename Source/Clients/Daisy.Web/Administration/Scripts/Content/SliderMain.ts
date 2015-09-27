@@ -47,4 +47,27 @@
             slider.deleteSliderPhotos(sliderId, photoIds);
         }
     });    
+
+    $('#btnUpdateOrders').click(function () {
+        var photoIds: number[] = [];
+        $('#gridSliderPhotos input[type=checkbox]').each(function () {
+            var photoId = $(this).val();
+            photoIds.push(photoId);
+        });
+
+        if (photoIds.length > 0) {
+            var sliderId: number = $('#sliderId').val();
+            slider.updatePhotoOrder(sliderId, photoIds);
+        }
+    });
+
+    Common.DragDropHandler.items = document.querySelectorAll('#gridSliderPhotos .draggable-item');
+    [].forEach.call(Common.DragDropHandler.items, function (item) {
+        item.addEventListener('dragstart', Common.DragDropHandler.handleDragStart, false);
+        item.addEventListener('dragenter', Common.DragDropHandler.handleDragEnter, false);
+        item.addEventListener('dragover', Common.DragDropHandler.handleDragOver, false);
+        item.addEventListener('dragleave', Common.DragDropHandler.handleDragLeave, false);
+        item.addEventListener('drop', Common.DragDropHandler.handleDrop, false);
+        item.addEventListener('dragend', Common.DragDropHandler.handleDragEnd, false);
+    });
 }); 

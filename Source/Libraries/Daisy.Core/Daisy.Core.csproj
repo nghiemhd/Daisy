@@ -61,6 +61,7 @@
     <Compile Include="Entities\Language.cs" />
     <Compile Include="Entities\Photo.cs" />
     <Compile Include="Entities\Slider.cs" />
+    <Compile Include="Entities\SliderPhoto.cs" />
     <Compile Include="Entities\UrlRecord.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Infrastructure\BaseEntity.cs" />

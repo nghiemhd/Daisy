@@ -30,7 +30,9 @@ namespace Daisy.Web.Controllers
 
         public ActionResult Index()
         {
-            var photos = contentService.GetFirstSlider().Photos.ToList();
+            var sliderId = contentService.GetFirstSlider().Id;
+            var photos = contentService.GetPhotosOfSlider(sliderId);
+
             var model = Mapper.Map<List<DaisyModels.Photo>>(photos);
             return View(model);
         }

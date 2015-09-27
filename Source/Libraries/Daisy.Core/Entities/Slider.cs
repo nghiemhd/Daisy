@@ -11,7 +11,7 @@ namespace Daisy.Core.Entities
     {
         public Slider()
         {
-            Photos = new HashSet<Photo>();
+            SliderPhotos = new HashSet<SliderPhoto>();
         }
 
         public string Name { get; set; }
@@ -20,6 +20,6 @@ namespace Daisy.Core.Entities
 
         public int Order { get; set; }
 
-        public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<SliderPhoto> SliderPhotos { get; set; }
     }
 }
