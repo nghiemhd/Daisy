@@ -1,0 +1,99 @@
+﻿@model Daisy.Admin.Models.PagedListBlogViewModel
+@{
+    ViewBag.Title = "Categories";
+}
+<div class="spacer btn-group">
+    <button id="btnAddCategory" class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Create", "Category")'">Add blog</button>
+</div>
+<div class="search-collapse">
+    <hr />
+    <div class="toggle-icon"></div>
+</div>
+<div class="spacer">
+    <div id="divOptions" class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(x => x.SearchOptions.LanguageId, new { @class = "control-label col-sm-1" })
+            <div class="col-lg-2 col-md-3 col-sm-3">
+                <select id="cboLanguages" class="form-control dropdown">
+                    <option>All</option>
+                    @foreach (var item in ViewData["languages"] as List<Daisy.Core.Entities.Language>)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.SearchOptions.Title, new { @class = "control-label col-sm-1" })
+            <div class="col-lg-2 col-md-3 col-sm-3">
+                @Html.TextBoxFor(x => x.SearchOptions.Title, new { id = "txtTitle", @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.SearchOptions.FromCreatedDate, new { @class = "control-label col-lg-1 col-md-1 col-sm-1" })
+            <div class="col-lg-2 col-md-3 col-sm-3">
+                <div id="fromCreatedDate" class="input-group date">
+                    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </div>
+            @Html.LabelFor(x => x.SearchOptions.ToCreatedDate, new { @class = "control-label col-lg-1 col-md-1 col-sm-1" })
+            <div class="col-lg-2 col-md-3 col-sm-3">
+                <div id="toCreatedDate" class="input-group date">
+                    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.SearchOptions.IsPublished, new { @class = "control-label col-sm-1" })
+            <div class="col-lg-2 col-md-3 col-sm-3">
+                <select id="cboPublishStatus" class="form-control dropdown">
+                    <option>All</option>
+                    <option value="true">Published</option>
+                    <option value="false">Unpublished</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-3">
+                <button id="btnSearch" type="button" data-request-url="@Url.Action("Search", "Blog")" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid spacer">
+    <div class="form-inline">
+        <div id="paging" class="form-group"></div>
+        <div id="searchResultInfo" class="form-group" style="float:right;margin-top:20px;"></div>
+    </div>
+</div>
+
+<div id="gridBlogs" class="container-fluid table-responsive" style="display:none">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" id="chkSelectAll" class="css-checkbox lrg" />
+                    <label for="chkSelectAll" class="css-label lrg klaus"></label>
+                </th>
+                <th>Title</th>
+                <th>Language</th>
+                <th>Published</th>
+                <th>Created Date</th>
+                <th>Updated Date</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div id="loader" class="overlay" style="display:none">
+    <img class="loader" src="~/Administration/Images/loading.gif" />
+</div>
+
+@section scripts
+{
+    <script src="~/Administration/Scripts/Blog/Blog.js"></script>
+    <script src="~/Administration/Scripts/Blog/Main.js"></script>
+}

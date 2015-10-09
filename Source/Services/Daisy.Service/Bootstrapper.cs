@@ -54,6 +54,7 @@ namespace Daisy.Service
             container.RegisterType<IBlogService, BlogService>();
             container.RegisterType<ILocalizationService, LocalizationService>();
             container.RegisterType<IUrlRecordService, UrlRecordService>();
+            container.RegisterType<ICategoryService, CategoryService>();
         }
     }
 }

@@ -88,7 +88,7 @@ namespace Daisy.Service
                 return urlRecord;
             });
 
-            return result as UrlRecord;
+            return result;
         }
 
         public string GetActiveSlug(int entityId, string entityName, int languageId)

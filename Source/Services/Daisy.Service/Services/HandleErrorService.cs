@@ -29,7 +29,7 @@ namespace Daisy.Service
             }
         }
 
-        public object Process(Func<object> func)
+        public T Process<T>(Func<T> func)
         {
             try
             {

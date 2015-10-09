@@ -48,7 +48,7 @@ namespace Daisy.Service
             {
                 return sliderRepository.Query().Where(x => x.Id == id).FirstOrDefault();
             });
-            return slider as DaisyEntities.Slider;
+            return slider;
         }
 
         public DaisyEntities.Slider GetFirstSlider()
@@ -57,7 +57,7 @@ namespace Daisy.Service
             {
                 return sliderRepository.Query().FirstOrDefault();
             });
-            return slider as DaisyEntities.Slider;
+            return slider;
         }
 
         public void AddSliderPhotos(DaisyEntities.Slider slider, int[] photoIds)
@@ -102,7 +102,7 @@ namespace Daisy.Service
                 return query.ToList();
             });
 
-            return (List<DaisyEntities.Photo>)result;
+            return result;
         }
 
         public void UpdateSliderPhotoOrder(int sliderId, int[] photoIds)

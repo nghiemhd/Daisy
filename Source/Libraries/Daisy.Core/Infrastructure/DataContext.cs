@@ -34,17 +34,8 @@ namespace Daisy.Core.Infrastructure
                     ap.ToTable("AlbumPhoto");
                 });            
 
-            //modelBuilder.Entity<Slider>()
-            //    .HasMany<Photo>(s => s.SliderPhotos)
-            //    .WithMany(p => p.Sliders)
-            //    .Map(sp =>
-            //    {
-            //        sp.MapLeftKey("SliderId");
-            //        sp.MapRightKey("PhotoId");
-            //        sp.ToTable("SliderPhoto");
-            //    });
-
             modelBuilder.Entity<SliderPhoto>().HasKey(e => new { e.SliderId, e.PhotoId });
+            modelBuilder.Entity<CategoryPhoto>().HasKey(e => new { e.CategoryId, e.PhotoId });
         }
 
         public int ExecuteSqlCommand(string sql, params object[] parameters)

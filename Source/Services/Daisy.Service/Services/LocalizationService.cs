@@ -31,7 +31,7 @@ namespace Daisy.Service
                 return this.languageRepository.Query().OrderBy(x => x.DisplayOrder).AsEnumerable();
             });
 
-            return languages as IEnumerable<Language>;
+            return languages;
         }
 
         public Language GetLanguageBy(int id)
@@ -41,7 +41,7 @@ namespace Daisy.Service
                 return this.languageRepository.Query().Where(x => x.Id == id).FirstOrDefault();
             });
 
-            return language as Language;
+            return language;
         }
     }
 }

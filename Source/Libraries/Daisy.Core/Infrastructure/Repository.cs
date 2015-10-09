@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -47,7 +48,13 @@ namespace Daisy.Core.Infrastructure
                 baseEntity.CreatedDate = DateTime.Now;
                 if (string.IsNullOrEmpty(baseEntity.CreatedBy))
                 {
-                    baseEntity.CreatedBy = Thread.CurrentPrincipal.Identity.Name;
+                    var createdBy = Thread.CurrentPrincipal.Identity.Name;
+                    if (createdBy == string.Empty)
+                    {
+                        SqlConnectionStringBuilder connection = new SqlConnectionStringBuilder(EFContext.Database.Connection.ConnectionString);
+                        createdBy = connection.UserID;
+                    }
+                    baseEntity.CreatedBy = createdBy;
                 }
                 baseEntity.UpdatedBy = baseEntity.CreatedBy;
                 return this.dbSet.Add(baseEntity as T);

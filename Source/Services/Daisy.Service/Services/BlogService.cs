@@ -112,7 +112,7 @@ namespace Daisy.Service
                 return result;
             });
 
-            return blogs as PagedList<DaisyEntities.BlogPost>;
+            return blogs;
         }
 
         public void PublishBlogs(IList<int> blogIds, bool isPublished)
@@ -138,7 +138,7 @@ namespace Daisy.Service
             {
                 return blogRepository.Query().Where(x => x.Id == id).FirstOrDefault();
             });
-            return blog as DaisyEntities.BlogPost;
+            return blog;
         }
     }
 }

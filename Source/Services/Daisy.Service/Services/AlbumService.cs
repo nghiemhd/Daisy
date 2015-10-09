@@ -218,7 +218,7 @@ namespace Daisy.Service
                 return album;
             });
 
-            return result as DaisyEntities.Album;
+            return result;
         }
 
         public void PublishAlbums(IList<int> albumIds, bool isPublished)

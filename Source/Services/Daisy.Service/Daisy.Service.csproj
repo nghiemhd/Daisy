@@ -93,6 +93,7 @@
     <Compile Include="DataContracts\SliderDto.cs" />
     <Compile Include="Seo\SeoExtensions.cs" />
     <Compile Include="ServiceContracts\IBlogService.cs" />
+    <Compile Include="ServiceContracts\ICategoryService.cs" />
     <Compile Include="ServiceContracts\IContentService.cs" />
     <Compile Include="ServiceContracts\IFlickrService.cs" />
     <Compile Include="ServiceContracts\ILocalizationService.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Common\Enums.cs" />
     <Compile Include="DataContracts\DataResponse.cs" />
     <Compile Include="Services\BlogService.cs" />
+    <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\ContentService.cs" />
     <Compile Include="Services\FlickrService.cs" />
     <Compile Include="Services\HandleErrorService.cs" />

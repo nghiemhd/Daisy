@@ -448,6 +448,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\FlickrAlbumController.cs" />
     <Compile Include="Controllers\HomeController.cs">
@@ -494,6 +495,8 @@
     <Content Include="Views\Blog\Create.cshtml" />
     <Content Include="Views\Shared\_Blog.cshtml" />
     <Content Include="Views\Blog\Edit.cshtml" />
+    <Content Include="Views\Album\WeddingDress.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
