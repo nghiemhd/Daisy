@@ -108,6 +108,7 @@ namespace Daisy.Core.Migrations
                 {
                     SliderId = c.Int(nullable: false),
                     PhotoId = c.Int(nullable: false),
+                    DisplayOrder = c.Int(nullable: false)
                 })
                 .PrimaryKey(t => new { t.SliderId, t.PhotoId })
                 .ForeignKey("Photo", t => t.PhotoId, cascadeDelete: true)
@@ -141,21 +142,6 @@ namespace Daisy.Core.Migrations
                 .ForeignKey("Language", t => t.LanguageId, cascadeDelete: false)
                 .Index(t => t.LanguageId);
 
-            //CreateTable(
-            //    "BlogPhoto",
-            //    c => new
-            //    {
-            //        BlogId = c.Int(nullable: false),
-            //        PhotoId = c.Int(nullable: false),
-            //        Order = c.Int(nullable: false),
-            //        Position = c.String(nullable: true, maxLength: 50, unicode: false)
-            //    })
-            //    .PrimaryKey(t => new { t.BlogId, t.PhotoId })
-            //    .ForeignKey("Photo", t => t.PhotoId, cascadeDelete: true)
-            //    .ForeignKey("Blog", t => t.BlogId, cascadeDelete: true)
-            //    .Index(t => t.PhotoId)
-            //    .Index(t => t.BlogId);
-
             CreateTable(
                 "UrlRecord",
                 c => new
@@ -187,14 +173,31 @@ namespace Daisy.Core.Migrations
         
         public override void Down()
         {
-            DropForeignKey("AlbumPhoto", "AlbumId", "Album");
-            DropForeignKey("AlbumPhoto", "PhotoId", "Photo");
-            DropIndex("AlbumPhoto", new[] { "AlbumId" });
-            DropIndex("AlbumPhoto", new[] { "PhotoId" });
-            DropTable("AlbumPhoto");
-            DropTable("User");
-            DropTable("Photo");
-            DropTable("Album");
+            DropForeignKey("dbo.CategoryPhoto", "PhotoId", "dbo.Photo");
+            DropForeignKey("dbo.CategoryPhoto", "CategoryId", "dbo.Category");
+            DropForeignKey("dbo.BlogPost", "LanguageId", "dbo.Language");
+            DropForeignKey("dbo.AlbumPhoto", "PhotoId", "dbo.Photo");
+            DropForeignKey("dbo.AlbumPhoto", "AlbumId", "dbo.Album");
+            DropForeignKey("dbo.SliderPhoto", "SliderId", "dbo.Slider");
+            DropForeignKey("dbo.SliderPhoto", "PhotoId", "dbo.Photo");
+            DropIndex("dbo.AlbumPhoto", new[] { "PhotoId" });
+            DropIndex("dbo.AlbumPhoto", new[] { "AlbumId" });
+            DropIndex("dbo.CategoryPhoto", new[] { "PhotoId" });
+            DropIndex("dbo.CategoryPhoto", new[] { "CategoryId" });
+            DropIndex("dbo.BlogPost", new[] { "LanguageId" });
+            DropIndex("dbo.SliderPhoto", new[] { "PhotoId" });
+            DropIndex("dbo.SliderPhoto", new[] { "SliderId" });
+            DropTable("dbo.AlbumPhoto");
+            DropTable("dbo.User");
+            DropTable("dbo.UrlRecord");
+            DropTable("dbo.CategoryPhoto");
+            DropTable("dbo.Category");
+            DropTable("dbo.Language");
+            DropTable("dbo.BlogPost");
+            DropTable("dbo.Slider");
+            DropTable("dbo.SliderPhoto");
+            DropTable("dbo.Photo");
+            DropTable("dbo.Album");
         }
     }
 }

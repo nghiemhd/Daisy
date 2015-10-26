@@ -51,44 +51,7 @@
                     $('#loader').hide();
                 }
             });
-        }
-
-        updateSliderPhotos(photoIds: number[]) {
-            $.ajax({
-                url: DaisyPhoto.updateSliderRequestUrl,
-                type: 'POST',
-                content: 'application/json; charset=utf-8',
-                dataType: 'json',
-                data: {
-                    photoIds: photoIds
-                },
-                success: (response) => {
-                    if (response == "Success") {
-                        toastr.success('Update successfully');
-                        window.location.href = '/Admin/Content/Slider';
-                    }
-                    else {
-                        toastr.options = {
-                            closeButton: true,
-                            positionClass: "toast-top-full-width",
-                            timeOut: 0,
-                            extendedTimeOut: 0
-                        };
-                        toastr.error(response);
-                    }
-                },
-                error: function (xhr, desc, err) {
-                    console.log(xhr);
-                    console.log('Desc: ' + desc + '\nErr:' + err);
-                },
-                beforeSend: function () {
-                    $('#loader').show();
-                },
-                complete: function () {
-                    $('#loader').hide();
-                }
-            });
-        }
+        }        
 
         private searchCallback(response: any) {
             Photo.DaisyPhoto.photos = response.Photos.Items;

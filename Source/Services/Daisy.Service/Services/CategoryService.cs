@@ -56,5 +56,56 @@ namespace Daisy.Service
                 this.unitOfWork.Commit();
             });
         }
+
+        public void AddCategoryPhotos(Category category, int[] photoIds)
+        {
+            Process(() =>
+            {
+                foreach (var photoId in photoIds)
+                {
+                    var categoryPhoto = new CategoryPhoto
+                    {
+                        CategoryId = category.Id,
+                        PhotoId = photoId
+                    };
+                    categoryPhotoRepository.Insert(categoryPhoto);
+                }
+
+                this.unitOfWork.Commit();
+            }); 
+        }
+
+        public void DeleteCategoryPhotos(Category category, int[] photoIds)
+        {
+            Process(() =>
+            {
+                var photosToDelete = categoryPhotoRepository.Query().Where(x => photoIds.Contains(x.PhotoId)).ToList();
+                categoryPhotoRepository.RemoveRange(photosToDelete);
+                this.unitOfWork.Commit();
+            }); 
+        }
+
+        public void UpdateCategoryPhotoOrder(int categoryId, int[] photoIds)
+        {
+            Process(() =>
+            {
+                var minOrder = categoryPhotoRepository.Query()
+                    .Where(x => x.CategoryId == categoryId && photoIds.Contains(x.PhotoId))
+                    .OrderBy(x => x.DisplayOrder)
+                    .Select(x => x.DisplayOrder)
+                    .FirstOrDefault();
+
+                foreach (var photoId in photoIds)
+                {
+                    var categoryPhoto = categoryPhotoRepository.Query()
+                        .Where(x => x.CategoryId == categoryId && x.PhotoId == photoId).First();
+
+                    categoryPhoto.DisplayOrder = minOrder;
+                    minOrder++;
+                }
+
+                this.unitOfWork.Commit();
+            });
+        }
     }
 }

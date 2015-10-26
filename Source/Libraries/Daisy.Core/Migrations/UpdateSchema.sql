@@ -93,3 +93,35 @@ SET IDENTITY_INSERT [tmpBlogPost] OFF
 DROP TABLE	[BlogPost]
 
 EXEC sp_rename 'tmpBlogPost', 'BlogPost'
+
+CREATE TABLE [Category] (
+    [Id] [int] NOT NULL IDENTITY,
+    [Name] [nvarchar](100) NOT NULL,
+    [Description] [nvarchar](max),
+    [TemplateId] [int] NOT NULL,
+    [MetaKeywords] [nvarchar](400),
+    [MetaDescription] [nvarchar](max),
+    [MetaTitle] [nvarchar](400),
+    [ParentCategoryId] [int],
+    [PhotoId] [int],
+    [PageSize] [int] NOT NULL,
+    [IsPublished] [bit] NOT NULL DEFAULT 0,
+    [DisplayOrder] [int] NOT NULL,
+    [IsDeleted] [bit] NOT NULL DEFAULT 0,
+    [UpdatedDate] [datetime] NOT NULL DEFAULT GETDATE(),
+    [UpdatedBy] [varchar](50) NOT NULL DEFAULT suser_name(),
+    [CreatedDate] [datetime] NOT NULL DEFAULT GETDATE(),
+    [CreatedBy] [varchar](50) NOT NULL DEFAULT suser_name(),
+    [RowRevision] rowversion NOT NULL,
+    CONSTRAINT [PK_Category] PRIMARY KEY ([Id])
+)
+CREATE TABLE [CategoryPhoto] (
+    [CategoryId] [int] NOT NULL,
+    [PhotoId] [int] NOT NULL,
+    [DisplayOrder] [int] NOT NULL,
+    CONSTRAINT [PK_CategoryPhoto] PRIMARY KEY ([CategoryId], [PhotoId])
+)
+CREATE INDEX [IX_CategoryId] ON [CategoryPhoto]([CategoryId])
+CREATE INDEX [IX_PhotoId] ON [CategoryPhoto]([PhotoId])
+ALTER TABLE [CategoryPhoto] ADD CONSTRAINT [FK_CategoryPhoto_Category_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [Category] ([Id]) ON DELETE CASCADE
+ALTER TABLE [CategoryPhoto] ADD CONSTRAINT [FK_CategoryPhoto_Photo_PhotoId] FOREIGN KEY ([PhotoId]) REFERENCES [Photo] ([Id]) ON DELETE CASCADE

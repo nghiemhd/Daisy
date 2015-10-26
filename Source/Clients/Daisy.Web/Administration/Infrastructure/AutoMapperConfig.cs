@@ -84,6 +84,8 @@ namespace Daisy.Admin.Infrastructure
             Mapper.CreateMap<DaisyModels.SearchBlogModel, SearchBlogOptions>();
 
             Mapper.CreateMap<DaisyEntities.Language, DaisyModels.Language>();
+
+            Mapper.CreateMap<DaisyEntities.Category, DaisyModels.Category>();
         }
     }
 }

@@ -1,0 +1,98 @@
+﻿@using Daisy.Web.Framework.Extentions
+@model Daisy.Admin.Models.Category
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#categoryInfo">Info</a></li>
+    <li><a data-toggle="tab" href="#categoryPhotos">Photo</a></li>
+</ul>
+<div class="tab-content">
+    <div id="categoryInfo" class="tab-pane fade in active">
+        <div class="spacer"></div>
+        <div class="form-horizontal">
+            @Html.HiddenFor(x => x.Id)            
+            <div class="form-group">
+                @Html.LabelFor(x => x.Name, new { @class = "col-md-1" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control max-width" })
+                    @Html.ValidationMessageFor(x => x.Name)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Description, new { @class = "col-md-1" })
+                <div class="col-md-11 blog-width">
+                    @Html.TextAreaFor(x => x.Description, new { @id = "txtDescription", @class = "blog-width form-control" })
+                    @Html.ValidationMessageFor(x => x.Description)
+                    <div id="textarea_feedback"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.MetaTitle, new { @class = "col-md-1" })
+                <div class="col-md-11 blog-width">
+                    @Html.TextAreaFor(x => x.MetaTitle, new { @id = "txtMetaTitle", @class = "form-control", @style = "max-width:1175px;height:100px;resize:none;" })
+                    @Html.ValidationMessageFor(x => x.MetaTitle)
+                    <div id="metatitle_feedback"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.MetaKeywords, new { @class = "col-md-1" })
+                <div class="col-md-11 blog-width">
+                    @Html.TextAreaFor(x => x.MetaKeywords, new { @id = "txtMetaKeywords", @class = "form-control", @style = "max-width:1175px;height:100px;resize:none;" })
+                    @Html.ValidationMessageFor(x => x.MetaKeywords)
+                    <div id="metakeywords_feedback"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.IsPublished, new { @class = "col-md-1" })
+                <div class="col-md-3">
+                    @Html.CheckBoxFor(x => x.IsPublished, new { @id = "chkPublish", @class = "css-checkbox lrg" })
+                    <label for="chkPublish" class="css-label lrg klaus"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-1">
+                    <input id="btnSubmit" type="submit" class="btn btn-primary" value="Save" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="categoryPhotos" class="tab-pane fade">
+        <div class="spacer btn-group">
+            <button id="btnDeletePhotos" class="btn btn-primary">Delete photos</button>
+            @Html.ActionLink("Add photos", "ViewPhotos", "Category", null, new { @class = "modal-link btn btn-primary" })
+            <button id="btnUpdateOrders" class="btn btn-primary">Update</button>
+        </div>
+        <hr />
+        <div id="modal-container" class="modal fade" tabindex="-1" role="dialog" style="overflow:scroll">
+            <div class="modal-content"></div>
+        </div>
+
+        @if (Model.Photos.Count > 0)
+        {
+        <div class="container-fluid">
+            <input type="checkbox" id="chkSelectAll" class="css-checkbox lrg" />
+            <label for="chkSelectAll" class="css-label lrg klaus">Select all</label>
+        </div>
+        <div id="gridCategoryPhotos" class="container-fluid">
+            @for (var i = 0; i < Model.Photos.Count; i++)
+            {
+                <div class="col-sm-6 col-md-6 col-lg-4 draggable-item" draggable="true" style="background-color:#101010;">
+                    <div class="album-thumbnail photo-list-album-view" style="background-image:url(@Model.Photos[i].MediumUrl)">
+                    </div>
+                    <div class="album-title">
+                        <input type="checkbox" id="_@Model.Photos[i].Id" class="css-checkbox lrg" value="@Model.Photos[i].Id" />
+                        <label for="_@Model.Photos[i].Id" class="css-label lrg klaus">@Model.Photos[i].Id</label>
+                    </div>
+                </div>
+            }
+        </div>
+        }    
+    </div>
+</div>
+<div id="loader" class="overlay" style="display:none">
+    <img class="loader" src="~/Administration/Images/loading.gif" />
+</div>
+@Html.RequireScript(RenderOptions.Body, "/Administration/Scripts/Common/modalPopup.js")
+@Html.RequireScript(RenderOptions.Body, "/Administration/Scripts/Photo/Photo.js")
+@Html.RequireScript(RenderOptions.Body, "/Administration/Scripts/Photo/Main.js")
+@Html.RequireScript(RenderOptions.Body, "/Administration/Scripts/Category/Category.js")
+@Html.RequireScript(RenderOptions.Body, "/Administration/Scripts/Category/CategoryMain.js")

@@ -39,7 +39,7 @@ namespace Daisy.Admin.Controllers
 
         public ActionResult ViewPhotos()
         {
-            return View();
+            return PartialView("_ViewPhotos");
         }
 
         [HttpPost]

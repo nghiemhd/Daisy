@@ -13,7 +13,7 @@
     @Scripts.Render("~/bundles/admin/modernizr")
     @Scripts.Render("~/bundles/admin/jquery")
     @Scripts.Render("~/bundles/admin/bootstrap")
-    @Html.EmitRequiredScripts()
+    @Html.RenderRequiredScripts(RenderOptions.Head)
     @RenderSection("styles", false)    
 </head>
 <body>
@@ -68,6 +68,7 @@
     </div>
         
     @RenderSection("scripts", required: false)
+    @Html.RenderRequiredScripts(RenderOptions.Body)
 
     <script>
         Common.Helper.applicationRoot = '@Url.Content("~")';

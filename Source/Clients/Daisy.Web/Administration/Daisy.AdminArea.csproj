@@ -163,6 +163,7 @@
     <Content Include="Scripts\bootstrap-dialog.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Common\modalPopup.js" />
     <Content Include="Scripts\date.format.js" />
     <Content Include="Scripts\FormValidation\formValidation.bootstrap.min.js" />
     <Content Include="Scripts\FormValidation\formValidation.min.js" />
@@ -467,6 +468,7 @@
     <Compile Include="Models\Blog\Blog.cs" />
     <Compile Include="Models\Blog\PagedListBlogViewModel.cs" />
     <Compile Include="Models\Blog\SearchBlogModel.cs" />
+    <Compile Include="Models\Category\Category.cs" />
     <Compile Include="Models\Content\PagedListPhotoViewModel.cs" />
     <Compile Include="Models\Content\SliderViewModel.cs" />
     <Compile Include="Models\Localization\Language.cs" />
@@ -490,13 +492,15 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Content\Slider.cshtml" />
-    <Content Include="Views\Content\ViewPhotos.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\Create.cshtml" />
-    <Content Include="Views\Shared\_Blog.cshtml" />
+    <Content Include="Views\Blog\_Blog.cshtml" />
     <Content Include="Views\Blog\Edit.cshtml" />
     <Content Include="Views\Album\WeddingDress.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\_CategoryCreateOrUpdate.cshtml" />
+    <Content Include="Views\Shared\_ViewPhotos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -533,6 +537,10 @@
     <TypeScriptCompile Include="Scripts\Album\Main.ts" />
     <TypeScriptCompile Include="Scripts\Blog\Blog.ts" />
     <TypeScriptCompile Include="Scripts\Blog\Main.ts" />
+    <TypeScriptCompile Include="Scripts\Category\Category.ts" />
+    <TypeScriptCompile Include="Scripts\Category\CategoryMain.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Scripts\Common\common.ts" />
     <TypeScriptCompile Include="Scripts\Content\Slider.ts" />
     <TypeScriptCompile Include="Scripts\Content\SliderMain.ts" />

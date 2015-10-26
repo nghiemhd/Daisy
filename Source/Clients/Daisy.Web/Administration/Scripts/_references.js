@@ -156,3 +156,4 @@
 /// <reference path="tinymce3/themes/simple/editor_template_src.js" />
 /// <reference path="tinymce3/themes/simple/langs/en.js" />
 /// <reference path="blog/blogdetail.js" />
+/// <reference path="common/modalpopup.js" />

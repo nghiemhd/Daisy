@@ -1,20 +1,23 @@
-﻿module Content {
+var Content;
+(function (Content) {
     'use strict';
-
-    export class Slider {
-        updateSliderPhotos(photoIds: number[]) {
+    var Category = (function () {
+        function Category() {
+        }
+        Category.prototype.updatePhotos = function (categoryId, photoIds) {
             $.ajax({
-                url: '/Admin/Content/UpdateSlider',
+                url: '/Admin/Category/UpdatePhotos',
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
                 data: {
+                    categoryId: categoryId,
                     photoIds: photoIds
                 },
-                success: (response) => {
+                success: function (response) {
                     if (response == "Success") {
                         toastr.success('Update successfully');
-                        window.location.href = '/Admin/Content/Slider';
+                        window.location.href = '/Admin/Category/Edit/' + categoryId + '#categoryPhotos';
                     }
                     else {
                         toastr.options = {
@@ -37,22 +40,21 @@
                     $('#loader').hide();
                 }
             });
-        }
-
-        deleteSliderPhotos(sliderId: number, photoIds: number[]) {
+        };
+        Category.prototype.deletePhotos = function (categoryId, photoIds) {
             $.ajax({
-                url: '/Admin/Content/DeleteSliderPhotos',
+                url: '/Admin/Category/DeletePhotos',
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
                 data: {
-                    sliderId: sliderId,
+                    categoryId: categoryId,
                     photoIds: photoIds
                 },
-                success: (response) => {
+                success: function (response) {
                     if (response == "Success") {
                         toastr.success('Delete successfully');
-                        window.location.href = '/Admin/Content/Slider';
+                        window.location.href = '/Admin/Category/Edit/' + categoryId + '#categoryPhotos';
                     }
                     else {
                         toastr.options = {
@@ -75,19 +77,18 @@
                     $('#loader').hide();
                 }
             });
-        }
-
-        updatePhotoOrder(sliderId: number, photoIds: number[]) {
+        };
+        Category.prototype.updatePhotoOrder = function (categoryId, photoIds) {
             $.ajax({
-                url: '/Admin/Content/UpdatePhotoOrder',
+                url: '/Admin/Category/UpdatePhotoOrder',
                 type: 'POST',
                 content: 'application/json; charset=utf-8',
                 dataType: 'json',
                 data: {
-                    sliderId: sliderId,
+                    categoryId: categoryId,
                     photoIds: photoIds
                 },
-                success: (response) => {
+                success: function (response) {
                     if (response == "Success") {
                         toastr.success('Update successfully');
                     }
@@ -112,6 +113,9 @@
                     $('#loader').hide();
                 }
             });
-        }
-    }
-} 
+        };
+        return Category;
+    })();
+    Content.Category = Category;
+})(Content || (Content = {}));
+//# sourceMappingURL=Category.js.map

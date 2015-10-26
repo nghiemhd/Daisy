@@ -1,0 +1,9 @@
+﻿@model Daisy.Admin.Models.Category
+@{
+    ViewBag.Title = "New category";
+}
+<div class="spacer"></div>
+@using (Html.BeginForm("Create", "Category", FormMethod.Post))
+{
+    Html.RenderPartial("_CategoryCreateOrUpdate", @Model);
+}

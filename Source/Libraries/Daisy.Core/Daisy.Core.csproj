@@ -77,13 +77,12 @@
     <Compile Include="Migrations\201506150712448_Init.Designer.cs">
       <DependentUpon>201506150712448_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510200333526_AddCategory.cs" />
+    <Compile Include="Migrations\201510200333526_AddCategory.Designer.cs">
+      <DependentUpon>201510200333526_AddCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506150712448_Init.resx">
-      <DependentUpon>201506150712448_Init.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -93,7 +92,14 @@
     <Content Include="Migrations\UpdateData.sql" />
     <Content Include="Migrations\UpdateSchema.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506150712448_Init.resx">
+      <DependentUpon>201506150712448_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510200333526_AddCategory.resx">
+      <DependentUpon>201510200333526_AddCategory.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

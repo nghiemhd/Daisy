@@ -24,17 +24,17 @@ namespace Daisy.Web.Framework.Extentions
             return classValue;
         }
 
-        public static string RequireScript(this HtmlHelper html, string path, int priority = 1)
+        public static string RequireScript(this HtmlHelper html, RenderOptions option, string path, int priority = 1)
         {
-            var requiredScripts = HttpContext.Current.Items["RequiredScripts"] as List<ResourceInclude>;
-            if (requiredScripts == null) HttpContext.Current.Items["RequiredScripts"] = requiredScripts = new List<ResourceInclude>();
+            var requiredScripts = HttpContext.Current.Items[option.ToString()] as List<ResourceInclude>;
+            if (requiredScripts == null) HttpContext.Current.Items[option.ToString()] = requiredScripts = new List<ResourceInclude>();
             if (!requiredScripts.Any(i => i.Path == path)) requiredScripts.Add(new ResourceInclude() { Path = path, Priority = priority });
             return null;
         }
 
-        public static HtmlString EmitRequiredScripts(this HtmlHelper html)
+        public static HtmlString RenderRequiredScripts(this HtmlHelper html, RenderOptions option)
         {
-            var requiredScripts = HttpContext.Current.Items["RequiredScripts"] as List<ResourceInclude>;
+            var requiredScripts = HttpContext.Current.Items[option.ToString()] as List<ResourceInclude>;
             if (requiredScripts == null) return null;
             StringBuilder sb = new StringBuilder();
             foreach (var item in requiredScripts.OrderByDescending(i => i.Priority))
@@ -42,7 +42,13 @@ namespace Daisy.Web.Framework.Extentions
                 sb.AppendFormat("<script src=\"{0}\" type=\"text/javascript\"></script>\n", item.Path);
             }
             return new HtmlString(sb.ToString());
-        }
+        }        
+    }
+
+    public enum RenderOptions
+    { 
+        Head,
+        Body
     }
 
     public class ResourceInclude

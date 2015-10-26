@@ -12,5 +12,11 @@ namespace Daisy.Service.ServiceContracts
         List<Category> GetCategories();
 
         void UpdateCategory(Category entity);
+
+        void AddCategoryPhotos(Category category, int[] photoIds);
+
+        void DeleteCategoryPhotos(Category category, int[] photoIds);
+
+        void UpdateCategoryPhotoOrder(int categoryId, int[] photoIds);
     }
 }

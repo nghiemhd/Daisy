@@ -52,6 +52,8 @@ namespace Daisy.Core.Infrastructure
         public DbSet<UrlRecord> UrlRecords { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<SliderPhoto> SliderPhotos { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryPhoto> CategoryPhotos { get; set; }
         #endregion DbSet        
     }
 }

@@ -103,6 +103,5 @@
         </div>
     </div>
 </div>
-@Html.RequireScript("/Administration/Scripts/common/common.js")
-@Html.RequireScript("/Administration/Scripts/tinymce3/tiny_mce.js")
-@Html.RequireScript("/Administration/Scripts/Blog/BlogDetail.js")
+@Html.RequireScript(RenderOptions.Body, "/Administration/Scripts/tinymce3/tiny_mce.js")
+@Html.RequireScript(RenderOptions.Body, "/Administration/Scripts/Blog/BlogDetail.js")
