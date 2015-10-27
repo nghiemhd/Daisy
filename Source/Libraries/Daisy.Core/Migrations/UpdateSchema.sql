@@ -107,6 +107,7 @@ CREATE TABLE [Category] (
     [PageSize] [int] NOT NULL,
     [IsPublished] [bit] NOT NULL DEFAULT 0,
     [DisplayOrder] [int] NOT NULL,
+	[LanguageId] [int] NOT NULL,
     [IsDeleted] [bit] NOT NULL DEFAULT 0,
     [UpdatedDate] [datetime] NOT NULL DEFAULT GETDATE(),
     [UpdatedBy] [varchar](50) NOT NULL DEFAULT suser_name(),
@@ -115,6 +116,9 @@ CREATE TABLE [Category] (
     [RowRevision] rowversion NOT NULL,
     CONSTRAINT [PK_Category] PRIMARY KEY ([Id])
 )
+CREATE INDEX [IX_LanguageId] ON [Category]([LanguageId])
+ALTER TABLE [Category] ADD CONSTRAINT [FK_Category_Language_LanguageId] FOREIGN KEY ([LanguageId]) REFERENCES [Language] ([Id])
+
 CREATE TABLE [CategoryPhoto] (
     [CategoryId] [int] NOT NULL,
     [PhotoId] [int] NOT NULL,

@@ -47,6 +47,7 @@
     });
 
     $(document).on('click', '#btnSave', function (e) {
+        e.preventDefault();
         var photoIds: number[] = [];
         $('#gridPhotos input[type=checkbox]:checked').each(function () {
             var photoId = $(this).val();
@@ -62,8 +63,12 @@
         else {
             var categoryId: number = $('#categoryId').val();
             category.updatePhotos(categoryId, photoIds);
+            $('#modal-container').modal('hide');
         }
     });
+
+    Common.Helper.countCharacters(400, '#txtMetaTitle', '#metatitle_feedback');
+    Common.Helper.countCharacters(400, '#txtMetaKeywords', '#metakeywords_feedback');
    
     Common.DragDropHandler.items = document.querySelectorAll('#gridCategoryPhotos .draggable-item');
     [].forEach.call(Common.DragDropHandler.items, function (item) {

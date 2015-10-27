@@ -64,7 +64,15 @@ namespace Daisy.Service
         {
             Process(() =>
             {
-                foreach (var photoId in photoIds)
+                var photosInDb = sliderPhotoRepository
+                    .Query()
+                    .Where(x => x.SliderId == slider.Id)
+                    .Select(x => x.PhotoId)
+                    .ToList();
+
+                var newPhotos = photoIds.Where(x => !photosInDb.Contains(x)).Distinct().ToList();
+
+                foreach (var photoId in newPhotos)
                 {
                     var sliderPhoto = new DaisyEntities.SliderPhoto
                     {

@@ -1,0 +1,20 @@
+﻿@model Daisy.Admin.Models.Category
+@{
+    ViewBag.Title = "Edit Category";
+}
+<div class="spacer"></div>
+@using (Html.BeginForm("Edit", "Category", FormMethod.Post))
+{
+    Html.RenderPartial("_CategoryCreateOrUpdate", @Model);
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var message = '@TempData["message"]';
+            if (message != '') {
+                toastr.success(message);
+            }
+        });
+    </script>
+}

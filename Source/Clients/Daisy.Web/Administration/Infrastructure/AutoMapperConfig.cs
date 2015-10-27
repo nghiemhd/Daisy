@@ -86,6 +86,8 @@ namespace Daisy.Admin.Infrastructure
             Mapper.CreateMap<DaisyEntities.Language, DaisyModels.Language>();
 
             Mapper.CreateMap<DaisyEntities.Category, DaisyModels.Category>();
+
+            Mapper.CreateMap<DaisyModels.Category, DaisyEntities.Category>();
         }
     }
 }

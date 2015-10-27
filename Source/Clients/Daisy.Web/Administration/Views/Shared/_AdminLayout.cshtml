@@ -14,9 +14,10 @@
     @Scripts.Render("~/bundles/admin/jquery")
     @Scripts.Render("~/bundles/admin/bootstrap")
     @Html.RenderRequiredScripts(RenderOptions.Head)
-    @RenderSection("styles", false)    
+    @RenderSection("styles", false)
 </head>
 <body>
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -59,14 +60,15 @@
     </div>
     <div class="container-fluid">
         @RenderBody()
-        <hr />        
     </div>
-    <div class="container-fluid">
-        <footer>
+
+    <div class="container-fluid footer">
+        <footer class="text-center">
+            <hr />
             <p>&copy; @DateTime.Now.Year - Daisy studio</p>
         </footer>
     </div>
-        
+
     @RenderSection("scripts", required: false)
     @Html.RenderRequiredScripts(RenderOptions.Body)
 

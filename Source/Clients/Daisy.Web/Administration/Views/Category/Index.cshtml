@@ -28,7 +28,7 @@
                             <input type="checkbox" id="_@category.Id" value="@category.Id" class="css-checkbox lrg" />
                             <label for="_@category.Id" class="css-label lrg klaus"></label>
                         </td>
-                        <td>@Html.ActionLink(category.Name, "Edit", "Category", null, new { @class = "table-link" })</td>
+                        <td>@Html.ActionLink(category.Name, "Edit", "Category", new { id = category.Id }, new { @class = "table-link" })</td>
                         <td>@category.IsPublished</td>
                         <td>@category.DisplayOrder</td>
                     </tr>                

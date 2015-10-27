@@ -17,7 +17,7 @@ var Content;
                 success: function (response) {
                     if (response == "Success") {
                         toastr.success('Update successfully');
-                        window.location.href = '/Admin/Category/Edit/' + categoryId + '#categoryPhotos';
+                        window.location.href = '/Admin/Category/Edit/' + categoryId;
                     }
                     else {
                         toastr.options = {

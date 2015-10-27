@@ -23,6 +23,7 @@ namespace Daisy.Core.Migrations
                     PageSize = c.Int(nullable: false),
                     IsPublished = c.Boolean(nullable: false, defaultValue: false),
                     DisplayOrder = c.Int(nullable: false),
+                    LanguageId = c.Int(nullable: false),
                     IsDeleted = c.Boolean(nullable: false, defaultValue: false),
                     UpdatedDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
                     UpdatedBy = c.String(nullable: false, maxLength: 50, unicode: false, defaultValueSql: "suser_name()"),
@@ -30,7 +31,9 @@ namespace Daisy.Core.Migrations
                     CreatedBy = c.String(nullable: false, maxLength: 50, unicode: false, defaultValueSql: "suser_name()"),
                     RowRevision = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                 })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("Language", t => t.LanguageId, cascadeDelete: false)
+                .Index(t => t.LanguageId); 
 
             CreateTable(
                 "CategoryPhoto",

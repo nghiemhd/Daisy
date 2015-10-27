@@ -501,6 +501,7 @@
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\_CategoryCreateOrUpdate.cshtml" />
     <Content Include="Views\Shared\_ViewPhotos.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -177,6 +177,20 @@
             date = date.replace(')/', '');
             return Number(date);
         }
+
+        static countCharacters = function (maxCharacter: number, textareaId, labelId) {
+            var text_max = maxCharacter;
+            var text_length = $(textareaId).val().length;
+            var text_remaining = text_max - text_length;
+            $(labelId).html(text_remaining + ' characters remaining');
+
+            $(textareaId).keyup(function () {
+                text_length = $(textareaId).val().length;
+                text_remaining = text_max - text_length;
+
+                $(labelId).html(text_remaining + ' characters remaining');
+            });
+        }
     }
 
     export class DragDropHandler {

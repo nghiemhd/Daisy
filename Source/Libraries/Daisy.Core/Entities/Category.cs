@@ -1,6 +1,7 @@
 ﻿using Daisy.Core.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,8 @@ namespace Daisy.Core.Entities
 
         public string MetaKeywords { get; set; }
 
+        public string MetaDescription { get; set; }
+
         public string MetaTitle { get; set; }
 
         public int ParentCategoryId { get; set; }
@@ -33,6 +36,11 @@ namespace Daisy.Core.Entities
         public bool IsPublished { get; set; }
 
         public int DisplayOrder { get; set; }
+
+        public int LanguageId { get; set; }
+
+        [ForeignKey("LanguageId")]
+        public virtual Language Language { get; set; }
 
         public virtual ICollection<CategoryPhoto> CategoryPhotos { get; set; }
     }

@@ -16,6 +16,7 @@ namespace Daisy.Service
         private ILogger logger;
         private IRepository<Category> categoryRepository;
         private IRepository<CategoryPhoto> categoryPhotoRepository;
+        private IRepository<Photo> photoRepository;
 
         public CategoryService(IUnitOfWork unitOfWork, ILogger logger) : base(logger)
         {
@@ -23,6 +24,7 @@ namespace Daisy.Service
             this.logger = logger;
             this.categoryRepository = this.unitOfWork.GetRepository<Category>();
             this.categoryPhotoRepository = this.unitOfWork.GetRepository<CategoryPhoto>();
+            this.photoRepository = this.unitOfWork.GetRepository<Photo>();
         }
 
         public List<Category> GetCategories()
@@ -33,6 +35,33 @@ namespace Daisy.Service
             });
 
             return categories;
+        }
+
+        public Category GetCategoryBy(int id)
+        {
+            var category = Process(() =>
+            {
+                return categoryRepository.Query().Where(x => x.Id == id).FirstOrDefault();
+            });
+
+            return category;
+        }
+
+        public List<Photo> GetCategoryPhotos(int categoryId)
+        {
+            var result = Process(() =>
+            {
+                var query = from cp in categoryPhotoRepository.Query()
+                            join p in photoRepository.Query()
+                            on cp.PhotoId equals p.Id
+                            where cp.CategoryId == categoryId
+                            orderby cp.DisplayOrder
+                            select p;
+
+                return query.ToList();
+            });
+
+            return result;
         }
 
         public void UpdateCategory(Category entity)
@@ -57,15 +86,23 @@ namespace Daisy.Service
             });
         }
 
-        public void AddCategoryPhotos(Category category, int[] photoIds)
+        public void AddCategoryPhotos(int categoryId, int[] photoIds)
         {
             Process(() =>
             {
-                foreach (var photoId in photoIds)
+                var photosInDb = categoryPhotoRepository
+                    .Query()
+                    .Where(x => x.CategoryId == categoryId)
+                    .Select(x => x.PhotoId)
+                    .ToList();
+
+                var newPhotos = photoIds.Where(x => !photosInDb.Contains(x)).Distinct().ToList();
+
+                foreach (var photoId in newPhotos)
                 {
                     var categoryPhoto = new CategoryPhoto
                     {
-                        CategoryId = category.Id,
+                        CategoryId = categoryId,
                         PhotoId = photoId
                     };
                     categoryPhotoRepository.Insert(categoryPhoto);
@@ -75,11 +112,14 @@ namespace Daisy.Service
             }); 
         }
 
-        public void DeleteCategoryPhotos(Category category, int[] photoIds)
+        public void DeleteCategoryPhotos(int categoryId, int[] photoIds)
         {
             Process(() =>
             {
-                var photosToDelete = categoryPhotoRepository.Query().Where(x => photoIds.Contains(x.PhotoId)).ToList();
+                var photosToDelete = categoryPhotoRepository
+                    .Query()
+                    .Where(x => photoIds.Contains(x.PhotoId) && x.CategoryId == categoryId)
+                    .ToList();
                 categoryPhotoRepository.RemoveRange(photosToDelete);
                 this.unitOfWork.Commit();
             }); 
@@ -89,7 +129,8 @@ namespace Daisy.Service
         {
             Process(() =>
             {
-                var minOrder = categoryPhotoRepository.Query()
+                var minOrder = categoryPhotoRepository
+                    .Query()
                     .Where(x => x.CategoryId == categoryId && photoIds.Contains(x.PhotoId))
                     .OrderBy(x => x.DisplayOrder)
                     .Select(x => x.DisplayOrder)
@@ -106,6 +147,6 @@ namespace Daisy.Service
 
                 this.unitOfWork.Commit();
             });
-        }
+        }        
     }
 }
