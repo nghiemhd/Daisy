@@ -5,6 +5,8 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
+using Daisy.Common.Extensions;
+
 namespace Daisy.Web.Framework.Extentions
 {
     public static class HtmlExtensions
@@ -22,6 +24,23 @@ namespace Daisy.Web.Framework.Extentions
             }
 
             return classValue;
+        }
+
+        public static string If(this HtmlHelper helper, bool condition, string then, string @else = "")
+        {
+            if (condition)
+            {
+                return then;
+            }
+            else
+            {
+                if (!@else.IsNullOrEmpty())
+                {
+                    return @else;
+                }
+            }
+
+            return string.Empty;
         }
 
         public static string RequireScript(this HtmlHelper html, RenderOptions option, string path, int priority = 1)

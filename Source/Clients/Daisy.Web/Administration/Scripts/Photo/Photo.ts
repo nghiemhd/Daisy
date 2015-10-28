@@ -104,7 +104,8 @@
                     '<div class="album-thumbnail photo-list-album-view" style="background-image:url(' + item.MediumUrl + ')">';
                 grid += '</div>' +
                 '<div class="album-title">' +
-                '<input type="checkbox" value="' + item.Id + '">&nbsp;' + item.Id +
+                '<input type="checkbox" id="chk' + item.Id + '" value="' + item.Id + '" class="css-checkbox lrg">' +
+                '<label for="chk' + item.Id + '" class="css-label lrg klaus">' + item.Id + '</label>' +
                 '</div>' +
                 '</div>';
                 $('#gridPhotos').append(grid);

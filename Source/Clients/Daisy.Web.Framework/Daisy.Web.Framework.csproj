@@ -62,7 +62,12 @@
     <Compile Include="ViewEngines\Razor\CustomRazorViewEngine.cs" />
     <Compile Include="ViewEngines\Razor\WebViewPage.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Daisy.Common\Daisy.Common.csproj">
+      <Project>{05856d7e-0cff-42f2-9da0-3b447253d90e}</Project>
+      <Name>Daisy.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

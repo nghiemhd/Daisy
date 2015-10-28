@@ -1,18 +1,22 @@
 ﻿@using Daisy.Web.Framework.Extentions
 @model Daisy.Admin.Models.Category
 
+@{
+    bool photoActive = TempData["PhotoActive"] == null ? false : (bool)TempData["PhotoActive"];
+}
+
 @Html.ActionLink("Back to list", "Index", null, new { @class = "table-link" })
 <div class="spacer"></div>
 <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#categoryInfo">Info</a></li>
+    <li @Html.If(!photoActive, "class=active")><a data-toggle="tab" href="#categoryInfo">Info</a></li>
     <li><a data-toggle="tab" href="#categorySEO">SEO</a></li>
     @if (Model != null && Model.Id > 0)
     {
-        <li><a data-toggle="tab" href="#categoryPhotos">Photo</a></li>
+        <li @Html.If(photoActive, "class=active")><a data-toggle="tab" href="#categoryPhotos">Photo</a></li>
     }
 </ul>
 <div class="tab-content">
-    <div id="categoryInfo" class="tab-pane fade in active">
+    <div id="categoryInfo" class="tab-pane fade">
         <div class="spacer"></div>
         <div class="form-horizontal">
             @Html.HiddenFor(x => x.Id, new { id = "categoryId" })
@@ -93,7 +97,7 @@
         <div class="spacer btn-group">
             <button id="btnDeletePhotos" class="btn btn-primary">Delete photos</button>
             @Html.ActionLink("Add photos", "ViewPhotos", "Category", null, new { @class = "modal-link btn btn-primary" })
-            <button id="btnUpdateOrders" class="btn btn-primary">Update</button>
+            <button id="btnUpdatePhotoOrders" class="btn btn-primary">Update</button>
         </div>
         <hr />
         <div id="modal-container" class="modal fade" tabindex="-1" role="dialog" style="overflow:scroll">

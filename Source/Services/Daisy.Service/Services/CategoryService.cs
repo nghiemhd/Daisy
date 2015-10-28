@@ -97,15 +97,23 @@ namespace Daisy.Service
                     .ToList();
 
                 var newPhotos = photoIds.Where(x => !photosInDb.Contains(x)).Distinct().ToList();
+                var maxOrder = categoryPhotoRepository
+                    .Query()
+                    .Where(x => x.CategoryId == categoryId)
+                    .OrderByDescending(x => x.DisplayOrder)
+                    .Select(x => x.DisplayOrder)
+                    .FirstOrDefault();
 
                 foreach (var photoId in newPhotos)
                 {
+                    maxOrder++;
                     var categoryPhoto = new CategoryPhoto
                     {
                         CategoryId = categoryId,
-                        PhotoId = photoId
+                        PhotoId = photoId,
+                        DisplayOrder = maxOrder
                     };
-                    categoryPhotoRepository.Insert(categoryPhoto);
+                    categoryPhotoRepository.Insert(categoryPhoto);                    
                 }
 
                 this.unitOfWork.Commit();

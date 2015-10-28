@@ -14,7 +14,8 @@
     });
 
     var category = new Content.Category();
-    $('#btnDeletePhotos').click(function () {
+    $('#btnDeletePhotos').click(function (e) {
+        e.preventDefault();
         var photoIds: number[] = [];
         var categoryId: number = $('#categoryId').val();
         $('#gridCategoryPhotos input[type=checkbox]:checked').each(function () {
@@ -33,7 +34,8 @@
         }
     });
 
-    $('#btnUpdateOrders').click(function () {
+    $('#btnUpdatePhotoOrders').click(function (e) {      
+        e.preventDefault();  
         var photoIds: number[] = [];
         $('#gridCategoryPhotos input[type=checkbox]').each(function () {
             var photoId = $(this).val();
@@ -66,6 +68,10 @@
             $('#modal-container').modal('hide');
         }
     });
+
+    var tabId = $('li.active>a').attr('href');
+    var tabContent = $(tabId);
+    tabContent.addClass("in active");
 
     Common.Helper.countCharacters(400, '#txtMetaTitle', '#metatitle_feedback');
     Common.Helper.countCharacters(400, '#txtMetaKeywords', '#metakeywords_feedback');

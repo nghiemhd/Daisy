@@ -12,7 +12,8 @@ $(document).ready(function () {
         }
     });
     var category = new Content.Category();
-    $('#btnDeletePhotos').click(function () {
+    $('#btnDeletePhotos').click(function (e) {
+        e.preventDefault();
         var photoIds = [];
         var categoryId = $('#categoryId').val();
         $('#gridCategoryPhotos input[type=checkbox]:checked').each(function () {
@@ -30,7 +31,8 @@ $(document).ready(function () {
             category.deletePhotos(categoryId, photoIds);
         }
     });
-    $('#btnUpdateOrders').click(function () {
+    $('#btnUpdatePhotoOrders').click(function (e) {
+        e.preventDefault();
         var photoIds = [];
         $('#gridCategoryPhotos input[type=checkbox]').each(function () {
             var photoId = $(this).val();
@@ -61,6 +63,9 @@ $(document).ready(function () {
             $('#modal-container').modal('hide');
         }
     });
+    var tabId = $('li.active>a').attr('href');
+    var tabContent = $(tabId);
+    tabContent.addClass("in active");
     Common.Helper.countCharacters(400, '#txtMetaTitle', '#metatitle_feedback');
     Common.Helper.countCharacters(400, '#txtMetaKeywords', '#metakeywords_feedback');
     Common.DragDropHandler.items = document.querySelectorAll('#gridCategoryPhotos .draggable-item');

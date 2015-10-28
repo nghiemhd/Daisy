@@ -53,7 +53,7 @@ namespace Daisy.Admin.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, bool photoActive = false)
         {
             var languages = GetLanguages();      
             var category = categoryService.GetCategoryBy(id);
@@ -64,6 +64,11 @@ namespace Daisy.Admin.Controllers
             model.Languages = languages;
             model.Slug = slug;
             model.Photos = Mapper.Map<List<DaisyModels.Photo>>(photos);
+
+            if (photoActive)
+            {
+                TempData["PhotoActive"] = true;
+            }
 
             return View(model);
         }
@@ -131,6 +136,7 @@ namespace Daisy.Admin.Controllers
             try
             {
                 categoryService.AddCategoryPhotos(categoryId, photoIds);
+                ViewBag.PhotoActive = true;
                 return Json(ResponseStatus.Success.ToString());
             }
             catch (Exception ex)

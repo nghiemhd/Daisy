@@ -15,7 +15,7 @@
                 success: (response) => {
                     if (response == "Success") {
                         toastr.success('Update successfully');
-                        window.location.href = '/Admin/Category/Edit/' + categoryId;
+                        window.location.href = '/Admin/Category/Edit?id=' + categoryId + '&photoActive=true';
                     }
                     else {
                         toastr.options = {
@@ -53,7 +53,7 @@
                 success: (response) => {
                     if (response == "Success") {
                         toastr.success('Delete successfully');
-                        window.location.href = '/Admin/Category/Edit/' + categoryId + '#categoryPhotos';
+                        window.location.href = '/Admin/Category/Edit?id=' + categoryId + '&photoActive=true';
                     }
                     else {
                         toastr.options = {
