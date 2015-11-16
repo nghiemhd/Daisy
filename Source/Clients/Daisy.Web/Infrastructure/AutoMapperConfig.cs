@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Daisy.Service.DataContracts;
 
 namespace Daisy.Web.Infrastructure
 {
@@ -18,6 +19,8 @@ namespace Daisy.Web.Infrastructure
             Mapper.CreateMap<DaisyEntities.Photo, DaisyModels.Photo>();
 
             Mapper.CreateMap<DaisyEntities.BlogPost, DaisyModels.Blog>();
+
+            Mapper.CreateMap<PublishedCategoryDto, DaisyModels.Category>();
         }
     }
 }

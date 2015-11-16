@@ -1,0 +1,10 @@
+﻿@using Daisy.Web.Framework.Extentions
+@model Daisy.Web.Models.CategoryTopMenuModel
+
+@if (Model != null && Model.Categories != null)
+{
+    foreach (var category in Model.Categories)
+    {
+        <li class="@Html.ActivePage("Blog", "Index")">@Html.ActionLink(category.Name, "Index", "Blog")</li>
+    }
+}

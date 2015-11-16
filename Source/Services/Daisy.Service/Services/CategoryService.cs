@@ -1,6 +1,7 @@
 ﻿using Daisy.Core.Entities;
 using Daisy.Core.Infrastructure;
 using Daisy.Logging;
+using Daisy.Service.DataContracts;
 using Daisy.Service.ServiceContracts;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace Daisy.Service
         private IRepository<Category> categoryRepository;
         private IRepository<CategoryPhoto> categoryPhotoRepository;
         private IRepository<Photo> photoRepository;
+        private IRepository<UrlRecord> urlRecordRepository;
+        private IRepository<Language> languageRepository;
 
         public CategoryService(IUnitOfWork unitOfWork, ILogger logger) : base(logger)
         {
@@ -25,9 +28,11 @@ namespace Daisy.Service
             this.categoryRepository = this.unitOfWork.GetRepository<Category>();
             this.categoryPhotoRepository = this.unitOfWork.GetRepository<CategoryPhoto>();
             this.photoRepository = this.unitOfWork.GetRepository<Photo>();
+            this.urlRecordRepository = this.unitOfWork.GetRepository<UrlRecord>();
+            this.languageRepository = this.unitOfWork.GetRepository<Language>();
         }
 
-        public List<Category> GetCategories()
+        public IList<Category> GetCategories()
         {
             var categories = Process(() =>
             {
@@ -47,7 +52,33 @@ namespace Daisy.Service
             return category;
         }
 
-        public List<Photo> GetCategoryPhotos(int categoryId)
+        public IList<PublishedCategoryDto> GetPublishedCategories(int languageId)
+        {
+            var categories = Process(() =>
+            {
+                var query = from c in categoryRepository.Query()
+                            join l in languageRepository.Query()
+                            on c.LanguageId equals l.Id
+                            join u in urlRecordRepository.Query().Where(x => x.EntityName == typeof(Category).Name)
+                            on new { p1 = c.Id, p2 = c.LanguageId } equals new { p1 = u.EntityId, p2 = u.LanguageId }
+                            where c.IsPublished == true
+                            select new PublishedCategoryDto
+                            {
+                                Id = c.Id,
+                                Name = c.Name,
+                                PageSize = c.PageSize,
+                                LanguageId = c.LanguageId,
+                                Language = l.Name,
+                                IsPublish = c.IsPublished,
+                                Slug = u.Slug
+                            };
+                return query.ToList();
+            });
+
+            return categories;
+        }
+
+        public IList<Photo> GetCategoryPhotos(int categoryId)
         {
             var result = Process(() =>
             {

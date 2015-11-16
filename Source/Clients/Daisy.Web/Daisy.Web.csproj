@@ -171,6 +171,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -180,6 +181,8 @@
     <Compile Include="Models\AlbumDetailViewModel.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\BlogDetailViewModel.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CategoryTopMenuModel.cs" />
     <Compile Include="Models\FeedbackViewModel.cs" />
     <Compile Include="Models\PagedListAlbumViewModel.cs" />
     <Compile Include="Models\PagedListBlogViewModel.cs" />
@@ -295,10 +298,12 @@
     <Content Include="Views\Shared\_MathCaptcha.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\Detail.cshtml" />
+    <Content Include="Views\Shared\_CategoryTopMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Album\" />
+    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

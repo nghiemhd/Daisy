@@ -1,4 +1,5 @@
 ﻿using Daisy.Core.Entities;
+using Daisy.Service.DataContracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,13 @@ namespace Daisy.Service.ServiceContracts
 {
     public interface ICategoryService
     {
-        List<Category> GetCategories();
+        IList<Category> GetCategories();
 
         Category GetCategoryBy(int id);
 
-        List<Photo> GetCategoryPhotos(int categoryId);
+        IList<PublishedCategoryDto> GetPublishedCategories(int languageId);
+
+        IList<Photo> GetCategoryPhotos(int categoryId);
 
         void UpdateCategory(Category entity);
 

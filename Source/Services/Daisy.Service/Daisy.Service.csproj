@@ -87,6 +87,7 @@
     <Compile Include="DataContracts\AlbumDetailDto.cs" />
     <Compile Include="DataContracts\AlbumDto.cs" />
     <Compile Include="DataContracts\PhotoDto.cs" />
+    <Compile Include="DataContracts\PublishedCategoryDto.cs" />
     <Compile Include="DataContracts\SearchAlbumOptions.cs" />
     <Compile Include="DataContracts\SearchBlogOptions.cs" />
     <Compile Include="DataContracts\SearchPhotoOptions.cs" />

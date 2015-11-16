@@ -49,25 +49,6 @@ namespace Daisy.Web.Controllers
             return View(result);
         }
 
-        //[Route("blog/{blogId:int}")]
-        //public ActionResult Detail(int blogId)
-        //{
-        //    var blog = blogService.GetBlogBy(blogId);
-        //    if (blog == null || !blog.IsPublished)
-        //    {
-        //        return PartialView("PageNotFound");
-        //    }
-
-        //    var blogModel = Mapper.Map<DaisyModels.Blog>(blog);
-
-        //    var model = new DaisyModels.BlogDetailViewModel
-        //    {
-        //        Blog = blogModel
-        //    };
-
-        //    return View(model);
-        //}
-
         public ActionResult Detail(string slug)
         {
             var urlRecord = urlRecordService.GetUrlRecordBy(typeof(DaisyEntities.BlogPost).Name, slug, 1);
