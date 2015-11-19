@@ -88,6 +88,8 @@ namespace Daisy.Admin.Infrastructure
             Mapper.CreateMap<DaisyEntities.Category, DaisyModels.Category>();
 
             Mapper.CreateMap<DaisyModels.Category, DaisyEntities.Category>();
+
+            Mapper.CreateMap<PublishedCategoryDto, DaisyModels.Category>();
         }
     }
 }

@@ -69,7 +69,32 @@ namespace Daisy.Service
                                 PageSize = c.PageSize,
                                 LanguageId = c.LanguageId,
                                 Language = l.Name,
-                                IsPublish = c.IsPublished,
+                                IsPublished = c.IsPublished,
+                                Slug = u.Slug
+                            };
+                return query.ToList();
+            });
+
+            return categories;
+        }
+
+        public IList<PublishedCategoryDto> GetCategoryDtos()
+        {
+            var categories = Process(() =>
+            {
+                var query = from c in categoryRepository.Query()
+                            join l in languageRepository.Query()
+                            on c.LanguageId equals l.Id
+                            join u in urlRecordRepository.Query().Where(x => x.EntityName == typeof(Category).Name)
+                            on new { p1 = c.Id, p2 = c.LanguageId } equals new { p1 = u.EntityId, p2 = u.LanguageId }
+                            select new PublishedCategoryDto
+                            {
+                                Id = c.Id,
+                                Name = c.Name,
+                                PageSize = c.PageSize,
+                                LanguageId = c.LanguageId,
+                                Language = l.Name,
+                                IsPublished = c.IsPublished,
                                 Slug = u.Slug
                             };
                 return query.ToList();

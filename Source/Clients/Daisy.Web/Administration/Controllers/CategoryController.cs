@@ -39,7 +39,7 @@ namespace Daisy.Admin.Controllers
 
         public ActionResult Index()
         {
-            var categories = categoryService.GetCategories();
+            var categories = categoryService.GetCategoryDtos();
             var model = Mapper.Map<List<DaisyModels.Category>>(categories);
 
             return View(model);

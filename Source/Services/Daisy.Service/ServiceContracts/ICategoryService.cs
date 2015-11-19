@@ -16,6 +16,8 @@ namespace Daisy.Service.ServiceContracts
 
         IList<PublishedCategoryDto> GetPublishedCategories(int languageId);
 
+        IList<PublishedCategoryDto> GetCategoryDtos();
+
         IList<Photo> GetCategoryPhotos(int categoryId);
 
         void UpdateCategory(Category entity);

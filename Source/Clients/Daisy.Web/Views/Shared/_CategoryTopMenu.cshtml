@@ -5,6 +5,6 @@
 {
     foreach (var category in Model.Categories)
     {
-        <li class="@Html.ActivePage("Blog", "Index")">@Html.ActionLink(category.Name, "Index", "Blog")</li>
+        <li class=""><a href="~/@category.Slug">@category.Name</a></li>
     }
 }

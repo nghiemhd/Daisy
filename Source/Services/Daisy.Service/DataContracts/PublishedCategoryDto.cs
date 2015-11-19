@@ -14,7 +14,7 @@ namespace Daisy.Service.DataContracts
 
         public int PageSize { get; set; }
 
-        public bool IsPublish { get; set; }
+        public bool IsPublished { get; set; }
 
         public int LanguageId { get; set; }
 

@@ -21,6 +21,8 @@ namespace Daisy.Web.Infrastructure
             Mapper.CreateMap<DaisyEntities.BlogPost, DaisyModels.Blog>();
 
             Mapper.CreateMap<PublishedCategoryDto, DaisyModels.Category>();
+
+            Mapper.CreateMap<DaisyEntities.Category, DaisyModels.Category>();
         }
     }
 }

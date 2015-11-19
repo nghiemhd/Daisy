@@ -14,7 +14,8 @@
                     <input type="checkbox" id="chkSelectAll" class="css-checkbox lrg" />
                     <label for="chkSelectAll" class="css-label lrg klaus"></label>
                 </th>
-                <th>Name</th>               
+                <th>Name</th>
+                <th>Language</th>
                 <th>Published</th>
                 <th>Display order</th>
             </tr>
@@ -29,6 +30,7 @@
                             <label for="_@category.Id" class="css-label lrg klaus"></label>
                         </td>
                         <td>@Html.ActionLink(category.Name, "Edit", "Category", new { id = category.Id }, new { @class = "table-link" })</td>
+                        <td>@category.Language</td>
                         <td>@category.IsPublished</td>
                         <td>@category.DisplayOrder</td>
                     </tr>                
