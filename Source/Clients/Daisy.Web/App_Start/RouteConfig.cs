@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
+using Daisy.Web.Framework.Seo;
+
 namespace Daisy.Web
 {
     public class RouteConfig
@@ -14,6 +16,11 @@ namespace Daisy.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapMvcAttributeRoutes();
+
+            routes.MapGenericPathRoute("GenericUrl",
+                                       "{generic_se_name}",
+                                       new { controller = "Common", action = "GenericUrl" },
+                                       new[] { "Nop.Web.Controllers" });
 
             routes.MapRoute(
                 name: "BlogPost",

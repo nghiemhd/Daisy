@@ -22,7 +22,7 @@ namespace Daisy.Service
 
         private const string URLRECORD_ACTIVE_BY_ID_NAME_LANGUAGE_KEY = "Daisy.urlrecord.active.id-name-language-{0}-{1}-{2}";
         private const string URLRECORD_PATTERN_KEY = "Daisy.urlrecord.";
-        private const string URLRECORD_ALL_KEY = "Nop.urlrecord.all";
+        private const string URLRECORD_ALL_KEY = "Daisy.urlrecord.all";
 
         public UrlRecordService(IUnitOfWork unitOfWork, ILogger logger, ICacheManager cacheManager)
             : base(logger)
@@ -65,6 +65,20 @@ namespace Daisy.Service
 
                 cacheManager.RemoveByPattern(URLRECORD_PATTERN_KEY);
             });
+        }
+
+        public UrlRecord GetUrlRecordBy(string slug)
+        {
+            var result = Process(() =>
+            {
+                var urlRecord = this.urlRecordRepository.Query().Where(x =>
+                    x.LanguageId == 1 &&
+                    x.Slug == slug).FirstOrDefault();
+
+                return urlRecord;
+            });
+
+            return result;
         }
 
         public UrlRecord GetUrlRecordBy(string entityName, string slug)

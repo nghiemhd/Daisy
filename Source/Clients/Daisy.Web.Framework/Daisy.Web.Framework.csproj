@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -56,10 +60,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extentions\HtmlExtensions.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Localization\LocalizedRoute.cs" />
+    <Compile Include="Localization\LocalizedRouteExtensions.cs" />
+    <Compile Include="Localization\LocalizedUrlExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seo\GenericPathRoute.cs" />
+    <Compile Include="Seo\GenericPathRouteExtensions.cs" />
     <Compile Include="ViewEngines\CustomVirtualPathProviderViewEngine.cs" />
     <Compile Include="ViewEngines\Razor\CustomRazorViewEngine.cs" />
     <Compile Include="ViewEngines\Razor\WebViewPage.cs" />
@@ -68,6 +75,14 @@
     <ProjectReference Include="..\..\Libraries\Daisy.Common\Daisy.Common.csproj">
       <Project>{05856d7e-0cff-42f2-9da0-3b447253d90e}</Project>
       <Name>Daisy.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Daisy.Core\Daisy.Core.csproj">
+      <Project>{b45bf591-6471-45fe-acb4-c697b9a0979f}</Project>
+      <Name>Daisy.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\Daisy.Service\Daisy.Service.csproj">
+      <Project>{61db9c60-07ab-4fda-bf6a-385113c8975b}</Project>
+      <Name>Daisy.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

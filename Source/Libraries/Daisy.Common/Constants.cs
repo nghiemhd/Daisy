@@ -21,5 +21,8 @@ namespace Daisy.Common
         public static readonly string UploadPath = "UploadPath";
         public static readonly string QuotePath = "QuotePath";
         public static readonly string DaisyEmail = "DaisyEmail";
+
+        //TODO: move to current Language
+        public static readonly int LanguageId = 1;
     }
 }

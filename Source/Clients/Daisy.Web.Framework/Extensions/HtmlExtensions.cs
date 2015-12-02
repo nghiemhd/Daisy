@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 using Daisy.Common.Extensions;
 
-namespace Daisy.Web.Framework.Extentions
+namespace Daisy.Web.Framework.Extensions
 {
     public static class HtmlExtensions
     {

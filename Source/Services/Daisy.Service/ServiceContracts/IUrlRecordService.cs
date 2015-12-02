@@ -16,6 +16,8 @@ namespace Daisy.Service.ServiceContracts
 
         void UpdateUrlRecord(UrlRecord urlRecord);
 
+        UrlRecord GetUrlRecordBy(string slug);
+
         UrlRecord GetUrlRecordBy(string entityName, string slug);
 
         UrlRecord GetUrlRecordBy(string entityName, string slug, int languageId);
