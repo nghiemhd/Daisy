@@ -36,6 +36,8 @@ namespace Daisy.Web.Controllers
         {
             var category = categoryService.GetCategoryBy(id);
             var model = Mapper.Map<DaisyModels.Category>(category);
+            var photos = categoryService.GetCategoryPhotos(id);
+            model.Photos = Mapper.Map<List<DaisyModels.Photo>>(photos);
 
             return View(model);
         }

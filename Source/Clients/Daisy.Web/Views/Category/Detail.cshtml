@@ -1,3 +1,62 @@
 ﻿@model Daisy.Web.Models.Category
 
-<h1>This is @Model.Name</h1>
+@section styles{
+    <link rel="stylesheet" type="text/css" href="~/Content/fotorama/fotorama.css" />
+}
+
+<div id="gridPhotos" class="container-fluid text-center">
+    <div class="photo-list">
+        @for (var i = 0; i < Model.Photos.Count; i++)
+        {
+            <div class="photo" data-index="@i">
+                @if (Model.Photos[i].Large1600Url == null)
+                {
+                    <img src="@Model.Photos[i].LargeUrl" alt="@Model.Photos[i].Name" />
+                }
+                else
+                {
+                    <img src="@Model.Photos[i].Large1600Url" alt="@Model.Photos[i].Name" data-full="@Model.Photos[i].Large2048Url" />
+                }
+                <div class="icon_fullscreen"></div>
+            </div>
+        }
+    </div>
+</div>
+
+<div id="gridPhotosFullScreen" class="fotorama" data-allow-full-screen="native" data-nav="thumbs" data-keyboard="true">
+    @foreach (var photo in @Model.Photos)
+    {
+        if (photo.Large1600Url == null)
+        {
+            <img src="@photo.LargeUrl" alt="@photo.Name" />
+        }
+        else
+        {
+            <img src="@photo.Large1600Url" alt="@photo.Name" data-full="@photo.Large2048Url" />
+        }
+    }
+</div>
+
+@section scripts{
+    <script src="~/Scripts/fotorama/fotorama.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#gridPhotosFullScreen').hide();
+
+            $('.icon_fullscreen').click(function () {
+                var index = $(this).parent('.photo').data('index');
+                $('#gridPhotosFullScreen').show();
+
+                var fotorama = $('.fotorama')
+                  //.fotorama({ allowfullscreen: true })
+                  .data('fotorama');
+                fotorama.show(index);
+                fotorama.requestFullScreen();
+            });
+
+            $('.fotorama').on('fotorama:fullscreenexit', function (e, fotorama, extra) {
+                $('#gridPhotosFullScreen').hide();
+            });
+        });
+    </script>
+}

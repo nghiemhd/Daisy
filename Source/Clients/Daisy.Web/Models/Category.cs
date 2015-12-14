@@ -20,5 +20,7 @@ namespace Daisy.Web.Models
         public string Language { get; set; }
 
         public string Slug { get; set; }
+
+        public IList<Photo> Photos { get; set; }
     }
 }

@@ -87,7 +87,7 @@ namespace Daisy.Web.Framework.Seo
                 {
                     case "category":
                         {
-                            data.Values["controller"] = "Catogory";
+                            data.Values["controller"] = "Category";
                             data.Values["action"] = "Detail";
                             data.Values["id"] = urlRecord.EntityId;
                             data.Values["SeName"] = urlRecord.Slug;

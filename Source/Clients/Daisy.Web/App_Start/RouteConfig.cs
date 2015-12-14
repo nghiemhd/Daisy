@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
+using Daisy.Web.Framework.Localization;
 using Daisy.Web.Framework.Seo;
 
 namespace Daisy.Web
@@ -17,10 +18,24 @@ namespace Daisy.Web
 
             routes.MapMvcAttributeRoutes();
 
+            routes.MapRoute(
+                name: "Blog",
+                url: "blog",
+                defaults: new { controller = "Blog", action = "Index" },
+                namespaces: new[] { "Daisy.Web.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Album",
+                url: "album",
+                defaults: new { controller = "Album", action = "Index" },
+                namespaces: new[] { "Daisy.Web.Controllers" }
+            );
+
             routes.MapGenericPathRoute("GenericUrl",
                                        "{generic_se_name}",
                                        new { controller = "Common", action = "GenericUrl" },
-                                       new[] { "Nop.Web.Controllers" });
+                                       new[] { "Daisy.Web.Controllers" });            
 
             routes.MapRoute(
                 name: "BlogPost",
