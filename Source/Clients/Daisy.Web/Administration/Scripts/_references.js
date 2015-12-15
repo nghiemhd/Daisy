@@ -157,3 +157,4 @@
 /// <reference path="tinymce3/themes/simple/langs/en.js" />
 /// <reference path="blog/blogdetail.js" />
 /// <reference path="common/modalpopup.js" />
+/// <reference path="freewall.js" />

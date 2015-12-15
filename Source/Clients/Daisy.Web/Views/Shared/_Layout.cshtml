@@ -26,6 +26,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Html.RenderRequiredScripts(RenderOptions.Head)
     @RenderSection("styles", false)
 </head>
 <body>
@@ -84,5 +85,6 @@
     </footer>
     
     @RenderSection("scripts", required: false)
+    @Html.RenderRequiredScripts(RenderOptions.Body)
 </body>
 </html>

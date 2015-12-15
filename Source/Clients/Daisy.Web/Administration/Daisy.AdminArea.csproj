@@ -170,6 +170,7 @@
     <Content Include="Scripts\fotorama\css-classes.js" />
     <Content Include="Scripts\fotorama\fotorama.js" />
     <Content Include="Scripts\fotorama\fotorama.min.js" />
+    <Content Include="Scripts\freewall.js" />
     <Content Include="Scripts\hotfixBootstrapModal.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

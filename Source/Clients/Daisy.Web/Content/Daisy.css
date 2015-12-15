@@ -73,6 +73,10 @@
     display: block;
 }
 
+.brick:hover .icon_fullscreen{
+    display: block;
+}
+
 @media screen and (max-width: 768px) {
     .photo-list {
         padding-left: 10px;
@@ -128,6 +132,10 @@ div.scale:hover {
 
 .shadow {
     box-shadow: 1px 5px 10px 1px #888888;
+}
+
+.light-shadow {
+    box-shadow: 1px 4px 10px 0.1px #888888;
 }
 
 .social {
@@ -246,4 +254,8 @@ input[type="checkbox"].input-validation-error {
 
 .custom-p p {
     font-size: 1.2em;
+}
+
+.free-wall {
+	margin: 15px;
 }

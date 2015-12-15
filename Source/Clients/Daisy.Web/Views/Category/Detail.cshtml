@@ -1,28 +1,18 @@
-﻿@model Daisy.Web.Models.Category
+﻿@using Daisy.Web.Framework.Extensions
+@model Daisy.Web.Models.Category
 
 @section styles{
     <link rel="stylesheet" type="text/css" href="~/Content/fotorama/fotorama.css" />
 }
-
-<div id="gridPhotos" class="container-fluid text-center">
-    <div class="photo-list">
-        @for (var i = 0; i < Model.Photos.Count; i++)
-        {
-            <div class="photo" data-index="@i">
-                @if (Model.Photos[i].Large1600Url == null)
-                {
-                    <img src="@Model.Photos[i].LargeUrl" alt="@Model.Photos[i].Name" />
-                }
-                else
-                {
-                    <img src="@Model.Photos[i].Large1600Url" alt="@Model.Photos[i].Name" data-full="@Model.Photos[i].Large2048Url" />
-                }
-                <div class="icon_fullscreen"></div>
-            </div>
-        }
-    </div>
-</div>
-
+<div id="freewall" class="free-wall">
+    @for (var i = 0; i < Model.Photos.Count; i++)
+    {
+        <div class="brick light-shadow" data-index="@i" style="width:400px;">
+            <img src="@Model.Photos[i].MediumUrl" alt="@Model.Photos[i].Name" width="100%" />
+            <div class="icon_fullscreen"></div>       
+        </div>
+    }
+</div>    
 <div id="gridPhotosFullScreen" class="fotorama" data-allow-full-screen="native" data-nav="thumbs" data-keyboard="true">
     @foreach (var photo in @Model.Photos)
     {
@@ -39,16 +29,32 @@
 
 @section scripts{
     <script src="~/Scripts/fotorama/fotorama.min.js"></script>
+    <script src="~/Scripts/freewall.js"></script>
     <script>
         $(document).ready(function () {
+            var wall = new freewall("#freewall");
+            wall.reset({
+                selector: '.brick',
+                animate: true,
+                cellW: 400,
+                cellH: 'auto',
+                onResize: function () {
+                    wall.fitWidth();
+                }
+            });
+            wall.fitWidth();
+            var images = wall.container.find('.brick');
+            images.find('img').load(function () {
+                wall.fitWidth();
+            });
+
             $('#gridPhotosFullScreen').hide();
 
             $('.icon_fullscreen').click(function () {
-                var index = $(this).parent('.photo').data('index');
+                var index = $(this).parent('.brick').data('index');
                 $('#gridPhotosFullScreen').show();
 
                 var fotorama = $('.fotorama')
-                  //.fotorama({ allowfullscreen: true })
                   .data('fotorama');
                 fotorama.show(index);
                 fotorama.requestFullScreen();
